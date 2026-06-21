@@ -1,7 +1,7 @@
 # slovenie
 
 A one-off static page: a travel itinerary for a two-week summer camping trip
-through Slovenia (August 2025), in Dutch.
+through Slovenia (August 2026), in Dutch.
 
 ## Contents
 
