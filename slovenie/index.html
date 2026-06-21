@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slovenië 2025 🇸🇮</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --soca: #1a7abf;
+    --forest: #2d5c1e;
+    --sun: #f0b429;
+    --sand: #fdf6ec;
+    --dark: #1c1c1c;
+    --mid: #555;
+    --light: #f4f4f0;
+    --white: #fff;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.10);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--light);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0d4f7c 0%, #1a7abf 50%, #2d5c1e 100%);
+    color: white;
+    padding: 80px 60px 70px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 60px;
+    background: var(--light);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-flag { font-size: 56px; line-height: 1; margin-bottom: 20px; }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1.0;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+  .hero h1 span { color: var(--sun); }
+  .hero-sub {
+    font-size: 20px;
+    opacity: 0.88;
+    font-weight: 400;
+    margin-bottom: 36px;
+    max-width: 520px;
+    line-height: 1.5;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+  }
+  .hero-stat {
+    text-align: center;
+  }
+  .hero-stat .num {
+    font-family: 'Fraunces', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--sun);
+    line-height: 1;
+  }
+  .hero-stat .lbl {
+    font-size: 13px;
+    opacity: 0.75;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  /* ── ROUTE OVERVIEW ── */
+  .route-bar {
+    background: var(--white);
+    border-bottom: 1px solid #e5e5e5;
+    padding: 0 60px;
+  }
+  .route-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    height: 64px;
+  }
+  .route-stop {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--mid);
+    white-space: nowrap;
+  }
+  .route-stop .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-nl { background: #888; }
+  .dot-1 { background: var(--soca); }
+  .dot-2 { background: #e8832a; }
+  .dot-3 { background: var(--forest); }
+  .route-arrow {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    color: #ccc;
+    font-size: 11px;
+  }
+  .route-arrow::before {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, #ddd 0, #ddd 6px, transparent 6px, transparent 12px);
+    margin-right: 4px;
+  }
+  .route-drive { font-size: 11px; color: #aaa; white-space: nowrap; }
+
+  /* ── SECTION ── */
+  .section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 60px;
+  }
+  .section + .section { padding-top: 0; }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid;
+  }
+  .section-header.color-1 { border-color: var(--soca); }
+  .section-header.color-2 { border-color: #e8832a; }
+  .section-header.color-3 { border-color: var(--forest); }
+
+  .section-num {
+    font-family: 'Fraunces', serif;
+    font-size: 80px;
+    font-weight: 900;
+    line-height: 0.85;
+    opacity: 0.12;
+    color: var(--dark);
+    user-select: none;
+  }
+  .section-title-block {}
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--mid);
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .section-meta {
+    margin-left: auto;
+    text-align: right;
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+  .camp-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: white;
+  }
+  .badge-1 { background: var(--soca); }
+  .badge-2 { background: #e8832a; }
+  .badge-3 { background: var(--forest); }
+
+  /* ── CAMPING CARD ── */
+  .camp-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    background: var(--white);
+    border: 1px solid #eee;
+  }
+  .camp-img {
+    width: 300px;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+  }
+  .camp-img-placeholder {
+    width: 300px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    background: linear-gradient(135deg, #e8f4fd, #d0eaff);
+  }
+  .camp-info {
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .camp-info h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .camp-info p {
+    font-size: 14px;
+    color: var(--mid);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .camp-details {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .camp-detail {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .camp-detail .icon { font-size: 16px; }
+
+  /* ── DAYS GRID ── */
+  .days-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--mid);
+    margin-bottom: 16px;
+  }
+  .days-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* ── DAY ROW ── */
+  .day-row {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    border: 1px solid #eee;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+  }
+  .day-photo {
+    position: relative;
+    overflow: hidden;
+  }
+  .day-photo img {
+    width: 200px;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+  }
+  .day-photo-placeholder {
+    width: 200px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+  }
+  .drive-badge {
+    position: absolute;
+    bottom: 8px; left: 8px;
+    background: rgba(0,0,0,0.72);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .day-content {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .day-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--mid);
+    margin-bottom: 6px;
+  }
+  .day-title {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .day-desc {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+  .day-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--light);
+    color: var(--mid);
+  }
+  .tag-water { background: #e0f0ff; color: #1a6ea8; }
+  .tag-hike  { background: #e6f4e0; color: #2d5c1e; }
+  .tag-kids  { background: #fff3cd; color: #7a5000; }
+  .tag-cave  { background: #ede0f5; color: #5a2d7a; }
+  .tag-swim  { background: #d0f0f8; color: #0a6070; }
+  .tag-culture { background: #fde8d8; color: #8a3a0a; }
+
+  /* ── TRAVEL DAY ── */
+  .travel-row {
+    background: #f8f8f6;
+    border: 1px dashed #ddd;
+    border-radius: var(--radius);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--mid);
+    font-size: 13px;
+  }
+  .travel-row .travel-icon { font-size: 28px; }
+  .travel-row strong { color: var(--dark); font-size: 14px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 32px;
+    font-size: 13px;
+    margin-top: 60px;
+  }
+  footer strong { color: rgba(255,255,255,0.9); }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+  .section-divider hr {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-flag">🇸🇮</div>
+    <h1>Zomer in<br><span>Slovenië</span></h1>
+    <p class="hero-sub">Twee weken kamperen met Emma en Luca — bergen, canyons, grotten en turquoise water.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">14</div>
+        <div class="lbl">Nachten</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">3</div>
+        <div class="lbl">Basiskampen</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">10</div>
+        <div class="lbl">Dagtrips</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">~1400</div>
+        <div class="lbl">km rijden</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROUTE BAR -->
+<div class="route-bar">
+  <div class="route-inner">
+    <div class="route-stop">
+      <span class="dot dot-nl"></span>
+      De Glind
+    </div>
+    <div class="route-arrow">
+      <span class="route-drive">dag 1–2 · ~14u</span>
+    </div>
+    <div class="route-stop">
+      <span class="dot dot-1"></span>
+      Soča-vallei
+    </div>
+    <div class="route-arrow">
+      <span class="route-drive">dag 8 · ~3u</span>
+    </div>
+    <div class="route-stop">
+      <span class="dot dot-2"></span>
+      Istrische kust
+    </div>
+    <div class="route-arrow">
+      <span class="route-drive">dag 12 · ~2,5u</span>
+    </div>
+    <div class="route-stop">
+      <span class="dot dot-3"></span>
+      Savinja-vallei
+    </div>
+    <div class="route-arrow">
+      <span class="route-drive">dag 15–16 · ~13u</span>
+    </div>
+    <div class="route-stop">
+      <span class="dot dot-nl"></span>
+      De Glind
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ KAMP 1 ═══ -->
+<div class="section">
+  <div class="section-header color-1">
+    <div class="section-num">1</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Dag 3 – 7 · 5 nachten</div>
+      <div class="section-title">Julische Alpen &amp; Soča-vallei</div>
+    </div>
+    <div class="section-meta">
+      <span class="camp-badge badge-1">Basiskamp 1</span><br>
+      Bergen · Turquoise rivier · Kloofjes
+    </div>
+  </div>
+
+  <!-- Camping -->
+  <div class="camp-card">
+    <div class="camp-img-placeholder" style="background: linear-gradient(135deg, #c8e8f8, #a0d0f0);">🏕️</div>
+    <div class="camp-info">
+      <h3>Camp Sorli Koritnica</h3>
+      <p>Klein kampeertje langs de rivier Koritnica, omringd door bergen. Heel veel 5-sterren reviews, een goede bar en lekker rustig. Perfecte uitvalsbasis voor de Soča-vallei.</p>
+      <div class="camp-details">
+        <div class="camp-detail"><span class="icon">⭐</span> 4.7 (444 reviews)</div>
+        <div class="camp-detail"><span class="icon">💶</span> ~€15 p.p.</div>
+        <div class="camp-detail"><span class="icon">🏞️</span> Rivier naast camping</div>
+        <div class="camp-detail"><span class="icon">🍺</span> Bar aanwezig</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Days -->
+  <div class="days-label">Dagtrips vanuit dit kamp</div>
+  <div class="days-grid">
+
+    <div class="day-row">
+      <div class="day-photo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Kozjak-Wasserfall_Kobarid.jpg/800px-Kozjak-Wasserfall_Kobarid.jpg"
+             onerror="this.parentElement.innerHTML='<div class=\'day-photo-placeholder\' style=\'background:linear-gradient(135deg,#c8f0e8,#90d8c0)\'>🌊</div>'" alt="Kozjak waterval">
+        <div class="drive-badge">🚗 30 min</div>
+      </div>
+      <div class="day-content">
+        <div class="day-label">Dag 4</div>
+        <div class="day-title">Kozjak Waterval</div>
+        <div class="day-desc">Kort maar spectaculair wandelingetje (±30 min) door een kloof naar een waterval in een grot. Het laatste stuk over een touw-loopbrug. De mooiste gratis wandeling van Slovenië.</div>
+        <div class="day-tags">
+          <span class="tag tag-hike">Wandelen</span>
+          <span class="tag tag-water">Waterval</span>
+          <span class="tag tag-kids">Kids ⭐⭐⭐</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-row">
+      <div class="day-photo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Tolmin_gorge_02.JPG/800px-Tolmin_gorge_02.JPG"
+             onerror="this.parentElement.innerHTML='<div class=\'day-photo-placeholder\' style=\'background:linear-gradient(135deg,#d0e8ff,#a8c8f0)\'>🏔️</div>'" alt="Tolmin kloof">
+        <div class="drive-badge">🚗 15 min</div>
+      </div>
+      <div class="day-content">
+        <div class="day-label">Dag 5</div>
+        <div class="day-title">Tolmin Kloof</div>
+        <div class="day-desc">Smalle canyon waar twee rivieren samenkomen. Loopbruggen over kolkend water, tropisch blauwgroen. Geweldige natuur vlak om de hoek. Tickets online kopen!</div>
+        <div class="day-tags">
+          <span class="tag tag-hike">Canyon</span>
+          <span class="tag tag-water">Turquoise water</span>
+          <span class="tag tag-kids">Kids ⭐⭐⭐</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-row">
+      <div class="day-photo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Vintgar01.jpg/800px-Vintgar01.jpg"
+             onerror="this.parentElement.innerHTML='<div class=\'day-photo-placeholder\' style=\'background:linear-gradient(135deg,#e8f4d0,#c0e080)\'>🌿</div>'" alt="Vintgar kloof">
+        <div class="drive-badge">🚗 60 min</div>
+      </div>
+      <div class="day-content">
+        <div class="day-label">Dag 6 · ochtend</div>
+        <div class="day-title">Vintgar Kloof</div>
+        <div class="day-desc">Boardwalk over de Radovna-rivier, langs kleine watervallen en drinkbaar blauw water. Combineer met het Meer van Bled op dezelfde dag. Vroeg gaan — wordt druk!</div>
+        <div class="day-tags">
+          <span class="tag tag-hike">Boardwalk</span>
+          <span class="tag tag-water">Waterval</span>
+          <span class="tag tag-kids">Kids ⭐⭐</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-row">
+      <div class="day-photo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Bled%2C_Slovenia_%282679156117%29.jpg/800px-Bled%2C_Slovenia_%282679156117%29.jpg"
+             onerror="this.parentElement.innerHTML='<div class=\'day-photo-placeholder\' style=\'background:linear-gradient(135deg,#b8d8f8,#6098c8)\'>🏔️</div>'" alt="Meer van Bled">
+        <div class="drive-badge">🚗 55 min</div>
+      </div>
+      <div class="day-content">
+        <div class="day-label">Dag 6 · middag</div>
+        <div class="day-title">Meer van Bled</div>
+        <div class="day-desc">Het plaatje-meer van Slovenië. Eilandje met kerkje, kasteel op de rots, zwemmen kan. Pedaloboten huren voor de kinderen. Erg druk in augustus — combineer met vroege Vintgar-ochtend.</div>
+        <div class="day-tags">
+          <span class="tag tag-swim">Zwemmen</span>
+          <span class="tag tag-kids">Kids ⭐⭐⭐</span>
+          <span class="tag tag-culture">Kasteel</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section-divider"><hr></div>
+
+<!-- REISDAG 1→2 -->
+<div class="section" style="padding-top: 40px; padding-bottom: 40px;">
+  <div class="travel-row">
+    <span class="travel-icon">🚗</span>
+    <div>
+      <strong>Reisdag — Dag 8 · Soča naar Istrische kust</strong><br>
+      ±3 uur rijden. Route langs Postojna of Škocjan — overweeg grot meteen te doen als tussenstop op weg naar kamp 2.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ KAMP 2 ═══ -->
+<div class="section" style="padding-top: 0;">
+  <div class="section-header color-2">
+    <div class="section-num">2</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Dag 8 – 11 · 4 nachten</div>
+      <div class="section-title">Istrische kust</div>
+    </div>
+    <div class="section-meta">
+      <span class="camp-badge badge-2">Basiskamp 2</span><br>
+      Zee · Grotten · Middeleeuws stadje
+    </div>
+  </div>
+
+  <div class="camp-card">
+    <div class="camp-img-placeholder" style="background: linear-gradient(135deg, #ffe8c8, #ffd090);">🌊</div>
+    <div class="camp-info">
+      <h3>Kaki Plac ⭐</h3>
+      <p>Lonely Planet's favoriete plek om onder de sterren te slapen. Max 40 tenten op terrassen in een oude kaki- en olijfboomgaard. Elk tentje heeft een eigen hangmat en bankje. Fiets naar het strand.</p>
+      <div class="camp-details">
+        <div class="camp-detail"><span class="icon">⭐</span> 4.9 (352 reviews)</div>
+        <div class="camp-detail"><span class="icon">💶</span> ~€25 p.p.</div>
+        <div class="camp-detail"><span class="icon">🚲</span> 30 min fietsen naar strand</div>
+        <div class="camp-detail"><span class="icon">🛶</span> Kayak mogelijk</div>
+        <div class="camp-detail"><span class="icon">⚠️</span> Vroeg boeken!</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="days-label">Dagtrips vanuit dit kamp</div>
+  <div class="days-grid">
+
+    <div class="day-row">
+      <div class="day-photo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Skocjan_jama_1.jpg/800px-Skocjan_jama_1.jpg"
+             onerror="this.parentElement.innerHTML='<div class=\'day-photo-placeholder\' style=\'background:linear-gradient(135deg,#ede0f5,#c8a8e8)\'>🦇</div>'" alt="Škocjan grotten">
+        <div class="drive-badge">🚗 45 min</div>
+      </div>
+      <div class="day-content">
+        <div class="day-label">Dag 9</div>
+        <div class="day-title">Škocjan Grotten</div>
+        <div class="day-desc">Ondergrondse canyon met een echte rivier, watervallen en 170 meter hoge grotten. UNESCO werelderfgoed. Indrukwekkender dan Postojna, minder toeristisch. Tickets online!</div>
+        <div class="day-tags">
+          <span class="tag tag-cave">Grot</span>
+          <span class="tag tag-water">Ondergrondse rivier</span>
+          <span class="tag tag-kids">Kids ⭐⭐⭐</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-row">
+      <div class="day-photo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Postojna_cave_01.jpg/800px-Postojna_cave_01.jpg"
+             onerror="this.parentElement.innerHTML='<div class=\'day-photo-placeholder\' style=\'background:linear-gradient(135deg,#f0e0f8,#d8b8f0)\'>🚂</div>'" alt="Postojna grotten">
+        <div class="drive-badge">🚗 65 min</div>
+      </div>
+      <div class="day-content">
+        <div class="day-label">Dag 10</div>
+        <div class="day-title">Postojna Grotten</div>
+        <div class="day-desc">Grootste grottenstelsel van Europa — met een treintje naar binnen! Stalactieten, stalagmieten en de zeldzame mensvis (olm). Druk maar erg indrukwekkend voor kinderen. €35 p.p.</div>
+        <div class="day-tags">
+          <span class="tag tag-cave">Grot</span>
+          <span class="tag tag-kids">Kids ⭐⭐⭐</span>
+          <span class="tag">🚂 Treintje</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-row">
+      <div class="day-photo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Piran_pano.jpg/800px-Piran_pano.jpg"
+             onerror="this.parentElement.innerHTML='<div class=\'day-photo-placeholder\' style=\'background:linear-gradient(135deg,#ffecd0,#ffc870)\'>⛵</div>'" alt="Piran">
+        <div class="drive-badge">🚗 15 min</div>
+      </div>
+      <div class="day-content">
+        <div class="day-label">Dag 11</div>
+        <div class="day-title">Piran</div>
+        <div class="day-desc">Het mooiste Venetiaanse stadje van de Adriatische kust. Smalle steegjes, uitkijktoren, zwemmen van de rotsige kades. Ga 's avonds voor sfeer en minder drukte.</div>
+        <div class="day-tags">
+          <span class="tag tag-swim">Zwemmen</span>
+          <span class="tag tag-culture">Stadje</span>
+          <span class="tag tag-kids">Kids ⭐⭐</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section-divider"><hr></div>
+
+<!-- REISDAG 2→3 -->
+<div class="section" style="padding-top: 40px; padding-bottom: 40px;">
+  <div class="travel-row">
+    <span class="travel-icon">🚗</span>
+    <div>
+      <strong>Reisdag — Dag 12 · Kust naar Savinja-vallei</strong><br>
+      ±2,5 uur rijden langs Ljubljana. Mooi tussenstop mogelijk in Ljubljana centrum (1u).
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ KAMP 3 ═══ -->
+<div class="section" style="padding-top: 0;">
+  <div class="section-header color-3">
+    <div class="section-num">3</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Dag 12 – 15 · 4 nachten</div>
+      <div class="section-title">Savinja-vallei</div>
+    </div>
+    <div class="section-meta">
+      <span class="camp-badge badge-3">Basiskamp 3</span><br>
+      Bergbeekjes · Raften · Natuur
+    </div>
+  </div>
+
+  <div class="camp-card">
+    <div class="camp-img-placeholder" style="background: linear-gradient(135deg, #c8f0d0, #88d8a0);">🏝️</div>
+    <div class="camp-info">
+      <h3>Camp Na Otoku ⭐</h3>
+      <p>Eerste boutique camping van de Savinja-vallei — letterlijk op een eilandje tussen twee beekjes. Kinderen kunnen in het ondiepe water spelen, dammen bouwen en op een vlotje. Maximaal 40 tenten.</p>
+      <div class="camp-details">
+        <div class="camp-detail"><span class="icon">⭐</span> 4.9 (210 reviews)</div>
+        <div class="camp-detail"><span class="icon">💶</span> ~€65 voor 4 pers.</div>
+        <div class="camp-detail"><span class="icon">🏝️</span> Eilandje met 2 beekjes</div>
+        <div class="camp-detail"><span class="icon">👧</span> Kids-paradijs</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="days-label">Dagtrips vanuit dit kamp</div>
+  <div class="days-grid">
+
+    <div class="day-row">
+      <div class="day-photo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Logarska_dolina.jpg/800px-Logarska_dolina.jpg"
+             onerror="this.parentElement.innerHTML='<div class=\'day-photo-placeholder\' style=\'background:linear-gradient(135deg,#d0f0d0,#90d890)\'>🏔️</div>'" alt="Logarska dolina">
+        <div class="drive-badge">🚗 35 min</div>
+      </div>
+      <div class="day-content">
+        <div class="day-label">Dag 13</div>
+        <div class="day-title">Logarska Dolina</div>
+        <div class="day-desc">Een van de mooiste bergvalleien van Europa. Omringd door 2000+ meter hoge toppen, watervallen en weilanden vol bloemen. Perfect voor een picknick met de kids.</div>
+        <div class="day-tags">
+          <span class="tag tag-hike">Bergwandeling</span>
+          <span class="tag tag-water">Waterval</span>
+          <span class="tag tag-kids">Kids ⭐⭐⭐</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-row">
+      <div class="day-photo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Savinja_rafting.jpg/800px-Savinja_rafting.jpg"
+             onerror="this.parentElement.innerHTML='<div class=\'day-photo-placeholder\' style=\'background:linear-gradient(135deg,#c0e8ff,#60b8e8)\'>🚣</div>'" alt="Raften Savinja">
+        <div class="drive-badge">🚗 10 min</div>
+      </div>
+      <div class="day-content">
+        <div class="day-label">Dag 14</div>
+        <div class="day-title">Raften op de Savinja</div>
+        <div class="day-desc">De Savinja is perfect voor gezinsraften — niet te wild, wel spannend. Kinderen vanaf 7 jaar mogen mee. Adventure Valley heeft topreviews. Vooraf boeken is een must in augustus.</div>
+        <div class="day-tags">
+          <span class="tag tag-water">Raften</span>
+          <span class="tag tag-kids">Kids ⭐⭐⭐</span>
+          <span class="tag">⚠️ Vooraf boeken</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-row">
+      <div class="day-photo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Kamnik_castle.jpg/800px-Kamnik_castle.jpg"
+             onerror="this.parentElement.innerHTML='<div class=\'day-photo-placeholder\' style=\'background:linear-gradient(135deg,#f8e8d0,#e8c890)\'>🏰</div>'" alt="Kamnik kasteel">
+        <div class="drive-badge">🚗 55 min</div>
+      </div>
+      <div class="day-content">
+        <div class="day-label">Dag 15 · tussenstop</div>
+        <div class="day-title">Kamnik &amp; kasteel</div>
+        <div class="day-desc">Leuk middeleeuws stadje op de route naar huis. Klim in 10 minuten naar het kasteelruïnetje voor een prachtig uitzicht over de Alpen. Goed moment voor een laatste Sloveense lunch.</div>
+        <div class="day-tags">
+          <span class="tag tag-culture">Kasteel</span>
+          <span class="tag tag-hike">Korte klim</span>
+          <span class="tag tag-kids">Kids ⭐⭐</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section-divider"><hr></div>
+
+<!-- TERUGWEG -->
+<div class="section" style="padding-top: 40px; padding-bottom: 60px;">
+  <div class="travel-row">
+    <span class="travel-icon">🏠</span>
+    <div>
+      <strong>Terug naar huis — Dag 15–16 · ±13 uur</strong><br>
+      Splits de rit. Overnacht ergens in Oostenrijk of Duitsland (Salzburg of München). Dag 16 thuis in De Glind.
+    </div>
+  </div>
+</div>
+
+<footer>
+  Gemaakt voor <strong>onze Slovenië-vakantie augustus 2025</strong> 🇸🇮 &nbsp;·&nbsp; Tickets grotten & Vintgar vroeg online boeken &nbsp;·&nbsp; Kaki Plac zo snel mogelijk reserveren
+</footer>
+
+</body>
+</html>
