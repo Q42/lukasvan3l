@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paklijst Slovenië 2026 🧳</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --soca: #1a7abf;
+    --forest: #2d5c1e;
+    --sun: #f0b429;
+    --sand: #fdf6ec;
+    --dark: #1c1c1c;
+    --mid: #555;
+    --light: #f4f4f0;
+    --white: #fff;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.10);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--light);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0d4f7c 0%, #1a7abf 50%, #2d5c1e 100%);
+    color: white;
+    padding: 56px 60px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 60px;
+    background: var(--light);
+    clip-path: ellipse(55% 100% at 50% 100%);
+    z-index: 2;
+  }
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    margin-bottom: 24px;
+    transition: color 0.15s;
+  }
+  .back-link:hover { color: white; }
+  .hero-flag { font-size: 44px; line-height: 1; margin-bottom: 14px; }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1.0;
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+  }
+  .hero h1 span { color: var(--sun); }
+  .hero-sub {
+    font-size: 18px;
+    opacity: 0.85;
+    font-weight: 400;
+    max-width: 480px;
+    line-height: 1.5;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-section {
+    background: var(--white);
+    border-bottom: 1px solid #e5e5e5;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .progress-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 18px 60px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .progress-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--mid);
+    white-space: nowrap;
+  }
+  .progress-bar-wrap {
+    flex: 1;
+    height: 8px;
+    background: #eee;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--soca), var(--forest));
+    border-radius: 8px;
+    transition: width 0.35s ease;
+    width: 0%;
+  }
+  .progress-count {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark);
+    white-space: nowrap;
+    min-width: 64px;
+    text-align: right;
+  }
+  .reset-btn {
+    font-size: 12px;
+    color: #bbb;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: color 0.15s;
+    white-space: nowrap;
+  }
+  .reset-btn:hover { color: var(--mid); }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 60px 80px;
+  }
+
+  .cat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .full-width { grid-column: 1 / -1; }
+
+  /* ── CATEGORY CARD ── */
+  .cat-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid #eee;
+    overflow: hidden;
+  }
+  .cat-header {
+    padding: 14px 20px 12px;
+    border-bottom: 2px solid;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cat-emoji { font-size: 20px; line-height: 1; }
+  .cat-title {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 700;
+    flex: 1;
+  }
+  .cat-count {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--mid);
+    background: var(--light);
+    padding: 3px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+  .cat-note {
+    font-size: 11px;
+    color: #8a7a5a;
+    font-style: italic;
+    padding: 6px 20px;
+    border-bottom: 1px solid #f0ebe0;
+    background: var(--sand);
+  }
+
+  .border-blue   { border-color: var(--soca); }
+  .border-orange { border-color: #e8832a; }
+  .border-green  { border-color: var(--forest); }
+  .border-yellow { border-color: #c89b00; }
+  .border-purple { border-color: #8b5cf6; }
+  .border-teal   { border-color: #0d9488; }
+  .border-red    { border-color: #dc2626; }
+  .border-navy   { border-color: #374151; }
+  .border-gray   { border-color: #9ca3af; }
+  .border-olive  { border-color: #6b7c00; }
+  .border-brown  { border-color: #92400e; }
+
+  /* ── CHECKLIST ── */
+  .check-list { list-style: none; padding: 4px 0; }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .check-item:hover { background: #f8f8f6; }
+  .check-item.done { opacity: 0.4; }
+  .check-item.done .check-text { text-decoration: line-through; }
+
+  .check-item input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    accent-color: var(--soca);
+    cursor: pointer;
+  }
+  .check-text { font-size: 14px; line-height: 1.4; flex: 1; }
+
+  .check-item.todo { cursor: default; opacity: 0.5; }
+  .check-item.todo .check-text { font-style: italic; color: #aaa; }
+
+  /* ── KLEDING SPLIT ── */
+  .clothing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .clothing-col { border-right: 1px solid #f0f0f0; }
+  .clothing-col:nth-child(even) { border-right: none; }
+  .clothing-col-header {
+    padding: 10px 20px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--mid);
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .clothing-all {
+    border-top: 1px solid #f0f0f0;
+    grid-column: 1 / -1;
+  }
+  .clothing-all .clothing-col-header { border-bottom: 1px solid #f0f0f0; }
+
+  /* ── FOOTER ── */
+  footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 60px 48px;
+    font-size: 13px;
+    color: #aaa;
+  }
+  footer a { color: var(--mid); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    .hero { padding: 36px 24px 60px; }
+    .hero h1 { font-size: 44px; }
+    .progress-inner { padding: 14px 24px; }
+    .main { padding: 28px 24px 60px; }
+    .cat-grid { grid-template-columns: 1fr; }
+    .full-width { grid-column: 1; }
+    .clothing-grid { grid-template-columns: 1fr; }
+    .clothing-col { border-right: none; border-bottom: 1px solid #f0f0f0; }
+    .clothing-col:last-child { border-bottom: none; }
+    footer { padding: 0 24px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <a class="back-link" href="./">← Terug naar reisplan</a>
+    <div class="hero-flag">🧳</div>
+    <h1>Pak<span>lijst</span></h1>
+    <p class="hero-sub">Slovenië 2026 · 14 nachten · Lukas, Hester, Floris &amp; Yune</p>
+  </div>
+</div>
+
+<div class="progress-section">
+  <div class="progress-inner">
+    <span class="progress-label">Ingepakt</span>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="prog-fill"></div>
+    </div>
+    <div class="progress-count"><span id="prog-done">0</span>&thinsp;/&thinsp;<span id="prog-total">0</span></div>
+    <button class="reset-btn" id="reset-btn">Reset</button>
+  </div>
+</div>
+
+<div class="main">
+  <div class="cat-grid">
+
+    <!-- ── SLAAP & KAMPEER ── -->
+    <div class="cat-card">
+      <div class="cat-header border-blue">
+        <span class="cat-emoji">🏕️</span>
+        <span class="cat-title">Slaap &amp; Kampeer</span>
+        <span class="cat-count" id="cnt-slaap"></span>
+      </div>
+      <ul class="check-list" data-cat="slaap">
+        <li class="check-item"><input type="checkbox"><span class="check-text">Kleine tent + grote tent / megatent — check haringen</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Slaapzak ×5</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Luchtbed ×5</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Luchtbedpomp</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Thermo ondervloer</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Kussens (Hester + Floris + evt. Lukas)</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Schapenvel ondermatras?</span></li>
+      </ul>
+    </div>
+
+    <!-- ── KOKEN & WARMTE ── -->
+    <div class="cat-card">
+      <div class="cat-header border-orange">
+        <span class="cat-emoji">🔥</span>
+        <span class="cat-title">Koken &amp; Warmte</span>
+        <span class="cat-count" id="cnt-koken"></span>
+      </div>
+      <ul class="check-list" data-cat="koken">
+        <li class="check-item"><input type="checkbox"><span class="check-text">Kachel</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Petroleum (jerrycan)</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Gasstel</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">1 volle gastank</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Aansteker / lucifers ×2</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Bol lamp + extra lampolie</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Pannenset</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Koekenpan</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Snijplank + mes</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Borden ×4</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Diepe borden / kommen ×4</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Bestek ×4</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Bekers ×4</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Vaatwaskwast + zeep</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Theedoeken ×2</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Waterzak / jerrycan</span></li>
+      </ul>
+    </div>
+
+    <!-- ── FIETSEN ── -->
+    <div class="cat-card">
+      <div class="cat-header border-green">
+        <span class="cat-emoji">🚴</span>
+        <span class="cat-title">Fietsen</span>
+        <span class="cat-count" id="cnt-fietsen"></span>
+      </div>
+      <div class="cat-note">2 mountainbikes — Lukas + Hester/Floris · gravelpaden, geen steile klimmers</div>
+      <ul class="check-list" data-cat="fietsen">
+        <li class="check-item"><input type="checkbox"><span class="check-text">2 mountainbikes</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Helmen ×2</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Fietsslot</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Bidons ×2</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Bandenplakset + CO₂-cartridges</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Mini-fietspomp</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">MTB-handschoenen</span></li>
+      </ul>
+    </div>
+
+    <!-- ── ACTIVITEITEN ── -->
+    <div class="cat-card">
+      <div class="cat-header border-yellow">
+        <span class="cat-emoji">🎯</span>
+        <span class="cat-title">Activiteiten</span>
+        <span class="cat-count" id="cnt-act"></span>
+      </div>
+      <div class="cat-note">Slackline in de bomen · hangmatten · water voor Floris &amp; Yune</div>
+      <ul class="check-list" data-cat="act">
+        <li class="check-item"><input type="checkbox"><span class="check-text">Slackline + ratchet</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Hangmatten ×2 + verlengkabels (grijs zakje)</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Zwembrillen ×2 (Floris &amp; Yune)</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Zwemvest / zwembandjes voor Yune</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Houtbewerkingsset (beitels, zaagje, schuurpapier)</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Potloden / stiften + papier / kleurboek</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Dagrugzak</span></li>
+      </ul>
+    </div>
+
+    <!-- ── KLEDING (full width, split per persoon) ── -->
+    <div class="cat-card full-width">
+      <div class="cat-header border-purple">
+        <span class="cat-emoji">👕</span>
+        <span class="cat-title">Kleding</span>
+        <span class="cat-count" id="cnt-kleding"></span>
+      </div>
+      <div class="clothing-grid">
+        <div class="clothing-col">
+          <div class="clothing-col-header">Lukas</div>
+          <ul class="check-list" data-cat="kleding-lukas">
+            <li class="check-item"><input type="checkbox"><span class="check-text">Fleece trui</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">1–2 sneldrogende lange broek</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">Korte broek</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">Pyjamabroek</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">3 shirts + 1 pyjamashirt</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">1 sportbroek + sportshirt</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">Sokken ×8</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">Onderbroeken ×8</span></li>
+          </ul>
+        </div>
+        <div class="clothing-col">
+          <div class="clothing-col-header">Hester <span style="color:#bbb;font-weight:400;font-style:italic">— nog invullen</span></div>
+          <ul class="check-list" data-cat="kleding-hester">
+            <li class="check-item todo"><input type="checkbox" disabled><span class="check-text">??</span></li>
+          </ul>
+        </div>
+        <div class="clothing-col">
+          <div class="clothing-col-header">Yune (7)</div>
+          <ul class="check-list" data-cat="kleding-yune">
+            <li class="check-item"><input type="checkbox"><span class="check-text">Twee onecies</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">Onderbroeken ×12</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">Sokken ×8</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">T-shirts ×5</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">Shirt met lange mouwen</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">Lange broek ×6</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">Korte broek / rok ×2</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">Fleece / vest</span></li>
+          </ul>
+        </div>
+        <div class="clothing-col">
+          <div class="clothing-col-header">Floris (9) <span style="color:#bbb;font-weight:400;font-style:italic">— nog invullen</span></div>
+          <ul class="check-list" data-cat="kleding-floris">
+            <li class="check-item todo"><input type="checkbox" disabled><span class="check-text">??</span></li>
+          </ul>
+        </div>
+        <div class="clothing-all">
+          <div class="clothing-col-header">Iedereen</div>
+          <ul class="check-list" data-cat="kleding-all" style="display:grid;grid-template-columns:1fr 1fr;padding:4px 0;">
+            <li class="check-item"><input type="checkbox"><span class="check-text">Zwemkleding</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">Warme jassen / regenjassen</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">Laarzen</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">Sandalen</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">Wandelschoenen</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">Trekking sandalen (voor in de rivier)</span></li>
+            <li class="check-item"><input type="checkbox"><span class="check-text">Evt. skibroeken / regenbroeken</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TOILETTAS ── -->
+    <div class="cat-card">
+      <div class="cat-header border-teal">
+        <span class="cat-emoji">🧴</span>
+        <span class="cat-title">Toilettas &amp; Hygiëne</span>
+        <span class="cat-count" id="cnt-toilet"></span>
+      </div>
+      <ul class="check-list" data-cat="toilet">
+        <li class="check-item"><input type="checkbox"><span class="check-text">Tandenborstel ×4</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Tandpasta (kids + Lukas + Hester)</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Shampoo + douchegel</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Zonnebrand SPF50</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Insectenspray (Sloveense bossen — teken!)</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Deodorant</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Handdoeken ×4</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Haarborstel</span></li>
+      </ul>
+    </div>
+
+    <!-- ── EHBO ── -->
+    <div class="cat-card">
+      <div class="cat-header border-red">
+        <span class="cat-emoji">🩺</span>
+        <span class="cat-title">EHBO &amp; Medicijnen</span>
+        <span class="cat-count" id="cnt-ehbo"></span>
+      </div>
+      <ul class="check-list" data-cat="ehbo">
+        <li class="check-item"><input type="checkbox"><span class="check-text">EHBO-doos</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Teken-tang (Slovenië = tekengebied)</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Paracetamol / ibuprofen</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Pleisters extra</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Eventueel persoonlijke medicatie</span></li>
+      </ul>
+    </div>
+
+    <!-- ── ELEKTRONICA ── -->
+    <div class="cat-card">
+      <div class="cat-header border-navy">
+        <span class="cat-emoji">📱</span>
+        <span class="cat-title">Elektronica &amp; Navigatie</span>
+        <span class="cat-count" id="cnt-elek"></span>
+      </div>
+      <ul class="check-list" data-cat="elek">
+        <li class="check-item"><input type="checkbox"><span class="check-text">Telefoons + opladers</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Powerbank(s)</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Zaklamp ×2 + batterijen</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Hoofdlamp ×2</span></li>
+      </ul>
+    </div>
+
+    <!-- ── AUTO & TRANSPORT ── -->
+    <div class="cat-card">
+      <div class="cat-header border-gray">
+        <span class="cat-emoji">🚗</span>
+        <span class="cat-title">Auto &amp; Transport</span>
+        <span class="cat-count" id="cnt-auto"></span>
+      </div>
+      <div class="cat-note">Fietsen meenemen op het dak / achterbak</div>
+      <ul class="check-list" data-cat="auto">
+        <li class="check-item"><input type="checkbox"><span class="check-text">Spanbanden / extra bevestiging (fietsen)</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">EHBO auto-kit</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Gevarendriehoek</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Groene kaart verzekering</span></li>
+      </ul>
+    </div>
+
+    <!-- ── DOCUMENTEN ── -->
+    <div class="cat-card">
+      <div class="cat-header border-navy">
+        <span class="cat-emoji">📄</span>
+        <span class="cat-title">Documenten</span>
+        <span class="cat-count" id="cnt-docs"></span>
+      </div>
+      <ul class="check-list" data-cat="docs">
+        <li class="check-item"><input type="checkbox"><span class="check-text">Paspoorten / ID / Rijbewijs ×4</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Europese ziektekostenkaart (EHIC) ×4</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Reserveringsbewijzen campings</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Noodnummers opgeschreven</span></li>
+      </ul>
+    </div>
+
+    <!-- ── OVERIG ── -->
+    <div class="cat-card">
+      <div class="cat-header border-olive">
+        <span class="cat-emoji">🧺</span>
+        <span class="cat-title">Overig</span>
+        <span class="cat-count" id="cnt-overig"></span>
+      </div>
+      <ul class="check-list" data-cat="overig">
+        <li class="check-item"><input type="checkbox"><span class="check-text">Waslijn + knijpers</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Plastic zakken + vuilniszakken</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Touw (paracord)</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Picknickkleed</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Kaartspel / dobbelstenen</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Boeken / e-reader</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Hakbijl / zakmes</span></li>
+      </ul>
+    </div>
+
+    <!-- ── VOORIN DE AUTO ── -->
+    <div class="cat-card">
+      <div class="cat-header border-brown">
+        <span class="cat-emoji">🚘</span>
+        <span class="cat-title">Voorin de auto</span>
+        <span class="cat-count" id="cnt-voorin"></span>
+      </div>
+      <div class="cat-note">Handig bereikbaar onderweg — dag 1–2 en dag 15–16</div>
+      <ul class="check-list" data-cat="voorin">
+        <li class="check-item"><input type="checkbox"><span class="check-text">WC-papier</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Kleine schep</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Contant geld</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Rood broodsnijmes</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Thee + doorzichtige bekers</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">USB-batterij</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Zaklamp</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Lunch, drinken, fruit, repen</span></li>
+        <li class="check-item"><input type="checkbox"><span class="check-text">Kindervermaak voor onderweg (puzzelboekjes e.d.)</span></li>
+      </ul>
+    </div>
+
+  </div><!-- /cat-grid -->
+</div><!-- /main -->
+
+<footer>
+  🚲 Mountainbikes &amp; slackline mee &nbsp;·&nbsp; <a href="./">← Terug naar reisplan</a>
+</footer>
+
+<script>
+(function () {
+  var KEY = 'paklijst-slovenie-2026';
+
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+
+  var allItems = []; // { cb, item }
+
+  /* Assign IDs, restore state, wire up events */
+  document.querySelectorAll('.check-list').forEach(function (list) {
+    var cat = list.dataset.cat;
+    list.querySelectorAll('.check-item:not(.todo)').forEach(function (item, i) {
+      var cb = item.querySelector('input[type="checkbox"]');
+      var id = cat + ':' + i;
+      allItems.push({ cb: cb, item: item });
+
+      if (saved[id]) {
+        cb.checked = true;
+        item.classList.add('done');
+      }
+
+      cb.addEventListener('change', function () {
+        item.classList.toggle('done', cb.checked);
+        saved[id] = cb.checked || undefined;
+        try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+        refresh();
+      });
+
+      /* click anywhere on the row toggles the checkbox */
+      item.addEventListener('click', function (e) {
+        if (e.target === cb) return;
+        cb.checked = !cb.checked;
+        cb.dispatchEvent(new Event('change'));
+      });
+    });
+  });
+
+  /* Reset button */
+  document.getElementById('reset-btn').addEventListener('click', function () {
+    if (!confirm('Alles op "niet ingepakt" zetten?')) return;
+    allItems.forEach(function (o) {
+      o.cb.checked = false;
+      o.item.classList.remove('done');
+    });
+    saved = {};
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    refresh();
+  });
+
+  /* Progress bar + per-card counts */
+  var catCountMap = {
+    slaap: 'cnt-slaap', koken: 'cnt-koken', fietsen: 'cnt-fietsen',
+    act: 'cnt-act', toilet: 'cnt-toilet', ehbo: 'cnt-ehbo',
+    elek: 'cnt-elek', auto: 'cnt-auto', docs: 'cnt-docs',
+    overig: 'cnt-overig', voorin: 'cnt-voorin'
+  };
+  var kledingCats = ['kleding-lukas', 'kleding-yune', 'kleding-all']; /* hester/floris = todo, excluded */
+
+  function countList(cat) {
+    var list = document.querySelector('[data-cat="' + cat + '"]');
+    if (!list) return { done: 0, total: 0 };
+    var items = list.querySelectorAll('.check-item:not(.todo)');
+    var done = list.querySelectorAll('.check-item:not(.todo) input:checked');
+    return { done: done.length, total: items.length };
+  }
+
+  function refresh() {
+    var total = allItems.length;
+    var done = allItems.filter(function (o) { return o.cb.checked; }).length;
+
+    document.getElementById('prog-done').textContent = done;
+    document.getElementById('prog-total').textContent = total;
+    document.getElementById('prog-fill').style.width = (total ? (done / total * 100) : 0) + '%';
+
+    Object.keys(catCountMap).forEach(function (cat) {
+      var el = document.getElementById(catCountMap[cat]);
+      if (!el) return;
+      var c = countList(cat);
+      el.textContent = c.done + ' / ' + c.total;
+    });
+
+    /* Kleding combined */
+    var kd = 0, kt = 0;
+    kledingCats.forEach(function (cat) {
+      var c = countList(cat);
+      kd += c.done; kt += c.total;
+    });
+    var kEl = document.getElementById('cnt-kleding');
+    if (kEl) kEl.textContent = kd + ' / ' + kt;
+  }
+
+  refresh();
+})();
+</script>
+</body>
+</html>
