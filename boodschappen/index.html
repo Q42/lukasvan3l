@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boodschappen — prijsvergelijker</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --dark: #1c1c1c;
+    --mid: #555;
+    --light: #f4f4f0;
+    --white: #fff;
+    --radius: 18px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.10);
+    --varuvo: #d97706;
+    --ah: #00a0e2;
+    --vhtg: #2d7a3a;
+    --geen: #999;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--light);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  header { margin-bottom: 28px; }
+  header .eyebrow {
+    font-size: 12px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--mid); margin-bottom: 8px;
+  }
+  header .eyebrow a { color: inherit; text-decoration: none; }
+  header h1 {
+    font-family: 'Fraunces', serif; font-size: 40px; font-weight: 900;
+    line-height: 1.05; letter-spacing: -1px; margin-bottom: 8px;
+  }
+  header p { font-size: 15px; color: var(--mid); max-width: 560px; line-height: 1.5; }
+
+  /* ── tabs ── */
+  .tabs { display: flex; gap: 8px; margin: 24px 0 20px; flex-wrap: wrap; }
+  .tabs button {
+    font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+    border: 1px solid #ddd; background: var(--white); color: var(--mid);
+    padding: 8px 16px; border-radius: 999px; transition: all .15s ease;
+  }
+  .tabs button.actief { background: var(--dark); border-color: var(--dark); color: var(--white); }
+  .tabs button .bol {
+    display: inline-block; min-width: 20px; padding: 1px 6px; margin-left: 6px;
+    background: rgba(255,255,255,.25); border-radius: 999px; font-size: 12px;
+  }
+  .tabs button:not(.actief) .bol { background: var(--light); }
+
+  .paneel { display: none; }
+  .paneel.actief { display: block; }
+
+  .kaart {
+    background: var(--white); border: 1px solid #eee; border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 20px 22px; margin-bottom: 18px;
+  }
+  .kaart h2 { font-family: 'Fraunces', serif; font-size: 20px; margin-bottom: 12px; }
+
+  /* ── invoer ── */
+  .invoerrij { display: flex; gap: 10px; }
+  .invoerrij input[type=text] {
+    flex: 1; font: inherit; font-size: 16px; padding: 12px 14px;
+    border: 1px solid #ddd; border-radius: 12px; background: var(--white);
+  }
+  .invoerrij input:focus { outline: 2px solid var(--dark); border-color: transparent; }
+  .invoerrij button {
+    font: inherit; font-size: 15px; font-weight: 600; cursor: pointer;
+    background: var(--dark); color: var(--white); border: none;
+    padding: 12px 20px; border-radius: 12px;
+  }
+  .suggesties { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .suggesties button {
+    font: inherit; font-size: 13px; cursor: pointer; border: 1px dashed #ccc;
+    background: transparent; color: var(--mid); padding: 4px 10px; border-radius: 999px;
+  }
+  .suggesties button:hover { border-color: var(--dark); color: var(--dark); }
+
+  /* ── lijst items ── */
+  ul.items { list-style: none; }
+  ul.items li {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 4px; border-bottom: 1px solid #f0f0ec;
+  }
+  ul.items li:last-child { border-bottom: none; }
+  ul.items li.af .naam { text-decoration: line-through; color: #aaa; }
+
+  .vink {
+    width: 24px; height: 24px; flex: none; cursor: pointer; appearance: none;
+    border: 2px solid #ccc; border-radius: 8px; position: relative;
+  }
+  .vink:checked { background: var(--dark); border-color: var(--dark); }
+  .vink:checked::after {
+    content: "✓"; color: #fff; font-size: 15px; position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -52%);
+  }
+
+  .itemtekst { flex: 1; min-width: 0; }
+  .itemtekst .naam { font-size: 16px; font-weight: 500; }
+  .itemtekst .sub { font-size: 12px; color: var(--mid); margin-top: 2px; }
+
+  .aantalknoppen { display: flex; align-items: center; gap: 4px; flex: none; }
+  .aantalknoppen button {
+    width: 28px; height: 28px; font-size: 16px; line-height: 1; cursor: pointer;
+    border: 1px solid #ddd; background: var(--white); border-radius: 8px; color: var(--mid);
+  }
+  .aantalknoppen .aantal { min-width: 26px; text-align: center; font-weight: 600; font-size: 15px; }
+
+  .weg {
+    flex: none; width: 28px; height: 28px; font-size: 14px; cursor: pointer;
+    border: none; background: transparent; color: #bbb; border-radius: 8px;
+  }
+  .weg:hover { color: #d33; background: #fdf0f0; }
+
+  .leeg { color: var(--mid); font-size: 14px; padding: 8px 0; }
+
+  /* ── shop badges ── */
+  .badge {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .5px;
+    text-transform: uppercase; padding: 2px 8px; border-radius: 999px; color: #fff;
+  }
+  .badge.varuvo { background: var(--varuvo); }
+  .badge.ah { background: var(--ah); }
+  .badge.vhtg { background: var(--vhtg); }
+  .badge.geen { background: var(--geen); }
+
+  /* ── bestellen ── */
+  .shopblok { margin-bottom: 18px; }
+  .shopblok .kop { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+  .shopblok .kop .totaal { margin-left: auto; font-weight: 700; font-size: 15px; }
+  .shopblok table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .shopblok td { padding: 7px 4px; border-bottom: 1px solid #f0f0ec; vertical-align: top; }
+  .shopblok tr:last-child td { border-bottom: none; }
+  .shopblok td.prijs { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .shopblok td.q { white-space: nowrap; color: var(--mid); }
+  .shopblok a { color: inherit; }
+  .besparing {
+    background: #eef7ee; border: 1px solid #d5ead5; border-radius: 12px;
+    padding: 12px 16px; font-size: 14px; margin-bottom: 18px;
+  }
+  .waarschuwing {
+    background: #fdf6ec; border: 1px solid #f0e2c8; border-radius: 12px;
+    padding: 12px 16px; font-size: 14px; margin-bottom: 18px; color: #7a5a1e;
+  }
+
+  .kies-shop { font: inherit; font-size: 12px; border: 1px solid #ddd; border-radius: 8px; padding: 2px 4px; background: #fff; color: var(--mid); }
+
+  /* ── producten (catalogus) ── */
+  details.product { border-bottom: 1px solid #f0f0ec; padding: 4px 0; }
+  details.product summary {
+    display: flex; align-items: center; gap: 10px; cursor: pointer;
+    padding: 10px 4px; list-style: none; font-size: 15px; font-weight: 500;
+  }
+  details.product summary::-webkit-details-marker { display: none; }
+  details.product summary .prijsjes { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; font-size: 12px; color: var(--mid); }
+  .mapping { padding: 6px 4px 16px 4px; display: grid; gap: 10px; }
+  .mapping .shoprij { display: grid; grid-template-columns: 74px 1fr 90px 70px; gap: 8px; align-items: center; }
+  .mapping .shoprij label { font-size: 12px; font-weight: 700; }
+  .mapping input {
+    font: inherit; font-size: 13px; padding: 7px 9px;
+    border: 1px solid #ddd; border-radius: 8px; width: 100%;
+  }
+  .mapping .hint { font-size: 11px; color: #999; grid-column: 2 / -1; margin-top: -6px; }
+  .mapping .acties { display: flex; gap: 8px; margin-top: 4px; }
+  .mapping .acties button {
+    font: inherit; font-size: 12px; cursor: pointer; padding: 6px 12px;
+    border-radius: 8px; border: 1px solid #ddd; background: var(--white);
+  }
+  .mapping .acties button.gevaar { color: #d33; border-color: #eecccc; }
+
+  /* ── data ── */
+  .dataknoppen { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+  .dataknoppen button, .dataknoppen label.knop {
+    font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+    border: 1px solid #ddd; background: var(--white); padding: 10px 16px; border-radius: 12px;
+  }
+  .dataknoppen input[type=file] { display: none; }
+  .mono {
+    font-family: ui-monospace, monospace; font-size: 12px; background: #f7f7f4;
+    border: 1px solid #eee; border-radius: 10px; padding: 12px; overflow-x: auto;
+    white-space: pre; line-height: 1.5;
+  }
+  .datum-info { font-size: 13px; color: var(--mid); margin-bottom: 10px; }
+
+  footer { margin-top: 40px; font-size: 13px; color: #aaa; }
+  footer a { color: var(--mid); }
+
+  @media (max-width: 560px) {
+    header h1 { font-size: 32px; }
+    .mapping .shoprij { grid-template-columns: 64px 1fr; }
+    .mapping .shoprij input.prijsveld, .mapping .shoprij input.inhoudveld { grid-column: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><a href="../">lukasvan3l</a> · boodschappen</div>
+    <h1>Boodschappen&shy;lijst</h1>
+    <p>Voeg toe wat je nodig hebt. Bij het bestellen wordt elk product toegewezen aan de goedkoopste winkel: <span class="badge varuvo">Varuvo</span> <span class="badge ah">AH</span> <span class="badge vhtg">Van&nbsp;Haver&nbsp;tot&nbsp;Gort</span></p>
+  </header>
+
+  <nav class="tabs">
+    <button data-tab="lijst" class="actief">Lijst <span class="bol" id="bol-lijst">0</span></button>
+    <button data-tab="bestellen">Bestellen</button>
+    <button data-tab="producten">Producten</button>
+    <button data-tab="data">Data</button>
+  </nav>
+
+  <!-- ══ LIJST ══ -->
+  <section class="paneel actief" id="paneel-lijst">
+    <div class="kaart">
+      <form class="invoerrij" id="toevoegform">
+        <input type="text" id="nieuwitem" placeholder="bijv. havermout, kokosmelk, wc-papier…" autocomplete="off">
+        <button type="submit">Toevoegen</button>
+      </form>
+      <div class="suggesties" id="suggesties"></div>
+    </div>
+    <div class="kaart">
+      <ul class="items" id="lijstitems"></ul>
+      <p class="leeg" id="lijstleeg">Nog niks op de lijst. Typ hierboven wat je nodig hebt.</p>
+    </div>
+  </section>
+
+  <!-- ══ BESTELLEN ══ -->
+  <section class="paneel" id="paneel-bestellen">
+    <div id="bestel-inhoud"></div>
+  </section>
+
+  <!-- ══ PRODUCTEN ══ -->
+  <section class="paneel" id="paneel-producten">
+    <div class="kaart">
+      <h2>Productcatalogus</h2>
+      <p class="leeg" style="margin-bottom:8px">Elk product dat je ooit toevoegde, met per winkel de koppeling (link/artikelnummer) en laatst bekende prijs. Prijzen vult de prijs-agent automatisch; je kunt ze hier ook handmatig invullen. Bij Varuvo verkopen ze per doos: vul dan <em>inhoud</em> in (aantal stuks per doos) zodat de stuksprijs eerlijk vergeleken wordt.</p>
+      <div id="catalogus"></div>
+      <p class="leeg" id="catalogusleeg">Nog geen producten.</p>
+    </div>
+  </section>
+
+  <!-- ══ DATA ══ -->
+  <section class="paneel" id="paneel-data">
+    <div class="kaart">
+      <h2>Prijzen &amp; back-up</h2>
+      <p class="datum-info" id="prijzen-datum"></p>
+      <div class="dataknoppen">
+        <label class="knop">Importeer prijzen (prijzen.json)<input type="file" id="import-prijzen" accept=".json"></label>
+        <button id="export-lijst">Exporteer boodschappen (JSON)</button>
+        <label class="knop">Herstel back-up<input type="file" id="import-alles" accept=".json"></label>
+        <button id="export-alles">Download back-up</button>
+      </div>
+      <p class="leeg">Alles wordt lokaal in je browser bewaard (localStorage) — er gaat niets naar een server. De prijs-agent (zie <a href="https://github.com/Q42/lukasvan3l/tree/main/boodschappen">README in de repo</a>) draait apart met jouw inloggegevens en produceert een <code>prijzen.json</code> die je hier importeert. Persoonlijke prijzen horen niet in deze publieke repo, dus die gaan via dit importbestand.</p>
+    </div>
+    <div class="kaart">
+      <h2>Formaat prijzen.json</h2>
+      <div class="mono">{
+  "opgehaald": "2026-07-08T06:00:00Z",
+  "prijzen": [
+    {
+      "product": "havermout",       // naam of product-id uit de export
+      "shop": "varuvo",             // varuvo | ah | vhtg
+      "prijs": 11.95,                // prijs zoals in de shop
+      "inhoud": 6,                   // optioneel: stuks per verpakking/doos
+      "url": "https://…",           // optioneel: productlink
+      "omschrijving": "Havermout 6×500g"  // optioneel
+    }
+  ]
+}</div>
+    </div>
+  </section>
+
+  <footer>
+    Onderdeel van <a href="../">Lukas' plekkie</a> · data blijft in je browser
+  </footer>
+</div>
+
+<script>
+"use strict";
+
+/* ───────────────────────── model ─────────────────────────
+   staat = {
+     producten: { [id]: { id, naam, shops: { varuvo|ah|vhtg: { url, prijs, inhoud, omschrijving, bijgewerkt } } } },
+     lijst:     [ { productId, aantal, af, shopKeuze } ],
+     prijzenOpgehaald: iso-string | null
+   }
+*/
+const SHOPS = {
+  varuvo: { naam: "Varuvo", zoek: n => "https://www.varuvo.nl/catalogsearch/result/?q=" + encodeURIComponent(n) },
+  ah:     { naam: "Albert Heijn", zoek: n => "https://www.ah.nl/zoeken?query=" + encodeURIComponent(n) },
+  vhtg:   { naam: "Van Haver tot Gort", zoek: n => "https://www.vanhavertotgort.nl/?s=" + encodeURIComponent(n) + "&post_type=product" },
+};
+const OPSLAG = "boodschappen.v1";
+
+let staat = laad();
+
+function laad() {
+  try {
+    const s = JSON.parse(localStorage.getItem(OPSLAG));
+    if (s && s.producten && s.lijst) return s;
+  } catch (e) { /* verse start */ }
+  return { producten: {}, lijst: [], prijzenOpgehaald: null };
+}
+function bewaar() { localStorage.setItem(OPSLAG, JSON.stringify(staat)); }
+
+function maakId(naam) {
+  const basis = "p_" + naam.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+  let id = basis, i = 2;
+  while (staat.producten[id] && staat.producten[id].naam.toLowerCase() !== naam.toLowerCase()) id = basis + "-" + i++;
+  return id;
+}
+
+function vindProductOpNaam(naam) {
+  const n = naam.trim().toLowerCase();
+  return Object.values(staat.producten).find(p => p.naam.toLowerCase() === n);
+}
+
+function voegToeAanLijst(naam) {
+  naam = naam.trim();
+  if (!naam) return;
+  let product = vindProductOpNaam(naam);
+  if (!product) {
+    const id = maakId(naam);
+    product = { id, naam, shops: {} };
+    staat.producten[id] = product;
+  }
+  const bestaand = staat.lijst.find(r => r.productId === product.id);
+  if (bestaand) { bestaand.aantal++; bestaand.af = false; }
+  else staat.lijst.push({ productId: product.id, aantal: 1, af: false, shopKeuze: null });
+  bewaar(); renderAlles();
+}
+
+/* stuksprijs voor eerlijke vergelijking: prijs / inhoud (inhoud standaard 1) */
+function stuksprijs(shopInfo) {
+  if (!shopInfo || typeof shopInfo.prijs !== "number") return null;
+  const inhoud = shopInfo.inhoud > 0 ? shopInfo.inhoud : 1;
+  return shopInfo.prijs / inhoud;
+}
+
+function goedkoopsteShop(product) {
+  let beste = null;
+  for (const key of Object.keys(SHOPS)) {
+    const sp = stuksprijs(product.shops[key]);
+    if (sp !== null && (beste === null || sp < beste.sp)) beste = { shop: key, sp };
+  }
+  return beste; // {shop, sp} of null
+}
+
+/* ───────────────────────── render: lijst ───────────────────────── */
+const el = id => document.getElementById(id);
+const fmt = n => "€ " + n.toFixed(2).replace(".", ",");
+
+function renderLijst() {
+  const ul = el("lijstitems");
+  ul.innerHTML = "";
+  const actief = staat.lijst.filter(r => !r.af), af = staat.lijst.filter(r => r.af);
+  for (const rij of [...actief, ...af]) {
+    const p = staat.producten[rij.productId];
+    if (!p) continue;
+    const li = document.createElement("li");
+    if (rij.af) li.classList.add("af");
+
+    const vink = document.createElement("input");
+    vink.type = "checkbox"; vink.className = "vink"; vink.checked = rij.af;
+    vink.onchange = () => { rij.af = vink.checked; bewaar(); renderAlles(); };
+
+    const tekst = document.createElement("div");
+    tekst.className = "itemtekst";
+    const beste = goedkoopsteShop(p);
+    tekst.innerHTML = '<div class="naam"></div><div class="sub"></div>';
+    tekst.querySelector(".naam").textContent = p.naam;
+    tekst.querySelector(".sub").innerHTML = beste
+      ? `goedkoopst: <span class="badge ${beste.shop}">${SHOPS[beste.shop].naam}</span> ${fmt(beste.sp)}${p.shops[beste.shop].inhoud > 1 ? "/stuk" : ""}`
+      : `<span class="badge geen">prijs onbekend</span>`;
+
+    const knoppen = document.createElement("div");
+    knoppen.className = "aantalknoppen";
+    const min = document.createElement("button"); min.textContent = "−";
+    const aantal = document.createElement("span"); aantal.className = "aantal"; aantal.textContent = rij.aantal;
+    const plus = document.createElement("button"); plus.textContent = "+";
+    min.onclick = () => { rij.aantal = Math.max(1, rij.aantal - 1); bewaar(); renderAlles(); };
+    plus.onclick = () => { rij.aantal++; bewaar(); renderAlles(); };
+    knoppen.append(min, aantal, plus);
+
+    const weg = document.createElement("button");
+    weg.className = "weg"; weg.textContent = "✕"; weg.title = "Verwijder van lijst";
+    weg.onclick = () => { staat.lijst = staat.lijst.filter(r => r !== rij); bewaar(); renderAlles(); };
+
+    li.append(vink, tekst, knoppen, weg);
+    ul.append(li);
+  }
+  el("lijstleeg").style.display = staat.lijst.length ? "none" : "";
+  el("bol-lijst").textContent = actief.length;
+  renderSuggesties();
+}
+
+function renderSuggesties() {
+  const opLijst = new Set(staat.lijst.map(r => r.productId));
+  const kandidaten = Object.values(staat.producten).filter(p => !opLijst.has(p.id)).slice(0, 12);
+  const div = el("suggesties");
+  div.innerHTML = "";
+  for (const p of kandidaten) {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = "+ " + p.naam;
+    b.onclick = () => voegToeAanLijst(p.naam);
+    div.append(b);
+  }
+}
+
+/* ───────────────────────── render: bestellen ───────────────────────── */
+function renderBestellen() {
+  const wrap = el("bestel-inhoud");
+  wrap.innerHTML = "";
+  const actief = staat.lijst.filter(r => !r.af);
+  if (!actief.length) {
+    wrap.innerHTML = '<div class="kaart"><p class="leeg">Zet eerst wat op de lijst, dan verschijnt hier de bestellijst per winkel.</p></div>';
+    return;
+  }
+
+  const perShop = { varuvo: [], ah: [], vhtg: [], geen: [] };
+  let totaalBeste = 0, totaalEnkeleShop = { varuvo: 0, ah: 0, vhtg: 0 }, allesOveralBekend = true;
+
+  for (const rij of actief) {
+    const p = staat.producten[rij.productId];
+    if (!p) continue;
+    const beste = goedkoopsteShop(p);
+    const keuze = rij.shopKeuze && stuksprijs(p.shops[rij.shopKeuze]) !== null ? rij.shopKeuze : (beste ? beste.shop : null);
+    if (!keuze) { perShop.geen.push({ rij, p }); allesOveralBekend = false; continue; }
+    perShop[keuze].push({ rij, p, sp: stuksprijs(p.shops[keuze]) });
+    totaalBeste += stuksprijs(p.shops[keuze]) * rij.aantal;
+    for (const s of Object.keys(totaalEnkeleShop)) {
+      const sp = stuksprijs(p.shops[s]);
+      if (sp === null) { totaalEnkeleShop[s] = NaN; }
+      else if (!Number.isNaN(totaalEnkeleShop[s])) totaalEnkeleShop[s] += sp * rij.aantal;
+    }
+  }
+
+  /* besparing t.o.v. alles bij één shop halen */
+  const haalbaar = Object.entries(totaalEnkeleShop).filter(([, v]) => !Number.isNaN(v));
+  if (haalbaar.length && totaalBeste > 0) {
+    const [duursteNaam] = haalbaar.sort((a, b) => b[1] - a[1])[0];
+    const goedkoopsteEnkel = Math.min(...haalbaar.map(([, v]) => v));
+    const besparing = goedkoopsteEnkel - totaalBeste;
+    if (besparing > 0.005) {
+      const d = document.createElement("div");
+      d.className = "besparing";
+      d.innerHTML = `Slim verdelen bespaart <strong>${fmt(besparing)}</strong> t.o.v. alles bij de goedkoopste enkele winkel halen. Totaal zo verdeeld: <strong>${fmt(totaalBeste)}</strong>.`;
+      wrap.append(d);
+    }
+  }
+
+  if (perShop.geen.length) {
+    const d = document.createElement("div");
+    d.className = "waarschuwing";
+    d.textContent = `Van ${perShop.geen.length} product(en) is nog geen prijs bekend — die staan onderaan. Importeer een verse prijzen.json of vul prijzen handmatig in bij Producten.`;
+    wrap.append(d);
+  }
+
+  for (const shopKey of [...Object.keys(SHOPS), "geen"]) {
+    const items = perShop[shopKey];
+    if (!items.length) continue;
+    const blok = document.createElement("div");
+    blok.className = "kaart shopblok";
+    const isShop = shopKey !== "geen";
+    const subtotaal = isShop ? items.reduce((t, x) => t + x.sp * x.rij.aantal, 0) : 0;
+    blok.innerHTML = `<div class="kop">
+        <span class="badge ${shopKey}">${isShop ? SHOPS[shopKey].naam : "Prijs onbekend"}</span>
+        <span style="font-size:13px;color:var(--mid)">${items.length} product${items.length === 1 ? "" : "en"}</span>
+        ${isShop ? `<span class="totaal">${fmt(subtotaal)}</span>` : ""}
+      </div><table></table>`;
+    const tabel = blok.querySelector("table");
+    for (const { rij, p, sp } of items) {
+      const tr = document.createElement("tr");
+      const info = isShop ? p.shops[shopKey] : null;
+      const link = (info && info.url) || SHOPS[isShop ? shopKey : "ah"].zoek(p.naam);
+      const omschrijving = info && info.omschrijving ? ` <span style="color:#999">(${info.omschrijving})</span>` : "";
+
+      /* handmatige shop-keuze dropdown: alleen shops met bekende prijs */
+      const opties = Object.keys(SHOPS)
+        .filter(s => stuksprijs(p.shops[s]) !== null)
+        .map(s => `<option value="${s}" ${s === shopKey ? "selected" : ""}>${SHOPS[s].naam} ${fmt(stuksprijs(p.shops[s]))}</option>`)
+        .join("");
+      const kiezer = opties && isShop ? `<select class="kies-shop" data-pid="${p.id}">${opties}</select>` : "";
+
+      tr.innerHTML = `<td class="q">${rij.aantal}×</td>
+        <td><a href="${link}" target="_blank" rel="noopener">${p.naam}</a>${omschrijving} ${kiezer}</td>
+        <td class="prijs">${isShop ? fmt(sp * rij.aantal) : "—"}</td>`;
+      tabel.append(tr);
+    }
+    wrap.append(blok);
+  }
+
+  wrap.querySelectorAll(".kies-shop").forEach(sel => {
+    sel.onchange = () => {
+      const rij = staat.lijst.find(r => r.productId === sel.dataset.pid);
+      if (rij) { rij.shopKeuze = sel.value; bewaar(); renderBestellen(); }
+    };
+  });
+}
+
+/* ───────────────────────── render: producten ───────────────────────── */
+function renderProducten() {
+  const div = el("catalogus");
+  div.innerHTML = "";
+  const producten = Object.values(staat.producten).sort((a, b) => a.naam.localeCompare(b.naam, "nl"));
+  el("catalogusleeg").style.display = producten.length ? "none" : "";
+
+  for (const p of producten) {
+    const d = document.createElement("details");
+    d.className = "product";
+    const prijsjes = Object.keys(SHOPS)
+      .map(s => { const sp = stuksprijs(p.shops[s]); return sp === null ? "" : `<span class="badge ${s}">${fmt(sp)}</span>`; })
+      .join(" ") || '<span class="badge geen">geen prijzen</span>';
+    d.innerHTML = `<summary><span>${p.naam}</span><span class="prijsjes">${prijsjes}</span></summary>`;
+
+    const map = document.createElement("div");
+    map.className = "mapping";
+    for (const s of Object.keys(SHOPS)) {
+      const info = p.shops[s] || {};
+      const rij = document.createElement("div");
+      rij.className = "shoprij";
+      rij.innerHTML = `<label><span class="badge ${s}">${s}</span></label>
+        <input type="url" placeholder="productlink bij ${SHOPS[s].naam}" value="${info.url || ""}" data-veld="url">
+        <input type="number" step="0.01" min="0" class="prijsveld" placeholder="prijs €" value="${typeof info.prijs === "number" ? info.prijs : ""}" data-veld="prijs">
+        <input type="number" step="1" min="1" class="inhoudveld" placeholder="inhoud" value="${info.inhoud || ""}" data-veld="inhoud" title="stuks per verpakking/doos">`;
+      rij.querySelectorAll("input").forEach(inp => {
+        inp.onchange = () => {
+          p.shops[s] = p.shops[s] || {};
+          const v = inp.value.trim();
+          if (inp.dataset.veld === "url") p.shops[s].url = v;
+          else p.shops[s][inp.dataset.veld] = v === "" ? undefined : Number(v);
+          p.shops[s].bijgewerkt = new Date().toISOString();
+          bewaar(); renderAlles();
+        };
+      });
+      map.append(rij);
+    }
+    const hint = document.createElement("div");
+    hint.className = "hint";
+    hint.innerHTML = `zoek: ${Object.keys(SHOPS).map(s => `<a href="${SHOPS[s].zoek(p.naam)}" target="_blank" rel="noopener">${SHOPS[s].naam}</a>`).join(" · ")}`;
+    map.append(hint);
+
+    const acties = document.createElement("div");
+    acties.className = "acties";
+    const hernoem = document.createElement("button");
+    hernoem.textContent = "Hernoem";
+    hernoem.onclick = () => {
+      const nieuw = prompt("Nieuwe naam:", p.naam);
+      if (nieuw && nieuw.trim()) { p.naam = nieuw.trim(); bewaar(); renderAlles(); }
+    };
+    const verwijder = document.createElement("button");
+    verwijder.className = "gevaar"; verwijder.textContent = "Verwijder product";
+    verwijder.onclick = () => {
+      if (!confirm(`"${p.naam}" en alle koppelingen verwijderen?`)) return;
+      delete staat.producten[p.id];
+      staat.lijst = staat.lijst.filter(r => r.productId !== p.id);
+      bewaar(); renderAlles();
+    };
+    acties.append(hernoem, verwijder);
+    map.append(acties);
+
+    d.append(map);
+    div.append(d);
+  }
+}
+
+/* ───────────────────────── data: import/export ───────────────────────── */
+function downloadJson(naam, obj) {
+  const blob = new Blob([JSON.stringify(obj, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = naam;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+el("export-lijst").onclick = () => {
+  /* export voor de prijs-agent: producten + actieve lijst */
+  const actief = staat.lijst.filter(r => !r.af);
+  downloadJson("boodschappen-export.json", {
+    geexporteerd: new Date().toISOString(),
+    lijst: actief.map(r => ({
+      product: staat.producten[r.productId]?.naam,
+      productId: r.productId,
+      aantal: r.aantal,
+      shops: staat.producten[r.productId]?.shops || {},
+    })),
+    catalogus: Object.values(staat.producten).map(p => ({ id: p.id, naam: p.naam, shops: p.shops })),
+  });
+};
+
+el("export-alles").onclick = () => downloadJson("boodschappen-backup.json", staat);
+
+el("import-alles").onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try {
+    const s = JSON.parse(await f.text());
+    if (!s.producten || !s.lijst) throw new Error("geen geldig back-upbestand");
+    staat = s; bewaar(); renderAlles();
+    alert("Back-up hersteld.");
+  } catch (err) { alert("Import mislukt: " + err.message); }
+  e.target.value = "";
+};
+
+el("import-prijzen").onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try {
+    const data = JSON.parse(await f.text());
+    const prijzen = Array.isArray(data) ? data : data.prijzen;
+    if (!Array.isArray(prijzen)) throw new Error("verwacht een lijst onder \"prijzen\"");
+    let toegepast = 0, onbekend = [];
+    for (const regel of prijzen) {
+      if (!regel || !SHOPS[regel.shop]) continue;
+      let p = staat.producten[regel.product] || vindProductOpNaam(regel.product || "");
+      if (!p) { onbekend.push(regel.product); continue; }
+      p.shops[regel.shop] = {
+        ...p.shops[regel.shop],
+        prijs: typeof regel.prijs === "number" ? regel.prijs : p.shops[regel.shop]?.prijs,
+        inhoud: regel.inhoud || p.shops[regel.shop]?.inhoud,
+        url: regel.url || p.shops[regel.shop]?.url,
+        omschrijving: regel.omschrijving || p.shops[regel.shop]?.omschrijving,
+        bijgewerkt: data.opgehaald || new Date().toISOString(),
+      };
+      toegepast++;
+    }
+    staat.prijzenOpgehaald = data.opgehaald || new Date().toISOString();
+    bewaar(); renderAlles();
+    alert(`${toegepast} prijzen bijgewerkt.` + (onbekend.length ? `\nNiet gevonden in catalogus: ${[...new Set(onbekend)].join(", ")}` : ""));
+  } catch (err) { alert("Import mislukt: " + err.message); }
+  e.target.value = "";
+};
+
+function renderData() {
+  el("prijzen-datum").textContent = staat.prijzenOpgehaald
+    ? "Prijzen voor het laatst bijgewerkt: " + new Date(staat.prijzenOpgehaald).toLocaleString("nl-NL")
+    : "Nog geen prijzen geïmporteerd.";
+}
+
+/* ───────────────────────── tabs & init ───────────────────────── */
+document.querySelectorAll(".tabs button").forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll(".tabs button").forEach(x => x.classList.toggle("actief", x === b));
+    document.querySelectorAll(".paneel").forEach(p => p.classList.toggle("actief", p.id === "paneel-" + b.dataset.tab));
+    renderAlles();
+  };
+});
+
+el("toevoegform").onsubmit = e => {
+  e.preventDefault();
+  voegToeAanLijst(el("nieuwitem").value);
+  el("nieuwitem").value = "";
+  el("nieuwitem").focus();
+};
+
+function renderAlles() { renderLijst(); renderBestellen(); renderProducten(); renderData(); }
+renderAlles();
+</script>
+</body>
+</html>

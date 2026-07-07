@@ -1,0 +1,14 @@
+{
+  "name": "boodschappen-prijsagent",
+  "private": true,
+  "type": "module",
+  "description": "Haalt prijzen op bij Varuvo, Albert Heijn en Van Haver tot Gort voor de boodschappen-app.",
+  "scripts": {
+    "prijzen": "node fetch-prices.mjs",
+    "login": "node login.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "playwright": "^1.45.0"
+  }
+}
