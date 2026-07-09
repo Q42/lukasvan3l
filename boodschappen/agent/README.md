@@ -1,12 +1,13 @@
 # Prijs-agent
 
 Haalt bij **Varuvo**, **Albert Heijn** en **Van Haver tot Gort** de prijzen op
-voor de boodschappen-app en schrijft een `prijzen.json` die je in de app
-importeert (tab **Data**).
+en schrijft ze naar **Supabase**, waar de app ze live oppikt. (Zonder Supabase-
+config valt hij terug op een `output/prijzen.json`-bestand — handig om de
+scrapers los te testen.)
 
 Dit draait op **jouw eigen machine** — niet op GitHub Pages. Reden: het gebruikt
-je persoonlijke inloggegevens en een echte browser, en persoonlijke prijzen
-(vooral Varuvo) mogen niet in de publieke repo staan.
+je persoonlijke inloggegevens en een echte browser, en de geheime Supabase
+service-role key mag niet in de publieke repo staan.
 
 > Let op: in de cloud-omgeving waarin deze code is gemaakt zijn `ah.nl`,
 > `varuvo.nl` en `vanhavertotgort.nl` geblokkeerd door netwerkbeleid, dus daar
@@ -18,9 +19,15 @@ je persoonlijke inloggegevens en een echte browser, en persoonlijke prijzen
 
 ```bash
 cd boodschappen/agent
-npm install                 # installeert playwright + dotenv
-npx playwright install chromium   # (op je eigen machine; in deze repo-omgeving stond Chromium al klaar)
-cp .env.example .env        # vul je e-mailadressen/wachtwoorden in (optioneel; alleen om loginvelden voor te vullen)
+npm install                 # playwright + dotenv + @supabase/supabase-js
+npx playwright install chromium
+cp .env.example .env        # vul in: SUPABASE_URL + SUPABASE_SERVICE_KEY, evt. shop-logins
+```
+
+Zet in `.env` de **Supabase** waarden (uit `supabase/README.md` stap 5):
+```
+SUPABASE_URL=https://<project>.supabase.co
+SUPABASE_SERVICE_KEY=<service_role key>   # GEHEIM
 ```
 
 `.env`, `state/` en `output/` staan in `.gitignore` — geheimen en persoonlijke
@@ -42,25 +49,25 @@ data verlaten je machine niet.
    Inloggen is alleen nodig voor je **persoonlijke bonus** en het **vullen van je
    mandje**.
 
-2. **Exporteer je lijst uit de app:** tab **Data → Exporteer boodschappen**.
-   Leg het bestand hier neer als `boodschappen-export.json` (of geef het pad mee).
-
-3. **Prijzen ophalen:**
+2. **Prijzen ophalen en naar Supabase schrijven:**
    ```bash
-   node fetch-prices.mjs [pad/naar/boodschappen-export.json]
+   node fetch-prices.mjs
    ```
-   Resultaat: `output/prijzen.json`.
+   Leest de producten uit de database (die je in de app toevoegt) en schrijft de
+   prijzen terug. De app werkt live bij. Zet dit in een **cron** (bv dagelijks);
+   dat houdt meteen je gratis Supabase-project wakker.
 
-4. **Importeer** `output/prijzen.json` in de app (tab **Data → Importeer prijzen**).
-   De app kiest nu per product de goedkoopste winkel.
+   > Zonder `SUPABASE_URL`/`SUPABASE_SERVICE_KEY` valt hij terug op bestanden:
+   > leest `boodschappen-export.json` en schrijft `output/prijzen.json`. Puur voor
+   > lokaal testen — de app zelf werkt met Supabase, niet met dat bestand.
 
-5. **(optioneel) AH-mandje automatisch vullen:**
+3. **(optioneel) AH-mandje automatisch vullen:**
    ```bash
-   node fill-cart-ah.mjs [pad/naar/boodschappen-export.json]
+   node fill-cart-ah.mjs
    ```
-   Zet alle producten die (op stuksprijs) het goedkoopst bij AH zijn in je
-   Albert Heijn-winkelmandje. Vereist een ingelogde AH-sessie. Afrekenen doe je
-   zelf in de AH-app / op ah.nl.
+   Zet alle actieve producten die (op stuksprijs) het goedkoopst bij AH zijn in je
+   Albert Heijn-winkelmandje (aantallen uit de lijst in de database). Vereist een
+   ingelogde AH-sessie. Afrekenen doe je zelf in de AH-app / op ah.nl.
 
 ## Per winkel
 

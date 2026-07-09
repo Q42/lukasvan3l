@@ -1,5 +1,11 @@
 // fetch-prices.mjs — haalt per product bij elke winkel de prijs op met de
-// bewaarde sessie (zie login.mjs) en schrijft output/prijzen.json.
+// bewaarde sessie (zie login.mjs).
+//
+// Bron van producten + bestemming van prijzen:
+//   • Is Supabase ingesteld (SUPABASE_URL + SUPABASE_SERVICE_KEY in .env), dan
+//     leest de agent de producten uit de database en schrijft de prijzen terug.
+//   • Anders valt hij terug op bestanden: leest boodschappen-export.json en
+//     schrijft output/prijzen.json (die je dan in de app importeert).
 //
 // Gebruik:  node fetch-prices.mjs [pad-naar-boodschappen-export.json]
 //
@@ -13,6 +19,7 @@ import { chromium } from "playwright";
 import { join } from "node:path";
 import { laadExport, producten, heeftSessie, schrijfPrijzen, parsePrijs, STATE_DIR } from "./lib.mjs";
 import * as ah from "./ah.mjs";
+import { heeftDb, getProducten, upsertPrijzen } from "./db.mjs";
 import "dotenv/config";
 
 /* ─── winkel-adapters ───────────────────────────────────────────────
@@ -89,10 +96,10 @@ const SHOP_ADAPTERS = {
 };
 
 async function main() {
-  const exp = laadExport(process.argv[2]);
-  const items = producten(exp);
-  if (!items.length) { console.error("Geen producten in het exportbestand."); process.exit(1); }
-  console.log(`${items.length} producten, ${Object.keys(SHOP_ADAPTERS).length} winkels.`);
+  const naarDb = heeftDb();
+  const items = naarDb ? await getProducten() : producten(laadExport(process.argv[2]));
+  if (!items.length) { console.error(naarDb ? "Geen producten in de database (voeg ze toe in de app)." : "Geen producten in het exportbestand."); process.exit(1); }
+  console.log(`${items.length} producten, ${Object.keys(SHOP_ADAPTERS).length} winkels. Bestemming: ${naarDb ? "Supabase" : "output/prijzen.json"}.`);
 
   const browser = await chromium.launch({ headless: true });
   const regels = [];
@@ -126,9 +133,14 @@ async function main() {
   }
 
   await browser.close();
-  const pad = schrijfPrijzen(regels);
-  console.log(`\n✓ ${regels.length} prijzen geschreven naar ${pad}`);
-  console.log("Importeer dit bestand in de app (tab Data → Importeer prijzen).");
+  if (naarDb) {
+    const n = await upsertPrijzen(regels);
+    console.log(`\n✓ ${n} prijzen weggeschreven naar Supabase. De app werkt live bij.`);
+  } else {
+    const pad = schrijfPrijzen(regels);
+    console.log(`\n✓ ${regels.length} prijzen geschreven naar ${pad}`);
+    console.log("Importeer dit bestand in de app (tab Data → Importeer prijzen).");
+  }
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

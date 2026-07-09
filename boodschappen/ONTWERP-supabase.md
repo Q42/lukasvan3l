@@ -1,8 +1,9 @@
 # Ontwerp: boodschappen-app op Supabase (multi-device)
 
-> Status: **ontwerp ter review** — nog geen app-code gewijzigd. Dit beschrijft
-> hoe we de huidige localStorage-app ombouwen naar een multi-device app met een
-> gedeelde database, en waar de prijs-agent op aansluit.
+> Status: **geïmplementeerd.** De frontend is omgebouwd naar een statische
+> single-file app met **Alpine.js + Supabase** (beide via CDN, geen buildstap);
+> de agent schrijft naar Supabase. Dit document beschrijft het ontwerp; de
+> eenmalige setup staat in `supabase/README.md`.
 
 ## Keuzes (afgestemd)
 
@@ -114,11 +115,13 @@ alter table prices     enable row level security;
 alter table list_items enable row level security;
 alter table members    enable row level security;
 
--- catalogus + prijzen: leden mogen LEZEN; niemand schrijft vanaf de client
-create policy "leden lezen products" on products for select using (is_member());
-create policy "leden lezen prices"   on prices   for select using (is_member());
--- (geen insert/update/delete-policy → clients kunnen niet schrijven;
---  de agent gebruikt de service-role key en omzeilt RLS legitiem)
+-- gedeelde catalogus + prijzen: leden lezen én beheren (vertrouwd gezin);
+-- buitenstaanders (niet-lid) niets. De agent gebruikt daarnaast de service-role
+-- key en omzeilt RLS.  (Leden kunnen dus ook handmatig prijzen bijstellen.)
+create policy "leden products" on products for all
+  using (is_member()) with check (is_member());
+create policy "leden prices"   on prices   for all
+  using (is_member()) with check (is_member());
 
 -- winkelmandje: alleen je eigen regels, en alleen als je lid bent
 create policy "eigen mandje" on list_items for all
