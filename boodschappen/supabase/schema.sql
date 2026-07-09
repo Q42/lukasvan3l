@@ -1,10 +1,10 @@
--- Boodschappen-app — Supabase schema + Row-Level Security
--- Draai dit in de Supabase SQL-editor (zie supabase/README.md voor de volgorde).
+-- Boodschappen-app — Supabase schema + Row-Level Security (offers-model)
+-- Draai dit in de Supabase SQL-editor voor een VERS project (zie README.md).
+-- Bestaand v1-project? Draai migrate-bugfixes.sql en migration-offers.sql.
 --
--- Model: producten + prijzen zijn GEDEELD (door het gezin), winkelmandjes zijn
--- PRIVÉ per gebruiker. Toegang is afgeschermd op een allowlist: alleen wie in
--- allowed_emails staat wordt bij eerste login lid en ziet iets. Buitenstaanders
--- die met Google inloggen worden geen lid en zien via RLS niets.
+-- Model: producten (zoektermen) + offers (SKU's per winkel) zijn GEDEELD;
+-- winkelmandjes + besteld-historie zijn PRIVÉ per gebruiker. Toegang is
+-- afgeschermd op een allowlist: alleen wie in allowed_emails staat wordt lid.
 
 -- ── tabellen ─────────────────────────────────────────────────────────────
 
@@ -13,7 +13,7 @@ create table if not exists allowed_emails (
   email text primary key
 );
 
--- daadwerkelijke leden (automatisch gevuld bij eerste login, zie trigger)
+-- daadwerkelijke leden (gevuld bij eerste login + via ensure_member RPC)
 create table if not exists members (
   user_id  uuid primary key references auth.users(id) on delete cascade,
   email    text,
@@ -31,7 +31,7 @@ create table if not exists products (
 -- alle matchende producten (SKU's) per zoekterm, van alle winkels
 create table if not exists offers (
   id          uuid primary key default gen_random_uuid(),
-  product_id  text references products(id) on delete cascade,  -- de zoekterm/behoefte
+  product_id  text references products(id) on delete cascade,
   shop        text check (shop in ('varuvo','ah','vhtg')),
   external_id text,                 -- SKU-id bij de winkel (bv AH webshopId)
   titel       text,                 -- concrete productnaam bij de winkel
@@ -53,6 +53,7 @@ create table if not exists list_items (
   afgevinkt       boolean default false,
   created_at      timestamptz default now()
 );
+create unique index if not exists list_items_user_product_key on list_items (user_id, product_id);
 
 -- besteld-geschiedenis per gebruiker (voor "eerder besteld bovenaan")
 create table if not exists purchases (
@@ -63,16 +64,25 @@ create table if not exists purchases (
   primary key (user_id, offer_id)
 );
 
--- ── allowlist-trigger: maak toegelaten gebruikers automatisch lid ──────────
+-- ── allowlist: maak toegelaten gebruikers lid ──────────────────────────────
+-- Bij eerste signup (trigger) én bij latere logins (ensure_member RPC uit de app).
+create or replace function public.promote_user_if_allowed(p_user_id uuid, p_email text, p_naam text)
+returns void language plpgsql security definer set search_path = public as $$
+begin
+  if p_email is not null and exists (select 1 from allowed_emails where lower(email) = lower(p_email)) then
+    insert into members (user_id, email, naam)
+    values (p_user_id, p_email, coalesce(p_naam, p_email))
+    on conflict (user_id) do nothing;
+  end if;
+end;
+$$;
 
 create or replace function public.handle_new_user()
 returns trigger language plpgsql security definer set search_path = public as $$
 begin
-  if exists (select 1 from allowed_emails where lower(email) = lower(new.email)) then
-    insert into members (user_id, email, naam)
-    values (new.id, new.email, coalesce(new.raw_user_meta_data->>'full_name', new.email))
-    on conflict (user_id) do nothing;
-  end if;
+  perform public.promote_user_if_allowed(
+    new.id, new.email, coalesce(new.raw_user_meta_data->>'full_name', new.email)
+  );
   return new;
 end;
 $$;
@@ -82,15 +92,41 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
 
--- ── helper: is de huidige gebruiker een toegelaten lid? ────────────────────
+-- door de app aangeroepen (rpc) zodat ook bestaande accounts alsnog lid worden
+create or replace function public.ensure_member()
+returns void language plpgsql security definer set search_path = public as $$
+declare u record;
+begin
+  select id, email, raw_user_meta_data into u from auth.users where id = auth.uid();
+  if not found then return; end if;
+  perform public.promote_user_if_allowed(
+    u.id, u.email, coalesce(u.raw_user_meta_data->>'full_name', u.email)
+  );
+end;
+$$;
 
+-- helper: is de huidige gebruiker een toegelaten lid?
 create or replace function public.is_member()
 returns boolean language sql security definer set search_path = public as $$
   select exists (select 1 from members where user_id = auth.uid())
 $$;
 
--- ── Row-Level Security ─────────────────────────────────────────────────────
+-- ── grants (voorkomt "permission denied for table …") ──────────────────────
+grant usage on schema public to anon, authenticated, service_role;
 
+grant all on table public.allowed_emails to service_role;
+grant all on table public.members    to anon, authenticated, service_role;
+grant all on table public.products   to anon, authenticated, service_role;
+grant all on table public.offers     to anon, authenticated, service_role;
+grant all on table public.list_items to anon, authenticated, service_role;
+grant all on table public.purchases  to anon, authenticated, service_role;
+
+grant execute on function public.is_member() to anon, authenticated, service_role;
+grant execute on function public.handle_new_user() to service_role;
+grant execute on function public.ensure_member() to authenticated;
+grant execute on function public.promote_user_if_allowed(uuid, text, text) to service_role;
+
+-- ── Row-Level Security ─────────────────────────────────────────────────────
 alter table allowed_emails enable row level security;   -- geen policies → alleen service-role
 alter table members        enable row level security;
 alter table products       enable row level security;
@@ -130,8 +166,7 @@ alter publication supabase_realtime add table list_items;
 alter publication supabase_realtime add table purchases;
 
 -- ── VUL JE ALLOWLIST ───────────────────────────────────────────────────────
--- Zet hier de Google-e-mailadressen van jou + gezin. Voer daarna deze inserts
--- uit (of doe het via de Table editor). Iedereen hierbuiten krijgt geen toegang.
+-- Zet hier de Google-e-mailadressen van jou + gezin en run deze insert.
 --
 -- insert into allowed_emails (email) values
 --   ('lukas@q42.nl'),

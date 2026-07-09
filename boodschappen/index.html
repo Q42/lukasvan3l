@@ -392,6 +392,9 @@ document.addEventListener("alpine:init", () => {
     async zetSessie(session) {
       this.session = session;
       if (!session) { this.toegang = false; this.toegangGecheckt = false; return; }
+      // promoot deze gebruiker tot lid als z'n e-mail op de allowlist staat
+      // (ook bij latere logins, niet alleen bij de allereerste signup-trigger)
+      await sb.rpc("ensure_member").catch(() => {});
       const { data } = await sb.from("members").select("user_id").maybeSingle();
       this.toegang = !!data;
       this.toegangGecheckt = true;

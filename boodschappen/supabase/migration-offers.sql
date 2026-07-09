@@ -34,6 +34,10 @@ create table if not exists purchases (
 -- ── het oude prijzen-model vervalt (data was automatisch opgehaald, herbouwbaar)
 drop table if exists prices;
 
+-- ── grants op de nieuwe tabellen (fix-grants dekte alleen prices) ───────────
+grant all on table public.offers    to anon, authenticated, service_role;
+grant all on table public.purchases to anon, authenticated, service_role;
+
 -- ── RLS ─────────────────────────────────────────────────────────────────────
 alter table offers    enable row level security;
 alter table purchases enable row level security;

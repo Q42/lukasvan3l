@@ -44,10 +44,10 @@ data verlaten je machine niet.
 
    **Albert Heijn** werkt iets anders: die gebruikt een mobiele API. Log in het
    browservenster in; na succes stuurt AH je naar `appie://login-exit?code=…`.
-   Kopieer die `code` en wissel 'm in (zie `ah.mjs` → `wisselCodeIn`). Voor
-   alleen prijsvergelijking is dit niet nodig — publieke prijzen werken anoniem.
-   Inloggen is alleen nodig voor je **persoonlijke bonus** en het **vullen van je
-   mandje**.
+   `login.mjs ah` pikt die code automatisch op en slaat tokens op in
+   `state/ah-token.json`. Voor alleen prijsvergelijking is dit niet nodig —
+   publieke prijzen werken anoniem. Inloggen is alleen nodig voor je
+   **persoonlijke bonus** en het **vullen van je mandje**.
 
 2. **Opties ophalen en naar Supabase schrijven:**
    ```bash
@@ -76,7 +76,7 @@ data verlaten je machine niet.
 |---|---|---|---|
 | **Albert Heijn** | publiek + persoonlijke bonus | alleen voor bonus/mandje | Mobiele API `api.ah.nl` (`ah.mjs`). Anoniem token voor publieke prijzen; refresh-token voor bonus + winkelmandje vullen. |
 | **Van Haver tot Gort** | publiek | nee | WooCommerce Store API `/wp-json/wc/store/v1/products`, met scrape-fallback. |
-| **Varuvo** | **persoonlijk** | **ja** | Browser met bewaarde sessie (zie `login.mjs`). Magento B2B, prijzen accountspecifiek. Site heeft een "Human verification"-laag; log daarom met een echte browser in. Sessie verloopt snel (reken op ± dagelijks opnieuw inloggen). Verkoopt vaak per **doos** — vul `inhoud` per product in de app aan voor een eerlijke stuksprijs. |
+| **Varuvo** | **persoonlijk** | **ja** | Browser met bewaarde sessie (zie `login.mjs`). Magento B2B, prijzen accountspecifiek. Site heeft een "Human verification"-laag; log daarom met een echte browser in. Sessie verloopt snel (reken op ± dagelijks opnieuw inloggen). Verkoopt vaak per **doos** — vul zo nodig `hoeveelheid` + `eenheid` per optie in de app aan voor een eerlijke basisprijs. |
 
 ## Tip voor Varuvo: vraag naar een export
 
