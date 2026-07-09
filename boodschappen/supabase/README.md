@@ -13,6 +13,8 @@ Daarna werkt de app op elk device en vult de agent de prijzen.
 
 1. Open in het project **SQL Editor** → **New query**.
 2. Plak de volledige inhoud van [`schema.sql`](./schema.sql) en **Run**.
+   Heb je het schema al eerder gedraaid, run dan ook
+   [`migrate-bugfixes.sql`](./migrate-bugfixes.sql) voor latere fixes.
    Krijg je later `permission denied for table products` in de agent, draai dan
    [`fix-grants.sql`](./fix-grants.sql) in de SQL Editor (eenmalig).
 3. Vul je allowlist. Onderaan `schema.sql` staat een `insert into allowed_emails`

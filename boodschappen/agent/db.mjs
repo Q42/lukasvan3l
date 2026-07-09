@@ -17,7 +17,8 @@ export const heeftDb = () => Boolean(url && key);
 let client = null;
 function db() {
   if (!client) {
-    if (!heeftDb()) throw new Error("Geen SUPABASE_URL / SUPABASE_SERVICE_KEY in .env");
+    if (!heeftDb())
+      throw new Error("Geen SUPABASE_URL / SUPABASE_SERVICE_KEY in .env");
     client = createClient(url, key, { auth: { persistSession: false } });
   }
   return client;
@@ -36,14 +37,21 @@ export async function upsertPrijs(regel) {
     product_id: regel.product,
     shop: regel.shop,
     prijs: regel.prijs ?? null,
-    inhoud: regel.inhoud ?? 1,
     url: regel.url ?? null,
     omschrijving: regel.omschrijving ?? null,
     external_id: regel.productId != null ? String(regel.productId) : null,
     updated_at: new Date().toISOString(),
   };
-  const { error } = await db().from("prices").upsert(rij, { onConflict: "product_id,shop" });
-  if (error) throw new Error(`prices upsert (${regel.product}/${regel.shop}): ${error.message}`);
+  // Alleen overschrijven als de scraper inhoud meegeeft — handmatig ingevulde
+  // doosgroottes (Varuvo) blijven anders bij elke cron-run staan.
+  if (regel.inhoud != null) rij.inhoud = regel.inhoud;
+  const { error } = await db()
+    .from("prices")
+    .upsert(rij, { onConflict: "product_id,shop" });
+  if (error)
+    throw new Error(
+      `prices upsert (${regel.product}/${regel.shop}): ${error.message}`,
+    );
 }
 
 export async function upsertPrijzen(regels) {
@@ -58,14 +66,25 @@ export async function getPrijzen() {
   return data || [];
 }
 
-// Actieve (niet-afgevinkte) boodschappen, opgeteld per product over alle leden.
-export async function getActieveLijst() {
-  const { data, error } = await db().from("list_items").select("product_id, aantal, afgevinkt");
+// Actieve (niet-afgevinkte) boodschappen per regel (incl. shop_keuze override).
+export async function getActieveLijstRijen() {
+  const { data, error } = await db()
+    .from("list_items")
+    .select("product_id, aantal, shop_keuze")
+    .eq("afgevinkt", false);
   if (error) throw new Error(`list_items lezen: ${error.message}`);
+  return data || [];
+}
+
+// Opgeteld per product (legacy; zonder shop_keuze).
+export async function getActieveLijst() {
   const perProduct = {};
-  for (const r of data || []) {
-    if (r.afgevinkt) continue;
-    perProduct[r.product_id] = (perProduct[r.product_id] || 0) + (r.aantal || 1);
+  for (const r of await getActieveLijstRijen()) {
+    perProduct[r.product_id] =
+      (perProduct[r.product_id] || 0) + (r.aantal || 1);
   }
-  return Object.entries(perProduct).map(([product_id, aantal]) => ({ product_id, aantal }));
+  return Object.entries(perProduct).map(([product_id, aantal]) => ({
+    product_id,
+    aantal,
+  }));
 }

@@ -52,17 +52,43 @@ create table if not exists list_items (
   created_at timestamptz default now()
 );
 
--- ── allowlist-trigger: maak toegelaten gebruikers automatisch lid ──────────
+-- één regel per gebruiker per product (voorkomt race bij voegToe)
+create unique index if not exists list_items_user_product_key on list_items (user_id, product_id);
+
+-- ── allowlist: maak toegelaten gebruikers automatisch lid ──────────────────
+-- Bij eerste signup (trigger) én bij latere logins (ensure_member RPC uit de app),
+-- zodat iemand die al in auth.users stond vóór allowlist-toevoeging alsnog lid wordt.
+
+create or replace function public.promote_user_if_allowed(p_user_id uuid, p_email text, p_naam text)
+returns void language plpgsql security definer set search_path = public as $$
+begin
+  if p_email is not null and exists (select 1 from allowed_emails where lower(email) = lower(p_email)) then
+    insert into members (user_id, email, naam)
+    values (p_user_id, p_email, coalesce(p_naam, p_email))
+    on conflict (user_id) do nothing;
+  end if;
+end;
+$$;
 
 create or replace function public.handle_new_user()
 returns trigger language plpgsql security definer set search_path = public as $$
 begin
-  if exists (select 1 from allowed_emails where lower(email) = lower(new.email)) then
-    insert into members (user_id, email, naam)
-    values (new.id, new.email, coalesce(new.raw_user_meta_data->>'full_name', new.email))
-    on conflict (user_id) do nothing;
-  end if;
+  perform public.promote_user_if_allowed(
+    new.id, new.email, coalesce(new.raw_user_meta_data->>'full_name', new.email)
+  );
   return new;
+end;
+$$;
+
+create or replace function public.ensure_member()
+returns void language plpgsql security definer set search_path = public as $$
+declare u record;
+begin
+  select id, email, raw_user_meta_data into u from auth.users where id = auth.uid();
+  if not found then return; end if;
+  perform public.promote_user_if_allowed(
+    u.id, u.email, coalesce(u.raw_user_meta_data->>'full_name', u.email)
+  );
 end;
 $$;
 
@@ -93,6 +119,8 @@ grant all on table public.list_items     to anon, authenticated, service_role;
 
 grant execute on function public.is_member() to anon, authenticated, service_role;
 grant execute on function public.handle_new_user() to service_role;
+grant execute on function public.ensure_member() to authenticated;
+grant execute on function public.promote_user_if_allowed(uuid, text, text) to service_role;
 
 -- ── Row-Level Security ─────────────────────────────────────────────────────
 

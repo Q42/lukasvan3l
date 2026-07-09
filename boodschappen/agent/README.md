@@ -44,10 +44,10 @@ data verlaten je machine niet.
 
    **Albert Heijn** werkt iets anders: die gebruikt een mobiele API. Log in het
    browservenster in; na succes stuurt AH je naar `appie://login-exit?code=…`.
-   Kopieer die `code` en wissel 'm in (zie `ah.mjs` → `wisselCodeIn`). Voor
-   alleen prijsvergelijking is dit niet nodig — publieke prijzen werken anoniem.
-   Inloggen is alleen nodig voor je **persoonlijke bonus** en het **vullen van je
-   mandje**.
+   `login.mjs ah` pikt die code automatisch op en slaat tokens op in
+   `state/ah-token.json`. Voor alleen prijsvergelijking is dit niet nodig —
+   publieke prijzen werken anoniem. Inloggen is alleen nodig voor je
+   **persoonlijke bonus** en het **vullen van je mandje**.
 
 2. **Prijzen ophalen en naar Supabase schrijven:**
    ```bash

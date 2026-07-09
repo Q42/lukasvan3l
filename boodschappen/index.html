@@ -347,15 +347,22 @@ document.addEventListener("alpine:init", () => {
     prices: [],     // {product_id, shop, prijs, inhoud, url, omschrijving, external_id, updated_at}
     lijst: [],      // list_items van deze gebruiker
     _channel: null, // realtime-kanaal (één keer aanmaken)
+    _zetSessieLopend: null,
 
     async init() {
       if (!sb) return;
       const { data } = await sb.auth.getSession();
       await this.zetSessie(data.session);
-      sb.auth.onAuthStateChange((_e, s) => this.zetSessie(s));
+      sb.auth.onAuthStateChange((_e, s) => { void this.zetSessie(s); });
     },
 
     async zetSessie(session) {
+      const run = () => this._zetSessieWerk(session);
+      this._zetSessieLopend = (this._zetSessieLopend || Promise.resolve()).then(run);
+      await this._zetSessieLopend;
+    },
+
+    async _zetSessieWerk(session) {
       this.session = session;
       if (!session) {
         this.toegang = false;
@@ -363,6 +370,7 @@ document.addEventListener("alpine:init", () => {
         this.stopAbonnement();
         return;
       }
+      await sb.rpc("ensure_member");
       // toegang = staat er een members-rij voor mij? (RLS geeft alleen mijn eigen rij)
       const { data } = await sb.from("members").select("user_id").maybeSingle();
       this.toegang = !!data;
@@ -391,11 +399,12 @@ document.addEventListener("alpine:init", () => {
 
     abonneer() {
       if (this._channel) return;
-      this._channel = sb.channel("boodschappen")
+      const ch = sb.channel("boodschappen")
         .on("postgres_changes", { event: "*", schema: "public", table: "products" }, async () => { this.products = (await sb.from("products").select("*")).data || []; })
         .on("postgres_changes", { event: "*", schema: "public", table: "prices" }, async () => { this.prices = (await sb.from("prices").select("*")).data || []; })
         .on("postgres_changes", { event: "*", schema: "public", table: "list_items" }, async () => { this.lijst = (await sb.from("list_items").select("*").order("created_at")).data || []; })
         .subscribe();
+      this._channel = ch;
     },
 
     stopAbonnement() {
@@ -475,10 +484,14 @@ document.addEventListener("alpine:init", () => {
       naam = (naam || "").trim();
       if (!naam) return;
       const id = slug(naam);
+      const uid = this.session.user.id;
       await sb.from("products").upsert({ id, naam }, { onConflict: "id" });
-      const bestaand = this.lijst.find(r => r.product_id === id);
-      if (bestaand) await sb.from("list_items").update({ aantal: bestaand.aantal + 1, afgevinkt: false }).eq("id", bestaand.id);
-      else await sb.from("list_items").insert({ product_id: id, aantal: 1, user_id: this.session.user.id });
+      const { error } = await sb.from("list_items").insert({ product_id: id, aantal: 1, user_id: uid });
+      if (error) {
+        if (error.code !== "23505") throw error;
+        const { data } = await sb.from("list_items").select("id, aantal").eq("product_id", id).eq("user_id", uid).single();
+        await sb.from("list_items").update({ aantal: data.aantal + 1, afgevinkt: false }).eq("id", data.id);
+      }
       await this.laadAlles();
     },
     async setAantal(rij, n) {
