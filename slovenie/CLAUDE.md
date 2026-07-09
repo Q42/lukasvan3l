@@ -40,6 +40,26 @@ slackline-friendly camps, water play for the kids) and keep the kids' names
   emoji placeholder. So to fix a blank card, tweak its `data-wiki` candidates
   or `data-search` query.
 
+## Booking & navigation
+
+- Each basecamp card has a **booking box** (`.booking-box`) with a status badge
+  (`.bk-ok` geboekt / `.bk-todo` nog te boeken) plus dates, address, payment
+  and check-in info. Source data comes from the reservation e-mails.
+  - **Kaki Plac** (kamp 2): Liminjan 8, 6320 Portorož · 7–12 aug · ref
+    WTB1A9A3EC · €440 cash bij vertrek · tel +386 41 359 801.
+  - **Kamp na Otoku** (kamp 3): Na Pečeh 7, 3333 Ljubno ob Savinji (island in
+    the Savinja) · 12–17 aug · aanbetaling gedaan, rest + toeristenbelasting
+    contant · tel +386 41 390 515.
+  - **Camp Šorli** (kamp 1, Soča): nog te boeken.
+- Every camp and day-trip has **action buttons** (`.actions` / `.btn`): a
+  `🧭 Navigatie` link (`google.com/maps/dir/?api=1&destination=…`, opens
+  turn-by-turn from the phone's location), a `📍 Maps` search link, and a
+  `📞 Bel camping` `tel:` link on the camps. Drive time is shown both on the
+  photo `.drive-badge` and in the nav button label.
+- The page is **mobile-first responsive** (media query at `max-width: 760px`):
+  cards/day-rows collapse to a single column and the route bar scrolls
+  horizontally — it's meant to be opened on a phone during the trip.
+
 ## Notes
 
 - All external resources (Leaflet, OSM tiles, Wikipedia images, Google Fonts)
