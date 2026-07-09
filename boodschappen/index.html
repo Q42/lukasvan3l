@@ -311,7 +311,7 @@
               </div>
             </details>
           </template>
-          <p class="leeg" x-show="producten.length===0">Nog geen producten.</p>
+          <p class="leeg" x-show="products.length===0">Nog geen producten.</p>
         </div>
       </div>
     </div>
@@ -346,6 +346,7 @@ document.addEventListener("alpine:init", () => {
     products: [],   // {id, naam}
     prices: [],     // {product_id, shop, prijs, inhoud, url, omschrijving, external_id, updated_at}
     lijst: [],      // list_items van deze gebruiker
+    _channel: null, // realtime-kanaal (één keer aanmaken)
 
     async init() {
       if (!sb) return;
@@ -356,7 +357,12 @@ document.addEventListener("alpine:init", () => {
 
     async zetSessie(session) {
       this.session = session;
-      if (!session) { this.toegang = false; this.toegangGecheckt = false; return; }
+      if (!session) {
+        this.toegang = false;
+        this.toegangGecheckt = false;
+        this.stopAbonnement();
+        return;
+      }
       // toegang = staat er een members-rij voor mij? (RLS geeft alleen mijn eigen rij)
       const { data } = await sb.from("members").select("user_id").maybeSingle();
       this.toegang = !!data;
@@ -384,11 +390,18 @@ document.addEventListener("alpine:init", () => {
     },
 
     abonneer() {
-      sb.channel("boodschappen")
+      if (this._channel) return;
+      this._channel = sb.channel("boodschappen")
         .on("postgres_changes", { event: "*", schema: "public", table: "products" }, async () => { this.products = (await sb.from("products").select("*")).data || []; })
         .on("postgres_changes", { event: "*", schema: "public", table: "prices" }, async () => { this.prices = (await sb.from("prices").select("*")).data || []; })
         .on("postgres_changes", { event: "*", schema: "public", table: "list_items" }, async () => { this.lijst = (await sb.from("list_items").select("*").order("created_at")).data || []; })
         .subscribe();
+    },
+
+    stopAbonnement() {
+      if (!this._channel) return;
+      sb.removeChannel(this._channel);
+      this._channel = null;
     },
 
     /* ── afgeleide data ── */
