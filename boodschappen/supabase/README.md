@@ -13,6 +13,9 @@ Daarna werkt de app op elk device en vult de agent de prijzen.
 
 1. Open in het project **SQL Editor** → **New query**.
 2. Plak de volledige inhoud van [`schema.sql`](./schema.sql) en **Run**.
+   (Had je een ouder schema al gedraaid met een `prices`-tabel? Draai dan in
+   plaats daarvan [`migration-offers.sql`](./migration-offers.sql) om te migreren
+   naar het offers-model.)
 3. Vul je allowlist. Onderaan `schema.sql` staat een `insert into allowed_emails`
    — haal het commentaar weg, zet er jullie **Google**-e-mailadressen in en run
    dat stukje (of gebruik **Table editor → allowed_emails → Insert**).

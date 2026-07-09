@@ -9,7 +9,7 @@
 
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { STATE_DIR } from "./lib.mjs";
+import { STATE_DIR, parseHoeveelheid } from "./lib.mjs";
 
 const API = "https://api.ah.nl";
 const HEADERS = {
@@ -78,21 +78,30 @@ export async function zoek(token, term) {
   return data.products || data.cards?.flatMap(c => c.products) || [];
 }
 
-// Geeft { prijs, url, omschrijving, productId } voor het beste zoekresultaat.
-export async function prijsVoor(token, term) {
-  const producten = await zoek(token, term);
-  if (!producten.length) return null;
-  const p = producten[0];
+function naarOffer(p) {
   const prijs = p.priceBeforeBonus ?? p.currentPrice ?? p.price?.now ?? p.priceV2?.now?.amount ?? null;
   const bonus = p.bonusPrice ?? (p.isBonus ? p.currentPrice : null);
   const gekozen = bonus ?? prijs;
   if (gekozen == null) return null;
+  const { hoeveelheid, eenheid } = parseHoeveelheid(p.salesUnitSize || p.title);
   return {
     prijs: Number(gekozen),
     productId: p.webshopId ?? p.id ?? p.productId,
     url: p.webshopId ? `https://www.ah.nl/producten/product/wi${p.webshopId}` : undefined,
-    omschrijving: [p.title, p.salesUnitSize].filter(Boolean).join(" · "),
+    titel: [p.title, p.salesUnitSize].filter(Boolean).join(" · "),
+    hoeveelheid, eenheid,
   };
+}
+
+// Alle matchende producten (SKU's) voor een zoekterm.
+export async function offersVoor(token, term) {
+  const producten = await zoek(token, term);
+  return producten.map(naarOffer).filter(Boolean);
+}
+
+// Enkel het beste resultaat (backwards compat / bestand-fallback).
+export async function prijsVoor(token, term) {
+  return (await offersVoor(token, term))[0] || null;
 }
 
 // Winkelmandje vullen (vereist ingelogd token).

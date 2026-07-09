@@ -49,13 +49,14 @@ data verlaten je machine niet.
    Inloggen is alleen nodig voor je **persoonlijke bonus** en het **vullen van je
    mandje**.
 
-2. **Prijzen ophalen en naar Supabase schrijven:**
+2. **Opties ophalen en naar Supabase schrijven:**
    ```bash
    node fetch-prices.mjs
    ```
-   Leest de producten uit de database (die je in de app toevoegt) en schrijft de
-   prijzen terug. De app werkt live bij. Zet dit in een **cron** (bv dagelijks);
-   dat houdt meteen je gratis Supabase-project wakker.
+   Leest de zoektermen uit de database (die je in de app toevoegt) en haalt per
+   winkel **alle matchende producten (SKU's)** op — inclusief verpakkingsgrootte —
+   en schrijft ze als `offers` terug. De app werkt live bij. Zet dit in een
+   **cron** (bv dagelijks); dat houdt meteen je gratis Supabase-project wakker.
 
    > Zonder `SUPABASE_URL`/`SUPABASE_SERVICE_KEY` valt hij terug op bestanden:
    > leest `boodschappen-export.json` en schrijft `output/prijzen.json`. Puur voor
@@ -65,9 +66,9 @@ data verlaten je machine niet.
    ```bash
    node fill-cart-ah.mjs
    ```
-   Zet alle actieve producten die (op stuksprijs) het goedkoopst bij AH zijn in je
-   Albert Heijn-winkelmandje (aantallen uit de lijst in de database). Vereist een
-   ingelogde AH-sessie. Afrekenen doe je zelf in de AH-app / op ah.nl.
+   Zet per lijst-item de **gekozen** AH-optie (of, zonder keuze, de goedkoopste AH-
+   optie op basisprijs) in je Albert Heijn-winkelmandje. Vereist een ingelogde AH-
+   sessie. Afrekenen doe je zelf in de AH-app / op ah.nl.
 
 ## Per winkel
 

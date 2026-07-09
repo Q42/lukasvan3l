@@ -9,18 +9,10 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --dark: #1c1c1c;
-    --mid: #555;
-    --light: #f4f4f0;
-    --white: #fff;
-    --radius: 18px;
-    --shadow: 0 4px 24px rgba(0,0,0,0.10);
-    --varuvo: #d97706;
-    --ah: #00a0e2;
-    --vhtg: #2d7a3a;
-    --geen: #999;
+    --dark: #1c1c1c; --mid: #555; --light: #f4f4f0; --white: #fff;
+    --radius: 18px; --shadow: 0 4px 24px rgba(0,0,0,0.10);
+    --varuvo: #d97706; --ah: #00a0e2; --vhtg: #2d7a3a; --geen: #999;
   }
-
   body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); min-height: 100vh; }
   [x-cloak] { display: none !important; }
 
@@ -32,15 +24,15 @@
   header h1 { font-family: 'Fraunces', serif; font-size: 40px; font-weight: 900; line-height: 1.05; letter-spacing: -1px; margin-bottom: 8px; }
   header p { font-size: 15px; color: var(--mid); max-width: 560px; line-height: 1.5; }
 
-  /* ── account-balk ── */
   .accountbalk { display: flex; align-items: center; gap: 12px; margin: 18px 0 4px; font-size: 14px; color: var(--mid); }
   .accountbalk .naam { font-weight: 600; color: var(--dark); }
   .accountbalk .spacer { flex: 1; }
   .knop, button.knop { font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; border: 1px solid #ddd; background: var(--white); color: var(--dark); padding: 9px 16px; border-radius: 12px; text-decoration: none; display: inline-block; }
   .knop.donker { background: var(--dark); color: var(--white); border-color: var(--dark); }
   .knop.klein { padding: 6px 12px; font-size: 13px; }
+  .knop.groen { background: var(--vhtg); color: #fff; border-color: var(--vhtg); }
+  .knop:disabled { opacity: .5; cursor: default; }
 
-  /* ── tabs ── */
   .tabs { display: flex; gap: 8px; margin: 20px 0; flex-wrap: wrap; }
   .tabs button { font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; border: 1px solid #ddd; background: var(--white); color: var(--mid); padding: 8px 16px; border-radius: 999px; transition: all .15s ease; }
   .tabs button.actief { background: var(--dark); border-color: var(--dark); color: var(--white); }
@@ -50,7 +42,6 @@
   .kaart { background: var(--white); border: 1px solid #eee; border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px 22px; margin-bottom: 18px; }
   .kaart h2 { font-family: 'Fraunces', serif; font-size: 20px; margin-bottom: 12px; }
 
-  /* ── invoer ── */
   .invoerrij { display: flex; gap: 10px; }
   .invoerrij input[type=text] { flex: 1; font: inherit; font-size: 16px; padding: 12px 14px; border: 1px solid #ddd; border-radius: 12px; background: var(--white); }
   .invoerrij input:focus { outline: 2px solid var(--dark); border-color: transparent; }
@@ -59,77 +50,87 @@
   .suggesties button { font: inherit; font-size: 13px; cursor: pointer; border: 1px dashed #ccc; background: transparent; color: var(--mid); padding: 4px 10px; border-radius: 999px; }
   .suggesties button:hover { border-color: var(--dark); color: var(--dark); }
 
-  /* ── lijst items ── */
   ul.items { list-style: none; }
   ul.items li { display: flex; align-items: center; gap: 12px; padding: 12px 4px; border-bottom: 1px solid #f0f0ec; }
   ul.items li:last-child { border-bottom: none; }
   ul.items li.af .naam { text-decoration: line-through; color: #aaa; }
-
   .vink { width: 24px; height: 24px; flex: none; cursor: pointer; appearance: none; border: 2px solid #ccc; border-radius: 8px; position: relative; }
   .vink:checked { background: var(--dark); border-color: var(--dark); }
   .vink:checked::after { content: "✓"; color: #fff; font-size: 15px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -52%); }
-
   .itemtekst { flex: 1; min-width: 0; }
   .itemtekst .naam { font-size: 16px; font-weight: 500; }
   .itemtekst .sub { font-size: 12px; color: var(--mid); margin-top: 2px; }
-
   .aantalknoppen { display: flex; align-items: center; gap: 4px; flex: none; }
   .aantalknoppen button { width: 28px; height: 28px; font-size: 16px; line-height: 1; cursor: pointer; border: 1px solid #ddd; background: var(--white); border-radius: 8px; color: var(--mid); }
   .aantalknoppen .aantal { min-width: 26px; text-align: center; font-weight: 600; font-size: 15px; }
-
   .weg { flex: none; width: 28px; height: 28px; font-size: 14px; cursor: pointer; border: none; background: transparent; color: #bbb; border-radius: 8px; }
   .weg:hover { color: #d33; background: #fdf0f0; }
-
   .leeg { color: var(--mid); font-size: 14px; padding: 8px 0; }
 
-  /* ── shop badges ── */
   .badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; color: #fff; }
-  .badge.varuvo { background: var(--varuvo); }
-  .badge.ah { background: var(--ah); }
-  .badge.vhtg { background: var(--vhtg); }
-  .badge.geen { background: var(--geen); }
+  .badge.varuvo { background: var(--varuvo); } .badge.ah { background: var(--ah); }
+  .badge.vhtg { background: var(--vhtg); } .badge.geen { background: var(--geen); }
+  .basis { font-variant-numeric: tabular-nums; color: var(--mid); font-size: 12px; }
 
-  /* ── bestellen ── */
-  .shopblok { margin-bottom: 18px; }
-  .shopblok .kop { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
-  .shopblok .kop .totaal { margin-left: auto; font-weight: 700; font-size: 15px; }
-  .shopblok table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  .shopblok td { padding: 7px 4px; border-bottom: 1px solid #f0f0ec; vertical-align: top; }
-  .shopblok tr:last-child td { border-bottom: none; }
-  .shopblok td.prijs { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
-  .shopblok td.q { white-space: nowrap; color: var(--mid); }
-  .shopblok a { color: inherit; }
-  .besparing { background: #eef7ee; border: 1px solid #d5ead5; border-radius: 12px; padding: 12px 16px; font-size: 14px; margin-bottom: 18px; }
+  /* ── bestellen: item + offer-picker ── */
+  .bestelitem { border-bottom: 1px solid #f0f0ec; padding: 14px 2px; }
+  .bestelitem:last-child { border-bottom: none; }
+  .bestelitem .kop { display: flex; align-items: center; gap: 10px; }
+  .bestelitem .kop .term { font-weight: 600; font-size: 16px; }
+  .bestelitem .kop .aantal { color: var(--mid); font-size: 13px; }
+  .bestelitem .kop .spacer { flex: 1; }
+  .gekozen { display: flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 14px; flex-wrap: wrap; }
+  .gekozen .titel { font-weight: 500; }
+  .gekozen .prijs { margin-left: auto; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .opties { margin-top: 10px; border: 1px solid #eee; border-radius: 12px; overflow: hidden; }
+  .optie { display: flex; align-items: center; gap: 10px; padding: 9px 12px; cursor: pointer; border-bottom: 1px solid #f4f4f0; font-size: 13px; }
+  .optie:last-child { border-bottom: none; }
+  .optie:hover { background: #fafafa; }
+  .optie.gekozenrij { background: #eef7ee; }
+  .optie .titel { flex: 1; min-width: 0; }
+  .optie .ster { color: #e0a400; }
+  .optie .prijs { font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .optie .basis { white-space: nowrap; }
+  .toon-opties { font: inherit; font-size: 13px; font-weight: 600; color: var(--mid); background: none; border: none; cursor: pointer; padding: 4px 0; }
+
+  .totalen { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+  .totalen .rij { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+  .totalen .rij .totaal { margin-left: auto; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .totalen .grand { border-top: 1px solid #eee; padding-top: 8px; margin-top: 4px; font-weight: 700; }
   .waarschuwing { background: #fdf6ec; border: 1px solid #f0e2c8; border-radius: 12px; padding: 12px 16px; font-size: 14px; margin-bottom: 18px; color: #7a5a1e; }
-  .kies-shop { font: inherit; font-size: 12px; border: 1px solid #ddd; border-radius: 8px; padding: 2px 4px; background: #fff; color: var(--mid); }
 
   /* ── producten (catalogus) ── */
   details.product { border-bottom: 1px solid #f0f0ec; padding: 4px 0; }
   details.product summary { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px 4px; list-style: none; font-size: 15px; font-weight: 500; }
   details.product summary::-webkit-details-marker { display: none; }
-  details.product summary .prijsjes { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; font-size: 12px; color: var(--mid); }
-  .mapping { padding: 6px 4px 16px 4px; display: grid; gap: 10px; }
-  .mapping .shoprij { display: grid; grid-template-columns: 74px 1fr 90px 70px; gap: 8px; align-items: center; }
-  .mapping .shoprij label { font-size: 12px; font-weight: 700; }
-  .mapping input { font: inherit; font-size: 13px; padding: 7px 9px; border: 1px solid #ddd; border-radius: 8px; width: 100%; }
-  .mapping .hint { font-size: 11px; color: #999; grid-column: 2 / -1; margin-top: -6px; }
-  .mapping .acties { display: flex; gap: 8px; margin-top: 4px; }
-  .mapping .acties button { font: inherit; font-size: 12px; cursor: pointer; padding: 6px 12px; border-radius: 8px; border: 1px solid #ddd; background: var(--white); }
-  .mapping .acties button.gevaar { color: #d33; border-color: #eecccc; }
+  details.product summary .telling { margin-left: auto; font-size: 12px; color: var(--mid); }
+  .offerlijst { padding: 4px 4px 16px; display: grid; gap: 8px; }
+  .offerrij { display: grid; grid-template-columns: 64px 1fr 80px 70px 60px 28px; gap: 6px; align-items: center; }
+  .offerrij .badge { justify-self: start; }
+  .offerrij input, .offerrij select { font: inherit; font-size: 13px; padding: 6px 8px; border: 1px solid #ddd; border-radius: 8px; width: 100%; }
+  .offerrij .wegknop { border: none; background: none; color: #bbb; cursor: pointer; font-size: 14px; }
+  .offerrij .wegknop:hover { color: #d33; }
+  .offer-toevoeg { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+  .offer-toevoeg button { font: inherit; font-size: 12px; cursor: pointer; padding: 5px 10px; border-radius: 8px; border: 1px dashed #ccc; background: transparent; color: var(--mid); }
+  .prod-acties { display: flex; gap: 8px; margin-top: 8px; }
+  .prod-acties button { font: inherit; font-size: 12px; cursor: pointer; padding: 6px 12px; border-radius: 8px; border: 1px solid #ddd; background: var(--white); }
+  .prod-acties button.gevaar { color: #d33; border-color: #eecccc; }
+  .zoeklinks { font-size: 11px; color: #999; margin-top: 6px; }
+  .zoeklinks a { color: var(--mid); }
+  .datum-info { font-size: 13px; color: var(--mid); margin: 4px 0 10px; }
 
-  /* ── login / status ── */
   .midden { text-align: center; padding: 40px 0; }
   .midden .groot { font-size: 60px; margin-bottom: 16px; }
   .setup { background: #fdf6ec; border: 1px solid #f0e2c8; border-radius: 12px; padding: 16px 18px; font-size: 14px; color: #7a5a1e; line-height: 1.6; }
   .setup code { background: rgba(0,0,0,.06); padding: 1px 5px; border-radius: 5px; }
-  .datum-info { font-size: 13px; color: var(--mid); margin: 4px 0 10px; }
 
   footer { margin-top: 40px; font-size: 13px; color: #aaa; }
   footer a { color: var(--mid); }
 
   @media (max-width: 560px) {
     header h1 { font-size: 32px; }
-    .mapping .shoprij { grid-template-columns: 64px 1fr; }
+    .offerrij { grid-template-columns: 54px 1fr 60px; }
+    .offerrij input.url-veld, .offerrij select.eenheid-veld { grid-column: 2 / -1; }
   }
 </style>
 </head>
@@ -138,21 +139,13 @@
   <header>
     <div class="eyebrow"><a href="../">lukasvan3l</a> · boodschappen</div>
     <h1>Boodschappen&shy;lijst</h1>
-    <p>Voeg toe wat je nodig hebt. Bij het bestellen wordt elk product toegewezen aan de goedkoopste winkel: <span class="badge varuvo">Varuvo</span> <span class="badge ah">AH</span> <span class="badge vhtg">Van&nbsp;Haver&nbsp;tot&nbsp;Gort</span></p>
+    <p>Voeg toe wat je nodig hebt. Bij het bestellen kies je per product de winkel/verpakking — met wat je eerder kocht bovenaan en daarna gesorteerd op prijs per kg/l/stuk. <span class="badge varuvo">Varuvo</span> <span class="badge ah">AH</span> <span class="badge vhtg">Van&nbsp;Haver&nbsp;tot&nbsp;Gort</span></p>
   </header>
 
-  <!-- setup nog niet gedaan -->
   <template x-if="setupNodig">
-    <div class="kaart">
-      <div class="setup">
-        <strong>Nog even instellen.</strong> Vul in <code>config.js</code> je Supabase
-        <code>supabaseUrl</code> en <code>supabaseAnonKey</code> in. Zie
-        <code>supabase/README.md</code> voor de stappen (project aanmaken, schema draaien, Google-login).
-      </div>
-    </div>
+    <div class="kaart"><div class="setup"><strong>Nog even instellen.</strong> Vul in <code>config.js</code> je Supabase <code>supabaseUrl</code> en <code>supabaseAnonKey</code> in. Zie <code>supabase/README.md</code>.</div></div>
   </template>
 
-  <!-- niet ingelogd -->
   <template x-if="!setupNodig && !session">
     <div class="kaart midden">
       <div class="groot">🛒</div>
@@ -161,7 +154,6 @@
     </div>
   </template>
 
-  <!-- ingelogd maar geen toegang -->
   <template x-if="!setupNodig && session && toegangGecheckt && !toegang">
     <div class="kaart midden">
       <div class="groot">🔒</div>
@@ -171,7 +163,6 @@
     </div>
   </template>
 
-  <!-- ingelogd + toegang: de app -->
   <template x-if="!setupNodig && session && toegang">
     <div>
       <div class="accountbalk">
@@ -207,11 +198,16 @@
                 <div class="itemtekst">
                   <div class="naam" x-text="naamVan(rij.product_id)"></div>
                   <div class="sub">
-                    <template x-if="goedkoopste(rij.product_id)">
-                      <span>goedkoopst: <span class="badge" :class="goedkoopste(rij.product_id).shop" x-text="SHOPS[goedkoopste(rij.product_id).shop].naam"></span>
-                        <span x-text="fmt(goedkoopste(rij.product_id).sp) + (heeftInhoud(rij.product_id, goedkoopste(rij.product_id).shop) ? '/stuk' : '')"></span></span>
+                    <template x-if="gekozenOffer(rij)">
+                      <span>
+                        <span class="badge" :class="gekozenOffer(rij).shop" x-text="SHOPS[gekozenOffer(rij).shop].naam"></span>
+                        <span x-text="fmt(gekozenOffer(rij).prijs)"></span>
+                        <span class="basis" x-show="basisTekst(gekozenOffer(rij))" x-text="'· ' + basisTekst(gekozenOffer(rij))"></span>
+                      </span>
                     </template>
-                    <template x-if="!goedkoopste(rij.product_id)"><span class="badge geen">prijs onbekend</span></template>
+                    <template x-if="!gekozenOffer(rij)">
+                      <span class="badge geen" x-text="offersVoor(rij.product_id).length ? 'kies een optie' : 'nog geen opties'"></span>
+                    </template>
                   </div>
                 </div>
                 <div class="aantalknoppen">
@@ -230,44 +226,75 @@
       <!-- ══ BESTELLEN ══ -->
       <div x-show="tab==='bestellen'">
         <template x-if="actieveItems.length===0">
-          <div class="kaart"><p class="leeg">Zet eerst wat op de lijst, dan verschijnt hier de bestellijst per winkel.</p></div>
+          <div class="kaart"><p class="leeg">Zet eerst wat op de lijst, dan kies je hier per product de winkel/verpakking.</p></div>
         </template>
         <template x-if="actieveItems.length>0">
           <div>
-            <div class="besparing" x-show="besparing > 0.005">
-              Slim verdelen bespaart <strong x-text="fmt(besparing)"></strong> t.o.v. alles bij de goedkoopste enkele winkel halen.
-              Totaal zo verdeeld: <strong x-text="fmt(totaalVerdeeld)"></strong>.
-            </div>
-            <div class="waarschuwing" x-show="verdeling.geen.length>0">
-              Van <span x-text="verdeling.geen.length"></span> product(en) is nog geen prijs bekend — die staan onderaan.
-              Draai de prijs-agent of vul prijzen handmatig in bij Producten.
+            <div class="waarschuwing" x-show="zonderOpties.length>0">
+              Van <span x-text="zonderOpties.length"></span> product(en) zijn nog geen opties bekend (<span x-text="zonderOpties.map(r=>naamVan(r.product_id)).join(', ')"></span>). Draai de prijs-agent of voeg opties toe bij Producten.
             </div>
 
-            <template x-for="shopKey in ['varuvo','ah','vhtg','geen']" :key="shopKey">
-              <div class="kaart shopblok" x-show="verdeling[shopKey].length>0">
-                <div class="kop">
-                  <span class="badge" :class="shopKey" x-text="shopKey==='geen' ? 'Prijs onbekend' : SHOPS[shopKey].naam"></span>
-                  <span style="font-size:13px;color:var(--mid)"><span x-text="verdeling[shopKey].length"></span> product(en)</span>
-                  <span class="totaal" x-show="shopKey!=='geen'" x-text="fmt(subtotaal(shopKey))"></span>
-                </div>
-                <table>
-                  <template x-for="x in verdeling[shopKey]" :key="x.rij.id">
-                    <tr>
-                      <td class="q" x-text="x.rij.aantal + '×'"></td>
-                      <td>
-                        <a :href="linkVoor(x.rij.product_id, shopKey)" target="_blank" rel="noopener" x-text="naamVan(x.rij.product_id)"></a>
-                        <select class="kies-shop" x-show="shopKey!=='geen'" @change="kiesShop(x.rij, $event.target.value)">
-                          <template x-for="s in shopsMetPrijs(x.rij.product_id)" :key="s">
-                            <option :value="s" :selected="s===shopKey" x-text="SHOPS[s].naam + ' ' + fmt(stuksprijsVan(x.rij.product_id, s))"></option>
-                          </template>
-                        </select>
-                      </td>
-                      <td class="prijs" x-text="shopKey==='geen' ? '—' : fmt(x.sp * x.rij.aantal)"></td>
-                    </tr>
+            <div class="kaart">
+              <h2>Kies per product</h2>
+              <template x-for="rij in actieveItems" :key="rij.id">
+                <div class="bestelitem">
+                  <div class="kop">
+                    <span class="term" x-text="naamVan(rij.product_id)"></span>
+                    <span class="aantal" x-text="'×' + rij.aantal"></span>
+                    <span class="spacer"></span>
+                    <button class="toon-opties" @click="toonOpties[rij.id] = !toonOpties[rij.id]"
+                      x-text="(toonOpties[rij.id] ? 'verberg' : 'toon') + ' ' + offersVoor(rij.product_id).length + ' opties'"></button>
+                  </div>
+                  <template x-if="gekozenOffer(rij)">
+                    <div class="gekozen">
+                      <span class="badge" :class="gekozenOffer(rij).shop" x-text="gekozenOffer(rij).shop"></span>
+                      <span class="titel" x-text="gekozenOffer(rij).titel || naamVan(rij.product_id)"></span>
+                      <span class="basis" x-show="basisTekst(gekozenOffer(rij))" x-text="basisTekst(gekozenOffer(rij))"></span>
+                      <span class="prijs" x-text="fmt(gekozenOffer(rij).prijs * rij.aantal)"></span>
+                    </div>
                   </template>
-                </table>
+                  <template x-if="!gekozenOffer(rij)">
+                    <div class="gekozen"><span class="badge geen">nog geen opties</span></div>
+                  </template>
+
+                  <div class="opties" x-show="toonOpties[rij.id]" x-cloak>
+                    <template x-for="o in gesorteerdeOffers(rij.product_id)" :key="o.id">
+                      <div class="optie" :class="{gekozenrij: gekozenOffer(rij) && gekozenOffer(rij).id===o.id}" @click="kiesOffer(rij, o.id)">
+                        <span class="badge" :class="o.shop" x-text="o.shop"></span>
+                        <span class="ster" x-show="eerderBesteld(o.id)" title="eerder besteld">★</span>
+                        <span class="titel" x-text="o.titel || naamVan(rij.product_id)"></span>
+                        <span class="basis" x-show="basisTekst(o)" x-text="basisTekst(o)"></span>
+                        <span class="prijs" x-text="fmt(o.prijs)"></span>
+                      </div>
+                    </template>
+                    <template x-if="offersVoor(rij.product_id).length===0">
+                      <div class="optie"><span class="leeg">Geen opties — draai de agent of voeg toe bij Producten.</span></div>
+                    </template>
+                  </div>
+                </div>
+              </template>
+            </div>
+
+            <div class="kaart">
+              <h2>Overzicht per winkel</h2>
+              <div class="totalen">
+                <template x-for="shop in ['varuvo','ah','vhtg']" :key="shop">
+                  <div class="rij" x-show="subtotaal(shop) > 0">
+                    <span class="badge" :class="shop" x-text="SHOPS[shop].naam"></span>
+                    <span x-text="aantalPerShop(shop) + ' product(en)'" style="color:var(--mid);font-size:13px"></span>
+                    <span class="totaal" x-text="fmt(subtotaal(shop))"></span>
+                  </div>
+                </template>
+                <div class="rij grand">
+                  <span>Totaal</span>
+                  <span class="totaal" x-text="fmt(totaal)"></span>
+                </div>
               </div>
-            </template>
+              <div style="margin-top:16px">
+                <button class="knop groen" @click="bestellingAfgerond()" :disabled="gekozenItems.length===0">Bestelling afgerond</button>
+                <span style="font-size:12px;color:var(--mid);margin-left:8px">logt je keuzes zodat ze volgende keer bovenaan staan</span>
+              </div>
+            </div>
           </div>
         </template>
       </div>
@@ -276,35 +303,41 @@
       <div x-show="tab==='producten'">
         <div class="kaart">
           <h2>Productcatalogus</h2>
-          <p class="datum-info" x-show="laatstBijgewerkt" x-text="'Prijzen voor het laatst bijgewerkt: ' + laatstBijgewerkt"></p>
-          <p class="leeg" style="margin-bottom:8px">Elk product met per winkel de koppeling (link) en laatst bekende prijs. Normaal vult de prijs-agent deze; je kunt ze hier ook handmatig aanpassen. Varuvo verkoopt per doos: vul <em>inhoud</em> (stuks per doos) in voor een eerlijke stuksprijs.</p>
+          <p class="datum-info" x-show="laatstBijgewerkt" x-text="'Opties voor het laatst bijgewerkt: ' + laatstBijgewerkt"></p>
+          <p class="leeg" style="margin-bottom:8px">Elke zoekterm met de gevonden opties (SKU's) per winkel. Normaal vult de prijs-agent deze; je kunt hier verpakking (hoeveelheid + eenheid), prijs en link aanpassen of handmatig opties toevoegen. De <em>basisprijs</em> (per kg/l/stuk) wordt berekend uit hoeveelheid + eenheid.</p>
           <template x-for="p in productenGesorteerd" :key="p.id">
             <details class="product">
               <summary>
                 <span x-text="p.naam"></span>
-                <span class="prijsjes">
-                  <template x-for="s in ['varuvo','ah','vhtg']" :key="s">
-                    <template x-if="stuksprijsVan(p.id, s)!==null"><span class="badge" :class="s" x-text="fmt(stuksprijsVan(p.id, s))"></span></template>
-                  </template>
-                  <template x-if="shopsMetPrijs(p.id).length===0"><span class="badge geen">geen prijzen</span></template>
-                </span>
+                <span class="telling" x-text="offersVoor(p.id).length + ' opties'"></span>
               </summary>
-              <div class="mapping">
-                <template x-for="s in ['varuvo','ah','vhtg']" :key="s">
-                  <div class="shoprij">
-                    <label><span class="badge" :class="s" x-text="s"></span></label>
-                    <input type="url" :placeholder="'productlink bij ' + SHOPS[s].naam" :value="veld(p.id,s,'url')" @change="zetPrijsVeld(p.id, s, 'url', $event.target.value)">
-                    <input type="number" step="0.01" min="0" placeholder="prijs €" :value="veld(p.id,s,'prijs')" @change="zetPrijsVeld(p.id, s, 'prijs', $event.target.value)">
-                    <input type="number" step="1" min="1" placeholder="inhoud" title="stuks per verpakking/doos" :value="veld(p.id,s,'inhoud')" @change="zetPrijsVeld(p.id, s, 'inhoud', $event.target.value)">
+              <div class="offerlijst">
+                <template x-for="o in gesorteerdeOffers(p.id)" :key="o.id">
+                  <div class="offerrij">
+                    <span class="badge" :class="o.shop" x-text="o.shop"></span>
+                    <input type="text" placeholder="titel" :value="o.titel || ''" @change="zetOfferVeld(o.id, 'titel', $event.target.value)">
+                    <input type="number" step="0.01" min="0" placeholder="prijs €" :value="o.prijs ?? ''" @change="zetOfferVeld(o.id, 'prijs', $event.target.value)">
+                    <input type="number" step="0.01" min="0" placeholder="hoevh." title="hoeveelheid per verpakking" :value="o.hoeveelheid ?? ''" @change="zetOfferVeld(o.id, 'hoeveelheid', $event.target.value)">
+                    <select class="eenheid-veld" @change="zetOfferVeld(o.id, 'eenheid', $event.target.value)">
+                      <template x-for="e in ['','g','ml','stuk']" :key="e">
+                        <option :value="e" :selected="(o.eenheid||'')===e" x-text="e || '—'"></option>
+                      </template>
+                    </select>
+                    <button class="wegknop" title="verwijder optie" @click="verwijderOffer(o.id)">✕</button>
                   </div>
                 </template>
-                <div class="hint">
+                <div class="offer-toevoeg">
+                  <template x-for="s in ['varuvo','ah','vhtg']" :key="s">
+                    <button @click="voegOfferToe(p.id, s)" x-text="'+ optie bij ' + SHOPS[s].naam"></button>
+                  </template>
+                </div>
+                <div class="zoeklinks">
                   zoek:
                   <template x-for="s in ['varuvo','ah','vhtg']" :key="s">
                     <span><a :href="SHOPS[s].zoek(p.naam)" target="_blank" rel="noopener" x-text="SHOPS[s].naam"></a> </span>
                   </template>
                 </div>
-                <div class="acties">
+                <div class="prod-acties">
                   <button @click="hernoem(p)">Hernoem</button>
                   <button class="gevaar" @click="verwijderProduct(p)">Verwijder product</button>
                 </div>
@@ -317,9 +350,7 @@
     </div>
   </template>
 
-  <footer>
-    Onderdeel van <a href="../">Lukas' plekkie</a> · live sync via Supabase
-  </footer>
+  <footer>Onderdeel van <a href="../">Lukas' plekkie</a> · live sync via Supabase</footer>
 </div>
 
 <script type="module">
@@ -334,18 +365,23 @@ const SHOPS = {
   vhtg:   { naam: "Van Haver tot Gort", zoek: n => "https://www.vanhavertotgort.nl/?s=" + encodeURIComponent(n) + "&post_type=product" },
 };
 const SHOP_KEYS = ["varuvo", "ah", "vhtg"];
+const slug = (naam) => "p_" + naam.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
-function slug(naam) {
-  return "p_" + naam.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+// basisprijs: normaliseer naar per kg / per l / per stuk
+function basisPrijs(offer) {
+  if (!offer || offer.prijs == null || !offer.hoeveelheid || offer.hoeveelheid <= 0 || !offer.eenheid) return null;
+  const p = Number(offer.prijs), h = Number(offer.hoeveelheid);
+  if (offer.eenheid === "g")  return { waarde: p / h * 1000, label: "kg" };
+  if (offer.eenheid === "ml") return { waarde: p / h * 1000, label: "l" };
+  if (offer.eenheid === "stuk") return { waarde: p / h, label: "stuk" };
+  return null;
 }
 
 document.addEventListener("alpine:init", () => {
   Alpine.data("app", () => ({
     SHOPS, setupNodig: !sb, session: null, toegang: false, toegangGecheckt: false,
-    tab: "lijst", nieuwItem: "",
-    products: [],   // {id, naam}
-    prices: [],     // {product_id, shop, prijs, inhoud, url, omschrijving, external_id, updated_at}
-    lijst: [],      // list_items van deze gebruiker
+    tab: "lijst", nieuwItem: "", toonOpties: {},
+    products: [], offers: [], lijst: [], purchases: [],
 
     async init() {
       if (!sb) return;
@@ -353,65 +389,66 @@ document.addEventListener("alpine:init", () => {
       await this.zetSessie(data.session);
       sb.auth.onAuthStateChange((_e, s) => this.zetSessie(s));
     },
-
     async zetSessie(session) {
       this.session = session;
       if (!session) { this.toegang = false; this.toegangGecheckt = false; return; }
-      // toegang = staat er een members-rij voor mij? (RLS geeft alleen mijn eigen rij)
       const { data } = await sb.from("members").select("user_id").maybeSingle();
       this.toegang = !!data;
       this.toegangGecheckt = true;
       if (this.toegang) { await this.laadAlles(); this.abonneer(); }
     },
-
     get naam() { return this.session?.user?.user_metadata?.full_name || this.session?.user?.email || "?"; },
-
-    async login() {
-      const redirectTo = location.href.split("#")[0];
-      await sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo } });
-    },
+    async login() { await sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.href.split("#")[0] } }); },
     async logout() { await sb.auth.signOut(); location.reload(); },
 
     async laadAlles() {
-      const [pr, pc, li] = await Promise.all([
+      const [pr, of, li, pu] = await Promise.all([
         sb.from("products").select("*"),
-        sb.from("prices").select("*"),
+        sb.from("offers").select("*"),
         sb.from("list_items").select("*").order("created_at"),
+        sb.from("purchases").select("*"),
       ]);
       this.products = pr.data || [];
-      this.prices = pc.data || [];
+      this.offers = of.data || [];
       this.lijst = li.data || [];
+      this.purchases = pu.data || [];
     },
-
     abonneer() {
+      const herlaad = { products: null, offers: null, list_items: null, purchases: null };
       sb.channel("boodschappen")
         .on("postgres_changes", { event: "*", schema: "public", table: "products" }, async () => { this.products = (await sb.from("products").select("*")).data || []; })
-        .on("postgres_changes", { event: "*", schema: "public", table: "prices" }, async () => { this.prices = (await sb.from("prices").select("*")).data || []; })
+        .on("postgres_changes", { event: "*", schema: "public", table: "offers" }, async () => { this.offers = (await sb.from("offers").select("*")).data || []; })
         .on("postgres_changes", { event: "*", schema: "public", table: "list_items" }, async () => { this.lijst = (await sb.from("list_items").select("*").order("created_at")).data || []; })
+        .on("postgres_changes", { event: "*", schema: "public", table: "purchases" }, async () => { this.purchases = (await sb.from("purchases").select("*")).data || []; })
         .subscribe();
     },
 
     /* ── afgeleide data ── */
     naamVan(id) { return this.products.find(p => p.id === id)?.naam || id; },
-    prijsRij(id, shop) { return this.prices.find(r => r.product_id === id && r.shop === shop) || null; },
-    heeftInhoud(id, shop) { const r = this.prijsRij(id, shop); return r && r.inhoud > 1; },
-    stuksprijsVan(id, shop) {
-      const r = this.prijsRij(id, shop);
-      if (!r || r.prijs == null) return null;
-      return Number(r.prijs) / (r.inhoud > 0 ? r.inhoud : 1);
+    offersVoor(pid) { return this.offers.filter(o => o.product_id === pid); },
+    basisPrijs(offer) { return basisPrijs(offer); },
+    basisTekst(offer) { const b = basisPrijs(offer); return b ? this.fmt(b.waarde) + "/" + b.label : ""; },
+    basisGetal(offer) { const b = basisPrijs(offer); return b ? b.waarde : Infinity; },
+    eerderBesteld(offerId) { return this.purchases.some(p => p.offer_id === offerId); },
+    laatstBesteld(offerId) { return this.purchases.find(p => p.offer_id === offerId)?.ordered_at || null; },
+
+    gesorteerdeOffers(pid) {
+      return this.offersVoor(pid).slice().sort((a, b) => {
+        const pa = this.laatstBesteld(a.id), pb = this.laatstBesteld(b.id);
+        if (pa && pb && pa !== pb) return pb.localeCompare(pa);   // recentst besteld eerst
+        if (pa && !pb) return -1;
+        if (!pa && pb) return 1;
+        return this.basisGetal(a) - this.basisGetal(b);           // dan op prijs per kg/l/stuk
+      });
     },
-    shopsMetPrijs(id) { return SHOP_KEYS.filter(s => this.stuksprijsVan(id, s) !== null); },
-    goedkoopste(id) {
-      let beste = null;
-      for (const s of SHOP_KEYS) {
-        const sp = this.stuksprijsVan(id, s);
-        if (sp !== null && (beste === null || sp < beste.sp)) beste = { shop: s, sp };
-      }
-      return beste;
+    gekozenOffer(rij) {
+      if (rij.chosen_offer_id) { const o = this.offers.find(o => o.id === rij.chosen_offer_id); if (o) return o; }
+      return this.gesorteerdeOffers(rij.product_id)[0] || null;
     },
-    veld(id, shop, k) { const r = this.prijsRij(id, shop); const v = r ? r[k] : ""; return v == null ? "" : v; },
 
     get actieveItems() { return this.lijst.filter(r => !r.afgevinkt); },
+    get gekozenItems() { return this.actieveItems.filter(r => this.gekozenOffer(r)); },
+    get zonderOpties() { return this.actieveItems.filter(r => !this.gekozenOffer(r)); },
     get lijstGesorteerd() { return [...this.lijst].sort((a, b) => (a.afgevinkt - b.afgevinkt) || (a.created_at || "").localeCompare(b.created_at || "")); },
     get productenGesorteerd() { return [...this.products].sort((a, b) => a.naam.localeCompare(b.naam, "nl")); },
     get suggesties() {
@@ -419,48 +456,20 @@ document.addEventListener("alpine:init", () => {
       return this.productenGesorteerd.filter(p => !op.has(p.id)).slice(0, 12);
     },
     get laatstBijgewerkt() {
-      const t = this.prices.map(r => r.updated_at).filter(Boolean).sort().pop();
+      const t = this.offers.map(o => o.updated_at).filter(Boolean).sort().pop();
       return t ? new Date(t).toLocaleString("nl-NL") : "";
     },
 
-    get verdeling() {
-      const per = { varuvo: [], ah: [], vhtg: [], geen: [] };
-      for (const rij of this.actieveItems) {
-        const beste = this.goedkoopste(rij.product_id);
-        const keuze = (rij.shop_keuze && this.stuksprijsVan(rij.product_id, rij.shop_keuze) !== null) ? rij.shop_keuze : (beste ? beste.shop : null);
-        if (!keuze) { per.geen.push({ rij }); continue; }
-        per[keuze].push({ rij, sp: this.stuksprijsVan(rij.product_id, keuze) });
-      }
-      return per;
-    },
-    subtotaal(shop) { return this.verdeling[shop].reduce((t, x) => t + x.sp * x.rij.aantal, 0); },
-    get totaalVerdeeld() { return SHOP_KEYS.reduce((t, s) => t + this.subtotaal(s), 0); },
-    get besparing() {
-      // vergelijk met alles-bij-één-winkel (alleen winkels waar élk product een prijs heeft)
-      let goedkoopsteEnkel = Infinity;
-      for (const s of SHOP_KEYS) {
-        let som = 0, compleet = true;
-        for (const rij of this.actieveItems) {
-          const sp = this.stuksprijsVan(rij.product_id, s);
-          if (sp === null) { compleet = false; break; }
-          som += sp * rij.aantal;
-        }
-        if (compleet) goedkoopsteEnkel = Math.min(goedkoopsteEnkel, som);
-      }
-      if (!isFinite(goedkoopsteEnkel) || this.totaalVerdeeld === 0) return 0;
-      return goedkoopsteEnkel - this.totaalVerdeeld;
-    },
-    linkVoor(id, shop) {
-      if (shop === "geen") return SHOPS.ah.zoek(this.naamVan(id));
-      return this.prijsRij(id, shop)?.url || SHOPS[shop].zoek(this.naamVan(id));
-    },
+    itemsVoorShop(shop) { return this.gekozenItems.filter(r => this.gekozenOffer(r).shop === shop); },
+    aantalPerShop(shop) { return this.itemsVoorShop(shop).length; },
+    subtotaal(shop) { return this.itemsVoorShop(shop).reduce((t, r) => t + Number(this.gekozenOffer(r).prijs || 0) * r.aantal, 0); },
+    get totaal() { return SHOP_KEYS.reduce((t, s) => t + this.subtotaal(s), 0); },
 
     fmt(n) { return n == null ? "" : "€ " + Number(n).toFixed(2).replace(".", ","); },
 
-    /* ── acties (schrijven naar Supabase) ── */
+    /* ── acties ── */
     async voegToe(naam) {
-      naam = (naam || "").trim();
-      if (!naam) return;
+      naam = (naam || "").trim(); if (!naam) return;
       const id = slug(naam);
       await sb.from("products").upsert({ id, naam }, { onConflict: "id" });
       const bestaand = this.lijst.find(r => r.product_id === id);
@@ -468,37 +477,43 @@ document.addEventListener("alpine:init", () => {
       else await sb.from("list_items").insert({ product_id: id, aantal: 1, user_id: this.session.user.id });
       await this.laadAlles();
     },
-    async setAantal(rij, n) {
-      n = Math.max(1, n);
-      await sb.from("list_items").update({ aantal: n }).eq("id", rij.id);
+    async setAantal(rij, n) { await sb.from("list_items").update({ aantal: Math.max(1, n) }).eq("id", rij.id); await this.laadAlles(); },
+    async toggleAf(rij) { await sb.from("list_items").update({ afgevinkt: !rij.afgevinkt }).eq("id", rij.id); await this.laadAlles(); },
+    async verwijderItem(rij) { await sb.from("list_items").delete().eq("id", rij.id); await this.laadAlles(); },
+    async kiesOffer(rij, offerId) { await sb.from("list_items").update({ chosen_offer_id: offerId }).eq("id", rij.id); await this.laadAlles(); },
+
+    async bestellingAfgerond() {
+      const rows = this.gekozenItems.map(r => ({
+        user_id: this.session.user.id,
+        offer_id: this.gekozenOffer(r).id,
+        product_id: r.product_id,
+        ordered_at: new Date().toISOString(),
+      }));
+      if (!rows.length) return;
+      await sb.from("purchases").upsert(rows, { onConflict: "user_id,offer_id" });
+      await this.laadAlles();
+      alert(`Bestelling gelogd (${rows.length} product(en)). Deze staan volgende keer bovenaan.`);
+    },
+
+    async zetOfferVeld(offerId, k, waarde) {
+      const patch = { updated_at: new Date().toISOString() };
+      if (k === "titel" || k === "eenheid" || k === "url") patch[k] = waarde.trim() || null;
+      else patch[k] = waarde === "" ? null : Number(waarde);
+      await sb.from("offers").update(patch).eq("id", offerId);
       await this.laadAlles();
     },
-    async toggleAf(rij) {
-      await sb.from("list_items").update({ afgevinkt: !rij.afgevinkt }).eq("id", rij.id);
+    async voegOfferToe(pid, shop) {
+      await sb.from("offers").insert({ product_id: pid, shop, titel: "", prijs: null });
       await this.laadAlles();
     },
-    async verwijderItem(rij) {
-      await sb.from("list_items").delete().eq("id", rij.id);
-      await this.laadAlles();
-    },
-    async kiesShop(rij, shop) {
-      await sb.from("list_items").update({ shop_keuze: shop }).eq("id", rij.id);
-      await this.laadAlles();
-    },
-    async zetPrijsVeld(id, shop, k, waarde) {
-      const patch = { product_id: id, shop };
-      patch[k] = k === "url" ? (waarde.trim() || null) : (waarde === "" ? null : Number(waarde));
-      patch.updated_at = new Date().toISOString();
-      await sb.from("prices").upsert(patch, { onConflict: "product_id,shop" });
-      await this.laadAlles();
-    },
+    async verwijderOffer(offerId) { await sb.from("offers").delete().eq("id", offerId); await this.laadAlles(); },
     async hernoem(p) {
       const nieuw = prompt("Nieuwe naam:", p.naam);
       if (nieuw && nieuw.trim()) { await sb.from("products").update({ naam: nieuw.trim() }).eq("id", p.id); await this.laadAlles(); }
     },
     async verwijderProduct(p) {
-      if (!confirm(`"${p.naam}" en alle koppelingen verwijderen?`)) return;
-      await sb.from("products").delete().eq("id", p.id);  // cascade ruimt prices + list_items op
+      if (!confirm(`"${p.naam}" en alle opties/koppelingen verwijderen?`)) return;
+      await sb.from("products").delete().eq("id", p.id);
       await this.laadAlles();
     },
   }));

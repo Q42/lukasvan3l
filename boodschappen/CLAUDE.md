@@ -33,21 +33,28 @@ GitHub Pages (statische app)  ── @supabase/supabase-js ──▶  Supabase
 
 - `allowed_emails` — allowlist (jij vult). `members` — auto-gevuld bij eerste
   login als de e-mail toegelaten is (trigger).
-- `products` — gedeelde catalogus `{id (slug), naam}`.
-- `prices` — per `(product_id, shop)`: `prijs, inhoud, url, omschrijving,
-  external_id (bv AH webshopId), updated_at`.
-- `list_items` — winkelmandje per gebruiker `{user_id, product_id, aantal,
-  afgevinkt, shop_keuze}`.
+- `products` — gedeelde catalogus van **zoektermen/behoeften** `{id (slug), naam}`,
+  bv 'havermout'.
+- `offers` — **alle matchende SKU's** per zoekterm, van alle winkels:
+  `{product_id, shop, external_id, titel, prijs, hoeveelheid, eenheid (g|ml|stuk),
+  url, updated_at}`. Eén zoekterm heeft dus meerdere offers per winkel.
+- `list_items` — winkelmandje per gebruiker `{user_id, product_id,
+  chosen_offer_id, aantal, afgevinkt}`. `chosen_offer_id` = de handmatig gekozen
+  SKU (null = default: eerder-besteld, anders goedkoopst op basisprijs).
+- `purchases` — besteld-geschiedenis per gebruiker `{user_id, offer_id,
+  product_id, ordered_at}`. Gevuld door de knop "Bestelling afgerond".
 
 **Toegang**: alle tabellen staan onder RLS die op `is_member()` checkt.
 Buitenstaanders die met Google inloggen worden geen lid en zien niets. Leden
-delen `products`/`prices`; `list_items` is privé per gebruiker.
+delen `products`/`offers`; `list_items` en `purchases` zijn privé per gebruiker.
 
-## Prijsvergelijking: stuksprijs
+## Prijsvergelijking: basisprijs
 
-Varuvo verkoopt vaak per **doos**. `prices.inhoud` = stuks per verpakking. De app
-vergelijkt op **stuksprijs** (`prijs / inhoud`), zodat 1 pak bij AH eerlijk tegen
-een doos bij Varuvo afgezet wordt.
+Offers hebben `hoeveelheid` + `eenheid`. De app rekent de **basisprijs** uit:
+gram → per kg, ml → per l, stuk → per stuk (`prijs / hoeveelheid` genormaliseerd).
+Zo staat een AH-pak eerlijk naast een Varuvo-doos. In het bestel-scherm kies je
+per zoekterm welke SKU je wilt; **eerder bestelde SKU's staan bovenaan**, daarna
+gesorteerd op basisprijs.
 
 ## Werkregels
 
@@ -60,8 +67,16 @@ een doos bij Varuvo afgezet wordt.
 - Persoonlijke Varuvo-prijzen zijn zichtbaar voor alle leden (één account levert
   de prijzen); dat is een bewuste aanname voor een gezinsapp.
 
+## Setup / migraties
+
+`supabase/schema.sql` is het volledige schema voor een vers project.
+`supabase/migration-offers.sql` migreert een bestaand v1-project (één prijs per
+winkel) naar het offers-model. Zie `supabase/README.md`.
+
 ## Historie
 
 Begon als een localStorage-only single-file app met handmatige `prijzen.json`
-import/export. Omgebouwd naar Supabase voor multi-device + live sync; het ontwerp
-staat in `ONTWERP-supabase.md`.
+import/export. Omgebouwd naar Supabase (Alpine + Postgres) voor multi-device +
+live sync; ontwerp in `ONTWERP-supabase.md`. Daarna uitgebreid van één prijs per
+winkel naar meerdere SKU-opties per zoekterm met keuze per lijst-item, basisprijs
+en besteld-historie.
