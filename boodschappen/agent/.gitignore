@@ -1,0 +1,5 @@
+# Geheimen en persoonlijke data — NOOIT committen
+.env
+state/
+output/
+node_modules/

@@ -1,0 +1,19 @@
+{
+  "name": "boodschappen-prijsagent",
+  "private": true,
+  "type": "module",
+  "description": "Haalt prijzen op bij Varuvo, Albert Heijn en Van Haver tot Gort voor de boodschappen-app.",
+  "scripts": {
+    "prijzen": "node fetch-prices.mjs",
+    "login": "node login.mjs",
+    "deps:update": "ncu -u --cooldown 2d && npm install"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.110.1",
+    "dotenv": "^17.4.2",
+    "playwright": "^1.61.1"
+  },
+  "devDependencies": {
+    "npm-check-updates": "^22.2.9"
+  }
+}
