@@ -90,8 +90,9 @@ const SCHEMA = {
 
 const SYSTEM = `Je analyseert berichten uit Parro (de schoolcommunicatie-app) voor de ouders van ${KINDEREN}. ${CONTEXT}
 
-Haal uit elk bericht de concrete agenda-informatie voor de ouders:
-- Alleen échte gebeurtenissen met een datum worden agenda-items (uitjes, vrije dagen, ouderavonden, kind van de week, gymdagen als ze specifiek genoemd worden). Algemene mededelingen zonder datum niet.
+Haal uit elk bericht (agenda, mededeling én chat) de concrete agenda-informatie voor de ouders:
+- Maak een agenda-item van álles met een concrete datum waar de ouders iets aan hebben: échte gebeurtenissen (uitjes, vrije dagen, ouderavonden, kind van de week, gymdagen), maar óók losse herinneringen, deadlines en to-do's uit een chat of mededeling ("vergeet morgen de gymtas niet", "vrijdag geld inleveren", "volgende week het schoolreisje-briefje mee"). De herinnering zelf is dan het agenda-item op die dag; de handeling zet je als actie eronder.
+- Geen agenda-item voor vage mededelingen zónder concrete dag of algemene info waar geen datum aan hangt.
 - Acties zijn dingen die de ouders moeten dóén: iets meenemen, voorbereiden, inschrijven, betalen, ophalen op afwijkende tijd. Geen acties verzinnen die er niet staan.
 - "Kind van de week" (ook wel ster/held van de week): maak daar een agenda-item van op de maandag van die week, met kind_van_de_week=true en de naam van het kind.
 - Bepaal per item over welk kind het gaat op basis van de groepsnaam of namen in de tekst; onduidelijk of allebei → kind=null.
