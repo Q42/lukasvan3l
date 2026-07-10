@@ -90,6 +90,18 @@
   .soort-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; background: var(--light); color: var(--mid); }
   .soort-tag.belangrijk { background: #fdecec; color: #b23030; }
 
+  /* foto's */
+  .foto-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin-top: 4px; }
+  .foto-tegel { position: relative; aspect-ratio: 1; border: none; padding: 0; margin: 0; background: var(--light); border-radius: 12px; overflow: hidden; cursor: pointer; }
+  .foto-tegel img, .foto-tegel video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .foto-tegel .speel { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 34px; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.6); pointer-events: none; }
+
+  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50; }
+  .lightbox .doos { max-width: 92vw; max-height: 92vh; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+  .lightbox img, .lightbox video { max-width: 92vw; max-height: 78vh; border-radius: 12px; box-shadow: 0 8px 40px rgba(0,0,0,.5); }
+  .lightbox .balk { display: flex; gap: 10px; align-items: center; }
+  .lightbox .knop { border-color: transparent; }
+
   .leeg { color: var(--mid); font-size: 14px; padding: 8px 0; }
   .midden { text-align: center; padding: 40px 0; }
   .midden .groot { font-size: 60px; margin-bottom: 16px; }
@@ -110,7 +122,7 @@
   <header>
     <div class="eyebrow"><a href="../">lukasvan3l</a> · parro</div>
     <h1>Parro-dashboard</h1>
-    <p>Wat er op school speelt: de agenda met wat we moeten regelen, een weekoverzicht en belangrijke meldingen.</p>
+    <p>Wat er op school speelt: de agenda met wat we moeten regelen, een weekoverzicht, belangrijke meldingen en de foto's uit Parro.</p>
   </header>
 
   <!-- setup nog niet gedaan -->
@@ -156,6 +168,7 @@
         <button :class="{actief: tab==='agenda'}" @click="tab='agenda'">Agenda <span class="bol" x-show="openActies>0" x-text="openActies"></span></button>
         <button :class="{actief: tab==='week'}" @click="tab='week'">Weekoverzicht</button>
         <button :class="{actief: tab==='meldingen'}" @click="tab='meldingen'">Meldingen <span class="bol" x-show="belangrijkeMeldingen.length>0" x-text="belangrijkeMeldingen.length"></span></button>
+        <button :class="{actief: tab==='fotos'}" @click="tab='fotos'">Foto's <span class="bol" x-show="fotos.length>0" x-text="fotos.length"></span></button>
       </nav>
 
       <!-- ══ AGENDA ══ -->
@@ -242,6 +255,50 @@
           <p class="leeg" x-show="meldingen.length===0">Nog geen berichten — draai de agent (zie <code>agent/README.md</code>).</p>
         </div>
       </div>
+
+      <!-- ══ FOTO'S ══ -->
+      <div x-show="tab==='fotos'">
+        <div class="kaart">
+          <h2>Foto's uit Parro</h2>
+          <template x-for="groep in fotosPerDag" :key="groep.datum">
+            <div class="dag">
+              <div class="dag-kop" x-text="groep.datum ? dagLabel(groep.datum) : 'Zonder datum'"></div>
+              <div class="foto-grid">
+                <template x-for="f in groep.items" :key="f.id">
+                  <button class="foto-tegel" @click="lightbox = f" :title="f.parro_items?.titel || f.bestandsnaam">
+                    <template x-if="f.isVideo">
+                      <video :src="f.url" muted preload="metadata"></video>
+                    </template>
+                    <template x-if="!f.isVideo">
+                      <img :src="f.url" loading="lazy" :alt="f.parro_items?.titel || 'foto'">
+                    </template>
+                    <span class="speel" x-show="f.isVideo">▶</span>
+                  </button>
+                </template>
+              </div>
+            </div>
+          </template>
+          <p class="leeg" x-show="fotos.length===0">Nog geen foto's — die verschijnen zodra de agent Parro-bijlagen synct (zie <code>agent/README.md</code>).</p>
+        </div>
+      </div>
+
+      <!-- lightbox -->
+      <template x-if="lightbox">
+        <div class="lightbox" @click="lightbox = null">
+          <div class="doos" @click.stop>
+            <template x-if="lightbox.isVideo">
+              <video :src="lightbox.url" controls autoplay></video>
+            </template>
+            <template x-if="!lightbox.isVideo">
+              <img :src="lightbox.url" :alt="lightbox.parro_items?.titel || 'foto'">
+            </template>
+            <div class="balk">
+              <a class="knop donker" :href="downloadUrl(lightbox)" :download="lightbox.bestandsnaam || 'foto'">Downloaden</a>
+              <button class="knop" @click="lightbox = null">Sluiten</button>
+            </div>
+          </div>
+        </div>
+      </template>
     </div>
   </template>
 
@@ -295,6 +352,8 @@ document.addEventListener("alpine:init", () => {
     agenda: [],      // parro_agenda incl. geneste parro_acties
     weken: [],       // parro_weekoverzicht
     items: [],       // parro_items (zonder raw)
+    fotos: [],       // parro_fotos incl. signed url + item-info
+    lightbox: null,  // geopende foto/video
     open: {},        // uitgeklapte meldingen
     _channel: null,
     _zetSessieLopend: null,
@@ -345,6 +404,30 @@ document.addEventListener("alpine:init", () => {
       this.agenda = ag.data || [];
       this.weken = wk.data || [];
       this.items = it.data || [];
+      await this.laadFotos();
+    },
+
+    async laadFotos() {
+      const { data } = await sb
+        .from("parro_fotos")
+        .select("*, parro_items(titel, groep, afzender)")
+        .order("datum", { ascending: false })
+        .limit(300);
+      const rijen = data || [];
+      // Private bucket: per bestand een tijdelijke signed URL maken (mag alleen
+      // als je lid bent, zie de storage-policy). In batch voor snelheid.
+      const urls = {};
+      if (rijen.length) {
+        const { data: signed } = await sb.storage
+          .from("parro-fotos")
+          .createSignedUrls(rijen.map((r) => r.pad), 3600);
+        for (const s of signed || []) if (s.signedUrl && !s.error) urls[s.path] = s.signedUrl;
+      }
+      this.fotos = rijen.map((r) => ({
+        ...r,
+        url: urls[r.pad] || null,
+        isVideo: (r.content_type || "").startsWith("video") || r.soort === "VIDEO",
+      })).filter((r) => r.url);
     },
 
     abonneer() {
@@ -352,6 +435,7 @@ document.addEventListener("alpine:init", () => {
       this._channel = sb.channel("parro")
         .on("postgres_changes", { event: "*", schema: "public", table: "parro_acties" }, () => this.laadAlles())
         .on("postgres_changes", { event: "*", schema: "public", table: "parro_agenda" }, () => this.laadAlles())
+        .on("postgres_changes", { event: "*", schema: "public", table: "parro_fotos" }, () => this.laadFotos())
         .subscribe();
     },
     stopAbonnement() {
@@ -387,6 +471,17 @@ document.addEventListener("alpine:init", () => {
     },
     get belangrijkeMeldingen() { return this.items.filter((m) => m.belangrijk); },
     get meldingen() { return this.items.filter((m) => m.tekst || m.titel); },
+    get fotosPerDag() {
+      const per = new Map();
+      for (const f of this.fotos) {
+        const dag = f.datum ? iso(new Date(f.datum)) : "";
+        if (!per.has(dag)) per.set(dag, []);
+        per.get(dag).push(f);
+      }
+      return [...per.entries()]
+        .sort((x, y) => y[0].localeCompare(x[0]))
+        .map(([datum, items]) => ({ datum, items }));
+    },
     get laatsteSync() {
       const t = this.items[0]?.datum;
       return t ? new Date(t).toLocaleString("nl-NL", { dateStyle: "medium", timeStyle: "short" }) : "";
@@ -398,6 +493,13 @@ document.addEventListener("alpine:init", () => {
         .update({ afgevinkt: !actie.afgevinkt, afgevinkt_door: this.naam })
         .eq("id", actie.id);
       await this.laadAlles();
+    },
+
+    /* ── foto's ── */
+    downloadUrl(f) {
+      if (!f?.url) return "#";
+      // '&download=<naam>' laat Supabase Storage het bestand als download serveren.
+      return f.url + "&download=" + encodeURIComponent(f.bestandsnaam || "foto");
     },
 
     /* ── weergave ── */

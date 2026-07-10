@@ -4,6 +4,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-parro check          # gwillem/parro: haal nieuwe Parro-items op
+parro check          # gwillem/parro: haal nieuwe Parro-items op (+ bijlagen)
 node sync.mjs        # SQLite → Supabase (parro_items)
+node fotos.mjs       # bijlagen uit de cache → Supabase Storage (parro_fotos)
 node enrich.mjs      # Claude: agenda + acties + belangrijk-vlaggen

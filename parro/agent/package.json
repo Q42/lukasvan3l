@@ -8,6 +8,7 @@
   },
   "scripts": {
     "sync": "node sync.mjs",
+    "fotos": "node fotos.mjs",
     "enrich": "node enrich.mjs",
     "week": "node week.mjs",
     "run": "./run.sh"
