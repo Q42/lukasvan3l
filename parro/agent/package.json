@@ -13,8 +13,8 @@
     "run": "./run.sh"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.116.0",
-    "@supabase/supabase-js": "^2.110.1",
+    "@anthropic-ai/sdk": "^0.110.0",
+    "@supabase/supabase-js": "^2.110.2",
     "dotenv": "^17.4.2"
   }
 }

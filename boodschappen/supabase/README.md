@@ -37,7 +37,7 @@ Daarna werkt de app op elk device en vult de agent de prijzen.
    - Plak de **Client ID** en **Client secret** terug in Supabase.
 3. **Authentication → URL Configuration → Redirect URLs**: voeg toe waar de app
    draait:
-   - `https://q42.github.io/lukasvan3l/boodschappen/` (productie)
+   - `https://apps.3l.nl/boodschappen/` (productie)
    - `http://localhost:*` en `http://127.0.0.1:*` (lokaal testen)
 
 ## 4. App koppelen (publieke sleutels)

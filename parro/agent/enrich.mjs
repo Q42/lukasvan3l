@@ -12,7 +12,7 @@ import "dotenv/config";
 import { vraagJson } from "./llm.mjs";
 import { getOnverwerkteItems, saveVerrijking } from "./db.mjs";
 
-const KINDEREN = process.env.PARRO_KINDEREN || "Floris, Yune";
+const KINDEREN = process.env.PARRO_KINDEREN || "";
 // Vrije context die het model helpt kinderen aan groepen te koppelen, bv:
 // PARRO_CONTEXT="Floris zit in groep De Vlinders (groep 3), Yune in De Rupsjes (groep 1)."
 const CONTEXT = process.env.PARRO_CONTEXT || "";
@@ -24,7 +24,8 @@ const SCHEMA = {
   properties: {
     belangrijk: {
       type: "boolean",
-      description: "Moeten de ouders dit echt gezien hebben (los van de agenda)?",
+      description:
+        "Moeten de ouders dit echt gezien hebben (los van de agenda)?",
     },
     actie_nodig: {
       type: "boolean",
@@ -35,14 +36,33 @@ const SCHEMA = {
       items: {
         type: "object",
         additionalProperties: false,
-        required: ["datum", "eind_datum", "titel", "omschrijving", "kind", "kind_van_de_week", "acties"],
+        required: [
+          "datum",
+          "eind_datum",
+          "titel",
+          "omschrijving",
+          "kind",
+          "kind_van_de_week",
+          "acties",
+        ],
         properties: {
           datum: { type: "string", description: "YYYY-MM-DD" },
-          eind_datum: { anyOf: [{ type: "string" }, { type: "null" }], description: "YYYY-MM-DD, alleen bij meerdaags" },
+          eind_datum: {
+            anyOf: [{ type: "string" }, { type: "null" }],
+            description: "YYYY-MM-DD, alleen bij meerdaags",
+          },
           titel: { type: "string" },
           omschrijving: { anyOf: [{ type: "string" }, { type: "null" }] },
-          kind: { anyOf: [{ type: "string" }, { type: "null" }], description: "Naam van het kind waar dit over gaat, of null als het beide/onduidelijk is" },
-          kind_van_de_week: { type: "boolean", description: "Is een van onze kinderen die week 'kind van de week' (of ster/held van de week e.d.)?" },
+          kind: {
+            anyOf: [{ type: "string" }, { type: "null" }],
+            description:
+              "Naam van het kind waar dit over gaat, of null als het beide/onduidelijk is",
+          },
+          kind_van_de_week: {
+            type: "boolean",
+            description:
+              "Is een van onze kinderen die week 'kind van de week' (of ster/held van de week e.d.)?",
+          },
           acties: {
             type: "array",
             items: {
@@ -50,8 +70,15 @@ const SCHEMA = {
               additionalProperties: false,
               required: ["tekst", "uiterlijk"],
               properties: {
-                tekst: { type: "string", description: "Concrete actie voor de ouders, bv 'gymkleren meegeven'" },
-                uiterlijk: { anyOf: [{ type: "string" }, { type: "null" }], description: "YYYY-MM-DD deadline, indien genoemd" },
+                tekst: {
+                  type: "string",
+                  description:
+                    "Concrete actie voor de ouders, bv 'gymkleren meegeven'",
+                },
+                uiterlijk: {
+                  anyOf: [{ type: "string" }, { type: "null" }],
+                  description: "YYYY-MM-DD deadline, indien genoemd",
+                },
               },
             },
           },

@@ -14,7 +14,7 @@ dubbel draaien kan geen kwaad.
 
 **Authentication → URL Configuration → Redirect URLs**:
 
-- `https://q42.github.io/lukasvan3l/parro/`
+- `https://apps.3l.nl/parro/`
 - (`http://localhost:*` en `http://127.0.0.1:*` staan er als het goed is al)
 
 ## 3. Alleen bij een vers project

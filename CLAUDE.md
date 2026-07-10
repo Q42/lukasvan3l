@@ -10,7 +10,7 @@ pages and projects that each live in their own top-level directory.
 - Directories are unrelated to each other. Treat each one as its own little
   project.
 - The repo is published with **GitHub Pages** at
-  <https://q42.github.io/lukasvan3l/>. The root `index.html` is the landing
+  <https://apps.3l.nl/> (custom domain). The root `index.html` is the landing
   page: a tiled navigation linking to each app (e.g. `slovenie/`).
 
 ## Working rules for Claude
@@ -24,7 +24,7 @@ pages and projects that each live in their own top-level directory.
   root one) for context when working inside the directory.
 - **Every app must be linked from the root landing page.** When you add a new
   one-off directory, add a tile for it in the root `index.html` so it's
-  reachable from <https://q42.github.io/lukasvan3l/>. (The root `index.html`
+  reachable from <https://apps.3l.nl/>. (The root `index.html`
   is the one place that's allowed to reference every directory.)
 - This root `CLAUDE.md` only describes the repo as a whole. For anything
   concrete, defer to the directory-level `CLAUDE.md`.

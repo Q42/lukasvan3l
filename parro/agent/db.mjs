@@ -36,11 +36,16 @@ export async function insertNieuweItems(items) {
 }
 
 export async function getOnverwerkteItems(limit = 25) {
+  // Nieuwste eerst: bij een grote achterstand willen we juist de aankomende
+  // agenda-items (die staan met een toekomstige datum bovenaan) als eerste
+  // verrijken, niet eerst jaren oude chatberichten. Anders vult parro_agenda
+  // zich met verleden-events (die de frontend verbergt) en blijft de agenda
+  // leeg tot de hele backlog is weggewerkt.
   const { data, error } = await db()
     .from("parro_items")
     .select("id, soort, titel, tekst, groep, afzender, datum")
     .eq("verwerkt", false)
-    .order("datum", { ascending: true })
+    .order("datum", { ascending: false })
     .limit(limit);
   if (error) throw new Error(`parro_items lezen: ${error.message}`);
   return data || [];
