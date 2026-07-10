@@ -3,159 +3,231 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Parro — gezinsdashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Parro-overzicht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --dark: #1c1c1c;
-    --mid: #555;
-    --light: #f4f4f0;
-    --white: #fff;
-    --radius: 18px;
-    --shadow: 0 4px 24px rgba(0,0,0,0.10);
-    --accent: #2f6f4f;      /* Parro-achtig groen */
-    --accent-licht: #e8f2ec;
-    --geel: #f2b705;
+    /* accent (user-default teal) + compacte dichtheid, uit de design-handoff */
+    --brand: #2E6E7D;
+    --brand-donker: #245864;
+    --gap: 14px;          /* ritme tussen daggroepen (compact) */
+    --card-pad: 15px;     /* padding in event-rij (compact) */
+
+    /* oppervlakken */
+    --page: #F6F3EC;
+    --surface: #FFFFFF;
+    --surface-mut: #FBFAF5;
+
+    /* inkt */
+    --ink: #1E2A22;
+    --ink2: #5C6A60;
+    --faint: #9AA69C;
+    --faint2: #8A968D;
+    --faint3: #B0B7AC;
+
+    /* brand-tint + amber (actie = ik moet iets regelen) */
+    --tint: #E7F0E7;
+    --tint2: #EAF1EA;
+    --tint-rand: #C9DCC9;
+    --amber-spine: #C6741F;
+    --amber-bg: #FBEEDB;
+    --amber-label: #8A5216;
+    --amber-deadline: #B9791F;
+    --amber-rand: #EAD6B4;
+
+    /* lijnen + neutrale chip */
+    --rand-kaart: #EAE5D8;
+    --rand-control: #E2DDD0;
+    --rand-mut: #EEE9DC;
+    --hair: #F0ECE1;
+    --chip-bg: #F1EEE4;
+    --chip-ink: #3A463D;
+
+    --shadow: 0 1px 2px rgba(30,42,34,0.05);
   }
 
-  body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); min-height: 100vh; }
+  body { font-family: 'Figtree', system-ui, -apple-system, sans-serif; background: var(--page); color: var(--ink); min-height: 100vh; -webkit-font-smoothing: antialiased; }
   [x-cloak] { display: none !important; }
 
-  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 44px 20px 90px; }
 
-  header { margin-bottom: 20px; }
-  header .eyebrow { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--mid); margin-bottom: 8px; }
+  h1, h2, h3 { font-family: 'Bricolage Grotesque', 'Figtree', sans-serif; }
+
+  /* ── header ── */
+  header .eyebrow { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--faint); }
   header .eyebrow a { color: inherit; text-decoration: none; }
-  header h1 { font-family: 'Fraunces', serif; font-size: 40px; font-weight: 900; line-height: 1.05; letter-spacing: -1px; margin-bottom: 8px; }
-  header p { font-size: 15px; color: var(--mid); max-width: 560px; line-height: 1.5; }
+  header .eyebrow a:hover { text-decoration: underline; }
+  header h1 { margin-top: 6px; font-weight: 800; font-size: 44px; line-height: 1.02; letter-spacing: -0.01em; color: var(--ink); }
+  header p.intro { margin-top: 12px; max-width: 52ch; font-size: 16px; line-height: 1.5; color: var(--ink2); }
 
-  .accountbalk { display: flex; align-items: center; gap: 12px; margin: 18px 0 4px; font-size: 14px; color: var(--mid); }
-  .accountbalk .naam { font-weight: 600; color: var(--dark); }
-  .accountbalk .spacer { flex: 1; }
-  .knop, button.knop { font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; border: 1px solid #ddd; background: var(--white); color: var(--dark); padding: 9px 16px; border-radius: 12px; text-decoration: none; display: inline-block; }
-  .knop.donker { background: var(--dark); color: var(--white); border-color: var(--dark); }
-  .knop.klein { padding: 6px 12px; font-size: 13px; }
+  .accountbalk { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 20px; font-size: 15px; color: var(--ink2); }
+  .accountbalk .naam { font-weight: 600; color: var(--ink); }
 
-  .tabs { display: flex; gap: 8px; margin: 20px 0; flex-wrap: wrap; }
-  .tabs button { font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; border: 1px solid #ddd; background: var(--white); color: var(--mid); padding: 8px 16px; border-radius: 999px; transition: all .15s ease; }
-  .tabs button.actief { background: var(--dark); border-color: var(--dark); color: var(--white); }
-  .tabs button .bol { display: inline-block; min-width: 20px; padding: 1px 6px; margin-left: 6px; background: var(--light); border-radius: 999px; font-size: 12px; }
-  .tabs button.actief .bol { background: rgba(255,255,255,.25); }
+  /* ── knoppen ── */
+  .knop-pill { font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--rand-control); background: var(--surface); color: var(--chip-ink); text-decoration: none; display: inline-block; transition: border-color .15s ease; }
+  .knop-pill:hover { border-color: #C9C2B0; }
+  .knop-brand { background: var(--brand); border-color: var(--brand); color: #fff; }
+  .knop-brand:hover { background: var(--brand-donker); border-color: var(--brand-donker); }
 
-  .kaart { background: var(--white); border: 1px solid #eee; border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px 22px; margin-bottom: 18px; }
-  .kaart h2 { font-family: 'Fraunces', serif; font-size: 20px; margin-bottom: 12px; }
+  /* ── tabs ── */
+  .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin: 24px 0 4px; }
+  .tabs button { display: inline-flex; align-items: center; gap: 8px; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--rand-control); background: var(--surface); color: var(--ink2); transition: all .15s ease; }
+  .tabs button.actief { background: var(--brand); border-color: var(--brand); color: #fff; }
+  .tabs .badge { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: var(--tint); color: #2F6E43; font-size: 13px; font-weight: 700; }
+  .tabs button.actief .badge { background: rgba(255,255,255,0.24); color: #fff; }
 
-  /* kind-van-de-week banner */
-  .kvdw { display: flex; align-items: center; gap: 14px; background: linear-gradient(120deg, #fdf3d0, #fbe6a2); border: 1px solid #f0dc9a; border-radius: var(--radius); padding: 16px 20px; margin-bottom: 18px; font-size: 15px; }
-  .kvdw .ster { font-size: 30px; }
-  .kvdw strong { font-family: 'Fraunces', serif; font-size: 18px; }
+  /* ── paneel-koppen ── */
+  .paneel { margin-top: 26px; }
+  .paneel-kop-rij { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .paneel-kop { font-weight: 700; font-size: 22px; color: var(--ink); }
+  .paneel-sub { margin-top: 6px; font-size: 15px; line-height: 1.5; color: var(--ink2); max-width: 56ch; }
+  .te-regelen { display: inline-flex; align-items: center; gap: 8px; background: var(--amber-bg); color: var(--amber-label); font-size: 13px; font-weight: 700; padding: 4px 11px; border-radius: 999px; white-space: nowrap; }
+  .te-regelen .swatch { width: 8px; height: 8px; border-radius: 2px; background: var(--amber-spine); }
 
-  /* agenda */
-  .dag { margin-bottom: 4px; }
-  .dag-kop { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin: 16px 0 6px; }
-  .agenda-item { border-left: 3px solid var(--accent-licht); padding: 8px 0 8px 14px; margin-bottom: 6px; }
-  .agenda-item .titel { font-size: 16px; font-weight: 600; }
-  .agenda-item .oms { font-size: 14px; color: var(--mid); margin-top: 2px; line-height: 1.45; }
-  .badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; color: #fff; background: var(--accent); margin-left: 8px; vertical-align: 2px; }
-  .badge.geel { background: var(--geel); color: #5c4500; }
+  /* ── kind van de week ── */
+  .kvdw { display: flex; align-items: center; gap: 12px; background: var(--tint); border: 1px solid var(--tint-rand); border-radius: 16px; padding: 14px 16px; margin-top: 18px; font-size: 15px; color: var(--ink); }
+  .kvdw .ster { font-size: 24px; line-height: 1; }
+  .kvdw strong { font-weight: 700; }
 
-  ul.acties { list-style: none; margin-top: 8px; }
-  ul.acties li { display: flex; align-items: flex-start; gap: 10px; padding: 5px 0; font-size: 14px; }
-  ul.acties li.af { color: #aaa; text-decoration: line-through; }
-  ul.acties .deadline { color: #b3541e; font-size: 12px; white-space: nowrap; margin-left: auto; padding-top: 2px; }
-  .vink { width: 20px; height: 20px; flex: none; margin-top: 1px; cursor: pointer; appearance: none; border: 2px solid #ccc; border-radius: 6px; position: relative; }
-  .vink:checked { background: var(--accent); border-color: var(--accent); }
-  .vink:checked::after { content: "✓"; color: #fff; font-size: 13px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -52%); }
+  /* ── agenda: daggroepen + event-kaart ── */
+  .dag { margin-top: 22px; }
+  .dag:first-of-type { margin-top: 22px; }
+  .dag-kop { display: flex; align-items: center; gap: 10px; margin-bottom: 11px; color: var(--brand); font-weight: 700; font-size: 13px; letter-spacing: 0.11em; text-transform: uppercase; }
+  .dag-kop .vandaag { padding: 4px 11px; border-radius: 999px; background: var(--brand); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.09em; }
 
-  /* weekoverzicht */
-  .week { margin-bottom: 22px; }
-  .week .kop { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-  .md { font-size: 14.5px; line-height: 1.6; color: #333; }
-  .md h1, .md h2, .md h3 { font-family: 'Fraunces', serif; margin: 14px 0 6px; font-size: 16px; }
+  .event-kaart { background: var(--surface); border: 1px solid var(--rand-kaart); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; margin-bottom: var(--gap); }
+  .event-rij { display: flex; gap: 14px; padding: var(--card-pad); }
+  .spine { width: 4px; border-radius: 4px; flex: none; }
+  .event-inhoud { flex: 1; min-width: 0; }
+  .event-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .event-top h3 { font-weight: 700; font-size: 18px; color: var(--ink); }
+  .event-top .spacer { flex: 1; }
+  .event-oms { margin-top: 6px; color: var(--ink2); font-size: 15px; line-height: 1.5; }
+
+  .kind-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .kind-chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px; background: var(--chip-bg); color: var(--chip-ink); font-size: 13px; font-weight: 600; }
+  .kind-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+
+  /* actie-strips (afvinkbaar) */
+  .acties { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .actie { display: flex; align-items: center; gap: 10px; background: var(--amber-bg); border-radius: 10px; padding: 10px 12px; cursor: pointer; }
+  .actie .vink { width: 20px; height: 20px; flex: none; cursor: pointer; appearance: none; border: 2px solid var(--amber-deadline); border-radius: 6px; background: transparent; position: relative; }
+  .actie .vink:checked { background: var(--amber-deadline); border-color: var(--amber-deadline); }
+  .actie .vink:checked::after { content: "✓"; color: #fff; font-size: 13px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -52%); }
+  .actie .label { flex: 1; min-width: 0; font-weight: 700; font-size: 14px; color: var(--amber-label); }
+  .actie .deadline { font-size: 13px; font-weight: 700; color: var(--amber-deadline); white-space: nowrap; }
+  .actie.af { background: var(--chip-bg); }
+  .actie.af .label { color: var(--faint); text-decoration: line-through; }
+  .actie.af .deadline { color: var(--faint); }
+  .actie.af .vink { border-color: var(--faint); }
+  .actie.af .vink:checked { background: var(--faint); border-color: var(--faint); }
+
+  /* ── weekoverzicht (markdown-samenvattingen) ── */
+  .week { margin-top: 20px; }
+  .week-kop { color: var(--brand); font-weight: 700; font-size: 13px; letter-spacing: 0.09em; text-transform: uppercase; margin-bottom: 10px; }
+  .week-kaart { background: var(--surface); border: 1px solid var(--rand-kaart); border-radius: 16px; box-shadow: var(--shadow); padding: 16px 18px; }
+  .md { font-size: 15px; line-height: 1.6; color: var(--ink2); }
+  .md h1, .md h2, .md h3 { margin: 14px 0 6px; font-size: 16px; font-weight: 700; color: var(--ink); }
+  .md h1:first-child, .md h2:first-child, .md h3:first-child { margin-top: 0; }
   .md p { margin: 8px 0; }
   .md ul { margin: 8px 0 8px 20px; }
   .md li { margin: 3px 0; }
-  .md strong { font-weight: 700; }
+  .md strong { font-weight: 700; color: var(--ink); }
 
-  /* meldingen */
-  .melding { border-bottom: 1px solid #f0f0ec; padding: 12px 0; }
-  .melding:last-child { border-bottom: none; }
-  .melding .kop { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
-  .melding .titel { font-size: 15px; font-weight: 600; }
-  .melding .meta { font-size: 12px; color: #999; margin-left: auto; white-space: nowrap; }
-  .melding .tekst { font-size: 14px; color: var(--mid); margin-top: 4px; line-height: 1.5; white-space: pre-line; }
+  /* ── meldingen ── */
+  .meldingen { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
+  .melding { display: flex; gap: 12px; border-radius: 14px; padding: 16px; background: var(--surface); border: 1px solid var(--rand-kaart); }
+  .melding .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--brand); flex: none; margin-top: 6px; }
+  .melding.gelezen { background: var(--surface-mut); border-color: var(--rand-mut); }
+  .melding.gelezen .dot { background: #D8D3C6; }
+  .melding-inhoud { flex: 1; min-width: 0; }
+  .melding-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .melding-top .spacer { flex: 1; }
+  .afzender-pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+  .afzender-pill.algemeen { background: var(--tint2); color: var(--brand); }
+  .afzender-pill.groep { background: var(--chip-bg); color: var(--chip-ink); }
+  .melding .tijd { font-size: 12px; color: var(--faint); white-space: nowrap; }
+  .melding h3 { margin: 8px 0 3px; font-weight: 700; font-size: 16px; color: var(--ink); }
+  .melding .tekst { color: var(--ink2); font-size: 14px; line-height: 1.5; white-space: pre-line; }
   .melding .tekst.dicht { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; cursor: pointer; }
-  .soort-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; background: var(--light); color: var(--mid); }
-  .soort-tag.belangrijk { background: #fdecec; color: #b23030; }
+  .melding.gelezen h3 { color: var(--chip-ink); }
+  .melding.gelezen .tekst { color: var(--faint2); }
+  .melding.gelezen .tijd { color: var(--faint3); }
 
-  /* foto's */
-  .foto-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin-top: 4px; }
-  .foto-tegel { position: relative; aspect-ratio: 1; border: none; padding: 0; margin: 0; background: var(--light); border-radius: 12px; overflow: hidden; cursor: pointer; }
+  /* ── foto's ── */
+  .foto-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+  .foto-tegel { position: relative; aspect-ratio: 1; border: 1px solid var(--rand-kaart); padding: 0; margin: 0; background: var(--surface-mut); border-radius: 12px; overflow: hidden; cursor: pointer; }
   .foto-tegel img, .foto-tegel video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .foto-tegel .speel { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 34px; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.6); pointer-events: none; }
 
-  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50; }
+  .lightbox { position: fixed; inset: 0; background: rgba(30,42,34,.85); display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50; }
   .lightbox .doos { max-width: 92vw; max-height: 92vh; display: flex; flex-direction: column; gap: 12px; align-items: center; }
   .lightbox img, .lightbox video { max-width: 92vw; max-height: 78vh; border-radius: 12px; box-shadow: 0 8px 40px rgba(0,0,0,.5); }
   .lightbox .balk { display: flex; gap: 10px; align-items: center; }
-  .lightbox .knop { border-color: transparent; }
   .lightbox .nav { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: none; background: rgba(255,255,255,.15); color: #fff; font-size: 32px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background .15s; }
   .lightbox .nav:hover { background: rgba(255,255,255,.3); }
   .lightbox .nav.vorige { left: 16px; }
   .lightbox .nav.volgende { right: 16px; }
 
-  .leeg { color: var(--mid); font-size: 14px; padding: 8px 0; }
-  .midden { text-align: center; padding: 40px 0; }
-  .midden .groot { font-size: 60px; margin-bottom: 16px; }
-  .setup { background: #fdf6ec; border: 1px solid #f0e2c8; border-radius: 12px; padding: 16px 18px; font-size: 14px; color: #7a5a1e; line-height: 1.6; }
-  .setup code { background: rgba(0,0,0,.06); padding: 1px 5px; border-radius: 5px; }
-  .sync-info { font-size: 12px; color: #aaa; margin-top: 4px; }
+  /* ── legenda weekoverzicht ── */
+  .legenda { display: flex; gap: 18px; margin-top: 18px; font-size: 13px; color: var(--ink2); }
+  .legenda span { display: inline-flex; align-items: center; gap: 7px; }
+  .legenda .vk { width: 12px; height: 12px; border-radius: 3px; }
 
-  footer { margin-top: 40px; font-size: 13px; color: #aaa; }
-  footer a { color: var(--mid); }
+  /* ── generieke states ── */
+  .mid-kaart { background: var(--surface); border: 1px solid var(--rand-kaart); border-radius: 16px; box-shadow: var(--shadow); padding: 32px 24px; margin-top: 26px; text-align: center; }
+  .mid-kaart .groot { font-size: 56px; margin-bottom: 14px; }
+  .mid-kaart p { color: var(--ink2); margin-bottom: 16px; }
+  .setup { background: var(--amber-bg); border: 1px solid var(--amber-rand); border-radius: 12px; padding: 16px 18px; font-size: 14px; color: var(--amber-label); line-height: 1.6; margin-top: 26px; text-align: left; }
+  .setup code { background: rgba(0,0,0,.06); padding: 1px 5px; border-radius: 5px; }
+  .leeg { color: var(--ink2); font-size: 15px; padding: 8px 0; }
+  code { background: rgba(0,0,0,.05); padding: 1px 5px; border-radius: 5px; font-size: .9em; }
+  .sync-info { font-size: 12px; color: var(--faint); margin-top: 12px; }
+
+  footer { margin-top: 40px; font-size: 13px; color: var(--faint); }
+  footer a { color: var(--ink2); }
 
   @media (max-width: 560px) {
-    header h1 { font-size: 32px; }
+    header h1 { font-size: 34px; }
   }
 </style>
 </head>
 <body>
 <div class="wrap" x-data="app()" x-init="init()" x-cloak>
   <header>
-    <div class="eyebrow"><a href="../">lukasvan3l</a> · parro</div>
-    <h1>Parro-dashboard</h1>
-    <p>Wat er op school speelt: de agenda met wat we moeten regelen, een weekoverzicht, belangrijke meldingen en de foto's uit Parro.</p>
+    <div class="eyebrow"><a href="../">Lukasvan3l</a> · Parro</div>
+    <h1>Parro-overzicht</h1>
+    <p class="intro">Wat er op school speelt — in één oogopslag: de agenda met wat je moet regelen, een weekoverzicht en de meldingen.</p>
   </header>
 
   <!-- setup nog niet gedaan -->
   <template x-if="setupNodig">
-    <div class="kaart">
-      <div class="setup">
-        <strong>Nog even instellen.</strong> Vul in <code>config.js</code> je Supabase
-        <code>supabaseUrl</code> en <code>supabaseAnonKey</code> in. Zie
-        <code>supabase/README.md</code> voor de stappen.
-      </div>
+    <div class="setup">
+      <strong>Nog even instellen.</strong> Vul in <code>config.js</code> je Supabase
+      <code>supabaseUrl</code> en <code>supabaseAnonKey</code> in. Zie
+      <code>supabase/README.md</code> voor de stappen.
     </div>
   </template>
 
   <!-- niet ingelogd -->
   <template x-if="!setupNodig && !session">
-    <div class="kaart midden">
+    <div class="mid-kaart">
       <div class="groot">🏫</div>
-      <p style="margin-bottom:18px;color:var(--mid)">Log in om de Parro-agenda en berichten te zien.</p>
-      <button class="knop donker" @click="login()">Inloggen met Google</button>
+      <p>Log in om de Parro-agenda en berichten te zien.</p>
+      <button class="knop-pill knop-brand" @click="login()">Inloggen met Google</button>
     </div>
   </template>
 
   <!-- ingelogd maar geen toegang -->
   <template x-if="!setupNodig && session && toegangGecheckt && !toegang">
-    <div class="kaart midden">
+    <div class="mid-kaart">
       <div class="groot">🔒</div>
-      <p style="margin-bottom:6px"><strong>Geen toegang</strong></p>
-      <p style="margin-bottom:18px;color:var(--mid)">Dit account (<span x-text="session?.user?.email"></span>) staat niet op de gastenlijst.</p>
-      <button class="knop klein" @click="logout()">Uitloggen</button>
+      <p><strong>Geen toegang</strong><br>Dit account (<span x-text="session?.user?.email"></span>) staat niet op de gastenlijst.</p>
+      <button class="knop-pill" @click="logout()">Uitloggen</button>
     </div>
   </template>
 
@@ -164,19 +236,37 @@
     <div>
       <div class="accountbalk">
         <span>Ingelogd als <span class="naam" x-text="naam"></span></span>
-        <span class="spacer"></span>
-        <button class="knop klein" @click="logout()">Uitloggen</button>
+        <button class="knop-pill" @click="logout()">Uitloggen</button>
       </div>
 
       <nav class="tabs">
-        <button :class="{actief: tab==='agenda'}" @click="tab='agenda'">Agenda <span class="bol" x-show="openActies>0" x-text="openActies"></span></button>
-        <button :class="{actief: tab==='week'}" @click="tab='week'">Weekoverzicht</button>
-        <button :class="{actief: tab==='meldingen'}" @click="tab='meldingen'">Meldingen <span class="bol" x-show="belangrijkeMeldingen.length>0" x-text="belangrijkeMeldingen.length"></span></button>
-        <button :class="{actief: tab==='fotos'}" @click="tab='fotos'">Foto's <span class="bol" x-show="fotos.length>0" x-text="fotos.length"></span></button>
+        <button :class="{actief: tab==='agenda'}" @click="tab='agenda'">
+          <span>Agenda</span>
+          <span class="badge" x-show="teRegelen>0" x-text="teRegelen"></span>
+        </button>
+        <button :class="{actief: tab==='week'}" @click="tab='week'">
+          <span>Weekoverzicht</span>
+        </button>
+        <button :class="{actief: tab==='meldingen'}" @click="tab='meldingen'">
+          <span>Meldingen</span>
+          <span class="badge" x-show="belangrijkeMeldingen.length>0" x-text="belangrijkeMeldingen.length"></span>
+        </button>
+        <button :class="{actief: tab==='fotos'}" @click="tab='fotos'">
+          <span>Foto's</span>
+          <span class="badge" x-show="fotos.length>0" x-text="fotos.length"></span>
+        </button>
       </nav>
 
       <!-- ══ AGENDA ══ -->
-      <div x-show="tab==='agenda'">
+      <div class="paneel" x-show="tab==='agenda'">
+        <div class="paneel-kop-rij">
+          <h2 class="paneel-kop">Komende tijd</h2>
+          <span class="te-regelen" x-show="teRegelen>0">
+            <span class="swatch"></span>
+            <span x-text="teRegelen + ' te regelen'"></span>
+          </span>
+        </div>
+
         <template x-for="k in kindVanDeWeek" :key="k.id">
           <div class="kvdw">
             <span class="ster">⭐</span>
@@ -184,106 +274,122 @@
           </div>
         </template>
 
-        <div class="kaart">
-          <h2>Komende tijd</h2>
-          <template x-for="groep in agendaPerDag" :key="groep.datum">
-            <div class="dag">
-              <div class="dag-kop" x-text="dagLabel(groep.datum)"></div>
-              <template x-for="a in groep.items" :key="a.id">
-                <div class="agenda-item">
-                  <div class="titel">
-                    <span x-text="a.titel"></span>
-                    <span class="badge" x-show="a.kind" x-text="a.kind"></span>
-                    <span class="badge geel" x-show="a.kind_van_de_week">⭐ kind vd week</span>
-                  </div>
-                  <div class="oms" x-show="a.omschrijving" x-text="a.omschrijving"></div>
-                  <ul class="acties" x-show="a.parro_acties && a.parro_acties.length">
-                    <template x-for="actie in a.parro_acties" :key="actie.id">
-                      <li :class="{af: actie.afgevinkt}">
-                        <input type="checkbox" class="vink" :checked="actie.afgevinkt" @change="toggleActie(actie)">
-                        <span x-text="actie.tekst"></span>
-                        <span class="deadline" x-show="actie.uiterlijk" x-text="'vóór ' + kortLabel(actie.uiterlijk)"></span>
-                      </li>
-                    </template>
-                  </ul>
-                </div>
-              </template>
+        <template x-for="groep in agendaPerDag" :key="groep.datum">
+          <div class="dag">
+            <div class="dag-kop">
+              <template x-if="isVandaag(groep.datum)"><span class="vandaag">Vandaag</span></template>
+              <span x-text="dagKopLabel(groep.datum)"></span>
             </div>
-          </template>
-          <p class="leeg" x-show="agendaPerDag.length===0">Niets in de agenda voor de komende tijd. 🎉</p>
-          <p class="sync-info" x-show="laatsteSync" x-text="'Laatste bericht uit Parro: ' + laatsteSync"></p>
-        </div>
+            <template x-for="a in groep.items" :key="a.id">
+              <div class="event-kaart">
+                <div class="event-rij">
+                  <div class="spine" :style="'background:' + (heeftOpenActie(a) ? 'var(--amber-spine)' : 'var(--brand)')"></div>
+                  <div class="event-inhoud">
+                    <div class="event-top">
+                      <h3 x-text="a.titel"></h3>
+                      <span class="spacer"></span>
+                      <div class="kind-chips">
+                        <template x-if="a.kind_van_de_week">
+                          <span class="kind-chip">⭐ kind vd week</span>
+                        </template>
+                        <template x-if="a.kind">
+                          <span class="kind-chip">
+                            <span class="kind-dot" :style="'background:' + kindKleur(a.kind)"></span>
+                            <span x-text="a.kind"></span>
+                          </span>
+                        </template>
+                      </div>
+                    </div>
+                    <p class="event-oms" x-show="a.omschrijving" x-text="a.omschrijving"></p>
+                    <div class="acties" x-show="a.parro_acties && a.parro_acties.length">
+                      <template x-for="actie in a.parro_acties" :key="actie.id">
+                        <label class="actie" :class="{af: actie.afgevinkt}">
+                          <input type="checkbox" class="vink" :checked="actie.afgevinkt" @change="toggleActie(actie)">
+                          <span class="label" x-text="actie.tekst"></span>
+                          <span class="deadline" x-show="actie.uiterlijk" x-text="kortLabel(actie.uiterlijk)"></span>
+                        </label>
+                      </template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+        </template>
+
+        <p class="leeg" x-show="agendaPerDag.length===0">Niets in de agenda voor de komende tijd. 🎉</p>
+        <p class="sync-info" x-show="laatsteSync" x-text="'Laatste bericht uit Parro: ' + laatsteSync"></p>
       </div>
 
       <!-- ══ WEEKOVERZICHT ══ -->
-      <div x-show="tab==='week'">
-        <div class="kaart">
-          <h2>Weekoverzichten</h2>
-          <template x-for="w in weken" :key="w.week_start">
-            <div class="week">
-              <div class="kop" x-text="weekLabel(w.week_start)"></div>
+      <div class="paneel" x-show="tab==='week'">
+        <h2 class="paneel-kop">Weekoverzicht</h2>
+        <p class="paneel-sub">Weeksamenvattingen — wat er speelde en wat eraan komt. De agent maakt deze elke week.</p>
+        <template x-for="w in weken" :key="w.week_start">
+          <div class="week">
+            <div class="week-kop" x-text="weekLabel(w.week_start)"></div>
+            <div class="week-kaart">
               <div class="md" x-html="md(w.samenvatting)"></div>
             </div>
-          </template>
-          <p class="leeg" x-show="weken.length===0">Nog geen weekoverzichten — die maakt de agent elke zondagavond.</p>
-        </div>
+          </div>
+        </template>
+        <p class="leeg" x-show="weken.length===0">Nog geen weekoverzichten — die maakt de agent elke zondagavond.</p>
       </div>
 
       <!-- ══ MELDINGEN ══ -->
-      <div x-show="tab==='meldingen'">
-        <div class="kaart" x-show="belangrijkeMeldingen.length">
-          <h2>Belangrijk</h2>
-          <template x-for="m in belangrijkeMeldingen" :key="m.id">
-            <div class="melding">
-              <div class="kop">
-                <span class="soort-tag belangrijk">belangrijk</span>
-                <span class="titel" x-text="m.titel || m.groep || m.afzender"></span>
-                <span class="meta" x-text="kortLabel(m.datum)"></span>
-              </div>
-              <div class="tekst" :class="{dicht: !open[m.id]}" @click="open[m.id]=!open[m.id]" x-text="m.tekst"></div>
-            </div>
-          </template>
-        </div>
-        <div class="kaart">
-          <h2>Laatste berichten</h2>
+      <div class="paneel" x-show="tab==='meldingen'">
+        <h2 class="paneel-kop">Meldingen</h2>
+        <p class="paneel-sub">Losse berichten uit Parro. Meerdere berichten over hetzelfde zijn in de Agenda tot één punt samengevoegd.</p>
+        <div class="meldingen">
           <template x-for="m in meldingen" :key="m.id">
-            <div class="melding">
-              <div class="kop">
-                <span class="soort-tag" x-text="m.soort"></span>
-                <span class="titel" x-text="m.titel || m.groep || m.afzender"></span>
-                <span class="meta" x-text="kortLabel(m.datum)"></span>
+            <div class="melding" :class="{gelezen: !m.belangrijk}">
+              <span class="dot"></span>
+              <div class="melding-inhoud">
+                <div class="melding-top">
+                  <template x-if="m.groep">
+                    <span class="afzender-pill groep">
+                      <span class="kind-dot" :style="'background:' + kindKleur(m.groep)"></span>
+                      <span x-text="m.groep"></span>
+                    </span>
+                  </template>
+                  <template x-if="!m.groep">
+                    <span class="afzender-pill algemeen" x-text="m.afzender || 'Algemeen'"></span>
+                  </template>
+                  <span class="spacer"></span>
+                  <span class="tijd" x-text="tijdLabel(m.datum)"></span>
+                </div>
+                <h3 x-show="m.titel" x-text="m.titel"></h3>
+                <div class="tekst" :class="{dicht: !open[m.id]}" @click="open[m.id]=!open[m.id]" x-text="m.tekst"></div>
               </div>
-              <div class="tekst" :class="{dicht: !open[m.id]}" @click="open[m.id]=!open[m.id]" x-text="m.tekst"></div>
             </div>
           </template>
-          <p class="leeg" x-show="meldingen.length===0">Nog geen berichten — draai de agent (zie <code>agent/README.md</code>).</p>
         </div>
+        <p class="leeg" x-show="meldingen.length===0">Nog geen berichten — draai de agent (zie <code>agent/README.md</code>).</p>
       </div>
 
       <!-- ══ FOTO'S ══ -->
-      <div x-show="tab==='fotos'">
-        <div class="kaart">
-          <h2>Foto's uit Parro</h2>
-          <template x-for="groep in fotosPerDag" :key="groep.datum">
-            <div class="dag">
-              <div class="dag-kop" x-text="groep.datum ? dagLabel(groep.datum) : 'Zonder datum'"></div>
-              <div class="foto-grid">
-                <template x-for="f in groep.items" :key="f.id">
-                  <button class="foto-tegel" x-data="{ zicht: false }" x-intersect:enter.once.margin.300px="zicht = true" @click="lightbox = f" :title="f.parro_items?.titel || f.bestandsnaam">
-                    <template x-if="f.isVideo">
-                      <video :src="zicht ? f.url : null" muted preload="metadata"></video>
-                    </template>
-                    <template x-if="!f.isVideo">
-                      <img :src="zicht ? f.url : null" loading="lazy" :alt="f.parro_items?.titel || 'foto'">
-                    </template>
-                    <span class="speel" x-show="f.isVideo">▶</span>
-                  </button>
-                </template>
-              </div>
+      <div class="paneel" x-show="tab==='fotos'">
+        <h2 class="paneel-kop">Foto's</h2>
+        <p class="paneel-sub">Foto's en video's uit de Parro-berichten.</p>
+        <template x-for="groep in fotosPerDag" :key="groep.datum">
+          <div class="dag">
+            <div class="dag-kop"><span x-text="groep.datum ? dagKopLabel(groep.datum) : 'Zonder datum'"></span></div>
+            <div class="foto-grid">
+              <template x-for="f in groep.items" :key="f.id">
+                <button class="foto-tegel" x-data="{ zicht: false }" x-intersect:enter.once.margin.300px="zicht = true" @click="lightbox = f" :title="f.parro_items?.titel || f.bestandsnaam">
+                  <template x-if="f.isVideo">
+                    <video :src="zicht ? f.url : null" muted preload="metadata"></video>
+                  </template>
+                  <template x-if="!f.isVideo">
+                    <img :src="zicht ? f.url : null" loading="lazy" :alt="f.parro_items?.titel || 'foto'">
+                  </template>
+                  <span class="speel" x-show="f.isVideo">▶</span>
+                </button>
+              </template>
             </div>
-          </template>
-          <p class="leeg" x-show="fotos.length===0">Nog geen foto's — die verschijnen zodra de agent Parro-bijlagen synct (zie <code>agent/README.md</code>).</p>
-        </div>
+          </div>
+        </template>
+        <p class="leeg" x-show="fotos.length===0">Nog geen foto's — die verschijnen zodra de agent Parro-bijlagen synct (zie <code>agent/README.md</code>).</p>
       </div>
 
       <!-- lightbox -->
@@ -303,8 +409,8 @@
               <img :src="lightbox.url" :alt="lightbox.parro_items?.titel || 'foto'">
             </template>
             <div class="balk">
-              <a class="knop donker" :href="downloadUrl(lightbox)" :download="lightbox.bestandsnaam || 'foto'">Downloaden</a>
-              <button class="knop" @click="lightbox = null">Sluiten</button>
+              <a class="knop-pill knop-brand" :href="downloadUrl(lightbox)" :download="lightbox.bestandsnaam || 'foto'">Downloaden</a>
+              <button class="knop-pill" @click="lightbox = null">Sluiten</button>
             </div>
           </div>
           <button class="nav volgende" @click.stop="stap(1)" x-show="fotos.findIndex(f => f.id === lightbox.id) < fotos.length - 1" aria-label="Volgende">›</button>
@@ -476,9 +582,12 @@ document.addEventListener("alpine:init", () => {
         .sort((x, y) => x[0].localeCompare(y[0]))
         .map(([datum, items]) => ({ datum, items }));
     },
-    get openActies() {
-      return this.agendaKomend.reduce(
-        (n, a) => n + (a.parro_acties || []).filter((x) => !x.afgevinkt).length, 0);
+    heeftOpenActie(a) {
+      return (a.parro_acties || []).some((x) => !x.afgevinkt);
+    },
+    // Agenda-badge: aantal komende events met nog iets te regelen.
+    get teRegelen() {
+      return this.agendaKomend.filter((a) => this.heeftOpenActie(a)).length;
     },
     get belangrijkeMeldingen() { return this.items.filter((m) => m.belangrijk); },
     get meldingen() { return this.items.filter((m) => m.tekst || m.titel); },
@@ -523,6 +632,18 @@ document.addEventListener("alpine:init", () => {
 
     /* ── weergave ── */
     md: mdNaarHtml,
+    // Kleur van het kind-bolletje, afgeleid van de naam (geen namen hardgecodeerd).
+    kindKleur(naam) {
+      const palet = ["#2E7D8A", "#C25D4B", "#7A4E8C", "#C6741F", "#2F6E43", "#B9791F"];
+      let h = 0;
+      for (const ch of (naam || "")) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+      return palet[h % palet.length];
+    },
+    isVandaag(d) { return d === iso(new Date()); },
+    dagKopLabel(d) {
+      const dt = new Date(d + "T00:00:00");
+      return dt.toLocaleDateString("nl-NL", { weekday: "long", day: "numeric", month: "long" }).toUpperCase();
+    },
     dagLabel(d) {
       const dt = new Date(d + "T00:00:00");
       const vandaag = new Date(); vandaag.setHours(0, 0, 0, 0);
@@ -535,6 +656,17 @@ document.addEventListener("alpine:init", () => {
     kortLabel(d) {
       if (!d) return "";
       return new Date(d).toLocaleDateString("nl-NL", { day: "numeric", month: "short" });
+    },
+    // Tijdstempel voor meldingen: 'vandaag 08:12' / 'gisteren 16:40' / '7 jul'.
+    tijdLabel(d) {
+      if (!d) return "";
+      const dt = new Date(d);
+      const dag0 = (x) => { const y = new Date(x); y.setHours(0, 0, 0, 0); return y; };
+      const diff = Math.round((dag0(new Date()) - dag0(dt)) / 86400000);
+      const tijd = dt.toLocaleTimeString("nl-NL", { hour: "2-digit", minute: "2-digit" });
+      if (diff === 0) return "vandaag " + tijd;
+      if (diff === 1) return "gisteren " + tijd;
+      return dt.toLocaleDateString("nl-NL", { day: "numeric", month: "short" });
     },
     weekLabel(weekStart) {
       const ma = new Date(weekStart + "T00:00:00");
