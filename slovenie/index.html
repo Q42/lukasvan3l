@@ -482,6 +482,100 @@
     border: none;
     border-top: 1px solid #e0e0e0;
   }
+
+  /* ── BOOKING BOX ── */
+  .booking-box {
+    margin-top: 16px;
+    background: var(--sand);
+    border: 1px solid #efe2cc;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .booking-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .bk-ok   { background: #e6f4e0; color: #2d6a1e; }
+  .bk-todo { background: #fde8d8; color: #a8500a; }
+  .bk-row { display: flex; gap: 9px; align-items: flex-start; }
+  .bk-row + .bk-row { margin-top: 6px; }
+  .bk-ico { flex-shrink: 0; width: 18px; text-align: center; }
+  .bk-row b { color: var(--dark); font-weight: 600; }
+
+  /* ── ACTION BUTTONS ── */
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 9px 15px;
+    border-radius: 22px;
+    border: 1px solid transparent;
+    line-height: 1;
+    transition: transform 0.08s ease, box-shadow 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-nav  { background: #1a73e8; color: #fff; box-shadow: 0 2px 8px rgba(26,115,232,0.35); }
+  .btn-call { background: #fff; color: var(--dark); border-color: #dcdcdc; }
+  .btn-map  { background: #fff; color: #1a73e8; border-color: #cfe0fb; }
+  .btn-sm   { padding: 7px 12px; font-size: 12px; }
+
+  /* ── RESPONSIVE / PHONE ── */
+  @media (max-width: 760px) {
+    .hero { padding: 46px 20px 52px; }
+    .hero-flag { font-size: 44px; margin-bottom: 14px; }
+    .hero h1 { font-size: 44px; }
+    .hero-sub { font-size: 16px; margin-bottom: 26px; }
+    .hero-stats { gap: 20px 30px; flex-wrap: wrap; }
+    .hero-stat .num { font-size: 32px; }
+
+    .route-bar { padding: 0 20px; }
+    .route-inner { height: auto; flex-wrap: nowrap; overflow-x: auto; padding: 14px 0; -webkit-overflow-scrolling: touch; }
+    .route-arrow { flex: 0 0 62px; }
+
+    .style-bar { padding: 0 20px; }
+    .map-section { padding: 32px 20px 0; }
+    #trip-map { height: 340px; }
+    .section { padding: 40px 20px; }
+    .section + .section { padding-top: 0; }
+    .section-divider { padding: 0 20px; }
+
+    .section-header { gap: 12px 16px; flex-wrap: wrap; align-items: center; }
+    .section-num { font-size: 52px; }
+    .section-title { font-size: 23px; }
+    .section-meta { margin-left: 0; text-align: left; flex-basis: 100%; }
+
+    .camp-card { grid-template-columns: 1fr; }
+    .camp-img-placeholder, .camp-img { width: 100%; }
+    .camp-img-placeholder { height: 190px; }
+    .camp-info { padding: 20px; }
+
+    .day-row { grid-template-columns: 1fr; }
+    .day-photo, .day-photo img, .day-photo-placeholder { width: 100%; }
+    .day-photo, .day-photo img, .day-photo-placeholder { height: 190px; }
+    .day-content { padding: 18px 20px; }
+
+    .travel-row { flex-direction: column; align-items: flex-start; }
+  }
 </style>
 </head>
 <body>
@@ -601,6 +695,16 @@
         <div class="camp-detail"><span class="icon">🚲</span> Gravel langs de rivier</div>
         <div class="camp-detail"><span class="icon">🍺</span> Bar aanwezig</div>
       </div>
+      <div class="booking-box">
+        <span class="booking-status bk-todo">⏳ Nog te boeken</span>
+        <div class="bk-row"><span class="bk-ico">📅</span><span><b>2 – 7 aug 2026</b> · 5 nachten</span></div>
+        <div class="bk-row"><span class="bk-ico">📍</span><span>Kamp Šorli, Koritnica, Bovec</span></div>
+        <div class="bk-row"><span class="bk-ico">🕑</span><span>Nog reserveren — daarna hier de bevestiging invullen</span></div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-nav" href="https://www.google.com/maps/dir/?api=1&destination=Kamp+Sorli,+Bovec" target="_blank" rel="noopener">🧭 Navigatie</a>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Kamp+Sorli,+Bovec" target="_blank" rel="noopener">📍 Google Maps</a>
+      </div>
     </div>
   </div>
 
@@ -623,6 +727,10 @@
           <span class="tag tag-water">Waterval</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
         </div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Slap+Kozjak,+Kobarid" target="_blank" rel="noopener">🧭 Navigatie · 30 min</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Slap+Kozjak,+Kobarid" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
       </div>
     </div>
 
@@ -640,6 +748,10 @@
           <span class="tag tag-hike">Canyon</span>
           <span class="tag tag-water">Turquoise water</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Tolminska+korita" target="_blank" rel="noopener">🧭 Navigatie · 15 min</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Tolminska+korita" target="_blank" rel="noopener">📍 Maps</a>
         </div>
       </div>
     </div>
@@ -659,6 +771,10 @@
           <span class="tag tag-water">Waterval</span>
           <span class="tag tag-kids">Kids ⭐⭐</span>
         </div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Vintgar+Gorge" target="_blank" rel="noopener">🧭 Navigatie · 60 min</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Vintgar+Gorge" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
       </div>
     </div>
 
@@ -677,6 +793,10 @@
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
           <span class="tag tag-culture">Kasteel</span>
         </div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Lake+Bled" target="_blank" rel="noopener">🧭 Navigatie · 55 min</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Lake+Bled" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
       </div>
     </div>
 
@@ -692,6 +812,9 @@
     <div>
       <strong>Reisdag — 7 aug · Soča naar Istrische kust</strong><br>
       ±3 uur rijden. Route langs Postojna of Škocjan — overweeg grot meteen te doen als tussenstop op weg naar kamp 2.
+      <div class="actions">
+        <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Kaki+Plac,+Liminjan+8,+Portoroz" target="_blank" rel="noopener">🧭 Naar Kaki Plac · ±3u</a>
+      </div>
     </div>
   </div>
 </div>
@@ -721,7 +844,22 @@
         <div class="camp-detail"><span class="icon">🚲</span> 30 min fietsen naar strand</div>
         <div class="camp-detail"><span class="icon">🤸</span> Boomgaard — slackline-plek</div>
         <div class="camp-detail"><span class="icon">🛶</span> Kayak mogelijk</div>
-        <div class="camp-detail"><span class="icon">⚠️</span> Vroeg boeken!</div>
+        <div class="camp-detail"><span class="icon">🚫</span> Smalle weg — geen camper/aanhanger</div>
+      </div>
+      <div class="booking-box">
+        <span class="booking-status bk-ok">✅ Geboekt</span>
+        <div class="bk-row"><span class="bk-ico">📅</span><span><b>7 – 12 aug 2026</b> · 5 nachten (aankomst vrij 7 aug)</span></div>
+        <div class="bk-row"><span class="bk-ico">📍</span><span>Liminjan 8, 6320 Portorož</span></div>
+        <div class="bk-row"><span class="bk-ico">⛺</span><span>Pitch 6 (4,8 × 3,3 m) · 2 volw. + 2 kinderen</span></div>
+        <div class="bk-row"><span class="bk-ico">🕑</span><span>Inchecken <b>14:00–20:00</b> · uitchecken 10:00–12:00</span></div>
+        <div class="bk-row"><span class="bk-ico">💶</span><span><b>€440</b> totaal — <b>contant bij vertrek</b> (geen aanbetaling)</span></div>
+        <div class="bk-row"><span class="bk-ico">🔖</span><span>Referentie <b>WTB1A9A3EC</b></span></div>
+        <div class="bk-row"><span class="bk-ico">📞</span><span>Even bellen/appen hoe laat je aankomt</span></div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-nav" href="https://www.google.com/maps/dir/?api=1&destination=Kaki+Plac,+Liminjan+8,+Portoroz" target="_blank" rel="noopener">🧭 Navigatie</a>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Kaki+Plac,+Liminjan+8,+Portoroz" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-call" href="tel:+38641359801">📞 Bel camping</a>
       </div>
     </div>
   </div>
@@ -744,6 +882,10 @@
           <span class="tag tag-water">Ondergrondse rivier</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
         </div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Skocjan+Caves" target="_blank" rel="noopener">🧭 Navigatie · 45 min</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Skocjan+Caves" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
       </div>
     </div>
 
@@ -761,6 +903,10 @@
           <span class="tag tag-cave">Grot</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
           <span class="tag">🚂 Treintje</span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Postojna+Cave" target="_blank" rel="noopener">🧭 Navigatie · 65 min</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Postojna+Cave" target="_blank" rel="noopener">📍 Maps</a>
         </div>
       </div>
     </div>
@@ -780,6 +926,10 @@
           <span class="tag tag-culture">Stadje</span>
           <span class="tag tag-kids">Kids ⭐⭐</span>
         </div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Piran,+Slovenia" target="_blank" rel="noopener">🧭 Navigatie · 15 min</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Piran,+Slovenia" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
       </div>
     </div>
 
@@ -795,6 +945,9 @@
     <div>
       <strong>Reisdag — 12 aug · Kust naar Savinja-vallei</strong><br>
       ±2,5 uur rijden langs Ljubljana. Mooi tussenstop mogelijk in Ljubljana centrum (1u).
+      <div class="actions">
+        <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Kamp+na+Otoku,+Ljubno+ob+Savinji" target="_blank" rel="noopener">🧭 Naar Kamp na Otoku · ±2,5u</a>
+      </div>
     </div>
   </div>
 </div>
@@ -825,6 +978,19 @@
         <div class="camp-detail"><span class="icon">🤸</span> Weiland voor slackline</div>
         <div class="camp-detail"><span class="icon">👧</span> Kids-paradijs</div>
       </div>
+      <div class="booking-box">
+        <span class="booking-status bk-ok">✅ Geboekt</span>
+        <div class="bk-row"><span class="bk-ico">📅</span><span><b>12 – 17 aug 2026</b> · 5 nachten</span></div>
+        <div class="bk-row"><span class="bk-ico">📍</span><span>Na Pečeh 7, 3333 Ljubno ob Savinji</span></div>
+        <div class="bk-row"><span class="bk-ico">💶</span><span>Aanbetaling gedaan · <b>rest contant ter plekke</b></span></div>
+        <div class="bk-row"><span class="bk-ico">🧾</span><span>Toeristenbelasting ter plekke: €2 p.p./dag (volw.), €1 p.p./dag (kind 7–17)</span></div>
+        <div class="bk-row"><span class="bk-ico">📞</span><span>Even bellen/appen hoe laat je aankomt</span></div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-nav" href="https://www.google.com/maps/dir/?api=1&destination=Kamp+na+Otoku,+Ljubno+ob+Savinji" target="_blank" rel="noopener">🧭 Navigatie</a>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Kamp+na+Otoku,+Ljubno+ob+Savinji" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-call" href="tel:+38641390515">📞 Bel camping</a>
+      </div>
     </div>
   </div>
 
@@ -846,6 +1012,10 @@
           <span class="tag tag-water">Waterval</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
         </div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Logarska+Dolina" target="_blank" rel="noopener">🧭 Navigatie · 35 min</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Logarska+Dolina" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
       </div>
     </div>
 
@@ -864,6 +1034,10 @@
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
           <span class="tag">⚠️ Vooraf boeken</span>
         </div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Ljubno+ob+Savinji" target="_blank" rel="noopener">🧭 Navigatie · 10 min</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Savinja+rafting+Ljubno" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
       </div>
     </div>
 
@@ -881,6 +1055,10 @@
           <span class="tag tag-culture">Kasteel</span>
           <span class="tag tag-hike">Korte klim</span>
           <span class="tag tag-kids">Kids ⭐⭐</span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Kamnik,+Slovenia" target="_blank" rel="noopener">🧭 Navigatie · 55 min</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Kamnik,+Slovenia" target="_blank" rel="noopener">📍 Maps</a>
         </div>
       </div>
     </div>
@@ -902,7 +1080,7 @@
 </div>
 
 <footer>
-  Gemaakt voor <strong>onze Slovenië-vakantie augustus 2026</strong> 🇸🇮 &nbsp;·&nbsp; Tickets grotten & Vintgar vroeg online boeken &nbsp;·&nbsp; Kaki Plac zo snel mogelijk reserveren &nbsp;·&nbsp; Mountainbikes & slackline mee 🚲
+  Gemaakt voor <strong>onze Slovenië-vakantie augustus 2026</strong> 🇸🇮 &nbsp;·&nbsp; Kaki Plac &amp; Kamp na Otoku ✅ geboekt · Soča-kamp nog reserveren &nbsp;·&nbsp; Tickets grotten &amp; Vintgar vooraf online &nbsp;·&nbsp; Genoeg <strong>cash</strong> mee (campings betaal je contant) &nbsp;·&nbsp; Mountainbikes &amp; slackline mee 🚲
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -979,7 +1157,7 @@
 
   var camps = [
     { name: 'Basiskamp 1 · Camp Sorli Koritnica', sub: '2–7 aug · Soča-vallei', lat: 46.345, lng: 13.565, c: 0 },
-    { name: 'Basiskamp 2 · Kaki Plac',            sub: '7–12 aug · Istrische kust', lat: 45.547, lng: 13.690, c: 1 },
+    { name: 'Basiskamp 2 · Kaki Plac',            sub: '7–12 aug · Istrische kust', lat: 45.508, lng: 13.626, c: 1 },
     { name: 'Basiskamp 3 · Camp Na Otoku',        sub: '12–17 aug · Savinja-vallei', lat: 46.344, lng: 14.834, c: 2 }
   ];
 
