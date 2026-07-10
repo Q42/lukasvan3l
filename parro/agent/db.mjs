@@ -35,6 +35,52 @@ export async function insertNieuweItems(items) {
   return nieuw;
 }
 
+// Naam van de private storage-bucket met de Parro-foto's/video's.
+export const FOTO_BUCKET = "parro-fotos";
+
+// Recente items mét hun ruwe JSON (waar de bijlagen in zitten). Voor fotos.mjs.
+export async function getItemsMetRaw(limit = 500) {
+  const { data, error } = await db()
+    .from("parro_items")
+    .select("id, soort, datum, raw")
+    .not("raw", "is", null)
+    .order("datum", { ascending: false })
+    .limit(limit);
+  if (error) throw new Error(`parro_items raw lezen: ${error.message}`);
+  return data || [];
+}
+
+// Al bekende foto-id's (om dubbel uploaden over te slaan).
+export async function bestaandeFotoIds() {
+  const ids = new Set();
+  const stap = 1000;
+  for (let van = 0; ; van += stap) {
+    const { data, error } = await db()
+      .from("parro_fotos")
+      .select("id")
+      .range(van, van + stap - 1);
+    if (error) throw new Error(`parro_fotos lezen: ${error.message}`);
+    for (const r of data || []) ids.add(r.id);
+    if (!data || data.length < stap) break;
+  }
+  return ids;
+}
+
+// Eén bestand naar de storage-bucket zetten (service-role, omzeilt RLS).
+export async function uploadFoto(pad, data, contentType) {
+  const { error } = await db()
+    .storage.from(FOTO_BUCKET)
+    .upload(pad, data, { contentType: contentType || undefined, upsert: true });
+  if (error) throw new Error(`upload ${pad}: ${error.message}`);
+}
+
+export async function insertFoto(rij) {
+  const { error } = await db()
+    .from("parro_fotos")
+    .upsert(rij, { onConflict: "id", ignoreDuplicates: true });
+  if (error) throw new Error(`parro_fotos insert: ${error.message}`);
+}
+
 export async function getOnverwerkteItems(limit = 25) {
   // Nieuwste eerst: bij een grote achterstand willen we juist de aankomende
   // agenda-items (die staan met een toekomstige datum bovenaan) als eerste

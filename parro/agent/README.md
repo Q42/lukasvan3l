@@ -4,11 +4,12 @@ Draait op **jouw eigen machine** (niet op GitHub Pages) en houdt Supabase bij:
 
 ```
 Parro API ──(gwillem/parro)──▶ ~/.local/share/parro/*.db (SQLite)
-                                        │ sync.mjs
-                                        ▼
-                                    Supabase (parro_items)
-                                        │ enrich.mjs (Claude API)
-                                        ▼
+                               + ~/.cache/parro/<guardian>/ (bijlagen)
+                                        │ sync.mjs          │ fotos.mjs
+                                        ▼                   ▼
+                                    Supabase (parro_items)  Supabase Storage
+                                        │ enrich.mjs        (bucket parro-fotos)
+                                        ▼                   + parro_fotos
                     parro_agenda + parro_acties + vlaggen op parro_items
                                         │ week.mjs (wekelijks, Claude API)
                                         ▼
@@ -75,7 +76,7 @@ gekozen in `llm.mjs`:
 ## Draaien
 
 ```bash
-./run.sh          # parro check → sync.mjs → enrich.mjs
+./run.sh          # parro check → sync.mjs → fotos.mjs → enrich.mjs
 node week.mjs     # weeksamenvatting van de lopende week
 ```
 
@@ -99,6 +100,7 @@ stilletjes breken.
 | Script | Doet |
 |---|---|
 | `sync.mjs` | Leest `events` + `chat_messages` uit de gwillem/parro-SQLite en upsert ze als ruwe `parro_items` (bestaande rijen blijven onaangeroerd). |
+| `fotos.mjs` | Leest de bijlagen (`attachments`) uit de ruwe JSON van de items, zoekt het door `parro check` gedownloade bestand in `~/.cache/parro/<guardian>/` en uploadt het naar de private bucket `parro-fotos` (+ rij in `parro_fotos`). Al geüploade foto's worden overgeslagen. Zet `PARRO_CACHE` als de cache elders staat. |
 | `enrich.mjs` | Stuurt onverwerkte items naar Claude (structured output): agenda-items met datum/kind/acties, kind-van-de-week, belangrijk-vlag. Mislukte items blijven onverwerkt en gaan de volgende run opnieuw. |
 | `week.mjs` | Vat één week Parro-verkeer samen in markdown → `parro_weekoverzicht`. Draai met een datum-argument om een oude week (opnieuw) te genereren. |
 

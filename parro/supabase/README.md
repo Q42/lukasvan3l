@@ -8,7 +8,9 @@ alleen stap 1 en 2 te doen.
 
 SQL Editor → New query → plak [`schema.sql`](./schema.sql) → **Run**.
 Het allowlist/leden-deel is identiek aan dat van boodschappen en idempotent;
-dubbel draaien kan geen kwaad.
+dubbel draaien kan geen kwaad. Dit maakt meteen de private storage-bucket
+`parro-fotos` aan (voor de foto's uit Parro) met een leespolicy: alleen leden
+kunnen er signed URLs voor maken, de bestanden zijn niet publiek opvraagbaar.
 
 ## 2. Redirect-URL toevoegen
 

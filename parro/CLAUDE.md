@@ -19,9 +19,10 @@ GitHub Pages (index.html) ── supabase-js ──▶ Supabase (Auth + Postgres
 
 - **Frontend** (`index.html`): statische single-file app, zelfde patroon als
   `boodschappen/` — Alpine.js + Supabase JS via CDN, Google-login via
-  Supabase Auth, allowlist (`allowed_emails`) + RLS. Drie tabs: Agenda
+  Supabase Auth, allowlist (`allowed_emails`) + RLS. Vier tabs: Agenda
   (met afvinkbare acties en kind-van-de-week-banner), Weekoverzicht,
-  Meldingen.
+  Meldingen en Foto's (galerij met lightbox + download; de bestanden komen
+  via tijdelijke signed URLs uit een private storage-bucket).
 - **`config.js`**: publieke Supabase-URL + publishable key. Standaard
   hetzelfde gezinsproject als boodschappen (gedeelde login/allowlist).
 - **`supabase/`**: `schema.sql` (parro_*-tabellen + RLS; het
@@ -29,8 +30,10 @@ GitHub Pages (index.html) ── supabase-js ──▶ Supabase (Auth + Postgres
   setup-README.
 - **`agent/`**: lokale cron-scripts op Lukas' machine. `sync.mjs` leest de
   SQLite van de [gwillem/parro](https://github.com/gwillem/parro) CLI,
-  `enrich.mjs` laat Claude (structured output) agenda-items/acties/vlaggen
-  extraheren, `week.mjs` schrijft weeksamenvattingen. Zie `agent/README.md`.
+  `fotos.mjs` uploadt de door die CLI gedownloade bijlagen (uit
+  `~/.cache/parro/`) naar de storage-bucket, `enrich.mjs` laat Claude
+  (structured output) agenda-items/acties/vlaggen extraheren, `week.mjs`
+  schrijft weeksamenvattingen. Zie `agent/README.md`.
 
 ## Datamodel
 
@@ -40,6 +43,9 @@ GitHub Pages (index.html) ── supabase-js ──▶ Supabase (Auth + Postgres
 - `parro_acties` — afvinkbare acties per agenda-item (leden mogen updaten,
   de rest is read-only; schrijven doet de agent via service-role).
 - `parro_weekoverzicht` — markdown-samenvatting per week (pk = maandag).
+- `parro_fotos` — foto's/video's uit berichten: metadata + het pad in de
+  private storage-bucket `parro-fotos`. De bestanden zelf staan in Storage,
+  niet in git; de frontend maakt er per sessie signed URLs voor aan.
 
 ## Werkregels
 

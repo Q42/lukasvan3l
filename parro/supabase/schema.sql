@@ -115,8 +115,22 @@ create table if not exists parro_weekoverzicht (
   created_at   timestamptz default now()
 );
 
+-- foto's/video's uit Parro-berichten. De bestanden zelf staan in de private
+-- storage-bucket 'parro-fotos'; hier alleen de metadata + het pad erin.
+create table if not exists parro_fotos (
+  id           text primary key,                -- '<item-id>#<index>', bv 'event:123#0'
+  item_id      text references parro_items(id) on delete cascade,
+  pad          text not null,                   -- pad in de 'parro-fotos'-bucket
+  bestandsnaam text,
+  content_type text,
+  soort        text,                            -- 'IMAGE' of 'VIDEO' (uit Parro)
+  datum        timestamptz,                     -- overgenomen van het bijbehorende item
+  created_at   timestamptz default now()
+);
+
 create index if not exists parro_items_datum_idx  on parro_items (datum desc);
 create index if not exists parro_agenda_datum_idx on parro_agenda (datum);
+create index if not exists parro_fotos_datum_idx  on parro_fotos (datum desc);
 
 -- ── rechten (Postgres GRANT, los van RLS) ───────────────────────────────────
 
@@ -128,6 +142,7 @@ grant all on table public.parro_items        to authenticated, service_role;
 grant all on table public.parro_agenda       to authenticated, service_role;
 grant all on table public.parro_acties       to authenticated, service_role;
 grant all on table public.parro_weekoverzicht to authenticated, service_role;
+grant all on table public.parro_fotos        to authenticated, service_role;
 
 grant execute on function public.is_member() to anon, authenticated, service_role;
 grant execute on function public.handle_new_user() to service_role;
@@ -142,6 +157,7 @@ alter table parro_items         enable row level security;
 alter table parro_agenda        enable row level security;
 alter table parro_acties        enable row level security;
 alter table parro_weekoverzicht enable row level security;
+alter table parro_fotos         enable row level security;
 
 drop policy if exists "eigen lid" on members;
 create policy "eigen lid" on members for select using (user_id = auth.uid());
@@ -155,6 +171,9 @@ create policy "leden lezen agenda" on parro_agenda for select using (is_member()
 
 drop policy if exists "leden lezen weekoverzicht" on parro_weekoverzicht;
 create policy "leden lezen weekoverzicht" on parro_weekoverzicht for select using (is_member());
+
+drop policy if exists "leden lezen fotos" on parro_fotos;
+create policy "leden lezen fotos" on parro_fotos for select using (is_member());
 
 -- acties: leden mogen lezen én afvinken
 drop policy if exists "leden lezen acties" on parro_acties;
@@ -172,6 +191,22 @@ exception when duplicate_object then null; end $$;
 do $$ begin
   alter publication supabase_realtime add table parro_agenda;
 exception when duplicate_object then null; end $$;
+
+do $$ begin
+  alter publication supabase_realtime add table parro_fotos;
+exception when duplicate_object then null; end $$;
+
+-- ── storage-bucket voor Parro-foto's ────────────────────────────────────────
+-- Private bucket: de bestanden zijn NIET publiek opvraagbaar. De frontend
+-- maakt per sessie signed URLs aan (mag alleen als je lid bent, zie policy);
+-- de agent uploadt met de service-role key (omzeilt RLS).
+insert into storage.buckets (id, name, public)
+values ('parro-fotos', 'parro-fotos', false)
+on conflict (id) do nothing;
+
+drop policy if exists "leden lezen parro-fotos" on storage.objects;
+create policy "leden lezen parro-fotos" on storage.objects for select
+  to authenticated using (bucket_id = 'parro-fotos' and is_member());
 
 -- ── VUL JE ALLOWLIST (overslaan als het boodschappen-project al gevuld is) ──
 -- insert into allowed_emails (email) values
