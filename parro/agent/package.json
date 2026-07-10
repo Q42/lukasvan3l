@@ -1,0 +1,20 @@
+{
+  "name": "parro-agent",
+  "private": true,
+  "type": "module",
+  "description": "Synct Parro-schoolberichten naar Supabase en verrijkt ze met Claude (agenda, acties, weekoverzicht).",
+  "engines": {
+    "node": ">=23.4"
+  },
+  "scripts": {
+    "sync": "node sync.mjs",
+    "enrich": "node enrich.mjs",
+    "week": "node week.mjs",
+    "run": "./run.sh"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.116.0",
+    "@supabase/supabase-js": "^2.110.1",
+    "dotenv": "^17.4.2"
+  }
+}
