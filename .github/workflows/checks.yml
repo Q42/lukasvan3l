@@ -1,0 +1,36 @@
+name: Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  inline-scripts:
+    name: Check inline <script> syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node .github/scripts/check-inline-scripts.mjs
+
+  boodschappen-agent:
+    name: boodschappen/agent
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: boodschappen/agent
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: boodschappen/agent/package-lock.json
+      - run: npm ci
+      - run: |
+          for f in *.mjs; do
+            node --check "$f"
+          done
