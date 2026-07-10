@@ -5,13 +5,12 @@
 //
 //   node enrich.mjs          # verwerkt max 25 onverwerkte items per run
 //
-// Auth: ANTHROPIC_API_KEY in .env, of een `ant auth login`-profiel.
+// Draait standaard via de Claude Code CLI op je abonnement; met een
+// ANTHROPIC_API_KEY in .env gaat het via de API. Zie llm.mjs.
 
-import Anthropic from "@anthropic-ai/sdk";
 import "dotenv/config";
+import { vraagJson } from "./llm.mjs";
 import { getOnverwerkteItems, saveVerrijking } from "./db.mjs";
-
-const anthropic = new Anthropic();
 
 const KINDEREN = process.env.PARRO_KINDEREN || "Floris, Yune";
 // Vrije context die het model helpt kinderen aan groepen te koppelen, bv:
@@ -73,38 +72,24 @@ Haal uit elk bericht de concrete agenda-informatie voor de ouders:
 - Datums zijn ISO (YYYY-MM-DD). Gebruik de datum van het bericht om relatieve aanduidingen ("volgende week vrijdag") op te lossen.`;
 
 async function verrijk(item) {
-  const response = await anthropic.messages.create({
-    model: "claude-opus-4-8",
-    max_tokens: 4096,
+  return vraagJson({
     system: SYSTEM,
-    output_config: { format: { type: "json_schema", schema: SCHEMA } },
-    messages: [
-      {
-        role: "user",
-        content:
-          `Vandaag is ${new Date().toISOString().slice(0, 10)}. Analyseer dit Parro-bericht:\n\n` +
-          JSON.stringify(
-            {
-              soort: item.soort,
-              datum: item.datum,
-              groep: item.groep,
-              afzender: item.afzender,
-              titel: item.titel,
-              tekst: (item.tekst || "").slice(0, 6000),
-            },
-            null,
-            2,
-          ),
-      },
-    ],
+    schema: SCHEMA,
+    prompt:
+      `Vandaag is ${new Date().toISOString().slice(0, 10)}. Analyseer dit Parro-bericht:\n\n` +
+      JSON.stringify(
+        {
+          soort: item.soort,
+          datum: item.datum,
+          groep: item.groep,
+          afzender: item.afzender,
+          titel: item.titel,
+          tekst: (item.tekst || "").slice(0, 6000),
+        },
+        null,
+        2,
+      ),
   });
-
-  if (response.stop_reason === "refusal") {
-    console.warn(`[enrich] ${item.id}: geweigerd door model, sla over`);
-    return { belangrijk: false, actie_nodig: false, agenda_items: [] };
-  }
-  const text = response.content.find((b) => b.type === "text")?.text ?? "{}";
-  return JSON.parse(text);
 }
 
 const items = await getOnverwerkteItems(25);

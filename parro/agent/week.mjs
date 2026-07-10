@@ -5,11 +5,10 @@
 //   node week.mjs                # de week van vandaag (maandag t/m zondag)
 //   node week.mjs 2026-06-29     # expliciete week_start (een maandag)
 
-import Anthropic from "@anthropic-ai/sdk";
 import "dotenv/config";
+import { vraagTekst } from "./llm.mjs";
 import { getItemsVanWeek, upsertWeekoverzicht } from "./db.mjs";
 
-const anthropic = new Anthropic();
 const KINDEREN = process.env.PARRO_KINDEREN || "Floris, Yune";
 
 function maandagVan(d) {
@@ -36,27 +35,14 @@ const invoer = items.map((i) => ({
   tekst: (i.tekst || "").slice(0, 1500),
 }));
 
-const response = await anthropic.messages.create({
-  model: "claude-opus-4-8",
-  max_tokens: 8000,
+const samenvatting = await vraagTekst({
   system:
     `Je schrijft voor de ouders van ${KINDEREN} een korte weeksamenvatting van de schoolcommunicatie uit Parro. ` +
     `Schrijf in het Nederlands, in markdown. Structuur: een alinea of wat bullets per kind/groep over wat er gebeurd is, ` +
     `daarna een kopje "Niet vergeten" met openstaande acties of aankondigingen voor de komende tijd (alleen als die er zijn). ` +
-    `Wees concreet en beknopt; sla nietszeggende chatberichten over.`,
-  messages: [
-    {
-      role: "user",
-      content: `De week van maandag ${weekStart}. Dit kwam er voorbij in Parro:\n\n${JSON.stringify(invoer, null, 2)}`,
-    },
-  ],
+    `Wees concreet en beknopt; sla nietszeggende chatberichten over. Geef alléén de samenvatting, geen inleiding.`,
+  prompt: `De week van maandag ${weekStart}. Dit kwam er voorbij in Parro:\n\n${JSON.stringify(invoer, null, 2)}`,
 });
 
-if (response.stop_reason === "refusal") {
-  console.error("[week] samenvatting geweigerd door model");
-  process.exit(1);
-}
-
-const samenvatting = response.content.find((b) => b.type === "text")?.text ?? "";
 await upsertWeekoverzicht(weekStart, samenvatting.trim());
 console.log(`[week] samenvatting voor week van ${weekStart} opgeslagen (${items.length} items)`);

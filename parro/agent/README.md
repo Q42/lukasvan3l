@@ -49,7 +49,6 @@ Vereist **Node ≥ 23.4** (voor `node:sqlite`); Node 24 LTS aanbevolen.
 ```
 SUPABASE_URL=https://<project>.supabase.co
 SUPABASE_SERVICE_KEY=<service_role key>        # GEHEIM — nooit in git
-ANTHROPIC_API_KEY=sk-ant-...                   # of laat weg met een `ant auth login`-profiel
 PARRO_KINDEREN=Floris, Yune
 PARRO_CONTEXT=Floris zit in groep <naam>, Yune in groep <naam>.
 # PARRO_DB=/pad/naar/parro.db                  # alleen als autodetectie faalt
@@ -57,6 +56,21 @@ PARRO_CONTEXT=Floris zit in groep <naam>, Yune in groep <naam>.
 
 `SUPABASE_URL`/`SUPABASE_SERVICE_KEY`: zelfde project en key als de
 boodschappen-agent (Project Settings → API → service_role).
+
+### Claude: abonnement of API key
+
+De verrijking (`enrich.mjs`, `week.mjs`) heeft Claude nodig. Twee smaken,
+gekozen in `llm.mjs`:
+
+- **Standaard: je Claude-abonnement**, via de Claude Code CLI headless
+  (`claude -p`). Geen API key, geen extra kosten — het telt mee in je normale
+  abonnementslimieten (een paar schoolberichten per dag is verwaarloosbaar).
+  Vereist dat `claude` geïnstalleerd en ingelogd is op deze machine. Voor
+  cron: zet `CLAUDE_BIN=$(which claude)` in `.env`, want cron heeft een kaal
+  PATH.
+- **Optioneel: de Anthropic API** — zet `ANTHROPIC_API_KEY` in `.env` (of
+  forceer met `PARRO_LLM=api`). Betaald per gebruik, maar met strikte
+  structured output (iets robuuster geparsete JSON).
 
 ## Draaien
 
