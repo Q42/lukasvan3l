@@ -12,10 +12,16 @@ Daarna werkt de app op elk device en vult de agent de prijzen.
 ## 2. Schema + beveiliging installeren
 
 1. Open in het project **SQL Editor** → **New query**.
-2. Plak de volledige inhoud van [`schema.sql`](./schema.sql) en **Run**.
-   Heb je het schema al eerder gedraaid, run dan ook
-   [`migrate-bugfixes.sql`](./migrate-bugfixes.sql) voor latere fixes.
-   Krijg je later `permission denied for table products` in de agent, draai dan
+2. **Vers project:** plak de volledige inhoud van [`schema.sql`](./schema.sql) en
+   **Run**. Dat bevat meteen alle fixes (auth, grants) en het offers-model.
+
+   **Bestaand v1-project** (je draaide eerder een `schema.sql` met een `prices`-
+   tabel): draai in deze volgorde:
+   - [`migrate-bugfixes.sql`](./migrate-bugfixes.sql) — auth-fixes + list_items opschonen
+   - [`migration-offers.sql`](./migration-offers.sql) — naar het offers-model
+     (maakt `offers` + `purchases`, verwijdert `prices`)
+
+   Krijg je later `permission denied for table …` in de agent of app, draai dan
    [`fix-grants.sql`](./fix-grants.sql) in de SQL Editor (eenmalig).
 3. Vul je allowlist. Onderaan `schema.sql` staat een `insert into allowed_emails`
    — haal het commentaar weg, zet er jullie **Google**-e-mailadressen in en run

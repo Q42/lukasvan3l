@@ -49,13 +49,14 @@ data verlaten je machine niet.
    publieke prijzen werken anoniem. Inloggen is alleen nodig voor je
    **persoonlijke bonus** en het **vullen van je mandje**.
 
-2. **Prijzen ophalen en naar Supabase schrijven:**
+2. **Opties ophalen en naar Supabase schrijven:**
    ```bash
    node fetch-prices.mjs
    ```
-   Leest de producten uit de database (die je in de app toevoegt) en schrijft de
-   prijzen terug. De app werkt live bij. Zet dit in een **cron** (bv dagelijks);
-   dat houdt meteen je gratis Supabase-project wakker.
+   Leest de zoektermen uit de database (die je in de app toevoegt) en haalt per
+   winkel **alle matchende producten (SKU's)** op — inclusief verpakkingsgrootte —
+   en schrijft ze als `offers` terug. De app werkt live bij. Zet dit in een
+   **cron** (bv dagelijks); dat houdt meteen je gratis Supabase-project wakker.
 
    > Zonder `SUPABASE_URL`/`SUPABASE_SERVICE_KEY` valt hij terug op bestanden:
    > leest `boodschappen-export.json` en schrijft `output/prijzen.json`. Puur voor
@@ -65,9 +66,9 @@ data verlaten je machine niet.
    ```bash
    node fill-cart-ah.mjs
    ```
-   Zet alle actieve producten die (op stuksprijs) het goedkoopst bij AH zijn in je
-   Albert Heijn-winkelmandje (aantallen uit de lijst in de database). Vereist een
-   ingelogde AH-sessie. Afrekenen doe je zelf in de AH-app / op ah.nl.
+   Zet per lijst-item de **gekozen** AH-optie (of, zonder keuze, de goedkoopste AH-
+   optie op basisprijs) in je Albert Heijn-winkelmandje. Vereist een ingelogde AH-
+   sessie. Afrekenen doe je zelf in de AH-app / op ah.nl.
 
 ## Per winkel
 
@@ -75,7 +76,7 @@ data verlaten je machine niet.
 |---|---|---|---|
 | **Albert Heijn** | publiek + persoonlijke bonus | alleen voor bonus/mandje | Mobiele API `api.ah.nl` (`ah.mjs`). Anoniem token voor publieke prijzen; refresh-token voor bonus + winkelmandje vullen. |
 | **Van Haver tot Gort** | publiek | nee | WooCommerce Store API `/wp-json/wc/store/v1/products`, met scrape-fallback. |
-| **Varuvo** | **persoonlijk** | **ja** | Browser met bewaarde sessie (zie `login.mjs`). Magento B2B, prijzen accountspecifiek. Site heeft een "Human verification"-laag; log daarom met een echte browser in. Sessie verloopt snel (reken op ± dagelijks opnieuw inloggen). Verkoopt vaak per **doos** — vul `inhoud` per product in de app aan voor een eerlijke stuksprijs. |
+| **Varuvo** | **persoonlijk** | **ja** | Browser met bewaarde sessie (zie `login.mjs`). Magento B2B, prijzen accountspecifiek. Site heeft een "Human verification"-laag; log daarom met een echte browser in. Sessie verloopt snel (reken op ± dagelijks opnieuw inloggen). Verkoopt vaak per **doos** — vul zo nodig `hoeveelheid` + `eenheid` per optie in de app aan voor een eerlijke basisprijs. |
 
 ## Tip voor Varuvo: vraag naar een export
 
