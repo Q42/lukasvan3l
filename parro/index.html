@@ -168,6 +168,8 @@
   .lightbox .doos { max-width: 92vw; max-height: 92vh; display: flex; flex-direction: column; gap: 12px; align-items: center; }
   .lightbox img, .lightbox video { max-width: 92vw; max-height: 78vh; border-radius: 12px; box-shadow: 0 8px 40px rgba(0,0,0,.5); }
   .lightbox .balk { display: flex; gap: 10px; align-items: center; }
+  .lightbox .spinner { width: 44px; height: 44px; border-radius: 50%; border: 4px solid rgba(255,255,255,.25); border-top-color: #fff; animation: draai .8s linear infinite; }
+  @keyframes draai { to { transform: rotate(360deg); } }
   .lightbox .nav { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: none; background: rgba(255,255,255,.15); color: #fff; font-size: 32px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background .15s; }
   .lightbox .nav:hover { background: rgba(255,255,255,.3); }
   .lightbox .nav.vorige { left: 16px; }
@@ -394,7 +396,7 @@
 
       <!-- lightbox -->
       <template x-if="lightbox">
-        <div class="lightbox" x-data="{ raakX: null }" @click="lightbox = null"
+        <div class="lightbox" x-data="{ raakX: null, bezig: true }" x-effect="lightbox.id; bezig = true" @click="lightbox = null"
              @keydown.window.arrow-left="stap(-1)"
              @keydown.window.arrow-right="stap(1)"
              @keydown.window.escape="lightbox = null"
@@ -402,11 +404,12 @@
              @touchend="if (raakX !== null) { const d = $event.changedTouches[0].clientX - raakX; if (Math.abs(d) > 50) stap(d < 0 ? 1 : -1); raakX = null; }">
           <button class="nav vorige" @click.stop="stap(-1)" x-show="fotos.findIndex(f => f.id === lightbox.id) > 0" aria-label="Vorige">‹</button>
           <div class="doos" @click.stop>
+            <div class="spinner" x-show="bezig"></div>
             <template x-if="lightbox.isVideo">
-              <video :src="lightbox.url" controls autoplay></video>
+              <video :src="lightbox.url" controls autoplay @loadeddata="bezig = false" :style="bezig ? 'display:none' : ''"></video>
             </template>
             <template x-if="!lightbox.isVideo">
-              <img :src="lightbox.url" :alt="lightbox.parro_items?.titel || 'foto'">
+              <img :src="lightbox.url" :alt="lightbox.parro_items?.titel || 'foto'" @load="bezig = false" @error="bezig = false" :style="bezig ? 'display:none' : ''">
             </template>
             <div class="balk">
               <a class="knop-pill knop-brand" :href="downloadUrl(lightbox)" :download="lightbox.bestandsnaam || 'foto'">Downloaden</a>
