@@ -101,6 +101,10 @@
   .lightbox img, .lightbox video { max-width: 92vw; max-height: 78vh; border-radius: 12px; box-shadow: 0 8px 40px rgba(0,0,0,.5); }
   .lightbox .balk { display: flex; gap: 10px; align-items: center; }
   .lightbox .knop { border-color: transparent; }
+  .lightbox .nav { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: none; background: rgba(255,255,255,.15); color: #fff; font-size: 32px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background .15s; }
+  .lightbox .nav:hover { background: rgba(255,255,255,.3); }
+  .lightbox .nav.vorige { left: 16px; }
+  .lightbox .nav.volgende { right: 16px; }
 
   .leeg { color: var(--mid); font-size: 14px; padding: 8px 0; }
   .midden { text-align: center; padding: 40px 0; }
@@ -265,12 +269,12 @@
               <div class="dag-kop" x-text="groep.datum ? dagLabel(groep.datum) : 'Zonder datum'"></div>
               <div class="foto-grid">
                 <template x-for="f in groep.items" :key="f.id">
-                  <button class="foto-tegel" @click="lightbox = f" :title="f.parro_items?.titel || f.bestandsnaam">
+                  <button class="foto-tegel" x-data="{ zicht: false }" x-intersect:enter.once.margin.300px="zicht = true" @click="lightbox = f" :title="f.parro_items?.titel || f.bestandsnaam">
                     <template x-if="f.isVideo">
-                      <video :src="f.url" muted preload="metadata"></video>
+                      <video :src="zicht ? f.url : null" muted preload="metadata"></video>
                     </template>
                     <template x-if="!f.isVideo">
-                      <img :src="f.url" loading="lazy" :alt="f.parro_items?.titel || 'foto'">
+                      <img :src="zicht ? f.url : null" loading="lazy" :alt="f.parro_items?.titel || 'foto'">
                     </template>
                     <span class="speel" x-show="f.isVideo">▶</span>
                   </button>
@@ -284,7 +288,13 @@
 
       <!-- lightbox -->
       <template x-if="lightbox">
-        <div class="lightbox" @click="lightbox = null">
+        <div class="lightbox" x-data="{ raakX: null }" @click="lightbox = null"
+             @keydown.window.arrow-left="stap(-1)"
+             @keydown.window.arrow-right="stap(1)"
+             @keydown.window.escape="lightbox = null"
+             @touchstart="raakX = $event.changedTouches[0].clientX"
+             @touchend="if (raakX !== null) { const d = $event.changedTouches[0].clientX - raakX; if (Math.abs(d) > 50) stap(d < 0 ? 1 : -1); raakX = null; }">
+          <button class="nav vorige" @click.stop="stap(-1)" x-show="fotos.findIndex(f => f.id === lightbox.id) > 0" aria-label="Vorige">‹</button>
           <div class="doos" @click.stop>
             <template x-if="lightbox.isVideo">
               <video :src="lightbox.url" controls autoplay></video>
@@ -297,6 +307,7 @@
               <button class="knop" @click="lightbox = null">Sluiten</button>
             </div>
           </div>
+          <button class="nav volgende" @click.stop="stap(1)" x-show="fotos.findIndex(f => f.id === lightbox.id) < fotos.length - 1" aria-label="Volgende">›</button>
         </div>
       </template>
     </div>
@@ -501,6 +512,14 @@ document.addEventListener("alpine:init", () => {
       // '&download=<naam>' laat Supabase Storage het bestand als download serveren.
       return f.url + "&download=" + encodeURIComponent(f.bestandsnaam || "foto");
     },
+    // Navigeren in de lightbox: fotos staat in dezelfde volgorde als de galerij.
+    stap(richting) {
+      if (!this.lightbox) return;
+      const i = this.fotos.findIndex((f) => f.id === this.lightbox.id);
+      if (i === -1) return;
+      const j = i + richting;
+      if (j >= 0 && j < this.fotos.length) this.lightbox = this.fotos[j];
+    },
 
     /* ── weergave ── */
     md: mdNaarHtml,
@@ -527,6 +546,7 @@ document.addEventListener("alpine:init", () => {
 });
 </script>
 <script src="config.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.14.1/dist/cdn.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 </body>
 </html>
