@@ -1,0 +1,185 @@
+/* Gedeelde styling voor de Latijns-Amerika reisplanner */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --dark: #1c1c1c;
+  --mid: #555;
+  --light: #f4f4f0;
+  --white: #fff;
+  --accent: #c2410c;      /* warm oranje-rood, Andes-aarde */
+  --accent-soft: #ffedd5;
+  --green: #2d7a3a;
+  --green-soft: #dcf2e0;
+  --blue: #0d4f7c;
+  --blue-soft: #dbeafe;
+  --yellow-soft: #fef3c7;
+  --red-soft: #fee2e2;
+  --radius: 18px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.10);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--light);
+  color: var(--dark);
+  min-height: 100vh;
+  -webkit-text-size-adjust: 100%;
+}
+
+.wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 28px 20px 64px;
+}
+
+/* ── NAV ── */
+nav.topnav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 34px;
+  font-size: 14px;
+}
+nav.topnav .home {
+  margin-right: auto;
+  text-decoration: none;
+  color: var(--mid);
+  font-weight: 600;
+  font-size: 13px;
+}
+nav.topnav .home:hover { color: var(--dark); }
+nav.topnav a.navlink {
+  text-decoration: none;
+  color: var(--mid);
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 20px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+nav.topnav a.navlink:hover { background: #e8e8e2; color: var(--dark); }
+nav.topnav a.navlink.active { background: var(--dark); color: var(--white); }
+
+/* ── KOPPEN ── */
+header.page { margin-bottom: 32px; }
+header.page .eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+header.page h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(34px, 7vw, 52px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+}
+header.page p.lead {
+  font-size: 17px;
+  color: var(--mid);
+  max-width: 640px;
+  line-height: 1.55;
+}
+
+h2.section {
+  font-family: 'Fraunces', serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 44px 0 6px;
+}
+p.section-sub {
+  color: var(--mid);
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 18px;
+  max-width: 640px;
+}
+
+/* ── KAARTEN / PANELEN ── */
+.card {
+  background: var(--white);
+  border: 1px solid #eee;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.badge.droog  { background: var(--green-soft); color: var(--green); }
+.badge.nat    { background: var(--blue-soft);  color: var(--blue); }
+.badge.mix    { background: var(--yellow-soft); color: #92400e; }
+.badge.mijden { background: var(--red-soft);   color: #b91c1c; }
+.badge.vlucht { background: var(--blue-soft);  color: var(--blue); }
+.badge.bus    { background: var(--green-soft); color: var(--green); }
+.badge.auto   { background: var(--accent-soft); color: var(--accent); }
+
+/* ── CALLOUT ── */
+.callout {
+  background: var(--accent-soft);
+  border: 1px solid #fdba74;
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 18px 0;
+}
+.callout strong { color: var(--accent); }
+
+/* ── TABELLEN ── */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table.data {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  font-size: 14px;
+}
+table.data th, table.data td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0ec;
+  vertical-align: top;
+}
+table.data th {
+  background: var(--dark);
+  color: var(--white);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+table.data tr:last-child td { border-bottom: none; }
+
+footer.page {
+  margin-top: 56px;
+  font-size: 13px;
+  color: #aaa;
+}
+footer.page a { color: var(--mid); }
+
+@media (max-width: 560px) {
+  .wrap { padding: 20px 14px 48px; }
+  nav.topnav { font-size: 13px; }
+  nav.topnav a.navlink { padding: 6px 10px; }
+}

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latijns-Amerika 2026 · Reisplanner</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ── FASES ── */
+  .fases { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 20px; }
+  .fase { position: relative; padding-top: 26px; }
+  .fase .nr {
+    position: absolute; top: -14px; left: 20px;
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-weight: 900; font-size: 20px;
+    color: var(--white); box-shadow: var(--shadow);
+  }
+  .fase:nth-child(1) .nr { background: var(--accent); }
+  .fase:nth-child(2) .nr { background: var(--green); }
+  .fase:nth-child(3) .nr { background: var(--blue); }
+  .fase h3 { font-family: 'Fraunces', serif; font-size: 20px; margin-bottom: 6px; }
+  .fase p { font-size: 14px; color: var(--mid); line-height: 1.55; }
+  .fase .waar { margin-top: 10px; font-size: 12px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── KAART ── */
+  #map {
+    height: 520px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid #eee;
+    z-index: 0; /* onder de sticky nav blijven */
+  }
+  @media (max-width: 560px) { #map { height: 420px; } }
+  .leaflet-popup-content { font-family: 'Inter', sans-serif; font-size: 13.5px; line-height: 1.5; margin: 12px 16px; }
+  .leaflet-popup-content b { font-family: 'Fraunces', serif; font-size: 15px; display: block; margin-bottom: 3px; }
+  .leaflet-popup-content .land { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); display: block; margin-bottom: 6px; }
+
+  /* ── SEIZOENEN ── */
+  .seizoen-kaart h3 { font-family: 'Fraunces', serif; font-size: 18px; margin-bottom: 2px; }
+  .seizoen-kaart .sub { font-size: 12px; color: var(--mid); margin-bottom: 10px; }
+  .seizoen-kaart p { font-size: 13.5px; color: var(--mid); line-height: 1.5; margin-top: 10px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="topnav">
+      <a class="home" href="../">← Lukas' plekkie</a>
+      <a class="navlink active" href="./">Kaart</a>
+      <a class="navlink" href="planning.html">Planning</a>
+      <a class="navlink" href="reizen.html">Tussen landen</a>
+      <a class="navlink" href="verhuur.html">4x4 huren</a>
+    </nav>
+
+    <header class="page">
+      <div class="eyebrow">Half juni – half september · 3 maanden</div>
+      <h1>Latijns-Amerika 2026</h1>
+      <p class="lead">
+        Drie maanden Spaans leren en ervaring opdoen in Guatemala en
+        Spaanstalig Zuid-Amerika — Colombia, Ecuador, Peru, Bolivia, Chili en
+        Argentinië. Precies in het droge seizoen van de Andes, de beste tijd
+        van het jaar. En terug naar Guatemala, waar Hester eerder drie maanden
+        woonde.
+      </p>
+    </header>
+
+    <h2 class="section">De drie fases</h2>
+    <p class="section-sub">De trip is opgebouwd in drie blokken die in elkaar overlopen.</p>
+    <div class="fases">
+      <div class="fase card">
+        <div class="nr">1</div>
+        <h3>Intensieve Spaanse les</h3>
+        <p>Een paar weken elke dag naar taalschool: één-op-één les, wonen bij
+           een gastgezin, ondergedompeld in het Spaans. De taalscholen van
+           Antigua en Lake Atitlán horen bij de beste (en goedkoopste) ter wereld.</p>
+        <div class="waar">Guatemala · evt. Quito of Cusco</div>
+      </div>
+      <div class="fase card">
+        <div class="nr">2</div>
+        <h3>Workaway &amp; gemeenschapsleven</h3>
+        <p>Weken meedraaien in een gemeenschap of bij een gastgezin via
+           Workaway: meewerken op een finca, in een hostel of een
+           gemeenschapsproject — Spaans in de praktijk brengen.</p>
+        <div class="waar">Ecuador · Peru · Colombia</div>
+      </div>
+      <div class="fase card">
+        <div class="nr">3</div>
+        <h3>Vakantie &amp; roadtrip</h3>
+        <p>Afsluiten met vrije weken: hoogtepunten bezoeken en per regio een
+           4x4 met daktent huren voor een roadtrip — Sacred Valley, de Salar
+           de Uyuni, de Atacama-woestijn.</p>
+        <div class="waar">Peru · Bolivia · Chili · Argentinië</div>
+      </div>
+    </div>
+
+    <h2 class="section">De kaart</h2>
+    <p class="section-sub">Alle highlights op een rij — klik op een marker voor een korte notitie.
+       Let op de afstand tussen Guatemala en Zuid-Amerika: daar zit geen weg tussen
+       (<a href="reizen.html">Darién Gap → vliegen</a>).</p>
+    <div id="map"></div>
+
+    <h2 class="section">Seizoen per regio (juni – september)</h2>
+    <p class="section-sub">Waar is het droog seizoen en waar juist niet? In één oogopslag wat aan te
+       raden is in onze reismaanden.</p>
+    <div class="grid">
+      <div class="card seizoen-kaart">
+        <h3>Guatemala</h3>
+        <div class="sub">Antigua · Atitlán · Tikal</div>
+        <span class="badge nat">Regenseizoen · goed te doen</span>
+        <p>Regenseizoen, maar meestal alleen middag- en avondbuien: ochtenden
+           zijn vaak zonnig. Prima voor taalles en stadjes; groen en rustig
+           (weinig toeristen).</p>
+      </div>
+      <div class="card seizoen-kaart">
+        <h3>Colombia</h3>
+        <div class="sub">Cartagena · Ciudad Perdida</div>
+        <span class="badge mix">Wisselvallig · prima</span>
+        <p>De Caribische kust is warm met af en toe een bui; in de Andes
+           (Bogotá, Medellín) is juli–augustus juist relatief droog. Goed
+           reisbaar.</p>
+      </div>
+      <div class="card seizoen-kaart">
+        <h3>Ecuador &amp; Galápagos</h3>
+        <div class="sub">Quito · Galápagos</div>
+        <span class="badge droog">Droog seizoen · beste tijd</span>
+        <p>Juni–september is het droge seizoen in de Ecuadoraanse Andes. Op de
+           Galápagos is het garúa-seizoen: koeler, maar top voor snorkelen en
+           dierenleven.</p>
+      </div>
+      <div class="card seizoen-kaart">
+        <h3>Peru (Andes)</h3>
+        <div class="sub">Cusco · Machu Picchu</div>
+        <span class="badge droog">Droog seizoen · beste tijd</span>
+        <p>Hét hoogseizoen: strakblauwe luchten, ideaal voor treks en Machu
+           Picchu. Wel druk — tickets voor Machu Picchu ruim vooraf boeken.
+           Koude nachten op hoogte.</p>
+      </div>
+      <div class="card seizoen-kaart">
+        <h3>Bolivia (Altiplano)</h3>
+        <div class="sub">Salar de Uyuni · La Paz</div>
+        <span class="badge droog">Droog seizoen · beste tijd</span>
+        <p>Droog en zonnig overdag, maar nachten op de Salar kunnen −10&nbsp;°C
+           worden. De zoutvlakte is dan hard en goed berijdbaar (geen
+           spiegeleffect).</p>
+      </div>
+      <div class="card seizoen-kaart">
+        <h3>Noord-Chili</h3>
+        <div class="sub">San Pedro de Atacama</div>
+        <span class="badge droog">Altijd droog · top</span>
+        <p>De Atacama is de droogste woestijn ter wereld — jaarrond goed.
+           Heldere winterluchten maken juni–september juist perfect voor
+           sterrenkijken.</p>
+      </div>
+      <div class="card seizoen-kaart">
+        <h3>Centraal-Chili &amp; Argentinië</h3>
+        <div class="sub">Santiago · Mendoza · Buenos Aires</div>
+        <span class="badge mix">Milde winter · prima</span>
+        <p>Zuidelijke winter: frisse maar vaak zonnige dagen, prima voor
+           steden en wijnstreken. Skiën kan zelfs, vlak bij Santiago en
+           Mendoza.</p>
+      </div>
+      <div class="card seizoen-kaart">
+        <h3>Patagonië</h3>
+        <div class="sub">Zuid-Chili · Zuid-Argentinië</div>
+        <span class="badge mijden">Winter · vermijden</span>
+        <p>Diep in de winter: veel trails, wegen en accommodaties dicht,
+           korte dagen, sneeuw en storm. Bewaren voor een andere reis
+           (okt–apr).</p>
+      </div>
+    </div>
+
+    <footer class="page">
+      Onderdeel van <a href="../">Lukas' plekkie</a> · kaart via
+      <a href="https://leafletjs.com/">Leaflet</a> &amp; OpenStreetMap
+    </footer>
+  </div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const highlights = [
+    { naam: "Antigua Guatemala", land: "Guatemala", lat: 14.5586, lng: -90.7295,
+      note: "Koloniaal stadje tussen drie vulkanen. Dé plek voor intensieve Spaanse les — en Hesters oude thuisbasis." },
+    { naam: "Lake Atitlán", land: "Guatemala", lat: 14.6900, lng: -91.2025,
+      note: "Kratermeer omringd door vulkanen en Maya-dorpjes (San Marcos, San Juan). Ook goed voor taalles en workaways." },
+    { naam: "Tikal", land: "Guatemala", lat: 17.2220, lng: -89.6237,
+      note: "Maya-tempels die boven het jungledak uitsteken. Bij zonsopkomst met brulapen op de achtergrond." },
+    { naam: "Cartagena", land: "Colombia", lat: 10.3910, lng: -75.4794,
+      note: "Caribische havenstad met kleurrijk ommuurd centrum. Warm en vochtig — cocktail op de stadsmuur bij zonsondergang." },
+    { naam: "Ciudad Perdida", land: "Colombia", lat: 11.0381, lng: -73.9256,
+      note: "'De verloren stad': 4-daagse jungletrek in de Sierra Nevada naar terrassen ouder dan Machu Picchu." },
+    { naam: "Quito", land: "Ecuador", lat: -0.1807, lng: -78.4678,
+      note: "Hoofdstad op 2.850 m met prachtig koloniaal centrum. Goede taalscholen; op de evenaar." },
+    { naam: "Galápagos", land: "Ecuador", lat: -0.7438, lng: -90.3110,
+      note: "Zeeleguanen, reuzenschildpadden en zeeleeuwen die nergens bang voor zijn. Vlucht vanaf Quito/Guayaquil." },
+    { naam: "Cusco", land: "Peru", lat: -13.5320, lng: -71.9675,
+      note: "Inca-hoofdstad op 3.400 m, uitvalsbasis voor de Sacred Valley. Ook hier: taalscholen en veel workaways." },
+    { naam: "Machu Picchu", land: "Peru", lat: -13.1631, lng: -72.5450,
+      note: "De beroemdste Inca-stad, per trein of trek (Salkantay/Inca Trail). In juni–aug droog én druk: ruim vooraf boeken." },
+    { naam: "Salar de Uyuni", land: "Bolivia", lat: -20.1338, lng: -67.4891,
+      note: "Grootste zoutvlakte ter wereld. In het droge seizoen een eindeloze witte vlakte — klassieke 3-daagse 4x4-tocht." },
+    { naam: "San Pedro de Atacama", land: "Chili", lat: -22.9087, lng: -68.2003,
+      note: "Woestijndorp tussen geisers, zoutmeren en maanlandschappen. 's Werelds beste sterrenhemel." },
+    { naam: "Santiago", land: "Chili", lat: -33.4489, lng: -70.6693,
+      note: "Metropool aan de voet van de Andes. Goede uitvalsbasis: wijn, bergen en (in onze maanden) zelfs ski." },
+    { naam: "Buenos Aires", land: "Argentinië", lat: -34.6037, lng: -58.3816,
+      note: "Tango, steaks en Europese grandeur. Mogelijk eindpunt van de trip — met directe vlucht naar huis." },
+  ];
+
+  const map = L.map('map', { scrollWheelZoom: false });
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  const bounds = [];
+  highlights.forEach(h => {
+    L.marker([h.lat, h.lng]).addTo(map)
+      .bindPopup(`<span class="land">${h.land}</span><b>${h.naam}</b>${h.note}`);
+    bounds.push([h.lat, h.lng]);
+  });
+  map.fitBounds(bounds, { padding: [30, 30] });
+</script>
+</body>
+</html>
