@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planning · Latijns-Amerika 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .toolbar {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin: 18px 0 22px;
+  }
+  .btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    padding: 9px 16px; border-radius: 20px;
+    border: 1px solid #ddd; background: var(--white);
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .btn:hover { background: #f0f0ea; }
+  .btn.primary { background: var(--dark); color: var(--white); border-color: var(--dark); }
+  .btn.primary:hover { background: #333; }
+  .save-status { font-size: 12px; color: var(--mid); margin-left: auto; }
+
+  .weekrow {
+    display: grid;
+    grid-template-columns: 118px 1fr 1fr 1fr 2fr;
+    gap: 10px;
+    align-items: center;
+    background: var(--white);
+    border: 1px solid #eee;
+    border-left: 5px solid #ddd;
+    border-radius: 14px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  .weekrow.act-taalles  { border-left-color: var(--accent); }
+  .weekrow.act-workaway { border-left-color: var(--green); }
+  .weekrow.act-vakantie { border-left-color: var(--blue); }
+  .weekrow.act-reizen   { border-left-color: #7c3aed; }
+
+  .weekrow .wk { line-height: 1.3; }
+  .weekrow .wk b { font-family: 'Fraunces', serif; font-size: 16px; display: block; }
+  .weekrow .wk span { font-size: 11.5px; color: var(--mid); }
+
+  .weekrow select, .weekrow input[type="text"] {
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    color: var(--dark);
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #e2e2dc;
+    border-radius: 9px;
+    background: #fafaf7;
+  }
+  .weekrow select:focus, .weekrow input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: -1px;
+    background: var(--white);
+  }
+  .weekrow select:invalid, .weekrow select.leeg { color: #999; }
+
+  .kop {
+    display: grid;
+    grid-template-columns: 118px 1fr 1fr 1fr 2fr;
+    gap: 10px;
+    padding: 0 19px 6px;
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: var(--mid);
+  }
+
+  .legenda { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 18px; font-size: 12.5px; color: var(--mid); }
+  .legenda span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; }
+  .legenda .l-taalles::before  { background: var(--accent); }
+  .legenda .l-workaway::before { background: var(--green); }
+  .legenda .l-vakantie::before { background: var(--blue); }
+  .legenda .l-reizen::before   { background: #7c3aed; }
+
+  @media (max-width: 720px) {
+    .kop { display: none; }
+    .weekrow {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 8px;
+    }
+    .weekrow .wk { grid-column: 1 / -1; }
+    .weekrow input[type="text"] { grid-column: 1 / -1; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="topnav">
+      <a class="home" href="../">← Lukas' plekkie</a>
+      <a class="navlink" href="./">Kaart</a>
+      <a class="navlink active" href="planning.html">Planning</a>
+      <a class="navlink" href="reizen.html">Tussen landen</a>
+      <a class="navlink" href="verhuur.html">4x4 huren</a>
+    </nav>
+
+    <header class="page">
+      <div class="eyebrow">Weekschema · 15 juni – 13 september</div>
+      <h1>Planning</h1>
+      <p class="lead">
+        Dertien weken om in te vullen: per week het land, het type activiteit
+        (taalles, workaway of vakantie) en hoe we naar het volgende land
+        reizen. Alles wordt automatisch in je browser bewaard
+        (localStorage) — geen account, geen server.
+      </p>
+    </header>
+
+    <div class="toolbar">
+      <button class="btn primary" id="voorbeeld">Voorbeeldplanning invullen</button>
+      <button class="btn" id="wissen">Alles wissen</button>
+      <span class="save-status" id="status">Wijzigingen worden automatisch bewaard</span>
+    </div>
+
+    <div class="kop">
+      <div>Week</div><div>Land</div><div>Activiteit</div><div>Vervoer erheen</div><div>Notitie</div>
+    </div>
+    <div id="schema"></div>
+
+    <div class="legenda">
+      <span class="l-taalles">Taalles (fase 1)</span>
+      <span class="l-workaway">Workaway (fase 2)</span>
+      <span class="l-vakantie">Vakantie (fase 3)</span>
+      <span class="l-reizen">Reisdagen</span>
+    </div>
+
+    <footer class="page">
+      Onderdeel van <a href="../">Lukas' plekkie</a> · opslag alleen in deze browser
+    </footer>
+  </div>
+
+<script>
+  const KEY = 'latam-planning-v1';
+  const AANTAL_WEKEN = 13;
+  const START = new Date(2026, 5, 15); // maandag 15 juni 2026
+
+  const LANDEN = ['Guatemala', 'Colombia', 'Ecuador', 'Peru', 'Bolivia', 'Chili', 'Argentinië'];
+  const ACTIVITEITEN = ['Taalles', 'Workaway', 'Vakantie', 'Reizen'];
+  const VERVOER = ['Vlucht', 'Bus', 'Auto (4x4)', 'Boot'];
+
+  const VOORBEELD = [
+    { land: 'Guatemala', act: 'Taalles',  vervoer: 'Vlucht', note: 'Vlucht AMS → Guatemala City · start taalschool Antigua' },
+    { land: 'Guatemala', act: 'Taalles',  vervoer: '',       note: 'Antigua: les + wonen bij gastgezin' },
+    { land: 'Guatemala', act: 'Taalles',  vervoer: '',       note: 'Laatste lesweek · weekend Lake Atitlán' },
+    { land: 'Guatemala', act: 'Vakantie', vervoer: 'Bus',    note: 'Lake Atitlán · shuttle/vlucht naar Tikal' },
+    { land: 'Colombia',  act: 'Vakantie', vervoer: 'Vlucht', note: 'Vlucht Guatemala → Cartagena (via Bogotá)' },
+    { land: 'Colombia',  act: 'Vakantie', vervoer: 'Bus',    note: 'Santa Marta · Ciudad Perdida-trek (4 dagen)' },
+    { land: 'Ecuador',   act: 'Workaway', vervoer: 'Vlucht', note: 'Vlucht → Quito · start workaway' },
+    { land: 'Ecuador',   act: 'Workaway', vervoer: '',       note: 'Workaway: finca / gemeenschapsproject' },
+    { land: 'Ecuador',   act: 'Workaway', vervoer: '',       note: 'Workaway afronden · evt. Galápagos-uitstap' },
+    { land: 'Peru',      act: 'Vakantie', vervoer: 'Vlucht', note: 'Vlucht → Cusco · 4x4 ophalen · Sacred Valley + Machu Picchu' },
+    { land: 'Bolivia',   act: 'Vakantie', vervoer: 'Bus',    note: 'Bus via Puno/Copacabana → La Paz · door naar Uyuni' },
+    { land: 'Chili',     act: 'Vakantie', vervoer: 'Auto (4x4)', note: 'Salar de Uyuni-tocht, eindigt in San Pedro de Atacama' },
+    { land: 'Chili',     act: 'Vakantie', vervoer: 'Vlucht', note: 'Vlucht → Santiago · terugvlucht naar huis' },
+  ];
+
+  const fmt = d => d.toLocaleDateString('nl-NL', { day: 'numeric', month: 'short' });
+
+  function laden() {
+    try { return JSON.parse(localStorage.getItem(KEY)) || []; }
+    catch { return []; }
+  }
+  function bewaren(data) {
+    localStorage.setItem(KEY, JSON.stringify(data));
+    const s = document.getElementById('status');
+    s.textContent = 'Bewaard ✓';
+    clearTimeout(bewaren._t);
+    bewaren._t = setTimeout(() => { s.textContent = 'Wijzigingen worden automatisch bewaard'; }, 1500);
+  }
+
+  function select(opties, waarde, placeholder) {
+    const sel = document.createElement('select');
+    sel.innerHTML = `<option value="">${placeholder}</option>` +
+      opties.map(o => `<option${o === waarde ? ' selected' : ''}>${o}</option>`).join('');
+    sel.classList.toggle('leeg', !waarde);
+    sel.addEventListener('change', () => sel.classList.toggle('leeg', !sel.value));
+    return sel;
+  }
+
+  const schema = document.getElementById('schema');
+  let data = laden();
+
+  function render() {
+    schema.innerHTML = '';
+    for (let i = 0; i < AANTAL_WEKEN; i++) {
+      const w = data[i] || {};
+      const ma = new Date(START); ma.setDate(START.getDate() + i * 7);
+      const zo = new Date(ma);    zo.setDate(ma.getDate() + 6);
+
+      const row = document.createElement('div');
+      row.className = 'weekrow' + (w.act ? ' act-' + w.act.toLowerCase() : '');
+
+      const wk = document.createElement('div');
+      wk.className = 'wk';
+      wk.innerHTML = `<b>Week ${i + 1}</b><span>${fmt(ma)} – ${fmt(zo)}</span>`;
+
+      const land = select(LANDEN, w.land, '— land —');
+      const act = select(ACTIVITEITEN, w.act, '— activiteit —');
+      const verv = select(VERVOER, w.vervoer, '— blijven —');
+      const note = document.createElement('input');
+      note.type = 'text';
+      note.placeholder = 'Notitie (plaats, school, workaway…)';
+      note.value = w.note || '';
+
+      function update() {
+        data[i] = { land: land.value, act: act.value, vervoer: verv.value, note: note.value };
+        row.className = 'weekrow' + (act.value ? ' act-' + act.value.toLowerCase() : '');
+        bewaren(data);
+      }
+      [land, act, verv].forEach(el => el.addEventListener('change', update));
+      note.addEventListener('input', update);
+
+      row.append(wk, land, act, verv, note);
+      schema.appendChild(row);
+    }
+  }
+
+  document.getElementById('voorbeeld').addEventListener('click', () => {
+    const ingevuld = data.some(w => w && (w.land || w.act || w.note));
+    if (ingevuld && !confirm('Er staat al een planning. Overschrijven met de voorbeeldplanning?')) return;
+    data = VOORBEELD.map(w => ({ land: w.land, act: w.act, vervoer: w.vervoer, note: w.note }));
+    bewaren(data);
+    render();
+  });
+
+  document.getElementById('wissen').addEventListener('click', () => {
+    if (!confirm('Weet je zeker dat je de hele planning wilt wissen?')) return;
+    data = [];
+    localStorage.removeItem(KEY);
+    render();
+  });
+
+  render();
+</script>
+</body>
+</html>
