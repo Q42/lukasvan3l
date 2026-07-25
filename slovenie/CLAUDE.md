@@ -25,6 +25,12 @@ slackline-friendly camps, water play for the kids) and keep the kids' names
 - `index.html` — the entire page. Single, self-contained HTML file with inline
   CSS and JavaScript. No build step, no dependencies to install; just open it
   in a browser.
+- `paklijst.html` — the packing checklist page.
+- `plan.md` — a plain-markdown distillation of the whole trip plan (route,
+  camps, bookings, day trips, to-dos, packing highlights). It's published via
+  GitHub Pages at <https://apps.3l.nl/slovenie/plan.md> and is used as context
+  for AI assistants (Claude/Cowork). **Keep it in sync**: when itinerary or
+  booking details change in `index.html`, update `plan.md` too.
 
 ## How it works
 
