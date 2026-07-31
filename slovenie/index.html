@@ -122,6 +122,7 @@
     flex-shrink: 0;
   }
   .dot-nl { background: #888; }
+  .dot-de { background: #c0a062; }
   .dot-1 { background: var(--soca); }
   .dot-2 { background: #e8832a; }
   .dot-3 { background: var(--forest); }
@@ -460,6 +461,8 @@
   }
   .travel-row .travel-icon { font-size: 28px; }
   .travel-row strong { color: var(--dark); font-size: 14px; }
+  .travel-row.travel-stay { align-items: flex-start; }
+  .travel-row.travel-stay .booking-box { background: #fff; }
 
   /* ── FOOTER ── */
   footer {
@@ -600,8 +603,8 @@
         <div class="lbl">Dagtrips</div>
       </div>
       <div class="hero-stat">
-        <div class="num">~1400</div>
-        <div class="lbl">km rijden</div>
+        <div class="num">~2800</div>
+        <div class="lbl">km heen &amp; terug</div>
       </div>
     </div>
     <a href="paklijst.html" style="display:inline-flex;align-items:center;gap:8px;margin-top:28px;padding:10px 20px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:24px;color:white;text-decoration:none;font-size:14px;font-weight:600;backdrop-filter:blur(4px);transition:background 0.18s;" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">🧳 Paklijst</a>
@@ -616,14 +619,21 @@
       De Glind
     </div>
     <div class="route-arrow">
-      <span class="route-drive">1–2 aug · ~14u</span>
+      <span class="route-drive">1 aug · ~7,5u</span>
+    </div>
+    <div class="route-stop">
+      <span class="dot dot-de"></span>
+      Meinheim (D)
+    </div>
+    <div class="route-arrow">
+      <span class="route-drive">2 aug · ~6,5u</span>
     </div>
     <div class="route-stop">
       <span class="dot dot-1"></span>
-      Soča-vallei
+      Baška grapa
     </div>
     <div class="route-arrow">
-      <span class="route-drive">7 aug · ~3u</span>
+      <span class="route-drive">7 aug · ~2,5u</span>
     </div>
     <div class="route-stop">
       <span class="dot dot-2"></span>
@@ -637,7 +647,7 @@
       Savinja-vallei
     </div>
     <div class="route-arrow">
-      <span class="route-drive">17–18 aug · ~13u</span>
+      <span class="route-drive">17–18 aug · ~12,5u</span>
     </div>
     <div class="route-stop">
       <span class="dot dot-nl"></span>
@@ -651,7 +661,6 @@
   <div class="style-inner">
     <span class="style-item"><span class="ico">👨‍👩‍👧‍👦</span> Lukas, Hester, Floris (9) &amp; Yune (7)</span>
     <span class="style-item"><span class="ico">🚲</span> 2 mountainbikes — gravel, geen steile routes</span>
-    <span class="style-item"><span class="ico">🤸</span> Slackline mee</span>
     <span class="style-item"><span class="ico">💦</span> Kids dol op spelen bij het water</span>
   </div>
 </div>
@@ -666,6 +675,31 @@
     <div class="lg"><span class="sw" style="background:#2d5c1e"></span> Basiskamp 3 &amp; dagtrips — Savinja</div>
   </div>
   <div class="map-hint">Grote stippen = campings · kleine stippen = dagtrips · klik voor details. (Coördinaten bij benadering.)</div>
+</div>
+
+<!-- HEENREIS TUSSENSTOP -->
+<div class="section" style="padding-bottom: 48px;">
+  <div class="travel-row travel-stay">
+    <span class="travel-icon">🚗</span>
+    <div style="flex:1">
+      <strong>Heenreis — 1 &amp; 2 aug · De Glind naar Slovenië (±14u, in twee dagen)</strong><br>
+      Dag 1 (±7,5u incl. pauzes) naar Beieren, dag 2 (±6,5u) door naar de Baška grapa. Vertrek 1 aug rond 05:00, dan ben je rond 14:00 op de boerderij en kunnen de kinderen 's middags nog naar een van de twee meren (15 min rijden): <b>Brombachsee</b> (kano's huren, zandstrand) of <b>Altmühlsee</b> (rustiger, vogelreservaat — en in het natuurpark mag je zelf fossielen uit de steen beitelen en houden 🦕).
+      <div class="booking-box">
+        <span class="booking-status bk-ok">✅ Geboekt</span>
+        <div class="bk-row"><span class="bk-ico">🏕️</span><span><b>Berghof Oberweiler</b> — familie Lehner &amp; Wolf · struisvogelboerderij met bio-winkel</span></div>
+        <div class="bk-row"><span class="bk-ico">📅</span><span><b>1 – 2 aug 2026</b> · 1 nacht (30 juni geboekt via Campspace)</span></div>
+        <div class="bk-row"><span class="bk-ico">📍</span><span>Oberweiler 5, 91802 Meinheim, Duitsland</span></div>
+        <div class="bk-row"><span class="bk-ico">🚿</span><span>Warm water en toilet aanwezig</span></div>
+        <div class="bk-row"><span class="bk-ico">✉️</span><span>info@berghof-oberweiler.de · tel +49 9146 940 560</span></div>
+        <div class="bk-row"><span class="bk-ico">🛣️</span><span>Vignetten ✅ geregeld — let op: <b>tweede vignet gaat in op 10 aug</b> (10 dagen geldig)</span></div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-nav" href="https://www.google.com/maps/dir/?api=1&destination=Oberweiler+5,+91802+Meinheim,+Germany" target="_blank" rel="noopener">🧭 Navigatie · ±7,5u</a>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Berghof+Oberweiler,+Meinheim" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-call" href="tel:+499146940560">📞 Bel boerderij</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══════════════════════════════════ KAMP 1 ═══ -->
@@ -686,8 +720,8 @@
   <div class="camp-card">
     <div class="camp-img-placeholder" style="background: linear-gradient(135deg, #c8e8f8, #a0d0f0);">🏕️<img class="camp-img" data-wiki="Bovec|Soča" data-search="Soča valley Slovenia mountains" alt="Soča-vallei" onerror="this.remove()"></div>
     <div class="camp-info">
-      <h3>Camp Sorli Koritnica</h3>
-      <p>Klein kampeertje langs de rivier Koritnica, omringd door bergen. Heel veel 5-sterren reviews, een goede bar en lekker rustig. Perfecte uitvalsbasis voor de Soča-vallei.</p>
+      <h3>Camp Šorli Koritnica</h3>
+      <p>Klein kampeertje aan de beek de Koritnica in de <b>Baška grapa</b>, 12 km van Tolmin (de Bača ligt 500 m verderop). Omringd door bergen, heel veel 5-sterren reviews, een goede bar en lekker rustig. Uitvalsbasis voor de <b>lagere Soča-vallei</b>: Tolmin op 20 min, Kobarid op een half uur. Bovec en de bovenloop van de Soča zijn een stuk verder (±1,5u over de bergweg).</p>
       <div class="camp-details">
         <div class="camp-detail"><span class="icon">⭐</span> 4.7 (444 reviews)</div>
         <div class="camp-detail"><span class="icon">💶</span> ~€15 p.p.</div>
@@ -698,12 +732,14 @@
       <div class="booking-box">
         <span class="booking-status bk-todo">⏳ Nog te boeken</span>
         <div class="bk-row"><span class="bk-ico">📅</span><span><b>2 – 7 aug 2026</b> · 5 nachten</span></div>
-        <div class="bk-row"><span class="bk-ico">📍</span><span>Kamp Šorli, Koritnica, Bovec</span></div>
-        <div class="bk-row"><span class="bk-ico">🕑</span><span>Nog reserveren — daarna hier de bevestiging invullen</span></div>
+        <div class="bk-row"><span class="bk-ico">📍</span><span>Koritnica 61a, 5242 Grahovo ob Bači</span></div>
+        <div class="bk-row"><span class="bk-ico">📞</span><span>+386 31 356 367 · camp.sorli@gmail.com</span></div>
+        <div class="bk-row"><span class="bk-ico">🕑</span><span>22 juni gemaild — nog reserveren/bevestigen, daarna hier de details invullen</span></div>
       </div>
       <div class="actions">
-        <a class="btn btn-nav" href="https://www.google.com/maps/dir/?api=1&destination=Kamp+Sorli,+Bovec" target="_blank" rel="noopener">🧭 Navigatie</a>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Kamp+Sorli,+Bovec" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-nav" href="https://www.google.com/maps/dir/?api=1&destination=Koritnica+61a,+5242+Grahovo+ob+Baci,+Slovenia" target="_blank" rel="noopener">🧭 Navigatie</a>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Kamp+Sorli+Koritnica,+Grahovo+ob+Baci" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-call" href="tel:+38631356367">📞 Bel camping</a>
       </div>
     </div>
   </div>
@@ -716,7 +752,7 @@
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#c8f0e8,#90d8c0)">🌊</div>
         <img data-wiki="Kozjak Falls|Slap Kozjak" data-search="Kozjak waterfall Kobarid Slovenia" alt="Kozjak waterval" onerror="this.remove()">
-        <div class="drive-badge">🚗 30 min</div>
+        <div class="drive-badge">🚗 40 min</div>
       </div>
       <div class="day-content">
         <div class="day-label">3 aug</div>
@@ -728,7 +764,7 @@
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
         </div>
         <div class="actions">
-          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Slap+Kozjak,+Kobarid" target="_blank" rel="noopener">🧭 Navigatie · 30 min</a>
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Slap+Kozjak,+Kobarid" target="_blank" rel="noopener">🧭 Navigatie · 40 min</a>
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Slap+Kozjak,+Kobarid" target="_blank" rel="noopener">📍 Maps</a>
         </div>
       </div>
@@ -738,7 +774,7 @@
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#d0e8ff,#a8c8f0)">🏔️</div>
         <img data-wiki="Tolmin Gorges|Tolmin Gorge" data-search="Tolmin Gorge Slovenia" alt="Tolmin kloof" onerror="this.remove()">
-        <div class="drive-badge">🚗 15 min</div>
+        <div class="drive-badge">🚗 25 min</div>
       </div>
       <div class="day-content">
         <div class="day-label">4 aug</div>
@@ -750,7 +786,7 @@
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
         </div>
         <div class="actions">
-          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Tolminska+korita" target="_blank" rel="noopener">🧭 Navigatie · 15 min</a>
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Tolminska+korita" target="_blank" rel="noopener">🧭 Navigatie · 25 min</a>
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Tolminska+korita" target="_blank" rel="noopener">📍 Maps</a>
         </div>
       </div>
@@ -760,7 +796,7 @@
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#e8f4d0,#c0e080)">🌿</div>
         <img data-wiki="Vintgar Gorge" data-search="Vintgar Gorge Slovenia" alt="Vintgar kloof" onerror="this.remove()">
-        <div class="drive-badge">🚗 60 min</div>
+        <div class="drive-badge">🚗 70 min</div>
       </div>
       <div class="day-content">
         <div class="day-label">5 aug · ochtend</div>
@@ -772,7 +808,7 @@
           <span class="tag tag-kids">Kids ⭐⭐</span>
         </div>
         <div class="actions">
-          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Vintgar+Gorge" target="_blank" rel="noopener">🧭 Navigatie · 60 min</a>
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Vintgar+Gorge" target="_blank" rel="noopener">🧭 Navigatie · 70 min</a>
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Vintgar+Gorge" target="_blank" rel="noopener">📍 Maps</a>
         </div>
       </div>
@@ -782,7 +818,7 @@
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#b8d8f8,#6098c8)">🏔️</div>
         <img data-wiki="Lake Bled|Bled Island" data-search="Lake Bled island Slovenia" alt="Meer van Bled" onerror="this.remove()">
-        <div class="drive-badge">🚗 55 min</div>
+        <div class="drive-badge">🚗 60 min</div>
       </div>
       <div class="day-content">
         <div class="day-label">5 aug · middag</div>
@@ -794,7 +830,7 @@
           <span class="tag tag-culture">Kasteel</span>
         </div>
         <div class="actions">
-          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Lake+Bled" target="_blank" rel="noopener">🧭 Navigatie · 55 min</a>
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Lake+Bled" target="_blank" rel="noopener">🧭 Navigatie · 60 min</a>
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Lake+Bled" target="_blank" rel="noopener">📍 Maps</a>
         </div>
       </div>
@@ -811,9 +847,9 @@
     <span class="travel-icon">🚗</span>
     <div>
       <strong>Reisdag — 7 aug · Soča naar Istrische kust</strong><br>
-      ±3 uur rijden. Route langs Postojna of Škocjan — overweeg grot meteen te doen als tussenstop op weg naar kamp 2.
+      ±2,5 uur rijden. Route langs Postojna of Škocjan — overweeg grot meteen te doen als tussenstop op weg naar kamp 2.
       <div class="actions">
-        <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Kaki+Plac,+Liminjan+8,+Portoroz" target="_blank" rel="noopener">🧭 Naar Kaki Plac · ±3u</a>
+        <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Kaki+Plac,+Liminjan+8,+Portoroz" target="_blank" rel="noopener">🧭 Naar Kaki Plac · ±2,5u</a>
       </div>
     </div>
   </div>
@@ -837,12 +873,11 @@
     <div class="camp-img-placeholder" style="background: linear-gradient(135deg, #ffe8c8, #ffd090);">🌊<img class="camp-img" data-wiki="Izola|Slovenian Istria" data-search="Izola Slovenia coast" alt="Istrische kust" onerror="this.remove()"></div>
     <div class="camp-info">
       <h3>Kaki Plac ⭐</h3>
-      <p>Lonely Planet's favoriete plek om onder de sterren te slapen. Max 40 tenten op terrassen in een oude kaki- en olijfboomgaard. Elk tentje heeft een eigen hangmat en bankje — en tussen de bomen hang je zó de slackline op. Fiets naar het strand.</p>
+      <p>Lonely Planet's favoriete plek om onder de sterren te slapen. Max 40 tenten op terrassen in een oude kaki- en olijfboomgaard. Elk tentje heeft een eigen hangmat en bankje. Fiets naar het strand.</p>
       <div class="camp-details">
         <div class="camp-detail"><span class="icon">⭐</span> 4.9 (352 reviews)</div>
         <div class="camp-detail"><span class="icon">💶</span> ~€25 p.p.</div>
         <div class="camp-detail"><span class="icon">🚲</span> 30 min fietsen naar strand</div>
-        <div class="camp-detail"><span class="icon">🤸</span> Boomgaard — slackline-plek</div>
         <div class="camp-detail"><span class="icon">🛶</span> Kayak mogelijk</div>
         <div class="camp-detail"><span class="icon">🚫</span> Smalle weg — geen camper/aanhanger</div>
       </div>
@@ -975,13 +1010,14 @@
         <div class="camp-detail"><span class="icon">⭐</span> 4.9 (210 reviews)</div>
         <div class="camp-detail"><span class="icon">💶</span> ~€65 voor 4 pers.</div>
         <div class="camp-detail"><span class="icon">💦</span> Ondiepe beekjes om in te spelen</div>
-        <div class="camp-detail"><span class="icon">🤸</span> Weiland voor slackline</div>
+        <div class="camp-detail"><span class="icon">🌳</span> Weiland met oude fruitbomen</div>
         <div class="camp-detail"><span class="icon">👧</span> Kids-paradijs</div>
       </div>
       <div class="booking-box">
         <span class="booking-status bk-ok">✅ Geboekt</span>
         <div class="bk-row"><span class="bk-ico">📅</span><span><b>12 – 17 aug 2026</b> · 5 nachten</span></div>
         <div class="bk-row"><span class="bk-ico">📍</span><span>Na Pečeh 7, 3333 Ljubno ob Savinji</span></div>
+        <div class="bk-row"><span class="bk-ico">🕑</span><span>Inchecken vanaf <b>14:00</b></span></div>
         <div class="bk-row"><span class="bk-ico">💶</span><span>Aanbetaling gedaan · <b>rest contant ter plekke</b></span></div>
         <div class="bk-row"><span class="bk-ico">🧾</span><span>Toeristenbelasting ter plekke: €2 p.p./dag (volw.), €1 p.p./dag (kind 7–17)</span></div>
         <div class="bk-row"><span class="bk-ico">📞</span><span>Even bellen/appen hoe laat je aankomt</span></div>
@@ -1070,17 +1106,26 @@
 
 <!-- TERUGWEG -->
 <div class="section" style="padding-top: 40px; padding-bottom: 60px;">
-  <div class="travel-row">
+  <div class="travel-row travel-stay">
     <span class="travel-icon">🏠</span>
-    <div>
-      <strong>Terug naar huis — 17–18 aug · ±13 uur</strong><br>
-      Vertrek 17 aug uit de Savinja-vallei en splits de rit. Overnacht ergens in Oostenrijk of Duitsland (Salzburg of München). 18 aug weer thuis in De Glind.
+    <div style="flex:1">
+      <strong>Terug naar huis — 17 aug uit de Savinja-vallei · ±12,5u / 1200 km</strong><br>
+      Nog te beslissen: splitsen of in één keer. Twee opties uit het plan:
+      <div class="booking-box">
+        <span class="booking-status bk-todo">⏳ Nog te beslissen</span>
+        <div class="bk-row"><span class="bk-ico">🅰️</span><span><b>Eén nacht onderweg</b> — nog een laatste dag in de bergen en een ontspannen terugreis. Of de omgeving Salzburgerland/Lungau. Twee plekken uit het plan (bellen kan direct hieronder):</span></div>
+        <div class="bk-row" style="padding-left:26px"><span class="bk-ico">🏕️</span><span><b>Campingplatz Kupferschmiede</b> — Trostberger Str. 4, 83339 Arlaching (Chieming), aan het Chiemsee. Bosrijk en rustig, badstrand en biergarten; let op: waarschijnlijk overal wifi. Open t/m 3 okt.<br><a class="btn btn-call btn-sm" href="tel:+498667446" style="margin-top:8px">📞 +49 8667 446</a> <a class="btn btn-map btn-sm" href="https://www.campingkupferschmiede.de/" target="_blank" rel="noopener" style="margin-top:8px">🌐 campingkupferschmiede.de</a> <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Campingplatz+Kupferschmiede,+Arlaching" target="_blank" rel="noopener" style="margin-top:8px">📍 Maps</a></span></div>
+        <div class="bk-row" style="padding-left:26px"><span class="bk-ico">🛖</span><span><b>Selbstversorgerhütte "Hirschalm" op ±900 m</b> — stil in het bos, geen camping, vanaf €150/nacht + €65 eindschoonmaak. In het doc staat geen link, en er zijn twee kandidaten:<br>• <b>Hirschalm am Fernsteinsee</b> (Nassereith, Tirol, ±990 m, alleenstaand in het bos, 2–6 pers.) — mooi op de route via de Fernpas; boeken loopt via het portaal, geen telefoonnummer.<br>• <b>Jagdmärchenpark Hirschalm</b> (Hinterberg 20, Unterweißenbach, Oberösterreich, 900 m) — blokhutten in het bos, maar wél naast een attractiepark. Tel <a href="tel:+4379566900">+43 7956 6900</a> · info@hirschalm.at<br><a class="btn btn-call btn-sm" href="tel:+4379566900" style="margin-top:8px">📞 +43 7956 6900 (Unterweißenbach)</a> <a class="btn btn-map btn-sm" href="https://www.huettenland.com/huette/1059/Hirschalm-am-Fernsteinsee/" target="_blank" rel="noopener" style="margin-top:8px">🌐 huettenland.com (Fernsteinsee)</a></span></div>
+        <div class="bk-row"><span class="bk-ico">🅱️</span><span><b>In één keer doorrijden</b> — vertrek vóór <b>07:00</b> uit Ljubno en probeer vóór de middag de Karawankentunnel te passeren.</span></div>
+        <div class="bk-row"><span class="bk-ico">🚧</span><span>Let op de files bij <b>Salzburg</b>, de <b>Karawankentunnel</b> en de <b>Tauerntunnel</b>: in augustus vooral op zaterdag en zondag. 17 aug 2026 is een <b>maandag</b>, dus dat scheelt.</span></div>
+        <div class="bk-row"><span class="bk-ico">🛣️</span><span>Vignet dekt de terugreis: tweede vignet loopt van 10 t/m 19 aug.</span></div>
+      </div>
     </div>
   </div>
 </div>
 
 <footer>
-  Gemaakt voor <strong>onze Slovenië-vakantie augustus 2026</strong> 🇸🇮 &nbsp;·&nbsp; Kaki Plac &amp; Kamp na Otoku ✅ geboekt · Soča-kamp nog reserveren &nbsp;·&nbsp; Tickets grotten &amp; Vintgar vooraf online &nbsp;·&nbsp; Genoeg <strong>cash</strong> mee (campings betaal je contant) &nbsp;·&nbsp; Mountainbikes &amp; slackline mee 🚲
+  Gemaakt voor <strong>onze Slovenië-vakantie augustus 2026</strong> 🇸🇮 &nbsp;·&nbsp; Berghof Oberweiler, Kaki Plac &amp; Camp Na Otoku ✅ geboekt · Camp Šorli nog reserveren &nbsp;·&nbsp; Vignetten ✅ — 2e vignet start 10 aug &nbsp;·&nbsp; Tickets grotten &amp; Vintgar vooraf online &nbsp;·&nbsp; Genoeg <strong>cash</strong> mee (campings betaal je contant) &nbsp;·&nbsp; Mountainbikes mee 🚲
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -1156,7 +1201,7 @@
   var colors = ['#1a7abf', '#e8832a', '#2d5c1e'];
 
   var camps = [
-    { name: 'Basiskamp 1 · Camp Sorli Koritnica', sub: '2–7 aug · Soča-vallei', lat: 46.345, lng: 13.565, c: 0 },
+    { name: 'Basiskamp 1 · Camp Šorli Koritnica', sub: '2–7 aug · Baška grapa / Soča-vallei', lat: 46.1666, lng: 13.8714, c: 0 },
     { name: 'Basiskamp 2 · Kaki Plac',            sub: '7–12 aug · Istrische kust', lat: 45.508, lng: 13.626, c: 1 },
     { name: 'Basiskamp 3 · Camp Na Otoku',        sub: '12–17 aug · Savinja-vallei', lat: 46.344, lng: 14.834, c: 2 }
   ];

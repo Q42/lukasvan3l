@@ -11,14 +11,13 @@ This page is tailored to **our family trip**, so keep content relevant to:
 - **Bikes:** we bring **2 mountainbikes** (one for Lukas, one shared by Hester
   or Floris). We like **gravel riding**, **not** steep/technical climbs — favour
   mellow valley/riverside gravel.
-- **Slackline:** we bring a slackline, so campsites with trees / a bit of
-  meadow are a plus.
+- **No slackline:** we decided *not* to bring one — don't mention slacklines
+  anywhere on the page or the packing list.
 - **Water play:** Floris and Yune love **playing by/in water** (shallow
   streams, rivers) — highlight kid-friendly water spots.
 
 When adding or editing content, lean into these preferences (gentle gravel,
-slackline-friendly camps, water play for the kids) and keep the kids' names
-(Floris & Yune) consistent.
+water play for the kids) and keep the kids' names (Floris & Yune) consistent.
 
 ## Contents
 
@@ -50,7 +49,15 @@ slackline-friendly camps, water play for the kids) and keep the kids' names
   - **Kamp na Otoku** (kamp 3): Na Pečeh 7, 3333 Ljubno ob Savinji (island in
     the Savinja) · 12–17 aug · aanbetaling gedaan, rest + toeristenbelasting
     contant · tel +386 41 390 515.
-  - **Camp Šorli** (kamp 1, Soča): nog te boeken.
+  - **Camp Šorli / Camp Koritnica** (kamp 1): Koritnica 61a, 5242 Grahovo ob
+    Bači · 2–7 aug · nog te boeken (22 juni gemaild) · tel +386 31 356 367.
+    Note: this is in the **Baška grapa**, 12 km from Tolmin — *not* near
+    Bovec, which is ±1,5u away over the mountain road.
+  - **Berghof Oberweiler** (heenweg-tussenstop): Oberweiler 5, 91802 Meinheim,
+    Duitsland · 1–2 aug · geboekt via Campspace · tel +49 9146 940 560.
+  - **Terugweg** (17 aug): tussenstop nog te beslissen — opties staan in het
+    laatste blok op de pagina.
+  - Vignetten zijn geregeld; het tweede vignet loopt van 10 t/m 19 aug.
 - Every camp and day-trip has **action buttons** (`.actions` / `.btn`): a
   `🧭 Navigatie` link (`google.com/maps/dir/?api=1&destination=…`, opens
   turn-by-turn from the phone's location), a `📍 Maps` search link, and a
