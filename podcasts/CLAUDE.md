@@ -18,8 +18,10 @@ Eén statische `index.html`, geen build, geen dependencies.
 - **Artwork** staat in de `ART`-map en linkt rechtstreeks naar de Apple-CDN
   (`is1-ssl.mzstatic.com/.../300x300bb.jpg`). Niet lokaal opgeslagen.
 - **State** (sterren + geluisterd-vlag) zit in `localStorage` onder
-  `podcasts-3l-v1`. De defaults in `SHOWS` (`done`, `rating`) gelden zolang er
-  niks is opgeslagen; opgeslagen waarden overschrijven ze per id.
+  `podcasts-3l-v2`. De defaults in `SHOWS` (`done`, `rating`) gelden zolang er
+  niks is opgeslagen; opgeslagen waarden overschrijven ze per id. Verhoog daarom
+  het versienummer in `KEY` als je een `done`- of `rating`-default wijzigt —
+  anders blijft oude opslag de nieuwe waarde overschrijven.
 - De uur-schatting onder "Aanraders" is ruw: `aantal afleveringen × 0,75 uur`.
 
 ## Een serie toevoegen

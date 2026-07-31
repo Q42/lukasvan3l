@@ -219,9 +219,6 @@ const SHOWS = [
     note: 'Binauraal opgenomen; bedoeld voor oortjes of koptelefoon. Bevat grof taalgebruik en drugsgebruik.' },
 
   // ── Engelstalige scripted fictie ──
-  { id: 1343499710, cat: 'en', tag: 'EN scripted', eps: 12,
-    name: "Marvel's Wolverine: The Lost Trail", artist: 'Marvel | Realm',
-    desc: 'Het directe vervolg op The Long Night: Logan trekt naar de moerassen van Louisiana op zoek naar Gambit. Zelfde makers, zelfde Richard Armitage. Daarna is er nog Wastelanders: Wolverine.' },
   { id: 1498806952, cat: 'en', tag: 'EN scripted', eps: 14,
     name: 'The Left Right Game', artist: 'QCODE',
     desc: 'Van dezelfde studio als Blackout. Een journalist sluit zich aan bij een konvooi dat een urban legend najaagt: steeds links, rechts, links. Met Tessa Thompson.' },
@@ -273,7 +270,10 @@ const SHOWS = [
     desc: 'Heel gaaf. Zoek daarna Wraak op — zelfde regisseur.' },
   { id: 1586688442, cat: 'en', tag: 'EN scripted', eps: 11, done: true, rating: 5,
     name: "Marvel's Wolverine: The Long Night", artist: 'Marvel & Realm',
-    desc: 'Heel gaaf. Het vervolg, The Lost Trail, staat bij de aanraders.' },
+    desc: 'Heel gaaf.' },
+  { id: 1343499710, cat: 'en', tag: 'EN scripted', eps: 12, done: true, rating: 0,
+    name: "Marvel's Wolverine: The Lost Trail", artist: 'Marvel | Realm',
+    desc: 'Geluisterd — oordeel nog niet ingevuld. Vervolg op The Long Night; daarna is er nog Wastelanders: Wolverine.' },
   { id: 1447513097, cat: 'en', tag: 'EN scripted', eps: 24, done: true, rating: 5,
     name: 'Blackout', artist: 'QCODE & Endeavor Content',
     desc: 'Heel gaaf. QCODE staat verder in de lijst nog twee keer.' },
@@ -293,7 +293,10 @@ const CATS = [
 ];
 
 // ── State ───────────────────────────────────────────────────────────────────
-const KEY = 'podcasts-3l-v1';
+// Bij een wijziging in de done/rating-defaults van SHOWS: versie verhogen, anders
+// overschrijft oude opslag de nieuwe defaults (v1 -> v2 toen The Lost Trail van
+// aanrader naar geluisterd ging).
+const KEY = 'podcasts-3l-v2';
 let filter = 'all';
 let state = load();
 
