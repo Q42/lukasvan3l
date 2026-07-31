@@ -13,6 +13,24 @@ pages and projects that each live in their own top-level directory.
   <https://apps.3l.nl/> (custom domain). The root `index.html` is the landing
   page: a tiled navigation linking to each app (e.g. `slovenie/`).
 
+## PWA (installeerbaar als app)
+
+De site is installeerbaar als webapp, zodat hij op Android/iOS zonder
+browser-UI opent. Dat zit volledig in de root:
+
+- `manifest.webmanifest` — `display: standalone`, `scope: /`, `start_url: /`.
+  Omdat de scope de hele site is, blijf je binnen het app-venster als je
+  doorklikt naar een one-off. Nieuwe app toegevoegd? Overweeg een entry in
+  `shortcuts`.
+- `sw.js` — service worker; Chrome eist er een met fetch-handler voordat het een
+  echte webapp-installatie (WebAPK) aanbiedt. Bewust **network-first**: de
+  one-offs veranderen vaak, dus de cache is alleen offline-fallback. Verhoog
+  `CACHE` bij een wijziging in de worker zelf.
+- `icons/` — gegenereerd uit SVG, zie `icons/README.md`.
+
+De `<link rel="manifest">`, `theme-color` en de service-worker-registratie staan
+in de root `index.html`; de one-offs hoeven hier niets voor te doen.
+
 ## Working rules for Claude
 
 - **Stay in one directory.** When you're working inside a directory, do not
