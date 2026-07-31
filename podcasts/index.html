@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luisterverhalen · Lukas' plekkie</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --dark: #1c1c1c;
+    --mid: #555;
+    --light: #f4f4f0;
+    --white: #fff;
+    --accent: #7c3aed;
+    --radius: 18px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.10);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--light);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 64px 24px 64px; }
+
+  a.back {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--mid);
+    text-decoration: none;
+    margin-bottom: 28px;
+  }
+  a.back:hover { color: var(--dark); }
+
+  header { margin-bottom: 32px; }
+  header .eyebrow {
+    font-size: 12px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--mid); margin-bottom: 10px;
+  }
+  header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 52px; font-weight: 900; line-height: 1.0;
+    letter-spacing: -1px; margin-bottom: 12px;
+  }
+  header p { font-size: 17px; color: var(--mid); max-width: 620px; line-height: 1.55; }
+
+  /* ── FILTERS ── */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 34px; }
+  .filters button {
+    font: inherit; font-size: 13px; font-weight: 500;
+    padding: 7px 14px; border-radius: 20px; cursor: pointer;
+    background: var(--white); border: 1px solid #e2e2dc; color: var(--mid);
+    transition: all 0.15s ease;
+  }
+  .filters button:hover { border-color: #c9c9c2; color: var(--dark); }
+  .filters button[aria-pressed="true"] {
+    background: var(--dark); border-color: var(--dark); color: var(--white);
+  }
+
+  h2.section {
+    font-family: 'Fraunces', serif;
+    font-size: 28px; font-weight: 700;
+    margin: 48px 0 4px;
+  }
+  h2.section:first-of-type { margin-top: 0; }
+  .section-sub { font-size: 14px; color: var(--mid); margin-bottom: 22px; }
+
+  /* ── CARDS ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    display: flex; flex-direction: column;
+    background: var(--white);
+    border: 1px solid #eee;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 10px 34px rgba(0,0,0,0.16); }
+
+  .card-link {
+    display: flex; gap: 14px; padding: 16px 16px 12px;
+    text-decoration: none; color: inherit;
+  }
+  .card-link img {
+    width: 76px; height: 76px; flex: 0 0 76px;
+    border-radius: 12px; background: var(--light);
+    object-fit: cover;
+  }
+  .card-head { min-width: 0; }
+  .card-head h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 18px; font-weight: 700; line-height: 1.2;
+    margin-bottom: 3px;
+  }
+  .card-head .meta { font-size: 12px; color: #999; line-height: 1.4; }
+
+  .card-body { padding: 0 16px 14px; }
+  .card-body p { font-size: 13.5px; color: var(--mid); line-height: 1.5; }
+  .card-body .note {
+    display: block; font-size: 12px; color: #a06c00;
+    background: #fff8e6; border-radius: 8px;
+    padding: 6px 9px; margin-top: 9px; line-height: 1.4;
+  }
+
+  .card-foot {
+    margin-top: auto;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; padding: 11px 16px; border-top: 1px solid #f0f0ec;
+  }
+  .tag {
+    font-size: 10.5px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--mid);
+    background: var(--light); padding: 4px 9px; border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .stars { display: flex; gap: 1px; }
+  .stars button {
+    background: none; border: 0; cursor: pointer;
+    font-size: 15px; line-height: 1; padding: 2px 1px;
+    color: #d8d8d2; transition: color 0.12s ease;
+  }
+  .stars button.on { color: #f0a500; }
+  .stars:hover button { color: #e8e8e2; }
+  .stars button:hover, .stars button:hover ~ button { color: #d8d8d2; }
+  .stars:hover button.on { color: #f0a500; }
+
+  .toggle {
+    font: inherit; font-size: 12px; font-weight: 500;
+    padding: 5px 11px; border-radius: 16px; cursor: pointer;
+    background: var(--white); border: 1px solid #ddd; color: var(--mid);
+    white-space: nowrap;
+  }
+  .toggle:hover { border-color: var(--dark); color: var(--dark); }
+
+  .pca {
+    font-size: 11.5px; font-weight: 600; color: var(--accent);
+    text-decoration: none;
+  }
+  .pca:hover { text-decoration: underline; }
+
+  .empty {
+    font-size: 14px; color: #999; font-style: italic;
+    background: var(--white); border: 1px dashed #ddd;
+    border-radius: var(--radius); padding: 22px;
+  }
+
+  footer { margin-top: 56px; font-size: 13px; color: #aaa; line-height: 1.7; }
+  footer a { color: var(--mid); }
+  footer button {
+    font: inherit; font-size: 13px; background: none; border: 0;
+    color: var(--mid); text-decoration: underline; cursor: pointer; padding: 0;
+  }
+
+  @media (max-width: 520px) {
+    .wrap { padding: 40px 16px 48px; }
+    header h1 { font-size: 38px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="../">&larr; Lukas' plekkie</a>
+
+    <header>
+      <div class="eyebrow">Luisterlijst</div>
+      <h1>Luisterverhalen</h1>
+      <p>Afgeronde, goed geproduceerde verhalen — fictie en true crime, geen wekelijks gebabbel.
+         Tik een kaart om hem in <strong>Pocket Casts</strong> te openen. Sterren en
+         &ldquo;geluisterd&rdquo; blijven bewaard in deze browser.</p>
+    </header>
+
+    <div class="filters" id="filters"></div>
+
+    <h2 class="section">Aanraders</h2>
+    <p class="section-sub" id="sub-todo"></p>
+    <div class="grid" id="grid-todo"></div>
+
+    <h2 class="section">Al geluisterd</h2>
+    <p class="section-sub" id="sub-done"></p>
+    <div class="grid" id="grid-done"></div>
+
+    <footer>
+      Links gaan naar <a href="https://pocketcasts.com/">Pocket Casts</a> via
+      <code>pca.st/itunes/&lt;id&gt;</code> — op mobiel opent de app, anders de webspeler.<br>
+      Afbeeldingen en aflevering-aantallen komen van de Apple Podcasts-catalogus.<br>
+      <button id="reset">Sterren en voortgang wissen</button>
+    </footer>
+  </div>
+
+<script>
+// ── Data ────────────────────────────────────────────────────────────────────
+// id = Apple Podcasts collectionId; gebruikt voor artwork én de Pocket Casts deeplink.
+const SHOWS = [
+  // ── Nederlandse fictie ──
+  { id: 1528713577, cat: 'nl', tag: 'NL fictie', eps: 9,
+    name: 'Wraak', artist: 'NPO Luister / AVROTROS',
+    desc: 'Van Hanneke Hendrix, dezelfde regisseur als De Brandstapel. Uitgeroepen tot beste fictiepodcast van 2024 en genomineerd voor een Prix Europa.',
+    note: 'Volledig in 360°/8D opgenomen — met koptelefoon indrukwekkender dan via de auto-speakers.' },
+  { id: 1853585716, cat: 'nl', tag: 'NL fictie', eps: 6,
+    name: 'STOKER', artist: 'NTR / NPO Luister',
+    desc: 'Twee podcastmakers stuiten op een bedrijf dat voor geld professioneel ruzie veroorzaakt tussen mensen. Met Lottie Hellingman en Nasrdin Dchar. Precies het Gabriel Born-trucje: fictie in podcastvorm.' },
+  { id: 1895258139, cat: 'nl', tag: 'NL fictie', eps: 9,
+    name: 'ALPHA', artist: 'NPO Luister / NTR',
+    desc: 'Hybride: echte ex-undercoveragenten vertellen hun verhaal, acteurs spelen de scènes na. Zit tussen true crime en drama in.' },
+  { id: 1874870968, cat: 'nl', tag: 'NL fictie', eps: 7,
+    name: 'RAAF', artist: 'studioschelp',
+    desc: 'Eén nacht op een huisfeest, van drank en drugs tot een ontnuchterende ochtendwandeling. Vreemder en losser dan de rest — leuk als je even geen spanning wil.',
+    note: 'Binauraal opgenomen; bedoeld voor oortjes of koptelefoon. Bevat grof taalgebruik en drugsgebruik.' },
+
+  // ── Engelstalige scripted fictie ──
+  { id: 1343499710, cat: 'en', tag: 'EN scripted', eps: 12,
+    name: "Marvel's Wolverine: The Lost Trail", artist: 'Marvel | Realm',
+    desc: 'Het directe vervolg op The Long Night: Logan trekt naar de moerassen van Louisiana op zoek naar Gambit. Zelfde makers, zelfde Richard Armitage. Daarna is er nog Wastelanders: Wolverine.' },
+  { id: 1498806952, cat: 'en', tag: 'EN scripted', eps: 14,
+    name: 'The Left Right Game', artist: 'QCODE',
+    desc: 'Van dezelfde studio als Blackout. Een journalist sluit zich aan bij een konvooi dat een urban legend najaagt: steeds links, rechts, links. Met Tessa Thompson.' },
+  { id: 1513640702, cat: 'en', tag: 'EN scripted', eps: 23,
+    name: 'Borrasca', artist: 'QCODE',
+    desc: 'Kleine mijnstad in de bergen waar meisjes verdwijnen en niemand vragen stelt. Coming-of-age die langzaam in horror kantelt.' },
+  { id: 1024247322, cat: 'en', tag: 'EN scripted', eps: 22,
+    name: 'Limetown', artist: 'Two-Up',
+    desc: 'Klassieker van het genre: een verslaggever onderzoekt hoe 300 mensen in een onderzoeksstadje van de aardbodem verdwenen. De blauwdruk voor half deze lijst.' },
+  { id: 1439247558, cat: 'en', tag: 'EN scripted', eps: 14,
+    name: 'Video Palace', artist: 'Shudder',
+    desc: 'Verzamelaar vindt een videoband die niet zou moeten bestaan en begint in zijn slaap een onbekende taal te praten. Kort, strak, behoorlijk unheimisch.' },
+  { id: 1267043823, cat: 'en', tag: 'EN scripted', eps: 119,
+    name: 'The White Vault', artist: 'Fool and Scholar Productions',
+    desc: 'Found-footage expeditie naar een onderzoeksstation op Spitsbergen. Qua opbouw en spanning het meest Wolverine-achtige van dit lijstje.' },
+  { id: 1485435369, cat: 'en', tag: 'EN scripted', eps: 161,
+    name: 'Old Gods of Appalachia', artist: 'DeepNerd Media',
+    desc: 'Folk-horror in een alternatieve Appalachen, verteld met een prachtige stem. Sfeer boven plot — goed voor de lange stukken snelweg.' },
+  { id: 1547222295, cat: 'en', tag: 'EN scripted', eps: 56,
+    name: 'The Silt Verses', artist: 'Eskew Productions',
+    desc: 'Twee gelovigen trekken langs een rivier vol vergeten goden. Literair, grimmig en heel eigen. Even inkomen, dan laat het niet meer los.' },
+  { id: 1095138637, cat: 'en', tag: 'EN scripted', eps: 398,
+    name: 'The Magnus Archives', artist: 'Rusty Quill',
+    desc: 'Een archivaris leest bizarre ooggetuigenverslagen voor; losse afleveringen bouwen samen één groot plot. Enorm veel materiaal. Het vervolg heet The Magnus Protocol.' },
+
+  // ── Nederlandse true crime, afgeronde series ──
+  { id: 1782072479, cat: 'tc', tag: 'True crime', eps: 14,
+    name: 'De Snapchatmoord', artist: 'Omroep Brabant',
+    desc: 'Afgeronde serie over een moord die via Snapchat werd geregeld. Strak gemonteerd en in één rit uit te luisteren.' },
+  { id: 1732553819, cat: 'tc', tag: 'True crime', eps: 8,
+    name: 'De Zwembadmoord', artist: 'NU.nl',
+    desc: 'Complete serie in acht delen over een zaak die jarenlang doorsudderde. Zelfde formaat als De Kofferbakmoord.' },
+  { id: 1751291643, cat: 'tc', tag: 'True crime', eps: 7,
+    name: 'Het Habbo-mysterie', artist: 'AD',
+    desc: 'Wat er misging in de virtuele wereld Habbo Hotel — en welke echte slachtoffers dat maakte. Onverwacht ongemakkelijk verhaal.' },
+  { id: 1749935878, cat: 'tc', tag: 'True crime', eps: 9,
+    name: 'Sicco, de verdwenen marechaussee', artist: 'Omrop Fryslân',
+    desc: 'Een marechaussee verdwijnt zonder spoor. Rustig verteld, sterk opgebouwd, netjes afgesloten.' },
+  { id: 1793083559, cat: 'tc', tag: 'True crime', eps: 14,
+    name: 'Cold cases: Tegen het licht', artist: 'Peter R. de Vries Foundation',
+    desc: 'Oude onopgeloste zaken opnieuw doorgelicht. Per zaak afgerond, dus makkelijk te doseren over de rit.' },
+
+  // ── Al geluisterd ──
+  { id: 1821728746, cat: 'en', tag: 'EN scripted', eps: 8, done: true, rating: 5,
+    name: 'Gabriel: Born', artist: 'Voyage Media',
+    desc: 'Heel gaaf.' },
+  { id: 1650987469, cat: 'nl', tag: 'NL fictie', eps: 7, done: true, rating: 5,
+    name: 'De Brandstapel', artist: 'NPO Luister / BNNVARA',
+    desc: 'Heel gaaf. Zoek daarna Wraak op — zelfde regisseur.' },
+  { id: 1586688442, cat: 'en', tag: 'EN scripted', eps: 11, done: true, rating: 5,
+    name: "Marvel's Wolverine: The Long Night", artist: 'Marvel & Realm',
+    desc: 'Heel gaaf. Het vervolg, The Lost Trail, staat bij de aanraders.' },
+  { id: 1447513097, cat: 'en', tag: 'EN scripted', eps: 24, done: true, rating: 5,
+    name: 'Blackout', artist: 'QCODE & Endeavor Content',
+    desc: 'Heel gaaf. QCODE staat verder in de lijst nog twee keer.' },
+  { id: 1457210551, cat: 'tc', tag: 'True crime', eps: 8, done: true, rating: 5,
+    name: 'De Kofferbakmoord', artist: 'Dagblad van het Noorden',
+    desc: 'Heel gaaf. De maat waar de andere NL true crime aan wordt afgemeten.' },
+  { id: 1458153685, cat: 'nl', tag: 'NL fictie', eps: 6, done: true, rating: 0,
+    name: 'De Blankenberge Tapes', artist: 'NPO Luister / VPRO',
+    desc: 'Geluisterd — oordeel nog niet ingevuld. Zet zelf de sterren.' },
+];
+
+const CATS = [
+  { key: 'all', label: 'Alles' },
+  { key: 'nl',  label: 'Nederlandse fictie' },
+  { key: 'en',  label: 'Engels scripted' },
+  { key: 'tc',  label: 'True crime' },
+];
+
+// ── State ───────────────────────────────────────────────────────────────────
+const KEY = 'podcasts-3l-v1';
+let filter = 'all';
+let state = load();
+
+function load() {
+  const base = {};
+  for (const s of SHOWS) base[s.id] = { done: !!s.done, rating: s.rating || 0 };
+  try {
+    const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+    for (const id in saved) if (base[id]) Object.assign(base[id], saved[id]);
+  } catch (e) { /* corrupte opslag: negeren, defaults gebruiken */ }
+  return base;
+}
+const save = () => localStorage.setItem(KEY, JSON.stringify(state));
+
+// ── Render ──────────────────────────────────────────────────────────────────
+// Artwork rechtstreeks van de Apple-CDN, opgehaald via de iTunes lookup-API.
+const ART = {
+  1528713577: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/07/d2/1f/07d21f51-bee1-01a2-57e0-5f1f5da4828f/mza_18354211405281074226.jpg/300x300bb.jpg',
+  1853585716: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/2a/40/35/2a403581-75a9-a4c4-54fd-d5039862c84b/mza_517501022308714437.jpg/300x300bb.jpg',
+  1895258139: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/73/5f/49/735f4908-e670-ac62-c726-2cfef67351b9/mza_495171378988475125.jpg/300x300bb.jpg',
+  1874870968: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/61/ec/f2/61ecf27c-b59a-e713-7a4e-49fb26a5ab1c/mza_14689857390340393550.jpg/300x300bb.jpg',
+  1343499710: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/4d/dc/ff/4ddcff06-d225-8805-8d05-07dd9a38db13/mza_4208557713259958453.jpg/300x300bb.jpg',
+  1498806952: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/1a/b4/68/1ab468a1-932c-1695-76d9-95cc71bf4bfa/mza_7965513790220207032.jpg/300x300bb.jpg',
+  1513640702: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/4f/da/0f/4fda0f77-7320-c0ac-3fa7-2924aecdb7fe/mza_12059920275851151954.jpg/300x300bb.jpg',
+  1024247322: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/d2/2e/52/d22e5203-0e33-ec5b-b490-da85734784e5/mza_17216057226925912729.jpeg/300x300bb.jpg',
+  1439247558: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts123/v4/1a/3f/a9/1a3fa919-b1b0-3895-1365-6892d606b682/mza_4400373903645173088.jpeg/300x300bb.jpg',
+  1267043823: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/92/24/03/922403e9-a5d4-be67-4911-09fae16057c9/mza_14752899404883980276.jpeg/300x300bb.jpg',
+  1485435369: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/aa/c8/c6/aac8c647-6073-0a38-cb68-47298fc73ab7/mza_990133593394875927.jpeg/300x300bb.jpg',
+  1547222295: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts114/v4/36/e4/26/36e4263b-638e-8ec4-7a10-ba9c24f960ba/mza_15286246539045821024.jpeg/300x300bb.jpg',
+  1095138637: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/01/2b/f6/012bf6cf-da73-11a8-4666-d65ad58dcea5/mza_1748774726906212092.jpg/300x300bb.jpg',
+  1782072479: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/2d/5e/76/2d5e76aa-f4fd-f853-2ca2-ce6a4043301b/mza_16624044025479798039.jpg/300x300bb.jpg',
+  1732553819: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts112/v4/69/67/d8/6967d8d6-9490-f0aa-6dc9-a056bca6fca5/mza_12993644071497941350.jpg/300x300bb.jpg',
+  1751291643: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/0c/d1/36/0cd13628-e024-a868-9daa-545e26e88ab1/mza_7422744854854927270.jpg/300x300bb.jpg',
+  1749935878: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/6f/00/b5/6f00b5db-cfe2-0051-078c-528c91e05ca5/mza_11950004719817095403.jpg/300x300bb.jpg',
+  1793083559: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/3d/90/0f/3d900f18-0ab3-d094-3092-7d8fa4a7174e/mza_12462464910863185550.jpg/300x300bb.jpg',
+  1821728746: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/f2/b0/56/f2b056f8-4b30-6621-4a97-b47de8a07c0d/mza_5863576209825526526.jpg/300x300bb.jpg',
+  1650987469: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/0b/41/ea/0b41eaa5-1cce-a99f-e187-561f6a454d92/mza_4000500368795602406.jpg/300x300bb.jpg',
+  1586688442: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/a9/39/74/a939745c-8386-f39b-3388-90b33707ba67/mza_12655617233774806835.jpg/300x300bb.jpg',
+  1447513097: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/ee/2f/3d/ee2f3d3b-c5b7-2da2-21f9-bef906760320/mza_17495574296539612902.jpg/300x300bb.jpg',
+  1457210551: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/31/04/46/310446d0-abd9-be27-c587-5ad44f5b2765/mza_12911472403804414511.jpg/300x300bb.jpg',
+  1458153685: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/ad/7d/aa/ad7daaf3-7f5e-2013-afcb-62c97c039da3/mza_10363968410688593669.jpg/300x300bb.jpg',
+};
+const pca = id => `https://pca.st/itunes/${id}`;
+
+function card(s) {
+  const st = state[s.id];
+  const el = document.createElement('article');
+  el.className = 'card';
+  el.innerHTML = `
+    <a class="card-link" href="${pca(s.id)}" target="_blank" rel="noopener">
+      <img src="${ART[s.id]}" alt="" loading="lazy" width="76" height="76">
+      <div class="card-head">
+        <h3>${s.name}</h3>
+        <div class="meta">${s.artist} · ${s.eps} afl.</div>
+      </div>
+    </a>
+    <div class="card-body">
+      <p>${s.desc}</p>
+      ${s.note ? `<span class="note">${s.note}</span>` : ''}
+    </div>
+    <div class="card-foot">
+      <span class="tag">${s.tag}</span>
+      <div class="stars" role="group" aria-label="Beoordeling ${s.name}"></div>
+      <button class="toggle">${st.done ? 'Terug naar lijst' : 'Geluisterd'}</button>
+    </div>`;
+
+  const stars = el.querySelector('.stars');
+  for (let n = 1; n <= 5; n++) {
+    const b = document.createElement('button');
+    b.textContent = n <= st.rating ? '★' : '☆';
+    b.className = n <= st.rating ? 'on' : '';
+    b.title = `${n} van 5`;
+    b.setAttribute('aria-label', `${n} van 5 sterren`);
+    b.onclick = () => {
+      st.rating = st.rating === n ? 0 : n;   // nogmaals tikken = wissen
+      if (st.rating) st.done = true;
+      save(); render();
+    };
+    stars.appendChild(b);
+  }
+
+  el.querySelector('.toggle').onclick = () => {
+    st.done = !st.done;
+    save(); render();
+  };
+  return el;
+}
+
+function render() {
+  const shown = SHOWS.filter(s => filter === 'all' || s.cat === filter);
+  const todo = shown.filter(s => !state[s.id].done);
+  const done = shown.filter(s => state[s.id].done);
+
+  for (const [id, list, empty] of [
+    ['todo', todo, 'Niks meer te luisteren in deze categorie.'],
+    ['done', done, 'Nog niks als geluisterd gemarkeerd.'],
+  ]) {
+    const grid = document.getElementById('grid-' + id);
+    grid.innerHTML = '';
+    if (!list.length) {
+      const p = document.createElement('p');
+      p.className = 'empty';
+      p.textContent = empty;
+      grid.appendChild(p);
+    } else {
+      for (const s of list) grid.appendChild(card(s));
+    }
+  }
+
+  // Korte series (<= 25 afl.) zijn afgeronde verhalen die je in één rit uit kunt
+  // luisteren; de rest zijn doorlopende series met een groot archief, waarvoor een
+  // totaal-in-uren niets zegt.
+  const short = todo.filter(s => s.eps <= 25);
+  const long  = todo.filter(s => s.eps > 25);
+  const hrs = Math.round(short.reduce((n, s) => n + s.eps, 0) * 0.75); // ~45 min per afl.
+  const parts = [`${todo.length} series`];
+  if (short.length) parts.push(`${short.length} kort en afgerond, samen ruwweg ${hrs} uur`);
+  if (long.length)  parts.push(`${long.length} met een groot archief`);
+  document.getElementById('sub-todo').textContent = parts.join(' · ');
+  document.getElementById('sub-done').textContent =
+    `${done.length} series · sterren zijn aanpasbaar`;
+}
+
+const filters = document.getElementById('filters');
+for (const c of CATS) {
+  const b = document.createElement('button');
+  b.textContent = c.label;
+  b.setAttribute('aria-pressed', String(filter === c.key));
+  b.onclick = () => {
+    filter = c.key;
+    for (const other of filters.children) other.setAttribute('aria-pressed', 'false');
+    b.setAttribute('aria-pressed', 'true');
+    render();
+  };
+  filters.appendChild(b);
+}
+
+document.getElementById('reset').onclick = () => {
+  localStorage.removeItem(KEY);
+  state = load();
+  render();
+};
+
+render();
+</script>
+</body>
+</html>
