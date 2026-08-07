@@ -447,6 +447,102 @@
   .tag-swim  { background: #d0f0f8; color: #0a6070; }
   .tag-culture { background: #fde8d8; color: #8a3a0a; }
 
+  /* ── GESCHIEDENIS ── */
+  .hist-header { border-color: var(--sun); }
+  .hist-header .section-num { opacity: 1; font-size: 46px; line-height: 1; }
+  .hist-lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--mid);
+    max-width: 660px;
+    margin-bottom: 32px;
+  }
+  .hist-lead b { color: var(--dark); }
+  .timeline {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 40px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 5px; top: 8px; bottom: 8px;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, var(--soca) 0%, #e8832a 55%, var(--forest) 100%);
+    opacity: 0.35;
+  }
+  .hist-item { position: relative; padding-bottom: 24px; }
+  .hist-item:last-child { padding-bottom: 0; }
+  .hist-item::before {
+    content: '';
+    position: absolute;
+    left: -26px; top: 4px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 3px solid var(--soca);
+  }
+  .hist-item.era-2::before { border-color: #e8832a; }
+  .hist-item.era-3::before { border-color: var(--forest); }
+  .hist-when {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--soca);
+    margin-bottom: 3px;
+  }
+  .hist-item.era-2 .hist-when { color: #c26a1a; }
+  .hist-item.era-3 .hist-when { color: var(--forest); }
+  .hist-item h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+  .hist-item p { font-size: 14px; line-height: 1.6; color: var(--mid); }
+  .hist-here {
+    display: inline-block;
+    margin-top: 9px;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.45;
+    background: var(--sand);
+    border: 1px solid #efe2cc;
+    color: #6b5836;
+    border-radius: 16px;
+    padding: 6px 13px;
+  }
+  .hist-spots {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .hist-spot {
+    background: var(--white);
+    border: 1px solid #eee;
+    border-radius: var(--radius);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    padding: 20px 22px;
+  }
+  .hist-spot h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .hist-spot .spot-camp {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--mid);
+    margin-bottom: 6px;
+  }
+  .hist-spot p { font-size: 13px; color: var(--mid); line-height: 1.6; }
+
   /* ── TRAVEL DAY ── */
   .travel-row {
     background: #f8f8f6;
@@ -578,6 +674,9 @@
     .day-content { padding: 18px 20px; }
 
     .travel-row { flex-direction: column; align-items: flex-start; }
+
+    .hist-header .section-num { font-size: 34px; }
+    .hist-spots { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -608,6 +707,7 @@
       </div>
     </div>
     <a href="paklijst.html" style="display:inline-flex;align-items:center;gap:8px;margin-top:28px;padding:10px 20px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:24px;color:white;text-decoration:none;font-size:14px;font-weight:600;backdrop-filter:blur(4px);transition:background 0.18s;" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">🧳 Paklijst</a>
+    <a href="#geschiedenis" style="display:inline-flex;align-items:center;gap:8px;margin-top:28px;margin-left:10px;padding:10px 20px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:24px;color:white;text-decoration:none;font-size:14px;font-weight:600;backdrop-filter:blur(4px);transition:background 0.18s;" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">📜 Geschiedenis</a>
   </div>
 </div>
 
@@ -676,6 +776,146 @@
   </div>
   <div class="map-hint">Grote stippen = campings · kleine stippen = dagtrips · klik voor details. (Coördinaten bij benadering.)</div>
 </div>
+
+<!-- GESCHIEDENIS -->
+<div class="section" id="geschiedenis">
+  <div class="section-header hist-header">
+    <div class="section-num">📜</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Achtergrond</div>
+      <div class="section-title">Waar reizen we eigenlijk rond?</div>
+    </div>
+    <div class="section-meta">
+      50.000 jaar<br>in tien minuten
+    </div>
+  </div>
+
+  <p class="hist-lead">Slovenië is piepklein — kleiner dan Nederland — maar het ligt precies op het kruispunt waar de <b>Alpen, de Middellandse Zee, de Karst en de Balkan</b> elkaar raken. Daardoor is er altijd iemand langsgekomen: Romeinen, Venetianen, Habsburgers, Napoleon, twee wereldoorlogen en Joegoslavië. Pas sinds <b>1991</b> is het een eigen land. Bijna alles hieronder kun je onderweg letterlijk zien staan.</p>
+
+  <div class="timeline">
+
+    <div class="hist-item era-1">
+      <div class="hist-when">± 50.000 v.Chr.</div>
+      <h4>Een neanderthaler met een fluit</h4>
+      <p>In de grot <b>Divje babe</b> bij Cerkno — ±40 minuten van kamp 1 — vonden archeologen een dijbeen van een holenbeer met keurige gaatjes erin. Volgens veel onderzoekers het <b>oudste muziekinstrument ter wereld</b>. Het origineel ligt in het Nationaal Museum in Ljubljana.</p>
+      <span class="hist-here">🎵 Leuk weetje voor Floris &amp; Yune: de oudste "blokfluit" van de wereld komt hier om de hoek vandaan.</span>
+    </div>
+
+    <div class="hist-item era-1">
+      <div class="hist-when">± 15 n.Chr. – 400</div>
+      <h4>De Romeinen leggen de wegen aan</h4>
+      <p>De Romeinen stichten <b>Emona</b>, de stad waar nu Ljubljana ligt, en trekken hun wegen van de Adriatische havens naar de Donau — dwars door de bergpassen die wij nu met de auto nemen. In het centrum van Ljubljana staan de muren van Emona nog gewoon in het gras.</p>
+    </div>
+
+    <div class="hist-item era-1">
+      <div class="hist-when">6e – 8e eeuw</div>
+      <h4>De Slaven komen de dalen in</h4>
+      <p>Slavische stammen trekken de Alpendalen binnen en vormen <b>Karantanië</b>, een van de eerste Slavische vorstendommen van Europa. Hun hertogen werden ingehuldigd op een oude Romeinse steen — in het Sloveens, door een boer, een ceremonie die eeuwenlang bleef bestaan. Van dat volk stammen de Slovenen af.</p>
+    </div>
+
+    <div class="hist-item era-1">
+      <div class="hist-when">± jaar 1000</div>
+      <h4>De oudste Sloveense woorden</h4>
+      <p>De <b>Freisinger handschriften</b> zijn de oudste tekst in het Sloveens én de oudste Slavische tekst in ons eigen Latijnse schrift. Het Sloveens is dus ouder op papier dan het Nederlands.</p>
+    </div>
+
+    <div class="hist-item era-2">
+      <div class="hist-when">1283 – 1797</div>
+      <h4>Venetië koopt de kust</h4>
+      <p>Piran, Izola en Koper horen <b>vijf eeuwen lang bij de Republiek Venetië</b>. Vandaar dat kamp 2 in een landschap ligt dat meer op Italië lijkt dan op de Alpen: campaniles, luiken, olijfbomen. Het zout uit de pannen van Sečovlje — pal naast de camping — maakte Piran rijk.</p>
+      <span class="hist-here">⛵ Zie je terug in: Piran (10 aug) — het Tartiniplein was tot 1894 gewoon de binnenhaven.</span>
+    </div>
+
+    <div class="hist-item era-2">
+      <div class="hist-when">1335 – 1918</div>
+      <h4>Bijna 600 jaar Habsburg</h4>
+      <p>Het grootste deel van Slovenië valt bijna zes eeuwen onder <b>Wenen</b>. Duits is de taal van de heren en de stad, Sloveens die van het dorp en de boerderij. Dat verklaart de Oostenrijkse kerktorentjes, de boerenhuizen met balkons vol geraniums — en de goede appeltaart.</p>
+    </div>
+
+    <div class="hist-item era-2">
+      <div class="hist-when">1550</div>
+      <h4>Het eerste boek in het Sloveens</h4>
+      <p>De protestantse priester <b>Primož Trubar</b> laat in Duitsland het eerste gedrukte Sloveense boek maken: een catechismus en een abc-boekje. De Reformatie werd hier later weer teruggedraaid, maar de taal bleef — en daarmee eigenlijk het hele idee "Sloveens".</p>
+    </div>
+
+    <div class="hist-item era-2">
+      <div class="hist-when">1809 – 1813</div>
+      <h4>Napoleon maakt Ljubljana hoofdstad</h4>
+      <p>Vier jaar lang zijn deze streken de <b>Illyrische Provincies</b> van Napoleon, met Ljubljana als hoofdstad. Voor het eerst mag er op school Sloveens gesproken worden. Kort maar beslissend: het nationale zelfvertrouwen van de 19e eeuw begint hier.</p>
+    </div>
+
+    <div class="hist-item era-3">
+      <div class="hist-when">1915 – 1917</div>
+      <h4>Het Isonzofront — precies waar kamp 1 staat</h4>
+      <p>Aan de turquoise Soča (Italiaans: Isonzo) vochten Italië en Oostenrijk-Hongarije <b>twaalf veldslagen</b> uit, met honderdduizenden doden in de bergen. In oktober 1917 braken Duitse en Oostenrijkse troepen door bij <b>Kobarid</b> (Caporetto) — Hemingway verwerkte die aftocht later in <i>A Farewell to Arms</i>. De spoorlijn met al die viaducten en tunnels door de Baška grapa, gebouwd in 1906, was toen de aanvoerlijn naar het front.</p>
+      <span class="hist-here">⚔️ Zie je terug in: de wandeling naar de Kozjak-waterval (3 aug) loopt langs Italiaanse loopgraven en stellingen.</span>
+    </div>
+
+    <div class="hist-item era-3">
+      <div class="hist-when">1920 – 1943</div>
+      <h4>De Italiaanse tijd</h4>
+      <p>Na de Eerste Wereldoorlog wordt de hele westkant — de Soča-vallei, de Karst en Istrië — <b>Italiaans</b>. Onder Mussolini mag het Sloveens niet meer op school en worden zelfs achternamen veritaliaanst. Hier ontstaat <b>TIGR</b>, een van de eerste antifascistische verzetsbewegingen van Europa. De rest van Slovenië hoort dan bij het koninkrijk Joegoslavië.</p>
+    </div>
+
+    <div class="hist-item era-3">
+      <div class="hist-when">1941 – 1945</div>
+      <h4>Bezet, opgedeeld, en verzet in het bos</h4>
+      <p>Slovenië wordt in drieën gedeeld tussen Duitsland, Italië en Hongarije. In de bossen en bergen — onder andere rond de Savinja-vallei van kamp 3 — vechten de <b>partizanen</b>. In een onvindbaar kloofje bij Cerkno lag <b>partizanenhospitaal Franja</b>: een compleet ziekenhuis van houten barakken, onzichtbaar van boven, waar honderden gewonden werden verpleegd.</p>
+      <span class="hist-here">🩺 Franja is nu museum, ±45 min van kamp 1 — een van de indrukwekkendste plekken van het land.</span>
+    </div>
+
+    <div class="hist-item era-3">
+      <div class="hist-when">1945 – 1991</div>
+      <h4>Joegoslavië onder Tito</h4>
+      <p>Slovenië is de kleinste maar rijkste republiek van Joegoslavië: nog geen tiende van de inwoners, maar bijna een derde van de export. Het land ligt aan het IJzeren Gordijn en tóch niet erachter — Slovenen konden reizen, en Italiaanse spijkerbroeken en koffie kwamen gewoon over de grens.</p>
+    </div>
+
+    <div class="hist-item era-3">
+      <div class="hist-when">1991 – nu</div>
+      <h4>Tien dagen oorlog, en toen een eigen land</h4>
+      <p>Op <b>25 juni 1991</b> roept Slovenië de onafhankelijkheid uit. Het Joegoslavische leger grijpt in, maar de <b>Tiendaagse Oorlog</b> is na anderhalve week voorbij, met een kleine zeventig doden — verreweg het lichtste van alle Joegoslavische oorlogen. Daarna ging het snel: in 2004 de EU en de NAVO, in 2007 de euro en open grenzen. Slovenië is dus jonger dan Lukas en Hester.</p>
+    </div>
+
+  </div>
+
+  <div class="days-label">Waar zie je het terug op onze route?</div>
+  <div class="hist-spots">
+
+    <div class="hist-spot">
+      <div class="spot-camp">Kamp 1 · Baška grapa &amp; Soča</div>
+      <h4>Het front in de bergen</h4>
+      <p>Om de camping heen ligt een openluchtmuseum: de spoorlijn uit 1906 door de grapa, loopgraven boven Kobarid, en het houten <b>gedenkkerkje Javorca</b> (1916) dat Oostenrijks-Hongaarse soldaten voor hun gevallen kameraden bouwden. In Kobarid vertelt het <b>Kobariški muzej</b> het hele verhaal — bekroond en heel goed te doen met kinderen.</p>
+      <div class="actions">
+        <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Kobariski+muzej,+Kobarid" target="_blank" rel="noopener">📍 Kobarid Museum</a>
+        <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Partizanska+bolnica+Franja,+Cerkno" target="_blank" rel="noopener">📍 Hospitaal Franja</a>
+      </div>
+    </div>
+
+    <div class="hist-spot">
+      <div class="spot-camp">Kamp 2 · Istrië</div>
+      <h4>Vijf eeuwen Venetië (en zout)</h4>
+      <p>Piran is een Venetiaans stadje gebleven: nauwe steegjes, een campanile naar het voorbeeld van San Marco, en het <b>Venetiaanse Huis</b> uit de 15e eeuw. Vlak bij de camping liggen de <b>zoutpannen van Sečovlje</b>, waar het zout nog steeds met de hand wordt geoogst zoals in de middeleeuwen — ondiep water, vogels, en overal wit: precies iets voor Floris en Yune.</p>
+      <div class="actions">
+        <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Secovlje+Salina+Nature+Park" target="_blank" rel="noopener">📍 Zoutpannen Sečovlje</a>
+      </div>
+    </div>
+
+    <div class="hist-spot">
+      <div class="spot-camp">Kamp 2 · De Karst</div>
+      <h4>Het woord "karst" komt hiervandaan</h4>
+      <p>Deze kalksteenstreek heet <b>Kras</b>, en alle karstverschijnselen ter wereld zijn ernaar vernoemd. In de Postojna-grot staan handtekeningen van bezoekers uit <b>1213</b> op de wand. En in 1944 bliezen partizanen er een Duits brandstofdepot op: het vuur brandde een week, de wanden bij de ingang zijn er nog steeds zwart van.</p>
+    </div>
+
+    <div class="hist-spot">
+      <div class="spot-camp">Kamp 3 · Savinja</div>
+      <h4>De vlotters van Ljubno</h4>
+      <p>Ljubno leefde eeuwenlang van de <b>flosarji</b>: vlottersmannen die boomstammen tot vlotten bonden en die de Savinja af voeren, helemaal tot in Kroatië en Servië. Toen de vrachtwagens kwamen was het voorbij, maar het dorp viert het elk jaar met het <b>Flosarski bal</b>. Ons raften op 14 aug is er eigenlijk de vrolijke nazaat van.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="section-divider"><hr></div>
 
 <!-- HEENREIS TUSSENSTOP -->
 <div class="section" style="padding-bottom: 48px;">

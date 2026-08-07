@@ -39,6 +39,19 @@ water play for the kids) and keep the kids' names (Floris & Yune) consistent.
   emoji placeholder. So to fix a blank card, tweak its `data-wiki` candidates
   or `data-search` query.
 
+## Geschiedenis-sectie
+
+- Tussen de kaart en de heenreis staat een achtergrondhoofdstuk (`#geschiedenis`,
+  ook bereikbaar via de knop in de hero): een **tijdlijn** (`.timeline` /
+  `.hist-item`, met `era-1/2/3` voor de kleur van de stip) van neanderthalers
+  tot 1991, plus een grid **"waar zie je het terug op onze route"**
+  (`.hist-spots` / `.hist-spot`) dat per basiskamp een verhaal koppelt aan een
+  plek die we toch al bezoeken.
+- Houd de tijdlijn **gekoppeld aan de route**: elk item dat je toevoegt hoort
+  iets te zeggen over waar we slapen of heen rijden (Isonzofront bij kamp 1,
+  Venetië/zout bij kamp 2, de vlotters van Ljubno bij kamp 3). De
+  `.hist-here`-pil is daarvoor bedoeld.
+
 ## Booking & navigation
 
 - Each basecamp card has a **booking box** (`.booking-box`) with a status badge
