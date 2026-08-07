@@ -70,6 +70,13 @@ water play for the kids) and keep the kids' names (Floris & Yune) consistent.
     Duitsland · 1–2 aug · geboekt via Campspace · tel +49 9146 940 560.
   - **Terugweg** (17 aug): tussenstop nog te beslissen — opties staan in het
     laatste blok op de pagina.
+  - **Bootverhuur** (dagtrip 11 aug, kamp 2): nog te regelen. Eerste keus
+    *Rent a Boat Bernardin / Rnavtika*, Marina Bernardin, +386 31 348 590,
+    rentaboat.si — kleinere boten mogen daar zónder vaarbewijs. Alternatieven:
+    Navtika Fial (rentaboatportoroz.com) en Rentas in Marina Portorož (daar is
+    wél een vaarbewijs of hun schipper nodig). Sloveense regels over wanneer
+    een vaarbewijs verplicht is spreken elkaar tegen (3,7 vs 7,35 kW), dus de
+    pagina adviseert het bij het boeken expliciet te vragen.
   - Vignetten zijn geregeld; het tweede vignet loopt van 10 t/m 19 aug.
 - Every camp and day-trip has **action buttons** (`.actions` / `.btn`): a
   `🧭 Navigatie` link (`google.com/maps/dir/?api=1&destination=…`, opens
