@@ -59,6 +59,23 @@ open een `.html` in de browser en klaar.
   emoji placeholder. So to fix a blank card, tweak its `data-wiki` candidates
   or `data-search` query.
 
+## Plan wordt logboek
+
+Tijdens de reis wordt het reisplan bijgewerkt naar **wat er echt gebeurd is**.
+Een dag die geweest is:
+
+- krijgt `class="day-row done"` en een `<span class="day-flag">✅ Gedaan</span>`
+  achter het daglabel (dat dan de weekdag noemt: "Dinsdag 4 aug");
+- krijgt een beschrijving in de **verleden tijd** van wat we werkelijk deden —
+  ook als dat iets heel anders was dan gepland. De oude planregel verdwijnt.
+- Een geplande dag die niet doorging maar nog wél kan, blijft staan met
+  `<span class="day-flag open">Niet gepland</span>` in plaats van een datum.
+- Reisdagen en de boekingsblokken volgen hetzelfde: `travel-row done`,
+  en de status wordt `✅ Gedaan` / `✅ Verbleven` / `✅ Aangekomen`.
+- In de kaart-JS krijgt zo'n dagtrip `done: true`; die stippen worden gevuld
+  getekend in plaats van open. Verwijder de markers van dingen die we niet
+  gedaan hebben, en voeg de echte plekken toe (coördinaten mogen ruw).
+
 ## `geschiedenis.html`
 
 - Een **tijdlijn** (`.timeline` / `.hist-item`, met `era-1/2/3` voor de kleur van

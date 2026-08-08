@@ -358,6 +358,33 @@
   .tag-swim  { background: #d0f0f8; color: #0a6070; }
   .tag-culture { background: #fde8d8; color: #8a3a0a; }
 
+  /* ── GEDAAN / LOGBOEK ── */
+  .day-row.done {
+    border-color: #cfe6c4;
+    box-shadow: 0 2px 12px rgba(45,92,30,0.11);
+  }
+  .day-row.done .day-label { color: #2d6a1e; }
+  .day-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    border-radius: 20px;
+    padding: 3px 9px;
+    margin-left: 8px;
+    background: #e6f4e0;
+    color: #2d6a1e;
+  }
+  .day-flag.open { background: #f0f0ee; color: #808080; }
+  .travel-row.done {
+    border-style: solid;
+    border-color: #cfe6c4;
+    background: #f6faf4;
+  }
+
   /* ── TRAVEL DAY ── */
   .travel-row {
     background: #f8f8f6;
@@ -507,6 +534,7 @@
     <span class="style-item"><span class="ico">👨‍👩‍👧‍👦</span> Lukas, Hester, Floris (9) &amp; Yune (7)</span>
     <span class="style-item"><span class="ico">🚲</span> 2 mountainbikes — gravel, geen steile routes</span>
     <span class="style-item"><span class="ico">💦</span> Kids dol op spelen bij het water</span>
+    <span class="style-item"><span class="ico">✅</span> Groen = wat we écht gedaan hebben</span>
   </div>
 </div>
 
@@ -519,18 +547,18 @@
     <div class="lg"><span class="sw" style="background:#e8832a"></span> Basiskamp 2 &amp; dagtrips — Istrië</div>
     <div class="lg"><span class="sw" style="background:#2d5c1e"></span> Basiskamp 3 &amp; dagtrips — Savinja</div>
   </div>
-  <div class="map-hint">Grote stippen = campings · kleine stippen = dagtrips · klik voor details. (Coördinaten bij benadering.)</div>
+  <div class="map-hint">Grote stippen = campings · <b>gevulde</b> stippen = al gedaan · open stippen = nog gepland · klik voor details. (Coördinaten bij benadering.)</div>
 </div>
 
 <!-- HEENREIS TUSSENSTOP -->
 <div class="section" id="heenreis" style="padding-bottom: 48px;">
-  <div class="travel-row travel-stay">
-    <span class="travel-icon">🚗</span>
+  <div class="travel-row travel-stay done">
+    <span class="travel-icon">✅</span>
     <div style="flex:1">
       <strong>Heenreis — 1 &amp; 2 aug · De Glind naar Slovenië (±14u, in twee dagen)</strong><br>
-      Dag 1 (±7,5u incl. pauzes) naar Beieren, dag 2 (±6,5u) door naar de Baška grapa. Vertrek 1 aug rond 05:00, dan ben je rond 14:00 op de boerderij en kunnen de kinderen 's middags nog naar een van de twee meren (15 min rijden): <b>Brombachsee</b> (kano's huren, zandstrand) of <b>Altmühlsee</b> (rustiger, vogelreservaat — en in het natuurpark mag je zelf fossielen uit de steen beitelen en houden 🦕).
+      In tweeën gereden zoals gepland: dag 1 naar Beieren, dag 2 door naar de Baška grapa. De tussenstop was een <b>Campspace-plek</b> — <a href="https://maps.app.goo.gl/zGsNJM9K8AfoYZPn7" target="_blank" rel="noopener">hier op de kaart</a>.
       <div class="booking-box">
-        <span class="booking-status bk-ok">✅ Geboekt</span>
+        <span class="booking-status bk-ok">✅ Gedaan</span>
         <div class="bk-row"><span class="bk-ico">🏕️</span><span><b>Berghof Oberweiler</b> — familie Lehner &amp; Wolf · struisvogelboerderij met bio-winkel</span></div>
         <div class="bk-row"><span class="bk-ico">📅</span><span><b>1 – 2 aug 2026</b> · 1 nacht (30 juni geboekt via Campspace)</span></div>
         <div class="bk-row"><span class="bk-ico">📍</span><span>Oberweiler 5, 91802 Meinheim, Duitsland</span></div>
@@ -575,11 +603,11 @@
         <div class="camp-detail"><span class="icon">🍺</span> Bar aanwezig</div>
       </div>
       <div class="booking-box">
-        <span class="booking-status bk-todo">⏳ Nog te boeken</span>
+        <span class="booking-status bk-ok">✅ Verbleven</span>
         <div class="bk-row"><span class="bk-ico">📅</span><span><b>2 – 7 aug 2026</b> · 5 nachten</span></div>
         <div class="bk-row"><span class="bk-ico">📍</span><span>Koritnica 61a, 5242 Grahovo ob Bači</span></div>
         <div class="bk-row"><span class="bk-ico">📞</span><span>+386 31 356 367 · camp.sorli@gmail.com</span></div>
-        <div class="bk-row"><span class="bk-ico">🕑</span><span>22 juni gemaild — nog reserveren/bevestigen, daarna hier de details invullen</span></div>
+        <div class="bk-row"><span class="bk-ico">💦</span><span>De waterval en het beekje bij de camping werden meteen de favoriete plek van de kinderen</span></div>
       </div>
       <div class="actions">
         <a class="btn btn-nav" href="https://www.google.com/maps/dir/?api=1&destination=Koritnica+61a,+5242+Grahovo+ob+Baci,+Slovenia" target="_blank" rel="noopener">🧭 Navigatie</a>
@@ -590,93 +618,87 @@
   </div>
 
   <!-- Days -->
-  <div class="days-label">Dagtrips vanuit dit kamp</div>
+  <div class="days-label">Wat we hier gedaan hebben</div>
   <div class="days-grid">
 
-    <div class="day-row">
+    <div class="day-row done">
       <div class="day-photo">
-        <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#c8f0e8,#90d8c0)">🌊</div>
-        <img data-wiki="Kozjak Falls|Slap Kozjak" data-search="Kozjak waterfall Kobarid Slovenia" alt="Kozjak waterval" onerror="this.remove()">
-        <div class="drive-badge">🚗 40 min</div>
+        <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#c8f0e8,#90d8c0)">💦</div>
+        <img data-wiki="Baška grapa|Koritnica" data-search="Koritnica river Slovenia stream" alt="Beekje bij de camping" onerror="this.remove()">
+        <div class="drive-badge">🏕️ Op de camping</div>
       </div>
       <div class="day-content">
-        <div class="day-label">3 aug</div>
-        <div class="day-title">Kozjak Waterval</div>
-        <div class="day-desc">Kort maar spectaculair wandelingetje (±30 min) door een kloof naar een waterval in een grot. Het laatste stuk over een touw-loopbrug. De mooiste gratis wandeling van Slovenië.</div>
+        <div class="day-label">Maandag 3 aug <span class="day-flag">✅ Gedaan</span></div>
+        <div class="day-title">Bij de camping gebleven</div>
+        <div class="day-desc">Geen dagtrip: gewoon blijven waar we zaten. <b>Van de waterval gesprongen</b> en in het beekje gezwommen. De eerste hele dag na twee dagen rijden — precies goed.</div>
         <div class="day-tags">
-          <span class="tag tag-hike">Wandelen</span>
           <span class="tag tag-water">Waterval</span>
+          <span class="tag tag-swim">Zwemmen</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
-        </div>
-        <div class="actions">
-          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Slap+Kozjak,+Kobarid" target="_blank" rel="noopener">🧭 Navigatie · 40 min</a>
-          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Slap+Kozjak,+Kobarid" target="_blank" rel="noopener">📍 Maps</a>
         </div>
       </div>
     </div>
 
-    <div class="day-row">
+    <div class="day-row done">
       <div class="day-photo">
-        <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#d0e8ff,#a8c8f0)">🏔️</div>
+        <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#d0e8ff,#a8c8f0)">🛟</div>
         <img data-wiki="Tolmin Gorges|Tolmin Gorge" data-search="Tolmin Gorge Slovenia" alt="Tolmin kloof" onerror="this.remove()">
         <div class="drive-badge">🚗 25 min</div>
       </div>
       <div class="day-content">
-        <div class="day-label">4 aug</div>
-        <div class="day-title">Tolmin Kloof</div>
-        <div class="day-desc">Smalle canyon waar twee rivieren samenkomen. Loopbruggen over kolkend water, tropisch blauwgroen. Geweldige natuur vlak om de hoek. Tickets online kopen!</div>
+        <div class="day-label">Dinsdag 4 aug <span class="day-flag">✅ Gedaan</span></div>
+        <div class="day-title">Tolmin Kloof &amp; tuben op de Soča</div>
+        <div class="day-desc">Eerst de <b>Tolminska korita</b>: loopbruggen over kolkend turquoise water. Daarna met <b>Labrca Outdoor Center</b> als uitvalsbasis op een <b>opblaasband</b> het water op, bij het <b>Sotočje</b> — de plek waar de Tolminka in de Soča komt.</div>
         <div class="day-tags">
           <span class="tag tag-hike">Canyon</span>
-          <span class="tag tag-water">Turquoise water</span>
+          <span class="tag tag-water">Tuben</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
         </div>
         <div class="actions">
-          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Tolminska+korita" target="_blank" rel="noopener">🧭 Navigatie · 25 min</a>
-          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Tolminska+korita" target="_blank" rel="noopener">📍 Maps</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Tolminska+korita" target="_blank" rel="noopener">📍 Tolmin kloof</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Labrca+Outdoor+Center" target="_blank" rel="noopener">📍 Labrca</a>
         </div>
       </div>
     </div>
 
-    <div class="day-row">
+    <div class="day-row done">
       <div class="day-photo">
-        <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#e8f4d0,#c0e080)">🌿</div>
-        <img data-wiki="Vintgar Gorge" data-search="Vintgar Gorge Slovenia" alt="Vintgar kloof" onerror="this.remove()">
-        <div class="drive-badge">🚗 70 min</div>
+        <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#e8f4d0,#c0e080)">🚡</div>
+        <img data-wiki="Soriška planina|Možic" data-search="Soriska planina Slovenia mountain" alt="Soriška planina" onerror="this.remove()">
+        <div class="drive-badge">🚗 45 min</div>
       </div>
       <div class="day-content">
-        <div class="day-label">5 aug · ochtend</div>
-        <div class="day-title">Vintgar Kloof</div>
-        <div class="day-desc">Boardwalk over de Radovna-rivier, langs kleine watervallen en drinkbaar blauw water. Combineer met het Meer van Bled op dezelfde dag. Vroeg gaan — wordt druk!</div>
+        <div class="day-label">Woensdag 5 aug <span class="day-flag">✅ Gedaan</span></div>
+        <div class="day-title">Berglift Soriška planina &amp; de Možic op</div>
+        <div class="day-desc">Met de <b>berglift van AlpVenture</b> op Soriška planina omhoog, en vanaf boven te voet de <b>Možic</b> (1602 m) beklommen. Uitzicht over de Julische Alpen aan de ene kant en de Baška grapa aan de andere.</div>
         <div class="day-tags">
-          <span class="tag tag-hike">Boardwalk</span>
-          <span class="tag tag-water">Waterval</span>
-          <span class="tag tag-kids">Kids ⭐⭐</span>
+          <span class="tag tag-hike">Bergtop</span>
+          <span class="tag">🚡 Stoeltjeslift</span>
+          <span class="tag tag-kids">Kids ⭐⭐⭐</span>
         </div>
         <div class="actions">
-          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Vintgar+Gorge" target="_blank" rel="noopener">🧭 Navigatie · 70 min</a>
-          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Vintgar+Gorge" target="_blank" rel="noopener">📍 Maps</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Soriska+planina" target="_blank" rel="noopener">📍 Soriška planina</a>
         </div>
       </div>
     </div>
 
-    <div class="day-row">
+    <div class="day-row done">
       <div class="day-photo">
-        <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#b8d8f8,#6098c8)">🏔️</div>
-        <img data-wiki="Lake Bled|Bled Island" data-search="Lake Bled island Slovenia" alt="Meer van Bled" onerror="this.remove()">
-        <div class="drive-badge">🚗 60 min</div>
+        <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#c0e8ff,#60b8e8)">🛶</div>
+        <img data-wiki="Soča" data-search="Soča river Slovenia turquoise" alt="De Soča" onerror="this.remove()">
+        <div class="drive-badge">🛶 Op het water</div>
       </div>
       <div class="day-content">
-        <div class="day-label">5 aug · middag</div>
-        <div class="day-title">Meer van Bled</div>
-        <div class="day-desc">Het plaatje-meer van Slovenië. Eilandje met kerkje, kasteel op de rots, zwemmen kan. Pedaloboten huren voor de kinderen. Erg druk in augustus — combineer met vroege Vintgar-ochtend.</div>
+        <div class="day-label">Donderdag 6 aug <span class="day-flag">✅ Gedaan</span></div>
+        <div class="day-title">Nog een keer de Soča af — nu met de kano</div>
+        <div class="day-desc">Zo leuk dat we het meteen nog eens deden, nu met de <b>geleende opblaaskano van vriendje Simon</b>. Ingestapt bij <b>46.19715° N, 13.69316° E</b> en afgezakt tot bij <b>Labrca</b>.</div>
         <div class="day-tags">
+          <span class="tag tag-water">Kanoën</span>
           <span class="tag tag-swim">Zwemmen</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
-          <span class="tag tag-culture">Kasteel</span>
         </div>
         <div class="actions">
-          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Lake+Bled" target="_blank" rel="noopener">🧭 Navigatie · 60 min</a>
-          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Lake+Bled" target="_blank" rel="noopener">📍 Maps</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=46.19715,13.69316" target="_blank" rel="noopener">📍 Instapplek</a>
         </div>
       </div>
     </div>
@@ -688,13 +710,13 @@
 
 <!-- REISDAG 1→2 -->
 <div class="section" style="padding-top: 40px; padding-bottom: 40px;">
-  <div class="travel-row">
-    <span class="travel-icon">🚗</span>
+  <div class="travel-row done">
+    <span class="travel-icon">✅</span>
     <div>
-      <strong>Reisdag — 7 aug · Soča naar Istrische kust</strong><br>
-      ±2,5 uur rijden. Route langs Postojna of Škocjan — overweeg grot meteen te doen als tussenstop op weg naar kamp 2.
+      <strong>Vrijdag 7 aug — Soča naar de Istrische kust</strong><br>
+      Onderweg naar Kaki Plac gestopt om te <b>snorkelen</b> bij <b>45,7308° N · 13,6847° E</b> — een kiezelbaaitje onder de kliffen van de Karstkust, tussen Monfalcone en Triëst. <b>Een privéstrand voor ons alleen</b>; volgens Floris het mooiste wat hij ooit had gezien.
       <div class="actions">
-        <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Kaki+Plac,+Liminjan+8,+Portoroz" target="_blank" rel="noopener">🧭 Naar Kaki Plac · ±2,5u</a>
+        <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=45.7308,13.6847" target="_blank" rel="noopener">📍 De snorkelplek</a>
       </div>
     </div>
   </div>
@@ -727,8 +749,8 @@
         <div class="camp-detail"><span class="icon">🚫</span> Smalle weg — geen camper/aanhanger</div>
       </div>
       <div class="booking-box">
-        <span class="booking-status bk-ok">✅ Geboekt</span>
-        <div class="bk-row"><span class="bk-ico">📅</span><span><b>7 – 12 aug 2026</b> · 5 nachten (aankomst vrij 7 aug)</span></div>
+        <span class="booking-status bk-ok">✅ Aangekomen 7 aug</span>
+        <div class="bk-row"><span class="bk-ico">📅</span><span><b>7 – 12 aug 2026</b> · 5 nachten (aangekomen vrij 7 aug)</span></div>
         <div class="bk-row"><span class="bk-ico">📍</span><span>Liminjan 8, 6320 Portorož</span></div>
         <div class="bk-row"><span class="bk-ico">⛺</span><span>Pitch 6 (4,8 × 3,3 m) · 2 volw. + 2 kinderen</span></div>
         <div class="bk-row"><span class="bk-ico">🕑</span><span>Inchecken <b>14:00–20:00</b> · uitchecken 10:00–12:00</span></div>
@@ -747,24 +769,23 @@
   <div class="days-label">Dagtrips vanuit dit kamp</div>
   <div class="days-grid">
 
-    <div class="day-row">
+    <div class="day-row done">
       <div class="day-photo">
-        <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#ede0f5,#c8a8e8)">🦇</div>
-        <img data-wiki="Škocjan Caves" data-search="Škocjan Caves Slovenia" alt="Škocjan grotten" onerror="this.remove()">
-        <div class="drive-badge">🚗 45 min</div>
+        <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#cdeefc,#68b8dd)">🚲</div>
+        <img data-wiki="Strunjan" data-search="Mesecev zaliv Strunjan Slovenia bay" alt="Maanbaai bij Strunjan" onerror="this.remove()">
+        <div class="drive-badge">🚲 Op de fiets</div>
       </div>
       <div class="day-content">
-        <div class="day-label">8 aug</div>
-        <div class="day-title">Škocjan Grotten</div>
-        <div class="day-desc">Ondergrondse canyon met een echte rivier, watervallen en 170 meter hoge grotten. UNESCO werelderfgoed. Indrukwekkender dan Postojna, minder toeristisch. Tickets online!</div>
+        <div class="day-label">Zaterdag 8 aug <span class="day-flag">✅ Gedaan</span></div>
+        <div class="day-title">Op de fiets naar de Maanbaai</div>
+        <div class="day-desc">Vanaf Kaki Plac naar de halvemaanvormige <b>Mesečev zaliv</b> bij Strunjan gefietst. En het knalt: <b>Yune heeft de hele rit heen én terug zelf gefietst</b> 🎉</div>
         <div class="day-tags">
-          <span class="tag tag-cave">Grot</span>
-          <span class="tag tag-water">Ondergrondse rivier</span>
+          <span class="tag">🚲 Fietsen</span>
+          <span class="tag tag-swim">Zwemmen</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
         </div>
         <div class="actions">
-          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Skocjan+Caves" target="_blank" rel="noopener">🧭 Navigatie · 45 min</a>
-          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Skocjan+Caves" target="_blank" rel="noopener">📍 Maps</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Mesecev+zaliv+Strunjan" target="_blank" rel="noopener">📍 Maanbaai</a>
         </div>
       </div>
     </div>
@@ -844,6 +865,28 @@
           <a class="btn btn-call btn-sm" href="tel:+38631348590">📞 +386 31 348 590</a>
           <a class="btn btn-map btn-sm" href="https://www.rentaboat.si/" target="_blank" rel="noopener">🌐 rentaboat.si</a>
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Mesecev+zaliv+Strunjan" target="_blank" rel="noopener">📍 Maanbaai</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-row">
+      <div class="day-photo">
+        <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#ede0f5,#c8a8e8)">🦇</div>
+        <img data-wiki="Škocjan Caves" data-search="Škocjan Caves Slovenia" alt="Škocjan grotten" onerror="this.remove()">
+        <div class="drive-badge">🚗 45 min</div>
+      </div>
+      <div class="day-content">
+        <div class="day-label">Nog open <span class="day-flag open">Niet gepland</span></div>
+        <div class="day-title">Škocjan Grotten</div>
+        <div class="day-desc">Ondergrondse canyon met een echte rivier, watervallen en 170 meter hoge grotten. UNESCO werelderfgoed. Indrukwekkender dan Postojna, minder toeristisch. Tickets online! <b>Stond op 8 aug gepland, maar we zijn gaan fietsen</b> — nog te verzetten als we willen.</div>
+        <div class="day-tags">
+          <span class="tag tag-cave">Grot</span>
+          <span class="tag tag-water">Ondergrondse rivier</span>
+          <span class="tag tag-kids">Kids ⭐⭐⭐</span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Skocjan+Caves" target="_blank" rel="noopener">🧭 Navigatie · 45 min</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Skocjan+Caves" target="_blank" rel="noopener">📍 Maps</a>
         </div>
       </div>
     </div>
@@ -1005,7 +1048,7 @@
 </div>
 
 <footer class="site-footer">
-  Gemaakt voor <strong>onze Slovenië-vakantie augustus 2026</strong> 🇸🇮 &nbsp;·&nbsp; Berghof Oberweiler, Kaki Plac &amp; Camp Na Otoku ✅ geboekt · Camp Šorli nog reserveren &nbsp;·&nbsp; Vignetten ✅ — 2e vignet start 10 aug &nbsp;·&nbsp; Tickets grotten &amp; Vintgar vooraf online &nbsp;·&nbsp; Bootje bij Bernardin vooraf bellen &nbsp;·&nbsp; Genoeg <strong>cash</strong> mee (campings betaal je contant) &nbsp;·&nbsp; Mountainbikes mee 🚲
+  <strong>Onze Slovenië-vakantie augustus 2026</strong> 🇸🇮 &nbsp;·&nbsp; Bijgewerkt t/m <strong>zaterdag 8 aug</strong> — groen is wat we écht gedaan hebben &nbsp;·&nbsp; Nu op <strong>Kaki Plac</strong> t/m 12 aug &nbsp;·&nbsp; Vignetten ✅ — 2e vignet start 10 aug &nbsp;·&nbsp; Tickets Postojna vooraf online &nbsp;·&nbsp; Bootje bij Bernardin vooraf bellen &nbsp;·&nbsp; Genoeg <strong>cash</strong> mee (campings betaal je contant)
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -1086,18 +1129,20 @@
     { name: 'Basiskamp 3 · Camp Na Otoku',        sub: '12–17 aug · Savinja-vallei', lat: 46.344, lng: 14.834, c: 2 }
   ];
 
+  // done: true = echt gedaan (gevulde stip), anders nog gepland (open stip)
   var trips = [
-    { name: 'Kozjak Waterval (3 aug)',        lat: 46.262, lng: 13.585, c: 0 },
-    { name: 'Tolmin Kloof (4 aug)',           lat: 46.196, lng: 13.732, c: 0 },
-    { name: 'Vintgar Kloof (5 aug)',          lat: 46.394, lng: 14.078, c: 0 },
-    { name: 'Meer van Bled (5 aug)',          lat: 46.363, lng: 14.094, c: 0 },
-    { name: 'Škocjan Grotten (8 aug)',        lat: 45.664, lng: 13.989, c: 1 },
-    { name: 'Postojna Grotten (9 aug)',       lat: 45.783, lng: 14.204, c: 1 },
-    { name: 'Piran (10 aug)',                 lat: 45.528, lng: 13.568, c: 1 },
-    { name: 'Bootje huren · Bernardin (11 aug)', lat: 45.522, lng: 13.582, c: 1 },
-    { name: 'Logarska Dolina (13 aug)',       lat: 46.392, lng: 14.622, c: 2 },
-    { name: 'Raften op de Savinja (14 aug)',  lat: 46.360, lng: 14.800, c: 2 },
-    { name: 'Kamnik & kasteel (15 aug)',      lat: 46.225, lng: 14.612, c: 2 }
+    { name: 'Tolmin Kloof &amp; tuben (4 aug)',   lat: 46.196,   lng: 13.732,   c: 0, done: true },
+    { name: 'Soriška planina &amp; Možic (5 aug)', lat: 46.234,  lng: 14.043,   c: 0, done: true },
+    { name: 'Kano op de Soča (6 aug)',        lat: 46.19715, lng: 13.69316, c: 0, done: true },
+    { name: 'Snorkelen aan de Karstkust (7 aug)', lat: 45.7308, lng: 13.6847, c: 1, done: true },
+    { name: 'Maanbaai op de fiets (8 aug)',   lat: 45.533,   lng: 13.606,   c: 1, done: true },
+    { name: 'Postojna Grotten (9 aug)',       lat: 45.783,   lng: 14.204,   c: 1 },
+    { name: 'Piran (10 aug)',                 lat: 45.528,   lng: 13.568,   c: 1 },
+    { name: 'Bootje huren · Bernardin (11 aug)', lat: 45.522, lng: 13.582,   c: 1 },
+    { name: 'Škocjan Grotten (nog open)',     lat: 45.664,   lng: 13.989,   c: 1 },
+    { name: 'Logarska Dolina (13 aug)',       lat: 46.392,   lng: 14.622,   c: 2 },
+    { name: 'Raften op de Savinja (14 aug)',  lat: 46.360,   lng: 14.800,   c: 2 },
+    { name: 'Kamnik & kasteel (15 aug)',      lat: 46.225,   lng: 14.612,   c: 2 }
   ];
 
   var map = L.map('trip-map', { scrollWheelZoom: false }).setView([46.1, 14.1], 8);
@@ -1120,9 +1165,10 @@
 
   trips.forEach(function (trip) {
     L.circleMarker([trip.lat, trip.lng], {
-      radius: 6, color: colors[trip.c], weight: 2,
-      fillColor: '#fff', fillOpacity: 1
-    }).addTo(map).bindPopup('<strong>' + trip.name + '</strong>');
+      radius: trip.done ? 7 : 6, color: colors[trip.c], weight: 2,
+      fillColor: trip.done ? colors[trip.c] : '#fff', fillOpacity: 1
+    }).addTo(map).bindPopup('<strong>' + trip.name + '</strong>' +
+      (trip.done ? '<br>✅ gedaan' : ''));
     pts.push([trip.lat, trip.lng]);
   });
 
