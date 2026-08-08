@@ -7,69 +7,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="stijl.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --soca: #1a7abf;
-    --forest: #2d5c1e;
-    --sun: #f0b429;
-    --sand: #fdf6ec;
-    --dark: #1c1c1c;
-    --mid: #555;
-    --light: #f4f4f0;
-    --white: #fff;
-    --radius: 16px;
-    --shadow: 0 4px 24px rgba(0,0,0,0.10);
-  }
-
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--light);
-    color: var(--dark);
-    min-height: 100vh;
-  }
+  /* Alleen wat het reisplan zelf nodig heeft — de rest staat in stijl.css */
 
   /* ── HERO ── */
-  .hero {
-    background: linear-gradient(135deg, #0d4f7c 0%, #1a7abf 50%, #2d5c1e 100%);
-    color: white;
-    padding: 80px 60px 70px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    bottom: -2px; left: 0; right: 0;
-    height: 60px;
-    background: var(--light);
-    clip-path: ellipse(55% 100% at 50% 100%);
-    z-index: 2;
-  }
-  .hero-inner {
-    max-width: 900px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-  }
-  .hero-flag { font-size: 56px; line-height: 1; margin-bottom: 20px; }
-  .hero h1 {
-    font-family: 'Fraunces', serif;
-    font-size: 72px;
-    font-weight: 900;
-    line-height: 1.0;
-    margin-bottom: 16px;
-    letter-spacing: -1px;
-  }
-  .hero h1 span { color: var(--sun); }
-  .hero-sub {
-    font-size: 20px;
-    opacity: 0.88;
-    font-weight: 400;
-    margin-bottom: 36px;
-    max-width: 520px;
-    line-height: 1.5;
+  .hero-sub { margin-bottom: 26px; }
+  @media (min-width: 761px) {
+    .hero { padding: 80px 60px 70px; }
+    .hero-flag { font-size: 56px; margin-bottom: 20px; }
+    .hero h1 { font-size: 72px; margin-bottom: 16px; }
+    .hero-sub { font-size: 20px; opacity: 0.88; margin-bottom: 36px; }
   }
   .hero-stats {
     display: flex;
@@ -116,6 +64,15 @@
     color: var(--mid);
     white-space: nowrap;
   }
+  a.route-stop {
+    text-decoration: none;
+    border-radius: 20px;
+    padding: 6px 8px;
+    margin: 0 -8px;
+    transition: background 0.15s, color 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  a.route-stop:hover { background: var(--light); color: var(--dark); }
   .route-stop .dot {
     width: 10px; height: 10px;
     border-radius: 50%;
@@ -213,56 +170,10 @@
   .map-hint { font-size: 12px; color: #aaa; margin-top: 10px; }
 
   /* ── SECTION ── */
-  .section {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 56px 60px;
-  }
-  .section + .section { padding-top: 0; }
-
-  .section-header {
-    display: flex;
-    align-items: flex-end;
-    gap: 20px;
-    margin-bottom: 32px;
-    padding-bottom: 20px;
-    border-bottom: 3px solid;
-  }
   .section-header.color-1 { border-color: var(--soca); }
   .section-header.color-2 { border-color: #e8832a; }
   .section-header.color-3 { border-color: var(--forest); }
 
-  .section-num {
-    font-family: 'Fraunces', serif;
-    font-size: 80px;
-    font-weight: 900;
-    line-height: 0.85;
-    opacity: 0.12;
-    color: var(--dark);
-    user-select: none;
-  }
-  .section-title-block {}
-  .section-eyebrow {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--mid);
-    margin-bottom: 6px;
-  }
-  .section-title {
-    font-family: 'Fraunces', serif;
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1.1;
-  }
-  .section-meta {
-    margin-left: auto;
-    text-align: right;
-    font-size: 13px;
-    color: var(--mid);
-    line-height: 1.6;
-  }
   .camp-badge {
     display: inline-block;
     padding: 4px 12px;
@@ -447,102 +358,6 @@
   .tag-swim  { background: #d0f0f8; color: #0a6070; }
   .tag-culture { background: #fde8d8; color: #8a3a0a; }
 
-  /* ── GESCHIEDENIS ── */
-  .hist-header { border-color: var(--sun); }
-  .hist-header .section-num { opacity: 1; font-size: 46px; line-height: 1; }
-  .hist-lead {
-    font-size: 15px;
-    line-height: 1.7;
-    color: var(--mid);
-    max-width: 660px;
-    margin-bottom: 32px;
-  }
-  .hist-lead b { color: var(--dark); }
-  .timeline {
-    position: relative;
-    padding-left: 26px;
-    margin-bottom: 40px;
-  }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 5px; top: 8px; bottom: 8px;
-    width: 2px;
-    border-radius: 2px;
-    background: linear-gradient(180deg, var(--soca) 0%, #e8832a 55%, var(--forest) 100%);
-    opacity: 0.35;
-  }
-  .hist-item { position: relative; padding-bottom: 24px; }
-  .hist-item:last-child { padding-bottom: 0; }
-  .hist-item::before {
-    content: '';
-    position: absolute;
-    left: -26px; top: 4px;
-    width: 12px; height: 12px;
-    border-radius: 50%;
-    background: var(--white);
-    border: 3px solid var(--soca);
-  }
-  .hist-item.era-2::before { border-color: #e8832a; }
-  .hist-item.era-3::before { border-color: var(--forest); }
-  .hist-when {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    color: var(--soca);
-    margin-bottom: 3px;
-  }
-  .hist-item.era-2 .hist-when { color: #c26a1a; }
-  .hist-item.era-3 .hist-when { color: var(--forest); }
-  .hist-item h4 {
-    font-family: 'Fraunces', serif;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1.25;
-    margin-bottom: 6px;
-  }
-  .hist-item p { font-size: 14px; line-height: 1.6; color: var(--mid); }
-  .hist-here {
-    display: inline-block;
-    margin-top: 9px;
-    font-size: 12.5px;
-    font-weight: 600;
-    line-height: 1.45;
-    background: var(--sand);
-    border: 1px solid #efe2cc;
-    color: #6b5836;
-    border-radius: 16px;
-    padding: 6px 13px;
-  }
-  .hist-spots {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-  .hist-spot {
-    background: var(--white);
-    border: 1px solid #eee;
-    border-radius: var(--radius);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-    padding: 20px 22px;
-  }
-  .hist-spot h4 {
-    font-family: 'Fraunces', serif;
-    font-size: 17px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .hist-spot .spot-camp {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: var(--mid);
-    margin-bottom: 6px;
-  }
-  .hist-spot p { font-size: 13px; color: var(--mid); line-height: 1.6; }
-
   /* ── TRAVEL DAY ── */
   .travel-row {
     background: #f8f8f6;
@@ -560,90 +375,8 @@
   .travel-row.travel-stay { align-items: flex-start; }
   .travel-row.travel-stay .booking-box { background: #fff; }
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--dark);
-    color: rgba(255,255,255,0.5);
-    text-align: center;
-    padding: 32px;
-    font-size: 13px;
-    margin-top: 60px;
-  }
-  footer strong { color: rgba(255,255,255,0.9); }
-
-  /* ── DIVIDER ── */
-  .section-divider {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 60px;
-  }
-  .section-divider hr {
-    border: none;
-    border-top: 1px solid #e0e0e0;
-  }
-
-  /* ── BOOKING BOX ── */
-  .booking-box {
-    margin-top: 16px;
-    background: var(--sand);
-    border: 1px solid #efe2cc;
-    border-radius: 12px;
-    padding: 14px 16px;
-    font-size: 13px;
-    line-height: 1.55;
-  }
-  .booking-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-  }
-  .bk-ok   { background: #e6f4e0; color: #2d6a1e; }
-  .bk-todo { background: #fde8d8; color: #a8500a; }
-  .bk-row { display: flex; gap: 9px; align-items: flex-start; }
-  .bk-row + .bk-row { margin-top: 6px; }
-  .bk-ico { flex-shrink: 0; width: 18px; text-align: center; }
-  .bk-row b { color: var(--dark); font-weight: 600; }
-
-  /* ── ACTION BUTTONS ── */
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 14px;
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-    padding: 9px 15px;
-    border-radius: 22px;
-    border: 1px solid transparent;
-    line-height: 1;
-    transition: transform 0.08s ease, box-shadow 0.15s ease;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .btn:active { transform: scale(0.97); }
-  .btn-nav  { background: #1a73e8; color: #fff; box-shadow: 0 2px 8px rgba(26,115,232,0.35); }
-  .btn-call { background: #fff; color: var(--dark); border-color: #dcdcdc; }
-  .btn-map  { background: #fff; color: #1a73e8; border-color: #cfe0fb; }
-  .btn-sm   { padding: 7px 12px; font-size: 12px; }
-
   /* ── RESPONSIVE / PHONE ── */
   @media (max-width: 760px) {
-    .hero { padding: 46px 20px 52px; }
-    .hero-flag { font-size: 44px; margin-bottom: 14px; }
-    .hero h1 { font-size: 44px; }
-    .hero-sub { font-size: 16px; margin-bottom: 26px; }
     .hero-stats { gap: 20px 30px; flex-wrap: wrap; }
     .hero-stat .num { font-size: 32px; }
 
@@ -654,14 +387,6 @@
     .style-bar { padding: 0 20px; }
     .map-section { padding: 32px 20px 0; }
     #trip-map { height: 340px; }
-    .section { padding: 40px 20px; }
-    .section + .section { padding-top: 0; }
-    .section-divider { padding: 0 20px; }
-
-    .section-header { gap: 12px 16px; flex-wrap: wrap; align-items: center; }
-    .section-num { font-size: 52px; }
-    .section-title { font-size: 23px; }
-    .section-meta { margin-left: 0; text-align: left; flex-basis: 100%; }
 
     .camp-card { grid-template-columns: 1fr; }
     .camp-img-placeholder, .camp-img { width: 100%; }
@@ -674,13 +399,35 @@
     .day-content { padding: 18px 20px; }
 
     .travel-row { flex-direction: column; align-items: flex-start; }
-
-    .hist-header .section-num { font-size: 34px; }
-    .hist-spots { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
+
+<!-- MENU -->
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <a class="sitenav-brand" href="./">🇸🇮 <span class="brand-text">Slovenië 2026</span></a>
+    <div class="sitenav-tabs">
+      <a href="./" class="active">Reisplan</a>
+      <a href="geschiedenis.html">Geschiedenis</a>
+      <a href="paklijst.html">Paklijst</a>
+      <a href="learnings.html">Learnings</a>
+    </div>
+  </div>
+</nav>
+
+<!-- SPRINGBALK -->
+<div class="jumpbar">
+  <div class="jumpbar-inner">
+    <span class="jump-label">Spring naar</span>
+    <a href="#heenreis">🚗 Heenreis</a>
+    <a href="#kamp1"><span class="jdot" style="background:#1a7abf"></span> 1 · Soča</a>
+    <a href="#kamp2"><span class="jdot" style="background:#e8832a"></span> 2 · Istrië</a>
+    <a href="#kamp3"><span class="jdot" style="background:#2d5c1e"></span> 3 · Savinja</a>
+    <a href="#terugweg">🏠 Terugweg</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -706,8 +453,6 @@
         <div class="lbl">km heen &amp; terug</div>
       </div>
     </div>
-    <a href="paklijst.html" style="display:inline-flex;align-items:center;gap:8px;margin-top:28px;padding:10px 20px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:24px;color:white;text-decoration:none;font-size:14px;font-weight:600;backdrop-filter:blur(4px);transition:background 0.18s;" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">🧳 Paklijst</a>
-    <a href="#geschiedenis" style="display:inline-flex;align-items:center;gap:8px;margin-top:28px;margin-left:10px;padding:10px 20px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:24px;color:white;text-decoration:none;font-size:14px;font-weight:600;backdrop-filter:blur(4px);transition:background 0.18s;" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">📜 Geschiedenis</a>
   </div>
 </div>
 
@@ -721,38 +466,38 @@
     <div class="route-arrow">
       <span class="route-drive">1 aug · ~7,5u</span>
     </div>
-    <div class="route-stop">
+    <a class="route-stop" href="#heenreis">
       <span class="dot dot-de"></span>
       Meinheim (D)
-    </div>
+    </a>
     <div class="route-arrow">
       <span class="route-drive">2 aug · ~6,5u</span>
     </div>
-    <div class="route-stop">
+    <a class="route-stop" href="#kamp1">
       <span class="dot dot-1"></span>
       Baška grapa
-    </div>
+    </a>
     <div class="route-arrow">
       <span class="route-drive">7 aug · ~2,5u</span>
     </div>
-    <div class="route-stop">
+    <a class="route-stop" href="#kamp2">
       <span class="dot dot-2"></span>
       Istrische kust
-    </div>
+    </a>
     <div class="route-arrow">
       <span class="route-drive">12 aug · ~2,5u</span>
     </div>
-    <div class="route-stop">
+    <a class="route-stop" href="#kamp3">
       <span class="dot dot-3"></span>
       Savinja-vallei
-    </div>
+    </a>
     <div class="route-arrow">
       <span class="route-drive">17–18 aug · ~12,5u</span>
     </div>
-    <div class="route-stop">
+    <a class="route-stop" href="#terugweg">
       <span class="dot dot-nl"></span>
       De Glind
-    </div>
+    </a>
   </div>
 </div>
 
@@ -777,148 +522,8 @@
   <div class="map-hint">Grote stippen = campings · kleine stippen = dagtrips · klik voor details. (Coördinaten bij benadering.)</div>
 </div>
 
-<!-- GESCHIEDENIS -->
-<div class="section" id="geschiedenis">
-  <div class="section-header hist-header">
-    <div class="section-num">📜</div>
-    <div class="section-title-block">
-      <div class="section-eyebrow">Achtergrond</div>
-      <div class="section-title">Waar reizen we eigenlijk rond?</div>
-    </div>
-    <div class="section-meta">
-      50.000 jaar<br>in tien minuten
-    </div>
-  </div>
-
-  <p class="hist-lead">Slovenië is piepklein — kleiner dan Nederland — maar het ligt precies op het kruispunt waar de <b>Alpen, de Middellandse Zee, de Karst en de Balkan</b> elkaar raken. Daardoor is er altijd iemand langsgekomen: Romeinen, Venetianen, Habsburgers, Napoleon, twee wereldoorlogen en Joegoslavië. Pas sinds <b>1991</b> is het een eigen land. Bijna alles hieronder kun je onderweg letterlijk zien staan.</p>
-
-  <div class="timeline">
-
-    <div class="hist-item era-1">
-      <div class="hist-when">± 50.000 v.Chr.</div>
-      <h4>Een neanderthaler met een fluit</h4>
-      <p>In de grot <b>Divje babe</b> bij Cerkno — ±40 minuten van kamp 1 — vonden archeologen een dijbeen van een holenbeer met keurige gaatjes erin. Volgens veel onderzoekers het <b>oudste muziekinstrument ter wereld</b>. Het origineel ligt in het Nationaal Museum in Ljubljana.</p>
-      <span class="hist-here">🎵 Leuk weetje voor Floris &amp; Yune: de oudste "blokfluit" van de wereld komt hier om de hoek vandaan.</span>
-    </div>
-
-    <div class="hist-item era-1">
-      <div class="hist-when">± 15 n.Chr. – 400</div>
-      <h4>De Romeinen leggen de wegen aan</h4>
-      <p>De Romeinen stichten <b>Emona</b>, de stad waar nu Ljubljana ligt, en trekken hun wegen van de Adriatische havens naar de Donau — dwars door de bergpassen die wij nu met de auto nemen. In het centrum van Ljubljana staan de muren van Emona nog gewoon in het gras.</p>
-    </div>
-
-    <div class="hist-item era-1">
-      <div class="hist-when">6e – 8e eeuw</div>
-      <h4>De Slaven komen de dalen in</h4>
-      <p>Slavische stammen trekken de Alpendalen binnen en vormen <b>Karantanië</b>, een van de eerste Slavische vorstendommen van Europa. Hun hertogen werden ingehuldigd op een oude Romeinse steen — in het Sloveens, door een boer, een ceremonie die eeuwenlang bleef bestaan. Van dat volk stammen de Slovenen af.</p>
-    </div>
-
-    <div class="hist-item era-1">
-      <div class="hist-when">± jaar 1000</div>
-      <h4>De oudste Sloveense woorden</h4>
-      <p>De <b>Freisinger handschriften</b> zijn de oudste tekst in het Sloveens én de oudste Slavische tekst in ons eigen Latijnse schrift. Het Sloveens is dus ouder op papier dan het Nederlands.</p>
-    </div>
-
-    <div class="hist-item era-2">
-      <div class="hist-when">1283 – 1797</div>
-      <h4>Venetië koopt de kust</h4>
-      <p>Piran, Izola en Koper horen <b>vijf eeuwen lang bij de Republiek Venetië</b>. Vandaar dat kamp 2 in een landschap ligt dat meer op Italië lijkt dan op de Alpen: campaniles, luiken, olijfbomen. Het zout uit de pannen van Sečovlje — pal naast de camping — maakte Piran rijk.</p>
-      <span class="hist-here">⛵ Zie je terug in: Piran (10 aug) — het Tartiniplein was tot 1894 gewoon de binnenhaven.</span>
-    </div>
-
-    <div class="hist-item era-2">
-      <div class="hist-when">1335 – 1918</div>
-      <h4>Bijna 600 jaar Habsburg</h4>
-      <p>Het grootste deel van Slovenië valt bijna zes eeuwen onder <b>Wenen</b>. Duits is de taal van de heren en de stad, Sloveens die van het dorp en de boerderij. Dat verklaart de Oostenrijkse kerktorentjes, de boerenhuizen met balkons vol geraniums — en de goede appeltaart.</p>
-    </div>
-
-    <div class="hist-item era-2">
-      <div class="hist-when">1550</div>
-      <h4>Het eerste boek in het Sloveens</h4>
-      <p>De protestantse priester <b>Primož Trubar</b> laat in Duitsland het eerste gedrukte Sloveense boek maken: een catechismus en een abc-boekje. De Reformatie werd hier later weer teruggedraaid, maar de taal bleef — en daarmee eigenlijk het hele idee "Sloveens".</p>
-    </div>
-
-    <div class="hist-item era-2">
-      <div class="hist-when">1809 – 1813</div>
-      <h4>Napoleon maakt Ljubljana hoofdstad</h4>
-      <p>Vier jaar lang zijn deze streken de <b>Illyrische Provincies</b> van Napoleon, met Ljubljana als hoofdstad. Voor het eerst mag er op school Sloveens gesproken worden. Kort maar beslissend: het nationale zelfvertrouwen van de 19e eeuw begint hier.</p>
-    </div>
-
-    <div class="hist-item era-3">
-      <div class="hist-when">1915 – 1917</div>
-      <h4>Het Isonzofront — precies waar kamp 1 staat</h4>
-      <p>Aan de turquoise Soča (Italiaans: Isonzo) vochten Italië en Oostenrijk-Hongarije <b>twaalf veldslagen</b> uit, met honderdduizenden doden in de bergen. In oktober 1917 braken Duitse en Oostenrijkse troepen door bij <b>Kobarid</b> (Caporetto) — Hemingway verwerkte die aftocht later in <i>A Farewell to Arms</i>. De spoorlijn met al die viaducten en tunnels door de Baška grapa, gebouwd in 1906, was toen de aanvoerlijn naar het front.</p>
-      <span class="hist-here">⚔️ Zie je terug in: de wandeling naar de Kozjak-waterval (3 aug) loopt langs Italiaanse loopgraven en stellingen.</span>
-    </div>
-
-    <div class="hist-item era-3">
-      <div class="hist-when">1920 – 1943</div>
-      <h4>De Italiaanse tijd</h4>
-      <p>Na de Eerste Wereldoorlog wordt de hele westkant — de Soča-vallei, de Karst en Istrië — <b>Italiaans</b>. Onder Mussolini mag het Sloveens niet meer op school en worden zelfs achternamen veritaliaanst. Hier ontstaat <b>TIGR</b>, een van de eerste antifascistische verzetsbewegingen van Europa. De rest van Slovenië hoort dan bij het koninkrijk Joegoslavië.</p>
-    </div>
-
-    <div class="hist-item era-3">
-      <div class="hist-when">1941 – 1945</div>
-      <h4>Bezet, opgedeeld, en verzet in het bos</h4>
-      <p>Slovenië wordt in drieën gedeeld tussen Duitsland, Italië en Hongarije. In de bossen en bergen — onder andere rond de Savinja-vallei van kamp 3 — vechten de <b>partizanen</b>. In een onvindbaar kloofje bij Cerkno lag <b>partizanenhospitaal Franja</b>: een compleet ziekenhuis van houten barakken, onzichtbaar van boven, waar honderden gewonden werden verpleegd.</p>
-      <span class="hist-here">🩺 Franja is nu museum, ±45 min van kamp 1 — een van de indrukwekkendste plekken van het land.</span>
-    </div>
-
-    <div class="hist-item era-3">
-      <div class="hist-when">1945 – 1991</div>
-      <h4>Joegoslavië onder Tito</h4>
-      <p>Slovenië is de kleinste maar rijkste republiek van Joegoslavië: nog geen tiende van de inwoners, maar bijna een derde van de export. Het land ligt aan het IJzeren Gordijn en tóch niet erachter — Slovenen konden reizen, en Italiaanse spijkerbroeken en koffie kwamen gewoon over de grens.</p>
-    </div>
-
-    <div class="hist-item era-3">
-      <div class="hist-when">1991 – nu</div>
-      <h4>Tien dagen oorlog, en toen een eigen land</h4>
-      <p>Op <b>25 juni 1991</b> roept Slovenië de onafhankelijkheid uit. Het Joegoslavische leger grijpt in, maar de <b>Tiendaagse Oorlog</b> is na anderhalve week voorbij, met een kleine zeventig doden — verreweg het lichtste van alle Joegoslavische oorlogen. Daarna ging het snel: in 2004 de EU en de NAVO, in 2007 de euro en open grenzen. Slovenië is dus jonger dan Lukas en Hester.</p>
-    </div>
-
-  </div>
-
-  <div class="days-label">Waar zie je het terug op onze route?</div>
-  <div class="hist-spots">
-
-    <div class="hist-spot">
-      <div class="spot-camp">Kamp 1 · Baška grapa &amp; Soča</div>
-      <h4>Het front in de bergen</h4>
-      <p>Om de camping heen ligt een openluchtmuseum: de spoorlijn uit 1906 door de grapa, loopgraven boven Kobarid, en het houten <b>gedenkkerkje Javorca</b> (1916) dat Oostenrijks-Hongaarse soldaten voor hun gevallen kameraden bouwden. In Kobarid vertelt het <b>Kobariški muzej</b> het hele verhaal — bekroond en heel goed te doen met kinderen.</p>
-      <div class="actions">
-        <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Kobariski+muzej,+Kobarid" target="_blank" rel="noopener">📍 Kobarid Museum</a>
-        <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Partizanska+bolnica+Franja,+Cerkno" target="_blank" rel="noopener">📍 Hospitaal Franja</a>
-      </div>
-    </div>
-
-    <div class="hist-spot">
-      <div class="spot-camp">Kamp 2 · Istrië</div>
-      <h4>Vijf eeuwen Venetië (en zout)</h4>
-      <p>Piran is een Venetiaans stadje gebleven: nauwe steegjes, een campanile naar het voorbeeld van San Marco, en het <b>Venetiaanse Huis</b> uit de 15e eeuw. Vlak bij de camping liggen de <b>zoutpannen van Sečovlje</b>, waar het zout nog steeds met de hand wordt geoogst zoals in de middeleeuwen — ondiep water, vogels, en overal wit: precies iets voor Floris en Yune.</p>
-      <div class="actions">
-        <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Secovlje+Salina+Nature+Park" target="_blank" rel="noopener">📍 Zoutpannen Sečovlje</a>
-      </div>
-    </div>
-
-    <div class="hist-spot">
-      <div class="spot-camp">Kamp 2 · De Karst</div>
-      <h4>Het woord "karst" komt hiervandaan</h4>
-      <p>Deze kalksteenstreek heet <b>Kras</b>, en alle karstverschijnselen ter wereld zijn ernaar vernoemd. In de Postojna-grot staan handtekeningen van bezoekers uit <b>1213</b> op de wand. En in 1944 bliezen partizanen er een Duits brandstofdepot op: het vuur brandde een week, de wanden bij de ingang zijn er nog steeds zwart van.</p>
-    </div>
-
-    <div class="hist-spot">
-      <div class="spot-camp">Kamp 3 · Savinja</div>
-      <h4>De vlotters van Ljubno</h4>
-      <p>Ljubno leefde eeuwenlang van de <b>flosarji</b>: vlottersmannen die boomstammen tot vlotten bonden en die de Savinja af voeren, helemaal tot in Kroatië en Servië. Toen de vrachtwagens kwamen was het voorbij, maar het dorp viert het elk jaar met het <b>Flosarski bal</b>. Ons raften op 14 aug is er eigenlijk de vrolijke nazaat van.</p>
-    </div>
-
-  </div>
-</div>
-
-<div class="section-divider"><hr></div>
-
 <!-- HEENREIS TUSSENSTOP -->
-<div class="section" style="padding-bottom: 48px;">
+<div class="section" id="heenreis" style="padding-bottom: 48px;">
   <div class="travel-row travel-stay">
     <span class="travel-icon">🚗</span>
     <div style="flex:1">
@@ -943,7 +548,7 @@
 </div>
 
 <!-- ═══════════════════════════════════ KAMP 1 ═══ -->
-<div class="section">
+<div class="section" id="kamp1">
   <div class="section-header color-1">
     <div class="section-num">1</div>
     <div class="section-title-block">
@@ -1096,7 +701,7 @@
 </div>
 
 <!-- ═══════════════════════════════════ KAMP 2 ═══ -->
-<div class="section" style="padding-top: 0;">
+<div class="section" id="kamp2" style="padding-top: 0;">
   <div class="section-header color-2">
     <div class="section-num">2</div>
     <div class="section-title-block">
@@ -1263,7 +868,7 @@
 </div>
 
 <!-- ═══════════════════════════════════ KAMP 3 ═══ -->
-<div class="section" style="padding-top: 0;">
+<div class="section" id="kamp3" style="padding-top: 0;">
   <div class="section-header color-3">
     <div class="section-num">3</div>
     <div class="section-title-block">
@@ -1380,7 +985,7 @@
 <div class="section-divider"><hr></div>
 
 <!-- TERUGWEG -->
-<div class="section" style="padding-top: 40px; padding-bottom: 60px;">
+<div class="section" id="terugweg" style="padding-top: 40px; padding-bottom: 60px;">
   <div class="travel-row travel-stay">
     <span class="travel-icon">🏠</span>
     <div style="flex:1">
@@ -1399,7 +1004,7 @@
   </div>
 </div>
 
-<footer>
+<footer class="site-footer">
   Gemaakt voor <strong>onze Slovenië-vakantie augustus 2026</strong> 🇸🇮 &nbsp;·&nbsp; Berghof Oberweiler, Kaki Plac &amp; Camp Na Otoku ✅ geboekt · Camp Šorli nog reserveren &nbsp;·&nbsp; Vignetten ✅ — 2e vignet start 10 aug &nbsp;·&nbsp; Tickets grotten &amp; Vintgar vooraf online &nbsp;·&nbsp; Bootje bij Bernardin vooraf bellen &nbsp;·&nbsp; Genoeg <strong>cash</strong> mee (campings betaal je contant) &nbsp;·&nbsp; Mountainbikes mee 🚲
 </footer>
 

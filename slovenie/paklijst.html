@@ -5,88 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paklijst Slovenië 2026 🧳</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="stijl.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --soca: #1a7abf;
-    --forest: #2d5c1e;
-    --sun: #f0b429;
-    --sand: #fdf6ec;
-    --dark: #1c1c1c;
-    --mid: #555;
-    --light: #f4f4f0;
-    --white: #fff;
-    --radius: 16px;
-    --shadow: 0 4px 24px rgba(0,0,0,0.10);
-  }
-
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--light);
-    color: var(--dark);
-    min-height: 100vh;
-  }
-
-  /* ── HERO ── */
-  .hero {
-    background: linear-gradient(135deg, #0d4f7c 0%, #1a7abf 50%, #2d5c1e 100%);
-    color: white;
-    padding: 56px 60px 72px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    bottom: -2px; left: 0; right: 0;
-    height: 60px;
-    background: var(--light);
-    clip-path: ellipse(55% 100% at 50% 100%);
-    z-index: 2;
-  }
-  .hero-inner {
-    max-width: 900px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-  }
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    font-weight: 500;
-    color: rgba(255,255,255,0.65);
-    text-decoration: none;
-    margin-bottom: 24px;
-    transition: color 0.15s;
-  }
-  .back-link:hover { color: white; }
-  .hero-flag { font-size: 44px; line-height: 1; margin-bottom: 14px; }
-  .hero h1 {
-    font-family: 'Fraunces', serif;
-    font-size: 64px;
-    font-weight: 900;
-    line-height: 1.0;
-    margin-bottom: 12px;
-    letter-spacing: -1px;
-  }
-  .hero h1 span { color: var(--sun); }
-  .hero-sub {
-    font-size: 18px;
-    opacity: 0.85;
-    font-weight: 400;
-    max-width: 480px;
-    line-height: 1.5;
-  }
+  /* Alleen wat de paklijst zelf nodig heeft — de rest staat in stijl.css */
 
   /* ── PROGRESS ── */
   .progress-section {
     background: var(--white);
     border-bottom: 1px solid #e5e5e5;
     position: sticky;
-    top: 0;
+    top: 52px;
     z-index: 10;
   }
   .progress-inner {
@@ -265,9 +193,11 @@
   footer a { color: var(--mid); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
 
+  @media (max-width: 760px) {
+    .progress-section { top: 50px; }
+  }
+
   @media (max-width: 640px) {
-    .hero { padding: 36px 24px 60px; }
-    .hero h1 { font-size: 44px; }
     .progress-inner { padding: 14px 24px; }
     .main { padding: 28px 24px 60px; }
     .cat-grid { grid-template-columns: 1fr; }
@@ -280,6 +210,19 @@
 </style>
 </head>
 <body>
+
+<!-- MENU -->
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <a class="sitenav-brand" href="./">🇸🇮 <span class="brand-text">Slovenië 2026</span></a>
+    <div class="sitenav-tabs">
+      <a href="./">Reisplan</a>
+      <a href="geschiedenis.html">Geschiedenis</a>
+      <a href="paklijst.html" class="active">Paklijst</a>
+      <a href="learnings.html">Learnings</a>
+    </div>
+  </div>
+</nav>
 
 <div class="hero">
   <div class="hero-inner">
@@ -571,7 +514,8 @@
 </div><!-- /main -->
 
 <footer>
-  🚲 Mountainbikes mee &nbsp;·&nbsp; <a href="./">← Terug naar reisplan</a>
+  🚲 Mountainbikes mee &nbsp;·&nbsp; <a href="./">← Terug naar reisplan</a> &nbsp;·&nbsp;
+  <a href="learnings.html">Iets geleerd over wat je mee moet nemen? Zet het bij de learnings →</a>
 </footer>
 
 <script>

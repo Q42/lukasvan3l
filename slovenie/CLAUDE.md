@@ -21,13 +21,33 @@ water play for the kids) and keep the kids' names (Floris & Yune) consistent.
 
 ## Contents
 
-- `index.html` — the entire page. Single, self-contained HTML file with inline
-  CSS and JavaScript. No build step, no dependencies to install; just open it
-  in a browser.
+Vier pagina's plus één gedeelde stylesheet. Geen build step, geen dependencies;
+open een `.html` in de browser en klaar.
+
+- `index.html` — **Reisplan**: route, kaart, de drie basiskampen en de dagtrips.
+- `geschiedenis.html` — **Geschiedenis**: tijdlijn + "waar zie je het terug".
+- `paklijst.html` — **Paklijst**: afvinklijst, voortgang in `localStorage`.
+- `learnings.html` — **Learnings**: wat we meenemen naar de vólgende vakantie.
+- `stijl.css` — gedeelde basis: kleurtokens, `body`, de menubalk, de hero,
+  `.section*`, `.booking-box`, `.btn`/`.actions` en `.site-footer`. Pagina-eigen
+  opmaak blijft inline in de betreffende `.html`.
+
+## Navigatie tussen de pagina's
+
+- Elke pagina begint met dezelfde **menubalk** (`.sitenav`, sticky): merk links,
+  vier tabs rechts. De tab van de huidige pagina krijgt `class="active"`. Voeg je
+  een pagina toe, zet 'm dan in **alle vier** de menu's. Op de telefoon verdwijnt
+  de merknaam (`.brand-text`) zodat de vier tabs passen.
+- Alleen het reisplan heeft daaronder een **springbalk** (`.jumpbar`, sticky op
+  `top: 52px`) naar `#heenreis`, `#kamp1`, `#kamp2`, `#kamp3` en `#terugweg`. De
+  stops in de routebalk linken naar diezelfde ankers. Secties met een `id`
+  krijgen via `stijl.css` een `scroll-margin-top` zodat de kop niet onder de
+  sticky balken verdwijnt — pas die aan als de balkhoogtes veranderen.
 
 ## How it works
 
-- **Layout/styling** is plain inline CSS. Fonts come from Google Fonts.
+- **Layout/styling** is plain CSS: `stijl.css` + een inline `<style>` per pagina.
+  Fonts come from Google Fonts.
 - **Interactive map**: [Leaflet](https://leafletjs.com/) (loaded from the
   unpkg CDN) with OpenStreetMap tiles. Markers for the 3 basecamps and the day
   trips, plus a route line. No API key required.
@@ -39,18 +59,29 @@ water play for the kids) and keep the kids' names (Floris & Yune) consistent.
   emoji placeholder. So to fix a blank card, tweak its `data-wiki` candidates
   or `data-search` query.
 
-## Geschiedenis-sectie
+## `geschiedenis.html`
 
-- Tussen de kaart en de heenreis staat een achtergrondhoofdstuk (`#geschiedenis`,
-  ook bereikbaar via de knop in de hero): een **tijdlijn** (`.timeline` /
-  `.hist-item`, met `era-1/2/3` voor de kleur van de stip) van neanderthalers
-  tot 1991, plus een grid **"waar zie je het terug op onze route"**
-  (`.hist-spots` / `.hist-spot`) dat per basiskamp een verhaal koppelt aan een
-  plek die we toch al bezoeken.
+- Een **tijdlijn** (`.timeline` / `.hist-item`, met `era-1/2/3` voor de kleur van
+  de stip) van neanderthalers tot 1991, plus een grid **"waar zie je het terug op
+  onze route"** (`.hist-spots` / `.hist-spot`) dat per basiskamp een verhaal
+  koppelt aan een plek die we toch al bezoeken.
 - Houd de tijdlijn **gekoppeld aan de route**: elk item dat je toevoegt hoort
   iets te zeggen over waar we slapen of heen rijden (Isonzofront bij kamp 1,
   Venetië/zout bij kamp 2, de vlotters van Ljubno bij kamp 3). De
   `.hist-here`-pil is daarvoor bedoeld.
+
+## `learnings.html`
+
+- Bewust **niet reisspecifiek**: dit is de pagina die je bij het plannen van de
+  vólgende vakantie openslaat. Geordend op scenario ("als we naar een mooie kust
+  gaan", "een warm land", …) in `.lrn-card`s, want zo gebruik je ze ook.
+- Een learning die uit deze reis komt krijgt het label
+  `<span class="lrn-src">Slovenië 2026</span>`. Komt-ie van een volgende reis,
+  gebruik dan die naam — zo blijft zichtbaar waar iets vandaan komt.
+- Onderaan staat een notitieblokje dat in `localStorage` schrijft
+  (`learnings-notities`), bedoeld om onderweg snel iets vast te leggen. Dat is
+  **per apparaat** en staat niet in de repo; met "Kopieer alles" haal je de
+  notities eruit om ze daarna als echte `.lrn-card`-regels in te typen.
 
 ## Booking & navigation
 
@@ -83,9 +114,10 @@ water play for the kids) and keep the kids' names (Floris & Yune) consistent.
   turn-by-turn from the phone's location), a `📍 Maps` search link, and a
   `📞 Bel camping` `tel:` link on the camps. Drive time is shown both on the
   photo `.drive-badge` and in the nav button label.
-- The page is **mobile-first responsive** (media query at `max-width: 760px`):
-  cards/day-rows collapse to a single column and the route bar scrolls
-  horizontally — it's meant to be opened on a phone during the trip.
+- Alle pagina's zijn **responsive** (breekpunt `max-width: 760px`, de paklijst
+  heeft er daarnaast één op 640px): kaarten en dagrijen worden één kolom, de
+  route- en springbalk scrollen horizontaal. Het is bedoeld om onderweg op een
+  telefoon open te hebben.
 
 ## Notes
 

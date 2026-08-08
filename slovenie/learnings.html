@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnings voor de volgende vakantie 💡</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="stijl.css">
+<style>
+  /* Alleen wat deze pagina zelf nodig heeft — de rest staat in stijl.css */
+
+  .main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 44px 60px 20px;
+  }
+  .lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--mid);
+    max-width: 660px;
+    margin-bottom: 32px;
+  }
+  .lead b { color: var(--dark); }
+
+  .block-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--mid);
+    margin-bottom: 16px;
+  }
+
+  /* ── SCENARIOKAARTEN ── */
+  .lrn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 44px;
+  }
+  .lrn-card {
+    background: var(--white);
+    border: 1px solid #eee;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .lrn-header {
+    padding: 15px 20px 13px;
+    border-bottom: 2px solid;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .lrn-emoji { font-size: 20px; line-height: 1; }
+  .lrn-when {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+  .b-sea    { border-color: #0d9488; }
+  .b-hot    { border-color: #e8832a; }
+  .b-mount  { border-color: var(--forest); }
+  .b-drive  { border-color: #6b7280; }
+  .b-camp   { border-color: var(--soca); }
+  .b-kids   { border-color: #c89b00; }
+
+  .lrn-list { list-style: none; padding: 8px 0 12px; }
+  .lrn-list li {
+    display: flex;
+    gap: 10px;
+    padding: 7px 20px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--mid);
+  }
+  .lrn-list li b { color: var(--dark); font-weight: 600; }
+  .lrn-list .bullet { flex-shrink: 0; color: #ccc; }
+  .lrn-src {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #a2906c;
+    background: var(--sand);
+    border: 1px solid #efe2cc;
+    border-radius: 10px;
+    padding: 1px 7px;
+    margin-left: 4px;
+    white-space: nowrap;
+    vertical-align: 1px;
+  }
+
+  /* ── EIGEN NOTITIES ── */
+  .notes {
+    background: var(--white);
+    border: 1px solid #eee;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px 24px 24px;
+    margin-bottom: 60px;
+  }
+  .notes h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .notes p.hint { font-size: 13px; color: var(--mid); line-height: 1.6; margin-bottom: 16px; }
+  .note-form { display: flex; gap: 8px; flex-wrap: wrap; }
+  .note-form input {
+    flex: 1;
+    min-width: 220px;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 11px 14px;
+    border: 1px solid #ddd;
+    border-radius: 22px;
+    outline: none;
+    color: var(--dark);
+    background: #fcfcfb;
+  }
+  .note-form input:focus { border-color: var(--soca); background: #fff; }
+  .note-btn {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 22px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    background: var(--dark);
+    color: #fff;
+    transition: transform 0.08s ease;
+  }
+  .note-btn:active { transform: scale(0.97); }
+  .note-btn.ghost { background: #fff; color: var(--mid); border-color: #dcdcdc; }
+
+  #note-list { list-style: none; margin-top: 18px; }
+  #note-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-top: 1px solid #f0f0f0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  #note-list .note-text { flex: 1; }
+  #note-list .note-del {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1.4;
+  }
+  #note-list .note-del:hover { color: #dc2626; }
+  .note-empty { font-size: 13px; color: #bbb; font-style: italic; margin-top: 16px; }
+  .note-actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+
+  @media (max-width: 760px) {
+    .main { padding: 32px 20px 20px; }
+    .lrn-grid { grid-template-columns: 1fr; gap: 16px; }
+    .notes { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MENU -->
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <a class="sitenav-brand" href="./">🇸🇮 <span class="brand-text">Slovenië 2026</span></a>
+    <div class="sitenav-tabs">
+      <a href="./">Reisplan</a>
+      <a href="geschiedenis.html">Geschiedenis</a>
+      <a href="paklijst.html">Paklijst</a>
+      <a href="learnings.html" class="active">Learnings</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <a class="back-link" href="./">← Terug naar reisplan</a>
+    <div class="hero-flag">💡</div>
+    <h1>Lear<span>nings</span></h1>
+    <p class="hero-sub">Wat nemen we mee naar de volgende vakantie? Geordend op "als we naar … gaan", zodat je bij het plannen meteen de juiste lijst hebt.</p>
+  </div>
+</div>
+
+<div class="main">
+
+  <p class="lead">Dit is geen paklijst maar een <b>geheugensteun voor het plannen</b>. De paklijst hoort bij één reis; deze pagina blijft staan en groeit. Schrijf een learning op <b>zolang je 'm nog vers hebt</b> — het moment dat je denkt "hadden we dit maar meegenomen" ben je thuis weer vergeten.</p>
+
+  <div class="block-label">Als we naar … gaan</div>
+  <div class="lrn-grid">
+
+    <div class="lrn-card">
+      <div class="lrn-header b-sea">
+        <span class="lrn-emoji">🌊</span>
+        <span class="lrn-when">Een mooie kust</span>
+      </div>
+      <ul class="lrn-list">
+        <li><span class="bullet">•</span><span><b>Zwembrillen én zwemflippers</b> mee, voor iedereen. Bij helder water willen de kinderen snorkelen en dan wil je niet ter plekke op zoek naar een winkel.</span></li>
+        <li><span class="bullet">•</span><span>Waterschoenen of trekkingsandalen: aan de Istrische kust zwem je vanaf <b>rotsige kades en keien</b>, bijna nergens vanaf zand.<span class="lrn-src">Slovenië 2026</span></span></li>
+        <li><span class="bullet">•</span><span>Een bootje huren kan verrassend goedkoop, maar check vooraf of je een <b>vaarbewijs</b> nodig hebt — en boek in het hoogseizoen dagen van tevoren.<span class="lrn-src">Slovenië 2026</span></span></li>
+      </ul>
+    </div>
+
+    <div class="lrn-card">
+      <div class="lrn-header b-hot">
+        <span class="lrn-emoji">☀️</span>
+        <span class="lrn-when">Een warm land</span>
+      </div>
+      <ul class="lrn-list">
+        <li><span class="bullet">•</span><span>De <b>Q42-slaapzak</b> mee in plaats van de dikke slaapzakken — dun genoeg om 's nachts niet te liggen bakken.</span></li>
+        <li><span class="bullet">•</span><span><b>Mesh-tenten</b> die zoveel mogelijk doorlaten: binnentent van gaas, buitentent eraf als het droog blijft. Lucht en zicht naar buiten, muggen buiten.</span></li>
+        <li><span class="bullet">•</span><span>Denk aan schaduw op de plek zelf: een <b>schaduwdoek of tarp</b> scheelt overdag meer dan een extra tent.</span></li>
+      </ul>
+    </div>
+
+    <div class="lrn-card">
+      <div class="lrn-header b-mount">
+        <span class="lrn-emoji">🏔️</span>
+        <span class="lrn-when">Bergen &amp; rivieren</span>
+      </div>
+      <ul class="lrn-list">
+        <li><span class="bullet">•</span><span><b>Trekkingsandalen</b> die het water in mogen: rivierbeddingen, kloofwandelingen en dammen bouwen. De beste aankoop voor water­kinderen.<span class="lrn-src">Slovenië 2026</span></span></li>
+        <li><span class="bullet">•</span><span><b>Tekentang</b> mee en elke avond even checken — grote delen van Midden-Europa zijn tekengebied.<span class="lrn-src">Slovenië 2026</span></span></li>
+        <li><span class="bullet">•</span><span>Ook in de zomer 's avonds koud in de bergen: <b>fleece en lange broek</b> horen erbij, ook als de weersverwachting 30 graden zegt.</span></li>
+        <li><span class="bullet">•</span><span>Bij gravelplannen: kijk of de dalroutes echt vlak zijn. <b>Mooie riviervalleien</b> werken beter dan bergpassen met de kinderen erbij.</span></li>
+      </ul>
+    </div>
+
+    <div class="lrn-card">
+      <div class="lrn-header b-drive">
+        <span class="lrn-emoji">🚗</span>
+        <span class="lrn-when">Een verre autorit</span>
+      </div>
+      <ul class="lrn-list">
+        <li><span class="bullet">•</span><span>Boven de ±10 uur: <b>knip de rit in tweeën</b> met een simpele tussenstop. Een boerencamping op de heenweg is een halve vakantiedag in plaats van een verloren dag.<span class="lrn-src">Slovenië 2026</span></span></li>
+        <li><span class="bullet">•</span><span>Een aparte kist <b>voorin de auto</b>: wc-papier, snijmes, thee, zaklamp, cash, lunch. Scheelt uitpakken bij elke stop.<span class="lrn-src">Slovenië 2026</span></span></li>
+        <li><span class="bullet">•</span><span><b>Vignetten en tolwegen</b> vooraf regelen — en let op de geldigheidsdata, want een 10-dagenvignet dekt zelden een hele vakantie.<span class="lrn-src">Slovenië 2026</span></span></li>
+        <li><span class="bullet">•</span><span>Plan de lange etappes op een <b>doordeweekse dag</b>: in augustus staan de Alpentunnels in het weekend vast.</span></li>
+      </ul>
+    </div>
+
+    <div class="lrn-card">
+      <div class="lrn-header b-camp">
+        <span class="lrn-emoji">🏕️</span>
+        <span class="lrn-when">Kamperen, waar dan ook</span>
+      </div>
+      <ul class="lrn-list">
+        <li><span class="bullet">•</span><span>Kleine campings rekenen vaak <b>contant af</b> en soms pas bij vertrek. Genoeg cash mee, ook voor toeristenbelasting.<span class="lrn-src">Slovenië 2026</span></span></li>
+        <li><span class="bullet">•</span><span><b>Drie basiskampen van vijf nachten</b> werkt beter dan doortrekken: één keer opbouwen, dan dagtrips. Houd per kamp een dag helemaal leeg.<span class="lrn-src">Slovenië 2026</span></span></li>
+        <li><span class="bullet">•</span><span>Check de <b>oprit</b> bij kleine campings: smalle wegen sluiten campers en aanhangers uit.<span class="lrn-src">Slovenië 2026</span></span></li>
+      </ul>
+    </div>
+
+    <div class="lrn-card">
+      <div class="lrn-header b-kids">
+        <span class="lrn-emoji">👧</span>
+        <span class="lrn-when">Op pad met Floris &amp; Yune</span>
+      </div>
+      <ul class="lrn-list">
+        <li><span class="bullet">•</span><span>Een camping <b>aan of op het water</b> verslaat elke bezienswaardigheid. Ondiepe beekjes = dagen zoet.<span class="lrn-src">Slovenië 2026</span></span></li>
+        <li><span class="bullet">•</span><span>Attracties waar je <b>tickets vooraf</b> voor koopt (grotten, kloven) niet uitstellen — in augustus is de dag zelf te laat.<span class="lrn-src">Slovenië 2026</span></span></li>
+        <li><span class="bullet">•</span><span>Eén "doe-ding" per dag is genoeg. Twee bezienswaardigheden op een dag levert altijd chagrijn op.</span></li>
+        <li><span class="bullet">•</span><span>Neem gereedschap mee waarmee ze zelf iets kunnen máken (houtbewerkingsset, touw) — dat wint het van schermen.</span></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="notes">
+    <h2>💭 Nieuwe learning opschrijven</h2>
+    <p class="hint">Voor onderweg: typ het hier snel op zodat je het niet vergeet. Deze notities staan alleen in de browser van <b>dit apparaat</b> — met "Kopieer alles" haal je ze eruit om ze daarna hierboven op de pagina te zetten.</p>
+    <form class="note-form" id="note-form">
+      <input type="text" id="note-input" placeholder="Bijv.: klapstoeltjes met hoge rug meenemen, die lage zitten niet lekker" autocomplete="off">
+      <button type="submit" class="note-btn">Toevoegen</button>
+    </form>
+    <ul id="note-list"></ul>
+    <p class="note-empty" id="note-empty">Nog niks opgeschreven.</p>
+    <div class="note-actions">
+      <button class="note-btn ghost" id="copy-btn">📋 Kopieer alles</button>
+      <button class="note-btn ghost" id="clear-btn">Alles wissen</button>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  💡 Learnings voor de volgende keer &nbsp;·&nbsp; <a href="./">Reisplan</a> &nbsp;·&nbsp; <a href="paklijst.html">Paklijst</a>
+</footer>
+
+<script>
+(function () {
+  var KEY = 'learnings-notities';
+
+  var notes = [];
+  try { notes = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { notes = []; }
+  if (!Array.isArray(notes)) notes = [];
+
+  var list  = document.getElementById('note-list');
+  var empty = document.getElementById('note-empty');
+  var input = document.getElementById('note-input');
+
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(notes)); } catch (e) {}
+  }
+
+  function render() {
+    list.textContent = '';
+    notes.forEach(function (text, i) {
+      var li = document.createElement('li');
+
+      var span = document.createElement('span');
+      span.className = 'note-text';
+      span.textContent = text;
+
+      var del = document.createElement('button');
+      del.className = 'note-del';
+      del.type = 'button';
+      del.title = 'Weghalen';
+      del.textContent = '✕';
+      del.addEventListener('click', function () {
+        notes.splice(i, 1);
+        save();
+        render();
+      });
+
+      li.appendChild(span);
+      li.appendChild(del);
+      list.appendChild(li);
+    });
+    empty.style.display = notes.length ? 'none' : '';
+  }
+
+  document.getElementById('note-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var text = input.value.trim();
+    if (!text) return;
+    notes.push(text);
+    save();
+    input.value = '';
+    render();
+  });
+
+  document.getElementById('copy-btn').addEventListener('click', function () {
+    if (!notes.length) return;
+    var btn = this;
+    var text = notes.map(function (n) { return '- ' + n; }).join('\n');
+    var done = function () {
+      btn.textContent = '✅ Gekopieerd';
+      setTimeout(function () { btn.textContent = '📋 Kopieer alles'; }, 1800);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { window.prompt('Kopieer:', text); });
+    } else {
+      window.prompt('Kopieer:', text);
+    }
+  });
+
+  document.getElementById('clear-btn').addEventListener('click', function () {
+    if (!notes.length) return;
+    if (!confirm('Alle opgeschreven learnings weghalen?')) return;
+    notes = [];
+    save();
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
