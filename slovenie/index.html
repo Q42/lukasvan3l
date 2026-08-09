@@ -379,6 +379,7 @@
     color: #2d6a1e;
   }
   .day-flag.open { background: #f0f0ee; color: #808080; }
+  .day-flag.time { background: #e6efff; color: #1a5ea8; }
   .travel-row.done {
     border-style: solid;
     border-color: #cfe6c4;
@@ -472,7 +473,7 @@
         <div class="lbl">Basiskampen</div>
       </div>
       <div class="hero-stat">
-        <div class="num">11</div>
+        <div class="num">10</div>
         <div class="lbl">Dagtrips</div>
       </div>
       <div class="hero-stat">
@@ -732,7 +733,7 @@
     </div>
     <div class="section-meta">
       <span class="camp-badge badge-2">Basiskamp 2</span><br>
-      Zee · Grotten · Middeleeuws stadje
+      Zee · Grot · Middeleeuws stadje
     </div>
   </div>
 
@@ -797,9 +798,9 @@
         <div class="drive-badge">🚗 65 min</div>
       </div>
       <div class="day-content">
-        <div class="day-label">9 aug</div>
+        <div class="day-label">Zondag 9 aug <span class="day-flag time">🕦 11:30</span></div>
         <div class="day-title">Postojna Grotten</div>
-        <div class="day-desc">Grootste grottenstelsel van Europa — met een treintje naar binnen! Stalactieten, stalagmieten en de zeldzame mensvis (olm). Druk maar erg indrukwekkend voor kinderen. €35 p.p.</div>
+        <div class="day-desc">Grootste grottenstelsel van Europa — met een treintje naar binnen! Stalactieten, stalagmieten en de zeldzame mensvis (olm). <b>Rondleiding om 11:30</b>; ±65 min rijden en je wilt er een half uur van tevoren zijn, dus <b>rond 10:00 weg</b> van Kaki Plac. Dit wordt onze enige grot — Škocjan slaan we over.</div>
         <div class="day-tags">
           <span class="tag tag-cave">Grot</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
@@ -865,28 +866,6 @@
           <a class="btn btn-call btn-sm" href="tel:+38631348590">📞 +386 31 348 590</a>
           <a class="btn btn-map btn-sm" href="https://www.rentaboat.si/" target="_blank" rel="noopener">🌐 rentaboat.si</a>
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Mesecev+zaliv+Strunjan" target="_blank" rel="noopener">📍 Maanbaai</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-row">
-      <div class="day-photo">
-        <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#ede0f5,#c8a8e8)">🦇</div>
-        <img data-wiki="Škocjan Caves" data-search="Škocjan Caves Slovenia" alt="Škocjan grotten" onerror="this.remove()">
-        <div class="drive-badge">🚗 45 min</div>
-      </div>
-      <div class="day-content">
-        <div class="day-label">Nog open <span class="day-flag open">Niet gepland</span></div>
-        <div class="day-title">Škocjan Grotten</div>
-        <div class="day-desc">Ondergrondse canyon met een echte rivier, watervallen en 170 meter hoge grotten. UNESCO werelderfgoed. Indrukwekkender dan Postojna, minder toeristisch. Tickets online! <b>Stond op 8 aug gepland, maar we zijn gaan fietsen</b> — nog te verzetten als we willen.</div>
-        <div class="day-tags">
-          <span class="tag tag-cave">Grot</span>
-          <span class="tag tag-water">Ondergrondse rivier</span>
-          <span class="tag tag-kids">Kids ⭐⭐⭐</span>
-        </div>
-        <div class="actions">
-          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Skocjan+Caves" target="_blank" rel="noopener">🧭 Navigatie · 45 min</a>
-          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Skocjan+Caves" target="_blank" rel="noopener">📍 Maps</a>
         </div>
       </div>
     </div>
@@ -1048,7 +1027,7 @@
 </div>
 
 <footer class="site-footer">
-  <strong>Onze Slovenië-vakantie augustus 2026</strong> 🇸🇮 &nbsp;·&nbsp; Bijgewerkt t/m <strong>zaterdag 8 aug</strong> — groen is wat we écht gedaan hebben &nbsp;·&nbsp; Nu op <strong>Kaki Plac</strong> t/m 12 aug &nbsp;·&nbsp; Vignetten ✅ — 2e vignet start 10 aug &nbsp;·&nbsp; Tickets Postojna vooraf online &nbsp;·&nbsp; Bootje bij Bernardin vooraf bellen &nbsp;·&nbsp; Genoeg <strong>cash</strong> mee (campings betaal je contant)
+  <strong>Onze Slovenië-vakantie augustus 2026</strong> 🇸🇮 &nbsp;·&nbsp; Bijgewerkt t/m <strong>zaterdag 8 aug</strong> — groen is wat we écht gedaan hebben &nbsp;·&nbsp; Nu op <strong>Kaki Plac</strong> t/m 12 aug &nbsp;·&nbsp; Vignetten ✅ — 2e vignet start 10 aug &nbsp;·&nbsp; Postojna zo 9 aug <strong>11:30</strong> — rond 10:00 weg &nbsp;·&nbsp; Bootje bij Bernardin vooraf bellen &nbsp;·&nbsp; Genoeg <strong>cash</strong> mee (campings betaal je contant)
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -1139,7 +1118,6 @@
     { name: 'Postojna Grotten (9 aug)',       lat: 45.783,   lng: 14.204,   c: 1 },
     { name: 'Piran (10 aug)',                 lat: 45.528,   lng: 13.568,   c: 1 },
     { name: 'Bootje huren · Bernardin (11 aug)', lat: 45.522, lng: 13.582,   c: 1 },
-    { name: 'Škocjan Grotten (nog open)',     lat: 45.664,   lng: 13.989,   c: 1 },
     { name: 'Logarska Dolina (13 aug)',       lat: 46.392,   lng: 14.622,   c: 2 },
     { name: 'Raften op de Savinja (14 aug)',  lat: 46.360,   lng: 14.800,   c: 2 },
     { name: 'Kamnik & kasteel (15 aug)',      lat: 46.225,   lng: 14.612,   c: 2 }
