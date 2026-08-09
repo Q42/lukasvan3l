@@ -72,6 +72,9 @@ Een dag die geweest is:
   `<span class="day-flag open">Niet gepland</span>` in plaats van een datum.
 - Reisdagen en de boekingsblokken volgen hetzelfde: `travel-row done`,
   en de status wordt `✅ Gedaan` / `✅ Verbleven` / `✅ Aangekomen`.
+- Elke `.day-row` heeft een `data-date="JJJJ-MM-DD"`. Een scriptje onderaan
+  zet daarmee automatisch `class="today"` + een geel `👉 Vandaag`-chipje op de
+  dag van vandaag. Nieuwe dagrij? Zet er dus een `data-date` op.
 - In de kaart-JS krijgt zo'n dagtrip `done: true`; die stippen worden gevuld
   getekend in plaats van open. Verwijder de markers van dingen die we niet
   gedaan hebben, en voeg de echte plekken toe (coördinaten mogen ruw).

@@ -380,6 +380,11 @@
   }
   .day-flag.open { background: #f0f0ee; color: #808080; }
   .day-flag.time { background: #e6efff; color: #1a5ea8; }
+  .day-flag.now  { background: var(--sun); color: #503800; }
+  .day-row.today {
+    border-color: var(--sun);
+    box-shadow: 0 0 0 2px rgba(240,180,41,0.4), 0 2px 12px rgba(0,0,0,0.07);
+  }
   .travel-row.done {
     border-style: solid;
     border-color: #cfe6c4;
@@ -622,7 +627,7 @@
   <div class="days-label">Wat we hier gedaan hebben</div>
   <div class="days-grid">
 
-    <div class="day-row done">
+    <div class="day-row done" data-date="2026-08-03">
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#c8f0e8,#90d8c0)">💦</div>
         <img data-wiki="Baška grapa|Koritnica" data-search="Koritnica river Slovenia stream" alt="Beekje bij de camping" onerror="this.remove()">
@@ -640,7 +645,7 @@
       </div>
     </div>
 
-    <div class="day-row done">
+    <div class="day-row done" data-date="2026-08-04">
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#d0e8ff,#a8c8f0)">🛟</div>
         <img data-wiki="Tolmin Gorges|Tolmin Gorge" data-search="Tolmin Gorge Slovenia" alt="Tolmin kloof" onerror="this.remove()">
@@ -662,7 +667,7 @@
       </div>
     </div>
 
-    <div class="day-row done">
+    <div class="day-row done" data-date="2026-08-05">
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#e8f4d0,#c0e080)">🚡</div>
         <img data-wiki="Soriška planina|Možic" data-search="Soriska planina Slovenia mountain" alt="Soriška planina" onerror="this.remove()">
@@ -683,7 +688,7 @@
       </div>
     </div>
 
-    <div class="day-row done">
+    <div class="day-row done" data-date="2026-08-06">
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#c0e8ff,#60b8e8)">🛶</div>
         <img data-wiki="Soča" data-search="Soča river Slovenia turquoise" alt="De Soča" onerror="this.remove()">
@@ -770,7 +775,7 @@
   <div class="days-label">Dagtrips vanuit dit kamp</div>
   <div class="days-grid">
 
-    <div class="day-row done">
+    <div class="day-row done" data-date="2026-08-08">
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#cdeefc,#68b8dd)">🚲</div>
         <img data-wiki="Strunjan" data-search="Mesecev zaliv Strunjan Slovenia bay" alt="Maanbaai bij Strunjan" onerror="this.remove()">
@@ -791,7 +796,7 @@
       </div>
     </div>
 
-    <div class="day-row">
+    <div class="day-row" data-date="2026-08-09">
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#f0e0f8,#d8b8f0)">🚂</div>
         <img data-wiki="Postojna Cave" data-search="Postojna Cave Slovenia" alt="Postojna grotten" onerror="this.remove()">
@@ -813,7 +818,7 @@
       </div>
     </div>
 
-    <div class="day-row">
+    <div class="day-row" data-date="2026-08-10">
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#ffecd0,#ffc870)">⛵</div>
         <img data-wiki="Piran" data-search="Piran Slovenia old town aerial" alt="Piran" onerror="this.remove()">
@@ -835,7 +840,7 @@
       </div>
     </div>
 
-    <div class="day-row">
+    <div class="day-row" data-date="2026-08-11">
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#cdeefc,#68b8dd)">🚤</div>
         <img data-wiki="Strunjan|Cape Madona" data-search="Strunjan cliffs Slovenia coast sea" alt="Kust bij Strunjan" onerror="this.remove()">
@@ -935,7 +940,7 @@
   <div class="days-label">Dagtrips vanuit dit kamp</div>
   <div class="days-grid">
 
-    <div class="day-row">
+    <div class="day-row" data-date="2026-08-13">
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#d0f0d0,#90d890)">🏔️</div>
         <img data-wiki="Logar Valley|Logarska Dolina" data-search="Logar Valley Slovenia" alt="Logarska dolina" onerror="this.remove()">
@@ -957,7 +962,7 @@
       </div>
     </div>
 
-    <div class="day-row">
+    <div class="day-row" data-date="2026-08-14">
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#c0e8ff,#60b8e8)">🚣</div>
         <img data-wiki="Savinja" data-search="Savinja river Slovenia" alt="Raften Savinja" onerror="this.remove()">
@@ -979,7 +984,7 @@
       </div>
     </div>
 
-    <div class="day-row">
+    <div class="day-row" data-date="2026-08-15">
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#f8e8d0,#e8c890)">🏰</div>
         <img data-wiki="Kamnik" data-search="Kamnik Slovenia old town castle" alt="Kamnik kasteel" onerror="this.remove()">
@@ -1098,6 +1103,24 @@
     hero.style.backgroundSize = 'cover';
     hero.style.backgroundPosition = 'center';
   });
+
+  /* ── Markeer de dag van vandaag (voorkomt "is het nou vandaag of morgen?") ── */
+  (function () {
+    var now = new Date();
+    var today = now.getFullYear() + '-' +
+                ('0' + (now.getMonth() + 1)).slice(-2) + '-' +
+                ('0' + now.getDate()).slice(-2);
+    var row = document.querySelector('.day-row[data-date="' + today + '"]');
+    if (!row) return;
+    row.classList.add('today');
+    var label = row.querySelector('.day-label');
+    if (!label) return;
+    var chip = document.createElement('span');
+    chip.className = 'day-flag now';
+    chip.textContent = '👉 Vandaag';
+    label.appendChild(document.createTextNode(' '));
+    label.appendChild(chip);
+  })();
 
   /* ── Interactieve kaart (Leaflet + OpenStreetMap) ── */
   var colors = ['#1a7abf', '#e8832a', '#2d5c1e'];
