@@ -450,6 +450,90 @@
   .travel-row.travel-stay { align-items: flex-start; }
   .travel-row.travel-stay .booking-box { background: #fff; }
 
+  /* ── SNORKELPLEKKEN ── */
+  .snorkel-box {
+    margin-top: 30px;
+    scroll-margin-top: 110px;
+    background: linear-gradient(165deg, #f1fafd, #e7f4fa);
+    border: 1px solid #cde5ef;
+    border-radius: var(--radius);
+    padding: 28px 30px;
+  }
+  .snorkel-box h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #0a5570;
+    margin-bottom: 8px;
+  }
+  .snorkel-lead {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--mid);
+    margin-bottom: 22px;
+  }
+  .snorkel-lead b { color: #0a5570; }
+  .snorkel-sub {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #0a6f8c;
+    margin: 22px 0 12px;
+  }
+  .snorkel-sub:first-of-type { margin-top: 0; }
+  .snorkel-grid {
+    display: grid;
+    gap: 12px;
+  }
+  .snorkel-spot {
+    background: var(--white);
+    border: 1px solid #dceaf0;
+    border-radius: 12px;
+    padding: 15px 18px;
+  }
+  .snorkel-spot .sp-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .snorkel-spot .sp-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--dark);
+  }
+  .snorkel-spot .sp-drive {
+    font-size: 11px;
+    font-weight: 600;
+    color: #0a6f8c;
+    background: #e4f3f9;
+    border-radius: 20px;
+    padding: 3px 9px;
+    white-space: nowrap;
+  }
+  .snorkel-spot .sp-drive.far { background: #fdf0e0; color: #8a5a0a; }
+  .snorkel-spot .sp-desc {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--mid);
+  }
+  .snorkel-spot .sp-desc b { color: var(--dark); }
+  .snorkel-spot .actions { margin-top: 10px; }
+  .snorkel-spot.pick { border-color: var(--sun); box-shadow: 0 0 0 2px rgba(240,180,41,0.22); }
+  .snorkel-spot .sp-pick {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    background: var(--sun);
+    color: #503800;
+    border-radius: 20px;
+    padding: 3px 9px;
+  }
+  .snorkel-box .facts { margin-top: 22px; }
+
   /* ── RESPONSIVE / PHONE ── */
   @media (max-width: 760px) {
     .hero-stats { gap: 20px 30px; flex-wrap: wrap; }
@@ -474,6 +558,8 @@
     .day-content { padding: 18px 20px; }
 
     .travel-row { flex-direction: column; align-items: flex-start; }
+
+    .snorkel-box { padding: 22px 20px; }
   }
 </style>
 </head>
@@ -952,7 +1038,7 @@
       <div class="day-content">
         <div class="day-label">Maandag 10 aug <span class="day-flag time">🌆 's avonds</span></div>
         <div class="day-title">Vuurtoren van Savudrija &amp; 's avonds Piran</div>
-        <div class="day-desc">Overdag de grens over naar <b>Kroatië</b>, naar de <b>vuurtoren van Savudrija</b> (Punta Salvore) op de westelijkste punt van het land — rotsige kust, helder water, goed <b>snorkelen</b>. De grens is tegenwoordig geen gedoe: sinds 2023 zit Kroatië in Schengen én bij de euro (paspoorten wel mee). 's <b>Avonds Piran</b>, precies het goede moment: smalle steegjes, uitkijktoren en zwemmen van de rotsige kades, met minder drukte dan overdag.</div>
+        <div class="day-desc">Overdag de grens over naar <b>Kroatië</b>, naar de <b>vuurtoren van Savudrija</b> (Punta Salvore) op de westelijkste punt van het land — rotsige kust, helder water, goed <b>snorkelen</b>. De grens is tegenwoordig geen gedoe: sinds 2023 zit Kroatië in Schengen én bij de euro (paspoorten wel mee). 's <b>Avonds Piran</b>, precies het goede moment: smalle steegjes, uitkijktoren en zwemmen van de rotsige kades, met minder drukte dan overdag.<br><br><b>⚠️ Onderweg geleerd:</b> eerst gestopt bij <b>Kanegra</b> (45,4776° N · 13,5825° E), het eerste strandje over de grens — maar dat ligt in de <b>binnenhoek van de Piranbaai</b>: kniediep, troebel en geen vis. Rij dóór naar de <b>buitenkant</b> van het schiereiland bij Bašanija/Savudrija, ±15 min verder: daar ligt open zee en rots. Alle alternatieven staan hieronder in <a href="#snorkelen">Waar zitten de vissen?</a></div>
         <div class="day-tags">
           <span class="tag tag-swim">Snorkelen</span>
           <span class="tag tag-culture">Stadje</span>
@@ -1023,6 +1109,112 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- ── SNORKELPLEKKEN ── -->
+  <div class="snorkel-box" id="snorkelen">
+    <h3>🤿 Waar zitten de vissen?</h3>
+    <p class="snorkel-lead">
+      In de <b>binnenhoek van de Piranbaai</b> (Kanegra, Sečovlje, de zoutpannen) valt niks te snorkelen, en dat is
+      logisch: de baai is er maar een paar meter diep, de Dragonja voert slib aan en de bodem is zand en modder.
+      Een vis heeft <b>rots</b> nodig — om zich in te verstoppen en om te eten. De regel voor deze kust:
+      <b>ga naar een kaap of punt aan de buitenkant, waar het meteen diep wordt</b>, en zwem langs de rand van de
+      rotsen in twee tot vier meter water. Zand oversteken kost je alleen tijd.
+    </p>
+
+    <div class="snorkel-sub">Vandaag, vanaf waar we nu staan</div>
+    <div class="snorkel-grid">
+      <div class="snorkel-spot pick">
+        <div class="sp-head"><span class="sp-name">Bašanija &amp; Punta Savudrija</span><span class="sp-drive">🚗 ±15 min vanaf Kanegra</span><span class="sp-pick">Nu hierheen</span></div>
+        <div class="sp-desc">Het westelijkste puntje van Kroatië, aan de <b>open zee</b> in plaats van in de baai: platte rotsplaten om vanaf in te stappen, rotspoeltjes voor Yune, pijnbomen voor de schaduw en de <b>vuurtoren</b> in het zicht — precies het uitje dat al voor vandaag stond. Vlak achter de punt wordt het snel diep; volg de rotsrand naar links of rechts, niet de baai in.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Basanija,+Savudrija,+Croatia" target="_blank" rel="noopener">🧭 Navigatie · Bašanija</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=45.4928,13.4938" target="_blank" rel="noopener">📍 Vuurtoren Savudrija</a>
+        </div>
+      </div>
+      <div class="snorkel-spot">
+        <div class="sp-head"><span class="sp-name">Zambratija &amp; de ruïne van Sipar</span><span class="sp-drive">🚗 ±25 min vanaf Kanegra</span></div>
+        <div class="sp-desc">Tussen Savudrija en Umag, een rij <b>kleine rotsbaaitjes</b> met makkelijke instap. Voor de kust ligt <b>Sipar</b>: de resten van een Romeins-Byzantijns stadje dat in de zee is verdwenen — een <b>half verdronken ruïne</b> waar je naartoe kunt kijken. Rustiger dan Umag zelf.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Zambratija,+Umag,+Croatia" target="_blank" rel="noopener">🧭 Navigatie · Zambratija</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="snorkel-sub">Dichtbij de camping (Sloveense kant)</div>
+    <div class="snorkel-grid">
+      <div class="snorkel-spot pick">
+        <div class="sp-head"><span class="sp-name">Rt Madona / Punta — Piran</span><span class="sp-drive">🚗 ±15 min</span><span class="sp-pick">Beste vlakbij</span></div>
+        <div class="sp-desc">De punt van het schiereiland van Piran, naast de vuurtoren. Je stapt van de <b>kade het diepe in</b> — geen ondiepe aanloop — en zwemt langs een rotswand met scheuren, zeegras, lipvissen en zeebrasems; er zijn hier zelfs <b>zeepaardjes</b> gezien. Officieel natuurmonument en samen met Strunjan de <b>rijkste plek van de Sloveense zee</b>. Combineer het met het avondbezoek aan Piran, of kom vóór tien uur — dan is het water het rustigst en het minst druk.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Rt+Madona,+Piran,+Slovenia" target="_blank" rel="noopener">🧭 Navigatie · 15 min</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=45.5285,13.5636" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+      <div class="snorkel-spot">
+        <div class="sp-head"><span class="sp-name">Bele skale &amp; de Maanbaai — Strunjan</span><span class="sp-drive">🚗 ±15 min + 15 min lopen</span></div>
+        <div class="sp-desc">Onder de flyschklif waar we zaterdag met de fiets waren. <b>Strunjan is het enige stuk zee dat Slovenië echt beschermt</b> (een strook van 200 m langs de kust), er mag niet gebouwd worden en dat merk je onder water: keien, zeegras en veel leven. <b>Vroeg in de ochtend of tegen de avond</b> komen de vissen tussen de stenen vandaan om te grazen — dan is het verschil met midden op de dag enorm. Parkeren bij Belvedere, daarna een steil pad naar beneden.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Camp+Belvedere+Strunjan" target="_blank" rel="noopener">🧭 Navigatie · Belvedere</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Mesecev+zaliv+Strunjan" target="_blank" rel="noopener">📍 Maanbaai</a>
+        </div>
+      </div>
+      <div class="snorkel-spot">
+        <div class="sp-head"><span class="sp-name">Fiesa</span><span class="sp-drive">🚗 ±15 min</span></div>
+        <div class="sp-desc">Het baaitje net achter Piran, tussen de rotsen. Weinig golfslag en weinig stroming, dus de <b>rustigste optie met de kinderen</b>; minder spectaculair dan de Punta, maar je kunt er zo vanaf het strandje de rotsrand op zwemmen.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Fiesa+beach,+Piran" target="_blank" rel="noopener">🧭 Navigatie · Fiesa</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="snorkel-sub">Een dag ervoor uittrekken</div>
+    <div class="snorkel-grid">
+      <div class="snorkel-spot">
+        <div class="sp-head"><span class="sp-name">Zeereservaat van Miramare — Grignano bij Triëst</span><span class="sp-drive far">🚗 ±55 min</span></div>
+        <div class="sp-desc">Hier zijn de vissen wél gegarandeerd: in dit stukje zee <b>mag sinds 1986 niet gevist of gevaren worden</b>, en dat &ldquo;reservaat-effect&rdquo; zie je meteen — scholen goudstreepbrasems, zeebrasems en wolken kleine donkerblauwe visjes boven de rotsen. Het WWF doet er <b>begeleide snorkeltochten</b> (woensdag, zaterdag en zondag, ±40 minuten in ondiep water, wetsuit en vinnen erbij, ±€30 p.p., vooraf reserveren). Let op: <b>de tocht is vanaf 8 jaar</b>, dus Floris mag mee en Yune niet — met haar erbij is de Karstkust hieronder de betere keuze. Zelfde hoek als het baaitje van vrijdag.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Porto+di+Grignano,+Trieste" target="_blank" rel="noopener">🧭 Navigatie · Grignano</a>
+          <a class="btn btn-map btn-sm" href="https://www.ampmiramare.it/en/seawatching-en/" target="_blank" rel="noopener">🌐 ampmiramare.it</a>
+          <a class="btn btn-call btn-sm" href="tel:+39040224147">📞 +39 040 224147</a>
+        </div>
+      </div>
+      <div class="snorkel-spot">
+        <div class="sp-head"><span class="sp-name">Terug naar de Karstkust</span><span class="sp-drive far">🚗 ±50 min</span></div>
+        <div class="sp-desc">Het kiezelbaaitje van vrijdag (45,7308° N · 13,6847° E) en de buurbaaitjes eronder — Canovella de' Zoppoli, Costa dei Barbari, Sistiana. <b>Steile kust, dus meteen diep water en rots</b>, en dat is precies waarom het daar zo goed was. Geen leeftijdsgrens, geen reservering, en volgens Floris het mooiste wat hij ooit heeft gezien: <b>hetzelfde nog eens doen mag gewoon</b>.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=45.7308,13.6847" target="_blank" rel="noopener">🧭 Navigatie · ons baaitje</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Canovella+de+Zoppoli" target="_blank" rel="noopener">📍 Canovella</a>
+        </div>
+      </div>
+      <div class="snorkel-spot">
+        <div class="sp-head"><span class="sp-name">Zlatni Rt &amp; Sveta Katarina — Rovinj</span><span class="sp-drive far">🚗 ±1,5 uur</span></div>
+        <div class="sp-desc">Zuidelijker in Istrië, en dát is het punt: hoe verder je van de Golf van Triëst en de riviermondingen komt, hoe <b>helderder het water</b>. Zlatni Rt (Punta Corrente) is een bos van pijnbomen dat op rotsplaten aan de zee eindigt, met eilandjes ervoor. De mooiste snorkelkust van Istrië ligt nóg zuidelijker (Kaap Kamenjak bij Pula, ±2u15) — te ver voor deze camping, maar wel iets voor de volgende keer.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Zlatni+Rt,+Rovinj,+Croatia" target="_blank" rel="noopener">🧭 Navigatie · Zlatni Rt</a>
+        </div>
+      </div>
+    </div>
+
+    <details class="facts">
+      <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">over de zee hier</span></summary>
+      <ul class="facts-list">
+        <li><span class="fico">🪨</span><span>Op <b>zand</b> woont bijna niets: er is niks te eten en niks om je in te verstoppen. Eén rots erbij en je hebt meteen tientallen soorten. Daarom zie je bij Kanegra niks en bij een rotspunt alles.</span></li>
+        <li><span class="fico">🌬️</span><span>Of het water helder is, hangt af van de <b>wind van gisteren</b>. Na de koude noordoostenwind (de <b>burja</b>) kun je meters ver kijken; na een zuidenwind of een regenbui staat al het slib omhoog.</span></li>
+        <li><span class="fico">🐟</span><span>De <b>goudstreepbrasem</b> (salpa) is bijna de enige vis die gras eet. Ze grazen in groepjes het zeegras af, precies zoals schapen in een weiland.</span></li>
+        <li><span class="fico">💙</span><span>Die kleine donkere visjes die als een wolk boven de rotsen hangen, zijn <b>castagnole</b>. Hun jongen zijn <b>felblauw</b> — het mooiste blauw van de Middellandse Zee, en alleen als ze klein zijn.</span></li>
+        <li><span class="fico">🦔</span><span>Een <b>zee-egel</b> heeft <b>vijf tanden</b> waarmee hij algen van de steen af schraapt, en hij loopt op zijn stekels. Kijk dus goed waar je je voeten zet.</span></li>
+        <li><span class="fico">🐙</span><span>Een <b>octopus</b> heeft <b>drie harten</b> en blauw bloed, en hij <b>ruikt en voelt met zijn armen</b>. Vind je een holletje met een muurtje van schelpjes ervoor, dan woont daar er waarschijnlijk een.</span></li>
+        <li><span class="fico">🐴</span><span>Bij de Punta van Piran leven <b>zeepaardjes</b> in het zeegras. Bij zeepaardjes draagt de <b>pápa</b> de eitjes in een buidel en bevalt hij van de jongen.</span></li>
+        <li><span class="fico">🧊</span><span>Deze zee is nergens dieper dan ongeveer <b>25 meter</b> en het is het <b>noordelijkste puntje van de Middellandse Zee</b>. Daarom is hij in augustus zo warm — en in de winter juist ijskoud.</span></li>
+      </ul>
+    </details>
+
+    <p class="snorkel-lead" style="margin: 22px 0 0">
+      <b>Praktisch:</b> waterschoenen aan (zee-egels), in het zand niet met je hakken slepen vanwege de <b>pieterman</b>
+      die zich daar ingraaft, en langs de rotsen zwemmen betekent tussen de bootjes zwemmen — houd Floris en Yune
+      dicht bij de kust en neem iets fel gekleurds mee dat drijft.
+    </p>
   </div>
 </div>
 
@@ -1213,7 +1405,7 @@
 </div>
 
 <footer class="site-footer">
-  <strong>Onze Slovenië-vakantie augustus 2026</strong> 🇸🇮 &nbsp;·&nbsp; Bijgewerkt t/m <strong>zondag 9 aug</strong> — groen is wat we écht gedaan hebben &nbsp;·&nbsp; Nu op <strong>Kaki Plac</strong> t/m 12 aug &nbsp;·&nbsp; Vignetten ✅ — 2e vignet start 10 aug &nbsp;·&nbsp; Elk uitje heeft een uitklapper met <strong>voorleesweetjes</strong> &nbsp;·&nbsp; Bootje bij Bernardin vooraf bellen &nbsp;·&nbsp; Genoeg <strong>cash</strong> mee (campings betaal je contant)
+  <strong>Onze Slovenië-vakantie augustus 2026</strong> 🇸🇮 &nbsp;·&nbsp; Bijgewerkt t/m <strong>maandag 10 aug</strong> — groen is wat we écht gedaan hebben &nbsp;·&nbsp; Nu op <strong>Kaki Plac</strong> t/m 12 aug &nbsp;·&nbsp; Snorkelen? Zie <a href="#snorkelen" style="color:inherit"><strong>Waar zitten de vissen?</strong></a> &nbsp;·&nbsp; Vignetten ✅ — 2e vignet start 10 aug &nbsp;·&nbsp; Elk uitje heeft een uitklapper met <strong>voorleesweetjes</strong> &nbsp;·&nbsp; Bootje bij Bernardin vooraf bellen &nbsp;·&nbsp; Genoeg <strong>cash</strong> mee (campings betaal je contant)
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -1322,7 +1514,11 @@
     { name: 'Postojna Grotten (9 aug)',       lat: 45.783,   lng: 14.204,   c: 1, done: true },
     { name: 'Rakov Škocjan · natuurbrug (9 aug)', lat: 45.789, lng: 14.297, c: 1, done: true },
     { name: 'Koper · Baščaršija (9 aug)',     lat: 45.547,   lng: 13.729,   c: 1, done: true },
+    { name: 'Kanegra · te ondiep, geen vis (10 aug)', lat: 45.4776, lng: 13.5825, c: 1, done: true },
     { name: 'Savudrija · snorkelen (10 aug)', lat: 45.4928,  lng: 13.4938,  c: 1 },
+    { name: 'Snorkelen · Bašanija',           lat: 45.4855,  lng: 13.4972,  c: 1 },
+    { name: 'Snorkelen · Rt Madona (Piran)',  lat: 45.5285,  lng: 13.5636,  c: 1 },
+    { name: 'Snorkelen · zeereservaat Miramare', lat: 45.7024, lng: 13.7128, c: 1 },
     { name: 'Piran (10 aug)',                 lat: 45.528,   lng: 13.568,   c: 1 },
     { name: 'Bootje huren · Bernardin (11 aug)', lat: 45.522, lng: 13.582,   c: 1 },
     { name: 'Logarska Dolina (13 aug)',       lat: 46.392,   lng: 14.622,   c: 2 },

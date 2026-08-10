@@ -94,6 +94,22 @@ Een dag die geweest is:
 - Controleer een weetje voordat je het opschrijft. Bij twijfel: weglaten of
   voorzichtiger formuleren; dit wordt letterlijk aan kinderen voorgelezen.
 
+## Snorkelplekken (`#snorkelen` op het reisplan)
+
+- Onder de dagtrips van kamp 2 staat een `.snorkel-box` met **"Waar zitten de
+  vissen?"**: de snorkelplekken op deze kust, gegroepeerd met een
+  `.snorkel-sub`-kopje per afstand (vandaag vlakbij / dichtbij de camping / een
+  dag ervoor uittrekken). Elke `.snorkel-spot` heeft een naam, een
+  `.sp-drive`-rijtijd (`.far` voor de verdere) en knoppen; de aanraders krijgen
+  `class="snorkel-spot pick"` plus een `.sp-pick`-label.
+- De vuistregel die erboven staat is de kern: **rots en diepte aan de buitenkant
+  van een kaap**, niet de binnenhoek van een baai. Dat kwam uit Kanegra
+  (10 aug), waar het kniediep en troebel was — die ervaring staat als
+  waarschuwing in de dagrij van 10 aug en als learning op `learnings.html`.
+- Er hoort een `<details class="facts">` bij met weetjes over de zee zelf
+  (waarom rots wél en zand niet, burja en helder water, castagnole, zee-egels).
+  Zelfde voorleestoon als bij de uitjes.
+
 ## `geschiedenis.html`
 
 - Een **tijdlijn** (`.timeline` / `.hist-item`, met `era-1/2/3` voor de kleur van
