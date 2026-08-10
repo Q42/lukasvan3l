@@ -106,6 +106,11 @@ Een dag die geweest is:
   van een kaap**, niet de binnenhoek van een baai. Dat kwam uit Kanegra
   (10 aug), waar het kniediep en troebel was — die ervaring staat als
   waarschuwing in de dagrij van 10 aug en als learning op `learnings.html`.
+  Een kwartier verder, aan de buitenkant bij Bašanija, was **Corner Beach** wél
+  prachtig; die staat daarom bovenaan met `.sp-pick` "✅ Hier waren we". Zo hoort
+  dit blok mee te groeien: een plek waar we geweest zijn, gaat naar boven met
+  wat we er echt zagen. Corner Beach is niet in kaartdiensten te vinden, dus de
+  knoppen zoeken op naam en de kaartcoördinaat is die van Bašanija (ruw).
 - Er hoort een `<details class="facts">` bij met weetjes over de zee zelf
   (waarom rots wél en zand niet, burja en helder water, castagnole, zee-egels).
   Zelfde voorleestoon als bij de uitjes.
