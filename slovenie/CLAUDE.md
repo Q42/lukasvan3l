@@ -79,6 +79,21 @@ Een dag die geweest is:
   getekend in plaats van open. Verwijder de markers van dingen die we niet
   gedaan hebben, en voeg de echte plekken toe (coördinaten mogen ruw).
 
+## Voorleesweetjes bij elk uitje
+
+- Elke `.day-row` heeft onder de tags een `<details class="facts">` met
+  "Wist je dat…" — een uitklapper (geen modal, zodat je gewoon kunt blijven
+  scrollen en voorlezen). Ze staan standaard **dicht**.
+- De toon is **om hardop voor te lezen aan Floris (9) en Yune (7)**: korte
+  zinnen, één weetje per regel, elk met een eigen emoji in `.fico`. Drie tot
+  zes per uitje; liever vier goede dan acht flauwe.
+- Mengsel van **geschiedenis en natuurkunde-van-de-plek**: waarom is het water
+  turquoise, wie stond hier honderd jaar geleden, welke legende hoort erbij.
+  Leg waar het kan een **verband met een ander uitje** ("dit is dezelfde
+  rivier als bij de camping") — dat werkt goed bij het voorlezen.
+- Controleer een weetje voordat je het opschrijft. Bij twijfel: weglaten of
+  voorzichtiger formuleren; dit wordt letterlijk aan kinderen voorgelezen.
+
 ## `geschiedenis.html`
 
 - Een **tijdlijn** (`.timeline` / `.hist-item`, met `era-1/2/3` voor de kleur van

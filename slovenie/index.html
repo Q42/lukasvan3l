@@ -391,6 +391,48 @@
     background: #f6faf4;
   }
 
+  /* ── VOORLEESWEETJES ── */
+  .facts {
+    margin-top: 14px;
+    border-top: 1px dashed #e8e4d8;
+    padding-top: 12px;
+  }
+  .facts > summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #6b5836;
+    background: var(--sand);
+    border: 1px solid #efe2cc;
+    border-radius: 20px;
+    padding: 7px 14px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color 0.15s;
+  }
+  .facts > summary::-webkit-details-marker { display: none; }
+  .facts > summary::after { content: '▾'; font-size: 10px; opacity: 0.55; }
+  .facts[open] > summary::after { content: '▴'; }
+  .facts > summary:hover { border-color: #d8c39a; }
+  .facts-list {
+    list-style: none;
+    margin: 14px 2px 2px;
+  }
+  .facts-list li {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--mid);
+  }
+  .facts-list li + li { margin-top: 10px; }
+  .facts-list .fico { flex-shrink: 0; }
+  .facts-list b { color: var(--dark); font-weight: 600; }
+
   /* ── TRAVEL DAY ── */
   .travel-row {
     background: #f8f8f6;
@@ -642,6 +684,15 @@
           <span class="tag tag-swim">Zwemmen</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
         </div>
+        <details class="facts">
+          <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">voorleesweetjes</span></summary>
+          <ul class="facts-list">
+            <li><span class="fico">🚂</span><span>De spoorlijn met al die tunnels en viaducten door de Baška grapa is uit <b>1906</b>, aangelegd om Wenen met de haven van Triëst te verbinden. Tien jaar later was het de aanvoerlijn naar het front aan de Soča.</span></li>
+            <li><span class="fico">🌉</span><span>Verderop op diezelfde lijn ligt de <b>brug van Solkan</b>: met een boog van 85 meter is dat de <b>grootste stenen spoorbrug ter wereld</b>.</span></li>
+            <li><span class="fico">🕳️</span><span>En de Bohinjtunnel dwars onder de bergen door is ruim <b>6 kilometer</b> lang — meer dan honderd jaar oud en nog altijd de langste spoortunnel van Slovenië.</span></li>
+            <li><span class="fico">💧</span><span>Waarom is het water zo blauwgroen? Er zweeft heel fijn kalksteengruis in, en dat kaatst juist het blauwe licht terug.</span></li>
+          </ul>
+        </details>
       </div>
     </div>
 
@@ -660,6 +711,16 @@
           <span class="tag tag-water">Tuben</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
         </div>
+        <details class="facts">
+          <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">voorleesweetjes</span></summary>
+          <ul class="facts-list">
+            <li><span class="fico">🏔️</span><span>De kloof is het <b>laagste punt van Nationaal Park Triglav</b>: je stapt hier op zo'n 180 meter hoogte het park in, terwijl de Triglav zelf 2864 meter is.</span></li>
+            <li><span class="fico">🐻</span><span>De <b>Berenkop</b> (Medvedova glava) is een rotsblok dat tussen de twee wanden klem is komen te zitten. Door de vochtige lucht zit hij helemaal onder het mos — vandaar die berenkop.</span></li>
+            <li><span class="fico">♨️</span><span>Onder de <b>Duivelsbrug</b>, zestig meter boven het water, komt een <b>warmwaterbron</b> uit de rots: ongeveer 20 graden, terwijl de Tolminka zelf maar 5 tot 9 graden is.</span></li>
+            <li><span class="fico">📖</span><span>In de Dantegrot hiernaast zou de dichter <b>Dante</b> rond 1300 zijn geweest. Het verhaal gaat dat die grot model stond voor de hel in zijn <i>Goddelijke Komedie</i>.</span></li>
+            <li><span class="fico">🤝</span><span>Dit is de enige plek in Slovenië waar twee rivieren <b>ín</b> een kloof samenkomen: de Tolminka en de Zadlaščica.</span></li>
+          </ul>
+        </details>
         <div class="actions">
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Tolminska+korita" target="_blank" rel="noopener">📍 Tolmin kloof</a>
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Labrca+Outdoor+Center" target="_blank" rel="noopener">📍 Labrca</a>
@@ -682,6 +743,15 @@
           <span class="tag">🚡 Stoeltjeslift</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
         </div>
+        <details class="facts">
+          <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">voorleesweetjes</span></summary>
+          <ul class="facts-list">
+            <li><span class="fico">🪖</span><span>Waar je op de top stond, sta je op een <b>Italiaanse bunker</b>. Tussen 1920 en 1943 liep hier pal over de toppen de <b>grens tussen Italië en Joegoslavië</b>: de Rapallo-grens.</span></li>
+            <li><span class="fico">🧱</span><span>Vanaf 1933 bouwde Italië hier een hele reeks bunkers, de <b>Alpenmuur</b>. Overal in de bergen liggen de resten nog: schietgaten, kazernes en gietijzeren uitkijkposten.</span></li>
+            <li><span class="fico">😞</span><span>Door die grens kwam ongeveer <b>een derde van alle Slovenen</b> in Italië te wonen, afgesneden van de rest.</span></li>
+            <li><span class="fico">🔭</span><span>De uitkijkkoepel op de Možic is inmiddels het symbool van Soriška planina — vanaf daar kijk je zo het Bohinjmeer in.</span></li>
+          </ul>
+        </details>
         <div class="actions">
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Soriska+planina" target="_blank" rel="noopener">📍 Soriška planina</a>
         </div>
@@ -703,6 +773,15 @@
           <span class="tag tag-swim">Zwemmen</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
         </div>
+        <details class="facts">
+          <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">voorleesweetjes</span></summary>
+          <ul class="facts-list">
+            <li><span class="fico">🐟</span><span>In dit water zwemt de <b>marmerforel</b>, de soška postrv. Die komt bijna nergens anders ter wereld voor en kan meer dan een meter lang worden.</span></li>
+            <li><span class="fico">⚔️</span><span>Precies hier vochten tussen 1915 en 1917 Italië en Oostenrijk-Hongarije <b>twaalf veldslagen</b> uit. In de bergen om je heen liggen nog loopgraven.</span></li>
+            <li><span class="fico">🇮🇹</span><span>De Soča is 138 kilometer lang en heet zodra hij Italië in stroomt <b>Isonzo</b> — daarom heet die oorlog het Isonzofront.</span></li>
+            <li><span class="fico">🧊</span><span>Het water blijft ook in augustus rond de 10 graden: het komt rechtstreeks uit de sneeuw en het kalkgesteente van de Julische Alpen.</span></li>
+          </ul>
+        </details>
         <div class="actions">
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=46.19715,13.69316" target="_blank" rel="noopener">📍 Instapplek</a>
         </div>
@@ -790,27 +869,47 @@
           <span class="tag tag-swim">Zwemmen</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
         </div>
+        <details class="facts">
+          <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">voorleesweetjes</span></summary>
+          <ul class="facts-list">
+            <li><span class="fico">🧗</span><span>De wand boven de baai is <b>80 meter hoog</b> en daarmee de <b>hoogste klif van de hele Adriatische Zee</b>.</span></li>
+            <li><span class="fico">🌙</span><span>Het gesteente heet <b>flysch</b>: dunne laagjes zandsteen en mergel op elkaar. Dat brokkelt makkelijk af, en juist daardoor is de baai zo'n perfecte halve maan geworden.</span></li>
+            <li><span class="fico">🌿</span><span>Dit is het <b>laatste ongerepte stuk kust</b> tussen Grado in Italië en Savudrija in Kroatië — vier kilometer lang en sinds 1990 beschermd.</span></li>
+            <li><span class="fico">🧂</span><span>Naast de baai liggen de <b>zoutpannen van Strunjan</b>, de noordelijkste van de Middellandse Zee. Er wordt hier al meer dan <b>700 jaar</b> op precies dezelfde manier zout gemaakt.</span></li>
+          </ul>
+        </details>
         <div class="actions">
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Mesecev+zaliv+Strunjan" target="_blank" rel="noopener">📍 Maanbaai</a>
         </div>
       </div>
     </div>
 
-    <div class="day-row" data-date="2026-08-09">
+    <div class="day-row done" data-date="2026-08-09">
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#f0e0f8,#d8b8f0)">🚂</div>
         <img data-wiki="Postojna Cave" data-search="Postojna Cave Slovenia" alt="Postojna grotten" onerror="this.remove()">
         <div class="drive-badge">🚗 65 min</div>
       </div>
       <div class="day-content">
-        <div class="day-label">Zondag 9 aug <span class="day-flag time">🕦 11:30</span></div>
+        <div class="day-label">Zondag 9 aug <span class="day-flag">✅ Gedaan</span></div>
         <div class="day-title">Postojna Grotten</div>
-        <div class="day-desc">Grootste grottenstelsel van Europa — met een treintje naar binnen! Stalactieten, stalagmieten en de zeldzame mensvis (olm). <b>Rondleiding om 11:30</b>; ±65 min rijden en je wilt er een half uur van tevoren zijn, dus <b>rond 10:00 weg</b> van Kaki Plac. Dit wordt onze enige grot — Škocjan slaan we over.</div>
+        <div class="day-desc">Om <b>11:30</b> naar binnen met het treintje: het grootste grottenstelsel van Europa, stalactieten, stalagmieten en de zeldzame <b>mensvis</b>. Onze enige grot deze vakantie — Škocjan hebben we overgeslagen.</div>
         <div class="day-tags">
           <span class="tag tag-cave">Grot</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
           <span class="tag">🚂 Treintje</span>
         </div>
+        <details class="facts">
+          <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">voorleesweetjes</span></summary>
+          <ul class="facts-list">
+            <li><span class="fico">✍️</span><span>Bij de ingang staan <b>handtekeningen van bezoekers uit 1213</b> op de wand. Dat is meer dan 800 jaar geleden.</span></li>
+            <li><span class="fico">💡</span><span>In <b>1818</b> maakte men de grot klaar voor een bezoek van de Oostenrijkse keizer. Lampenaansteker <b>Luka Čeč</b> klom over een rots, verdween, en riep even later dat hij <i>&ldquo;een nieuwe wereld&rdquo;</i> had gevonden. Bijna alles wat je nu ziet, is die nieuwe wereld.</span></li>
+            <li><span class="fico">🚂</span><span>Het treintje rijdt al sinds <b>1872</b> — het eerste grottentreintje ter wereld. In het begin duwden de gidsen de wagentjes zelf naar binnen.</span></li>
+            <li><span class="fico">🔌</span><span>De grot had in <b>1884</b> al elektrisch licht: eerder dan Ljubljana, de hoofdstad.</span></li>
+            <li><span class="fico">🐉</span><span>De <b>mensvis</b> is blind en bleek, wordt zo'n <b>honderd jaar oud</b> en kan <b>tien jaar zonder eten</b>. Vroeger dachten mensen dat het babydraakjes waren die na zware regen uit de grot spoelden.</span></li>
+            <li><span class="fico">🔥</span><span>In 1944 bliezen partizanen hier een Duits benzinedepot op. Het vuur brandde een week lang — de wanden bij de ingang zijn er nog steeds zwart van.</span></li>
+          </ul>
+        </details>
         <div class="actions">
           <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Postojna+Cave" target="_blank" rel="noopener">🧭 Navigatie · 65 min</a>
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Postojna+Cave" target="_blank" rel="noopener">📍 Maps</a>
@@ -833,6 +932,15 @@
           <span class="tag tag-culture">Stadje</span>
           <span class="tag tag-kids">Kids ⭐⭐</span>
         </div>
+        <details class="facts">
+          <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">voorleesweetjes</span></summary>
+          <ul class="facts-list">
+            <li><span class="fico">🎻</span><span>Op het plein werd in <b>1692 Giuseppe Tartini</b> geboren, violist en componist. Hij droomde dat de <b>duivel op zijn viool speelde</b>, werd wakker en schreef het op: de Duivelstriller-sonate.</span></li>
+            <li><span class="fico">⚓</span><span>Het Tartiniplein was tot <b>1894</b> gewoon de <b>binnenhaven</b>. Waar nu zijn standbeeld staat, lagen de boten.</span></li>
+            <li><span class="fico">🦁</span><span>Piran hoorde <b>vijf eeuwen bij Venetië</b>. De klokkentoren is een kleinere kopie van die van de San Marco in Venetië.</span></li>
+            <li><span class="fico">💬</span><span>Op het rode Venetiaanse Huis staat <i>&ldquo;Lassa pur dir&rdquo;</i> — <b>&ldquo;laat ze maar praten&rdquo;</b>. Volgens de legende van een rijke Venetiaanse koopman voor zijn geliefde uit Piran, over wie het hele stadje roddelde.</span></li>
+          </ul>
+        </details>
         <div class="actions">
           <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Piran,+Slovenia" target="_blank" rel="noopener">🧭 Navigatie · 15 min</a>
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Piran,+Slovenia" target="_blank" rel="noopener">📍 Maps</a>
@@ -856,6 +964,15 @@
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
           <span class="tag">⚠️ Vooraf boeken</span>
         </div>
+        <details class="facts">
+          <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">voorleesweetjes</span></summary>
+          <ul class="facts-list">
+            <li><span class="fico">🧭</span><span>De Golf van Triëst is het <b>meest noordelijke puntje van de hele Middellandse Zee</b>. Verder naar het noorden kom je met een boot niet.</span></li>
+            <li><span class="fico">🌡️</span><span>De zee is hier nergens dieper dan ongeveer <b>25 meter</b>. Juist daardoor warmt hij in augustus zo lekker op.</span></li>
+            <li><span class="fico">🔦</span><span>Bij <b>Kaap Madona</b> stond vroeger het kerkje van de zeelui; de vuurtoren wijst nog altijd de haven van Piran aan.</span></li>
+            <li><span class="fico">🪨</span><span>Vanaf het water zie je de <b>laagjes flysch</b> in de kliffen liggen als de bladzijden van een boek — dezelfde steen als bij de Maanbaai.</span></li>
+          </ul>
+        </details>
         <div class="booking-box">
           <span class="booking-status bk-todo">⏳ Nog te regelen</span>
           <div class="bk-row"><span class="bk-ico">⛵</span><span><b>Rent a Boat Bernardin</b> (Rnavtika) — Marina Bernardin, tussen Portorož en Piran, ±10 min van de camping. Boten van 5 tot 16 m, per halve of hele dag. <b>Voor de kleinere boten is geen vaarbewijs of ervaring nodig</b>, en er kan een schipper mee. Panoramische tocht mét schipper en brandstof vanaf ±€120/uur (tot 6 personen).</span></div>
@@ -955,6 +1072,14 @@
           <span class="tag tag-water">Waterval</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
         </div>
+        <details class="facts">
+          <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">voorleesweetjes</span></summary>
+          <ul class="facts-list">
+            <li><span class="fico">🧊</span><span>De vallei is uitgesleten door een <b>gletsjer</b>. Daarom is hij overal even breed en heeft hij die U-vorm; een rivier had er een V van gemaakt.</span></li>
+            <li><span class="fico">💦</span><span>Achterin stort de <b>Rinka</b> negentig meter naar beneden. Daar <b>begint de Savinja</b> — dezelfde rivier als bij onze camping.</span></li>
+            <li><span class="fico">🌲</span><span>Sinds <b>1987</b> is het een beschermd landschapspark, en bijzonder: het wordt beheerd door <b>de boeren uit de vallei zelf</b>.</span></li>
+          </ul>
+        </details>
         <div class="actions">
           <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Logarska+Dolina" target="_blank" rel="noopener">🧭 Navigatie · 35 min</a>
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Logarska+Dolina" target="_blank" rel="noopener">📍 Maps</a>
@@ -977,6 +1102,14 @@
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
           <span class="tag">⚠️ Vooraf boeken</span>
         </div>
+        <details class="facts">
+          <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">voorleesweetjes</span></summary>
+          <ul class="facts-list">
+            <li><span class="fico">🪵</span><span>Op deze rivier voeren vroeger de <b>flosarji</b>: vlottersmannen die boomstammen aan elkaar bonden en zo helemaal tot in Kroatië en Servië voeren.</span></li>
+            <li><span class="fico">🎉</span><span>Toen de vrachtwagens kwamen was het voorbij, maar Ljubno viert het elk jaar nog met het <b>Flosarski bal</b>, het vlottersbal.</span></li>
+            <li><span class="fico">🔁</span><span>Het water waar je op vaart komt van de <b>Rinka-waterval</b> die we gisteren zagen. Je vaart dus letterlijk op dezelfde druppels, een dag later.</span></li>
+          </ul>
+        </details>
         <div class="actions">
           <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Ljubno+ob+Savinji" target="_blank" rel="noopener">🧭 Navigatie · 10 min</a>
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Savinja+rafting+Ljubno" target="_blank" rel="noopener">📍 Maps</a>
@@ -999,6 +1132,14 @@
           <span class="tag tag-hike">Korte klim</span>
           <span class="tag tag-kids">Kids ⭐⭐</span>
         </div>
+        <details class="facts">
+          <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">voorleesweetjes</span></summary>
+          <ul class="facts-list">
+            <li><span class="fico">⛪</span><span>Op de <b>Mali grad</b> staat een kapel uit de <b>12e eeuw</b> met twee kerkjes bovenop elkaar — dat is heel zeldzaam.</span></li>
+            <li><span class="fico">🐍</span><span>De legende van <b>Veronika</b>: een gravin die vervloekt werd en sindsdien half vrouw, half slang de schat onder de burcht bewaakt. Ze staat nog steeds in het wapen van Kamnik.</span></li>
+            <li><span class="fico">🛣️</span><span>Kamnik lag in de middeleeuwen op de <b>handelsroute naar Karinthië</b> en was toen een van de belangrijkste stadjes van de streek.</span></li>
+          </ul>
+        </details>
         <div class="actions">
           <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Kamnik,+Slovenia" target="_blank" rel="noopener">🧭 Navigatie · 55 min</a>
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Kamnik,+Slovenia" target="_blank" rel="noopener">📍 Maps</a>
@@ -1032,7 +1173,7 @@
 </div>
 
 <footer class="site-footer">
-  <strong>Onze Slovenië-vakantie augustus 2026</strong> 🇸🇮 &nbsp;·&nbsp; Bijgewerkt t/m <strong>zaterdag 8 aug</strong> — groen is wat we écht gedaan hebben &nbsp;·&nbsp; Nu op <strong>Kaki Plac</strong> t/m 12 aug &nbsp;·&nbsp; Vignetten ✅ — 2e vignet start 10 aug &nbsp;·&nbsp; Postojna zo 9 aug <strong>11:30</strong> — rond 10:00 weg &nbsp;·&nbsp; Bootje bij Bernardin vooraf bellen &nbsp;·&nbsp; Genoeg <strong>cash</strong> mee (campings betaal je contant)
+  <strong>Onze Slovenië-vakantie augustus 2026</strong> 🇸🇮 &nbsp;·&nbsp; Bijgewerkt t/m <strong>zondag 9 aug</strong> — groen is wat we écht gedaan hebben &nbsp;·&nbsp; Nu op <strong>Kaki Plac</strong> t/m 12 aug &nbsp;·&nbsp; Vignetten ✅ — 2e vignet start 10 aug &nbsp;·&nbsp; Elk uitje heeft een uitklapper met <strong>voorleesweetjes</strong> &nbsp;·&nbsp; Bootje bij Bernardin vooraf bellen &nbsp;·&nbsp; Genoeg <strong>cash</strong> mee (campings betaal je contant)
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -1138,7 +1279,7 @@
     { name: 'Kano op de Soča (6 aug)',        lat: 46.19715, lng: 13.69316, c: 0, done: true },
     { name: 'Snorkelen aan de Karstkust (7 aug)', lat: 45.7308, lng: 13.6847, c: 1, done: true },
     { name: 'Maanbaai op de fiets (8 aug)',   lat: 45.533,   lng: 13.606,   c: 1, done: true },
-    { name: 'Postojna Grotten (9 aug)',       lat: 45.783,   lng: 14.204,   c: 1 },
+    { name: 'Postojna Grotten (9 aug)',       lat: 45.783,   lng: 14.204,   c: 1, done: true },
     { name: 'Piran (10 aug)',                 lat: 45.528,   lng: 13.568,   c: 1 },
     { name: 'Bootje huren · Bernardin (11 aug)', lat: 45.522, lng: 13.582,   c: 1 },
     { name: 'Logarska Dolina (13 aug)',       lat: 46.392,   lng: 14.622,   c: 2 },
