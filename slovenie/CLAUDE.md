@@ -104,6 +104,10 @@ Een dag die geweest is:
   iets te zeggen over waar we slapen of heen rijden (Isonzofront bij kamp 1,
   Venetië/zout bij kamp 2, de vlotters van Ljubno bij kamp 3). De
   `.hist-here`-pil is daarvoor bedoeld.
+- Onder het Sloveense deel staat een tweede hoofdstuk **Istrië & Kroatië**
+  (`#istrie`), met dezelfde tijdlijn-opmaak en een eigen `.hist-spots`-grid.
+  Vanaf kamp 2 rijden we die kant op, dus daar hoort ook wat we in Kroatië
+  doen. Bovenaan staat een `.jump-down`-knop naar dat blok.
 
 ## `learnings.html`
 
