@@ -33,6 +33,9 @@ in de root `index.html`; de one-offs hoeven hier niets voor te doen.
 
 ## Working rules for Claude
 
+- **Committen en pushen gaat direct naar `main`.** Geen feature branches, geen
+  pull requests: dit is een plekkie voor one-offs, en de site is pas bijgewerkt
+  als het op `main` staat.
 - **Stay in one directory.** When you're working inside a directory, do not
   read, reference, or modify files in other directories. What happens in
   `slovenie/` has nothing to do with any other one-off.
