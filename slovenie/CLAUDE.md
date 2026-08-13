@@ -148,10 +148,10 @@ Een dag die geweest is:
   - **Bootverhuur** (dagtrip 11 aug, kamp 2): is er niet van gekomen — die
     dagrij staat nu als *Niet doorgegaan* op de pagina en de learning
     ("boek een bootje vóór de vakantie") staat op `learnings.html`.
-  - **Mijnmuseum Velenje** (dagtrip 16 aug, kamp 3): reserveren verplicht,
-    telefonisch 8:30–15:00 op +386 3 587 09 97. Open di–zo 9:00–16:30,
-    familierondleidingen 9:00 / 12:00 / 14:00; maandag dicht. Prijs 2024 €21
-    volw. / €18 kind, malica inbegrepen. Telefoons mogen niet mee omlaag.
+  - **Ljubljana** (dagtrip 14 aug, kamp 3): niks te boeken. Centrum is
+    autovrij; P+R Dolgi most ±€1,50/dag inclusief twee busritten (betalen met
+    een Urbana-kaart), of parkeergarage Kongresni trg ±€2–3/uur. Op vrijdag
+    staat de *Odprta kuhna* op Pogačarjev trg (10:00–22:00, niet bij regen).
   - **Golte** (dagtrip 15 aug, kamp 3): niks te boeken, wel bellen voor het
     actuele schema van de nihalka (+386 3 839 1212, of hotel Montis
     +386 3 839 1100). Onderstation Radegunda 19c, Mozirje.
