@@ -69,7 +69,12 @@ Een dag die geweest is:
 - krijgt een beschrijving in de **verleden tijd** van wat we werkelijk deden —
   ook als dat iets heel anders was dan gepland. De oude planregel verdwijnt.
 - Een geplande dag die niet doorging maar nog wél kan, blijft staan met
-  `<span class="day-flag open">Niet gepland</span>` in plaats van een datum.
+  `<span class="day-flag open">Niet gepland</span>` in plaats van een datum —
+  dan vervalt ook de `data-date` (zulke reserverijen staan onderaan de
+  `days-grid` van hun kamp). Een uitje dat definitief niet meer kan (de dag is
+  voorbij) houdt zijn datum en krijgt
+  `<span class="day-flag open">Niet doorgegaan</span>`, met in één zin wat er
+  wél gebeurde of waarom het niet lukte.
 - Reisdagen en de boekingsblokken volgen hetzelfde: `travel-row done`,
   en de status wordt `✅ Gedaan` / `✅ Verbleven` / `✅ Aangekomen`.
 - Elke `.day-row` heeft een `data-date="JJJJ-MM-DD"`. Een scriptje onderaan
@@ -140,14 +145,21 @@ Een dag die geweest is:
     Duitsland · 1–2 aug · geboekt via Campspace · tel +49 9146 940 560.
   - **Terugweg** (17 aug): tussenstop nog te beslissen — opties staan in het
     laatste blok op de pagina.
-  - **Bootverhuur** (dagtrip 11 aug, kamp 2): nog te regelen. Eerste keus
-    *Rent a Boat Bernardin / Rnavtika*, Marina Bernardin, +386 31 348 590,
-    rentaboat.si — kleinere boten mogen daar zónder vaarbewijs. Alternatieven:
-    Navtika Fial (rentaboatportoroz.com) en Rentas in Marina Portorož (daar is
-    wél een vaarbewijs of hun schipper nodig). Sloveense regels over wanneer
-    een vaarbewijs verplicht is spreken elkaar tegen (3,7 vs 7,35 kW), dus de
-    pagina adviseert het bij het boeken expliciet te vragen.
+  - **Bootverhuur** (dagtrip 11 aug, kamp 2): is er niet van gekomen — die
+    dagrij staat nu als *Niet doorgegaan* op de pagina en de learning
+    ("boek een bootje vóór de vakantie") staat op `learnings.html`.
+  - **Mijnmuseum Velenje** (dagtrip 16 aug, kamp 3): reserveren verplicht,
+    telefonisch 8:30–15:00 op +386 3 587 09 97. Open di–zo 9:00–16:30,
+    familierondleidingen 9:00 / 12:00 / 14:00; maandag dicht. Prijs 2024 €21
+    volw. / €18 kind, malica inbegrepen. Telefoons mogen niet mee omlaag.
+  - **Golte** (dagtrip 15 aug, kamp 3): niks te boeken, wel bellen voor het
+    actuele schema van de nihalka (+386 3 839 1212, of hotel Montis
+    +386 3 839 1100). Onderstation Radegunda 19c, Mozirje.
   - Vignetten zijn geregeld; het tweede vignet loopt van 10 t/m 19 aug.
+  - **Snežna jama op Raduha is gesloten** (ingang ingestort bij het noodweer
+    van aug 2023; ook seizoen 2025 en 2026 dicht). Stond in het oorspronkelijke
+    plan; vervangen door Golte. Niet terugzetten zonder op snezna-jama.com te
+    checken of hij weer open is.
 - Every camp and day-trip has **action buttons** (`.actions` / `.btn`): a
   `🧭 Navigatie` link (`google.com/maps/dir/?api=1&destination=…`, opens
   turn-by-turn from the phone's location), a `📍 Maps` search link, and a
