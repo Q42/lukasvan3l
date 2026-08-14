@@ -149,9 +149,13 @@ Een dag die geweest is:
     dagrij staat nu als *Niet doorgegaan* op de pagina en de learning
     ("boek een bootje vóór de vakantie") staat op `learnings.html`.
   - **Ljubljana** (dagtrip 14 aug, kamp 3): niks te boeken. Centrum is
-    autovrij; P+R Dolgi most ±€1,50/dag inclusief twee busritten (betalen met
-    een Urbana-kaart), of parkeergarage Kongresni trg ±€2–3/uur. Op vrijdag
-    staat de *Odprta kuhna* op Pogačarjev trg (10:00–22:00, niet bij regen).
+    autovrij. Vanuit kamp 3 kom je aan de noordoostkant binnen, dus P+R Center
+    Stožice (inrit Štajerska cesta) — €1,50/dag inclusief twee busritten,
+    bus 13/18/20 het centrum in. Let op: in dezelfde garage geldt ook het
+    ŠRC Stožice-uurtarief van €1,50/uur, dus bij de Urbanomat het P+R-tarief
+    kiezen. Alternatieven: P+R Dolgi most (zuidwest) en P+R Ježica (noord, via
+    Kamnik), of garage Kongresni trg ±€2–3/uur. Op vrijdag staat de
+    *Odprta kuhna* op Pogačarjev trg (10:00–22:00, niet bij regen).
   - **Golte** (dagtrip 15 aug, kamp 3): niks te boeken, wel bellen voor het
     actuele schema van de nihalka (+386 3 839 1212, of hotel Montis
     +386 3 839 1100). Onderstation Radegunda 19c, Mozirje.
