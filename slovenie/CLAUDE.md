@@ -159,6 +159,12 @@ Een dag die geweest is:
   - **Golte** (dagtrip 15 aug, kamp 3): niks te boeken, wel bellen voor het
     actuele schema van de nihalka (+386 3 839 1212, of hotel Montis
     +386 3 839 1100). Onderstation Radegunda 19c, Mozirje.
+  - **Uit eten** (kamp 3): *Okrepčevalnica Ribiški dom* (Matej Podkrižnik
+    s.p.), Na Pečeh 10, Ljubno — naast de camping, forel uit eigen vijver,
+    +386 31 408 428. *Gostilna Weiss*, Radegunda 53A, Mozirje, bij het
+    dalstation van de Golte-kabelbaan, +386 3 583 28 54 (reserveren tot een
+    uur voor sluiting). Waar we gegeten hebben komt in de dagrij van die dag
+    te staan, in een `booking-box` met de status "🐟 Waar we aten".
   - Vignetten zijn geregeld; het tweede vignet loopt van 10 t/m 19 aug.
   - **Snežna jama op Raduha is gesloten** (ingang ingestort bij het noodweer
     van aug 2023; ook seizoen 2025 en 2026 dicht). Stond in het oorspronkelijke
