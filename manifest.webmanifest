@@ -33,6 +33,7 @@
     { "name": "Luisterverhalen", "url": "/podcasts/" },
     { "name": "Slovenië 2026", "url": "/slovenie/" },
     { "name": "Boodschappen", "url": "/boodschappen/" },
+    { "name": "Stokken maken", "url": "/stokken/" },
     { "name": "Parro", "url": "/parro/" }
   ]
 }

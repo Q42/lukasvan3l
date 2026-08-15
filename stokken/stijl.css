@@ -1,0 +1,233 @@
+/* ── Stokken maken — gedeelde stijl ─────────────────────────────
+   Aards palet: schors, perkament, oker en mosgroen. Elke pagina
+   linkt dit bestand en zet pagina-eigen opmaak in een eigen <style>. */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --schors: #33261a;        /* donker schorsbruin — koppen, nav */
+  --schors-zacht: #5c4632;  /* lichter bruin — subkoppen */
+  --inkt2: #6b5d4f;         /* lopende tekst secundair */
+  --perkament: #f7f2e8;     /* paginakleur */
+  --kaart: #fffdf8;         /* kaart/tegel-achtergrond */
+  --rand: #e6dcc9;
+  --oker: #b0722a;          /* accent: warm oker */
+  --mos: #4a5d3a;           /* accent: mosgroen */
+  --steen: #6d5a8e;         /* accent: amethist-paars, voor stenen */
+  --radius: 14px;
+  --schaduw: 0 3px 18px rgba(51, 38, 26, 0.08);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--perkament);
+  color: #2e2a24;
+  line-height: 1.6;
+}
+
+/* ── Menubalk ── */
+.sitenav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 18px;
+  height: 54px;
+  background: var(--schors);
+  color: #f0e8da;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.sitenav .brand {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 17px;
+  color: #fff;
+  text-decoration: none;
+  margin-right: auto;
+  white-space: nowrap;
+}
+.sitenav .brand span { color: var(--oker); }
+.sitenav a.tab {
+  font-size: 13px;
+  font-weight: 600;
+  color: #d8ccb8;
+  text-decoration: none;
+  padding: 6px 11px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+.sitenav a.tab:hover { background: rgba(255,255,255,0.09); color: #fff; }
+.sitenav a.tab.active { background: var(--oker); color: #fff; }
+
+@media (max-width: 720px) {
+  .sitenav .brand-text { display: none; }
+  .sitenav { padding: 0 10px; }
+}
+
+/* ── Pagina-indeling ── */
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 22px 70px; }
+
+.hero { padding: 54px 0 8px; }
+.hero .eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--oker);
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(34px, 6vw, 52px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.5px;
+  color: var(--schors);
+  margin-bottom: 14px;
+}
+.hero p.lead {
+  font-size: 18px;
+  color: var(--inkt2);
+  max-width: 620px;
+}
+
+section { margin-top: 46px; }
+section[id] { scroll-margin-top: 70px; }
+
+h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--schors);
+  margin-bottom: 6px;
+}
+h2 + p.sub { color: var(--inkt2); margin-bottom: 18px; max-width: 640px; }
+h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--schors-zacht);
+  margin: 22px 0 8px;
+}
+p + p { margin-top: 10px; }
+a { color: var(--oker); }
+
+ul.lijst { margin: 10px 0 0 20px; }
+ul.lijst li { margin-bottom: 6px; }
+
+/* ── Kaarten ── */
+.kaarten {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+.kaart {
+  background: var(--kaart);
+  border: 1px solid var(--rand);
+  border-radius: var(--radius);
+  padding: 18px 18px 16px;
+  box-shadow: var(--schaduw);
+}
+.kaart h3 { margin: 0 0 6px; font-size: 18px; }
+.kaart .kop-emoji { font-size: 26px; line-height: 1; margin-bottom: 10px; }
+.kaart p { font-size: 14px; color: var(--inkt2); }
+.kaart .eigenschap {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: var(--perkament);
+  color: var(--schors-zacht);
+  border: 1px solid var(--rand);
+  margin: 8px 6px 0 0;
+}
+
+/* ── Tabellen ── */
+table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 14.5px; }
+th {
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--schors-zacht);
+  border-bottom: 2px solid var(--rand);
+  padding: 8px 10px;
+}
+td { padding: 9px 10px; border-bottom: 1px solid var(--rand); vertical-align: top; }
+td:first-child { font-weight: 600; color: var(--schors); white-space: nowrap; }
+@media (max-width: 640px) {
+  table, thead, tbody, tr { display: block; }
+  thead { display: none; }
+  tr { border: 1px solid var(--rand); border-radius: 10px; margin-bottom: 10px; background: var(--kaart); padding: 6px 4px; }
+  td { display: block; border: none; padding: 4px 12px; }
+  td:first-child { padding-top: 8px; }
+  td[data-label]::before {
+    content: attr(data-label) " — ";
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--oker);
+    font-weight: 600;
+  }
+}
+
+/* ── Tip- en waarschuwingsblokken ── */
+.tip, .letop {
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin-top: 16px;
+  font-size: 14.5px;
+}
+.tip { background: #eef2e6; border: 1px solid #cdd8ba; }
+.tip strong:first-child { color: var(--mos); }
+.letop { background: #f9e9dd; border: 1px solid #ecccae; }
+.letop strong:first-child { color: #a4550f; }
+
+/* ── Stappen (genummerd) ── */
+.stappen { counter-reset: stap; margin-top: 18px; }
+.stap {
+  position: relative;
+  padding: 0 0 22px 54px;
+  border-left: 2px solid var(--rand);
+  margin-left: 19px;
+}
+.stap:last-child { border-left-color: transparent; padding-bottom: 0; }
+.stap::before {
+  counter-increment: stap;
+  content: counter(stap);
+  position: absolute;
+  left: -20px;
+  top: -2px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--oker);
+  color: #fff;
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stap h3 { margin-top: 2px; }
+.stap p { font-size: 15px; color: var(--inkt2); }
+
+/* ── Voetnoot / footer ── */
+.site-footer {
+  margin-top: 64px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rand);
+  font-size: 13px;
+  color: #a4977f;
+}
+.site-footer a { color: var(--schors-zacht); }

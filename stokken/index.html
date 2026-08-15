@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stokken maken — begin hier</title>
+<meta name="description" content="Leer zelf krachtstokken en talking sticks maken: hout, stenen, technieken en gereedschap.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="stijl.css">
+<style>
+  .anatomie {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 0 26px;
+    margin-top: 20px;
+    background: var(--kaart);
+    border: 1px solid var(--rand);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--schaduw);
+  }
+  .anatomie .stok-figuur {
+    grid-row: 1 / span 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 30px;
+    line-height: 1.15;
+    user-select: none;
+  }
+  .anatomie .deel { padding: 10px 0; border-bottom: 1px dashed var(--rand); }
+  .anatomie .deel:last-child { border-bottom: none; }
+  .anatomie .deel h3 { margin: 0 0 3px; font-size: 16px; }
+  .anatomie .deel p { font-size: 14px; color: var(--inkt2); }
+  @media (max-width: 560px) {
+    .anatomie { grid-template-columns: 1fr; }
+    .anatomie .stok-figuur { flex-direction: row; gap: 6px; grid-row: auto; margin-bottom: 8px; }
+  }
+  .twee-soorten { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+  @media (max-width: 640px) { .twee-soorten { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="sitenav">
+  <a class="brand" href="./"><span>🪵</span> <span class="brand-text">Stokken maken</span></a>
+  <a class="tab active" href="./">Begin hier</a>
+  <a class="tab" href="materialen.html">Hout &amp; meer</a>
+  <a class="tab" href="stenen.html">Stenen</a>
+  <a class="tab" href="technieken.html">Technieken</a>
+  <a class="tab" href="gereedschap.html">Gereedschap</a>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Krachtstokken &amp; talking sticks</div>
+    <h1>Leer stokken maken</h1>
+    <p class="lead">
+      Alles wat je nodig hebt om zelf krachtstokken en talking sticks te maken:
+      welk hout je kiest, hoe je stenen bevestigt, welke technieken en welk
+      gereedschap je nodig hebt — en waar je alles vindt of goedkoop koopt.
+    </p>
+  </header>
+
+  <section id="wat">
+    <h2>Wat maak je eigenlijk?</h2>
+    <p class="sub">Twee verwante dingen, met een verschillend doel.</p>
+
+    <div class="twee-soorten">
+      <div class="kaart">
+        <div class="kop-emoji">🗣️</div>
+        <h3>Talking stick (praatstok)</h3>
+        <p>
+          Een gespreksinstrument uit de traditie van verschillende inheemse
+          volkeren van Noord-Amerika: in een kring heeft alleen degene die de
+          stok vasthoudt het woord, de rest luistert. De stok is meestal
+          30–60&nbsp;cm, handzaam, en versierd met materialen die iets betekenen
+          voor de groep of de maker — leer, veren, kralen, een steen.
+        </p>
+      </div>
+      <div class="kaart">
+        <div class="kop-emoji">🌟</div>
+        <h3>Krachtstok / ceremoniële staf</h3>
+        <p>
+          Een persoonlijk object, vaak langer (wandelstok- tot staflengte,
+          120–160&nbsp;cm), dat je maakt met materialen die voor jou betekenis
+          hebben: een houtsoort met symboliek, een kristal op de top, gewei,
+          leer, veren. Het maken zelf — verzamelen, kiezen, wikkelen — is een
+          groot deel van de waarde.
+        </p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <strong>Met respect.</strong> De talking stick komt uit levende inheemse
+      tradities. Maak je eigen versie vanuit je eigen verhaal en materialen, en
+      kopieer geen heilige symbolen of specifieke stamdesigns. Arendsveren zijn
+      in die tradities heilig (en in de praktijk ook gewoon verboden om te
+      bezitten) — gebruik veren van fazant, gans of kalkoen. Meer daarover bij
+      <a href="technieken.html#versieren">versieren</a>.
+    </div>
+  </section>
+
+  <section id="anatomie">
+    <h2>De anatomie van een stok</h2>
+    <p class="sub">Handig om te kennen, want elke pagina op deze site hangt aan één van deze onderdelen.</p>
+
+    <div class="anatomie">
+      <div class="stok-figuur">💎<br>🧶<br>┃<br>🪶<br>┃<br>🔘</div>
+      <div class="deel">
+        <h3>Top</h3>
+        <p>De blikvanger: een kristalpunt, trommelsteen, geweitak of gesneden vorm.
+           Zie <a href="stenen.html">stenen</a> en <a href="technieken.html#bevestigen">bevestigen</a>.</p>
+      </div>
+      <div class="deel">
+        <h3>Wikkeling</h3>
+        <p>Leer, koperdraad, wol of touw die de top vastzet én het handvat vormt.
+           De meeste bevestiging <em>is</em> wikkeling.</p>
+      </div>
+      <div class="deel">
+        <h3>Schacht</h3>
+        <p>De stok zelf: houtsoort, dikte, recht of grillig. Ontschorst, geschuurd
+           en geolied. Zie <a href="materialen.html">hout &amp; meer</a>.</p>
+      </div>
+      <div class="deel">
+        <h3>Hangers</h3>
+        <p>Veren, kralen, botjes, schelpen of belletjes aan leerveters. Hier zit
+           vaak de persoonlijke betekenis.</p>
+      </div>
+      <div class="deel">
+        <h3>Voet</h3>
+        <p>Bij een staf die mee naar buiten gaat: een rubberen dop of koperen
+           huls tegen slijtage en splijten.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="eerste-project">
+    <h2>Je eerste stok: een stappenplan</h2>
+    <p class="sub">
+      Begin met een talking stick, niet met een staf: klein, snel resultaat, en
+      je oefent alle technieken die je later voor een grote krachtstok nodig hebt.
+    </p>
+
+    <div class="stappen">
+      <div class="stap">
+        <h3>Vind een tak</h3>
+        <p>Hazelaar, wilg of es, 30–50&nbsp;cm, dikte 2–3&nbsp;cm. Snoeiafval, een dood
+           stuk uit het bos of gewoon uit eigen tuin. Vers hout: laat het een paar
+           weken drogen (zie <a href="materialen.html#drogen">hout drogen</a> — bij
+           dunne takken valt dit mee).</p>
+      </div>
+      <div class="stap">
+        <h3>Ontschors en schuur</h3>
+        <p>Schil de bast met een mes (vers hout schilt makkelijk), schuur op met
+           korrel 80 → 120 → 240. Werk knoesten bij met een rasp of dremel.
+           Zie <a href="technieken.html#hout-bewerken">houtbewerking</a>.</p>
+      </div>
+      <div class="stap">
+        <h3>Kies je steen en zet hem vast</h3>
+        <p>Een trommelsteen of kristalpunt op de top. Makkelijkste eerste
+           techniek: uitgefreesd komnetje + epoxy, of wikkelen met koperdraad.
+           Zie <a href="technieken.html#bevestigen">bevestigingstechnieken</a>.</p>
+      </div>
+      <div class="stap">
+        <h3>Wikkel en versier</h3>
+        <p>Leerveter om de top en als handvat, dan hangers: veren, kralen, een
+           tweede steentje. Minder is meer — drie materialen die kloppen slaan
+           tien losse dingetjes.</p>
+      </div>
+      <div class="stap">
+        <h3>Werk af met olie</h3>
+        <p>Lijnzaad- of Deense olie maakt de nerf diep en warm en beschermt het
+           hout. Twee dunne lagen. <em>Let op: oliedoeken kunnen zelfontbranden —
+           uitgespreid laten drogen.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="wegwijzer">
+    <h2>Wegwijzer</h2>
+    <div class="kaarten">
+      <a class="kaart" href="materialen.html" style="text-decoration:none">
+        <div class="kop-emoji">🌳</div>
+        <h3>Hout &amp; meer</h3>
+        <p>Houtsoorten met hun eigenschappen en symboliek, hout drogen, en
+           alternatieven: gewei, bot en drijfhout. Plus waar je alles gratis
+           vindt of goedkoop koopt.</p>
+      </a>
+      <a class="kaart" href="stenen.html" style="text-decoration:none">
+        <div class="kop-emoji">💎</div>
+        <h3>Stenen</h3>
+        <p>Edelstenen en hun betekenis, welke vormen handig zijn om te
+           bevestigen, nep herkennen, en inkopen op beurzen en bij groothandels.</p>
+      </a>
+      <a class="kaart" href="technieken.html" style="text-decoration:none">
+        <div class="kop-emoji">🔧</div>
+        <h3>Technieken</h3>
+        <p>Hout bewerken met de hand en met de dremel, stenen bevestigen
+           (wire wrap, epoxy, leer), versieren en afwerken.</p>
+      </a>
+      <a class="kaart" href="gereedschap.html" style="text-decoration:none">
+        <div class="kop-emoji">🛠️</div>
+        <h3>Gereedschap</h3>
+        <p>Wat je echt nodig hebt en wat handig is, dremel-accessoires, het
+           eerlijke verhaal over AliExpress-draaibankjes, en veiligheid.</p>
+      </a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    Onderdeel van <a href="../">Lukas' plekkie</a> · Inspiratie:
+    <a href="https://www.atelierlazuli.nl/c-1372119/talking-stick-praatstok/" rel="noopener">Atelier Lazuli</a>
+  </footer>
+
+</div>
+</body>
+</html>
