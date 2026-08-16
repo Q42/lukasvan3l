@@ -143,8 +143,9 @@ Een dag die geweest is:
     Bovec, which is ±1,5u away over the mountain road.
   - **Berghof Oberweiler** (heenweg-tussenstop): Oberweiler 5, 91802 Meinheim,
     Duitsland · 1–2 aug · geboekt via Campspace · tel +49 9146 940 560.
-  - **Terugweg** (17 aug): tussenstop nog te beslissen — opties staan in het
-    laatste blok op de pagina.
+  - **Terugweg** (17 & 18 aug): in tweeën, met dezelfde tussenstop als op de
+    heenweg — Berghof Oberweiler bij Meinheim. Wel een nieuwe reservering via
+    Campspace.
   - **Bootverhuur** (dagtrip 11 aug, kamp 2): is er niet van gekomen — die
     dagrij staat nu als *Niet doorgegaan* op de pagina en de learning
     ("boek een bootje vóór de vakantie") staat op `learnings.html`.
