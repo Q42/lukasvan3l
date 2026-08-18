@@ -450,6 +450,90 @@
   .travel-row.travel-stay { align-items: flex-start; }
   .travel-row.travel-stay .booking-box { background: #fff; }
 
+  /* ── SNORKELPLEKKEN ── */
+  .snorkel-box {
+    margin-top: 30px;
+    scroll-margin-top: 110px;
+    background: linear-gradient(165deg, #f1fafd, #e7f4fa);
+    border: 1px solid #cde5ef;
+    border-radius: var(--radius);
+    padding: 28px 30px;
+  }
+  .snorkel-box h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #0a5570;
+    margin-bottom: 8px;
+  }
+  .snorkel-lead {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--mid);
+    margin-bottom: 22px;
+  }
+  .snorkel-lead b { color: #0a5570; }
+  .snorkel-sub {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #0a6f8c;
+    margin: 22px 0 12px;
+  }
+  .snorkel-sub:first-of-type { margin-top: 0; }
+  .snorkel-grid {
+    display: grid;
+    gap: 12px;
+  }
+  .snorkel-spot {
+    background: var(--white);
+    border: 1px solid #dceaf0;
+    border-radius: 12px;
+    padding: 15px 18px;
+  }
+  .snorkel-spot .sp-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .snorkel-spot .sp-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--dark);
+  }
+  .snorkel-spot .sp-drive {
+    font-size: 11px;
+    font-weight: 600;
+    color: #0a6f8c;
+    background: #e4f3f9;
+    border-radius: 20px;
+    padding: 3px 9px;
+    white-space: nowrap;
+  }
+  .snorkel-spot .sp-drive.far { background: #fdf0e0; color: #8a5a0a; }
+  .snorkel-spot .sp-desc {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--mid);
+  }
+  .snorkel-spot .sp-desc b { color: var(--dark); }
+  .snorkel-spot .actions { margin-top: 10px; }
+  .snorkel-spot.pick { border-color: var(--sun); box-shadow: 0 0 0 2px rgba(240,180,41,0.22); }
+  .snorkel-spot .sp-pick {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    background: var(--sun);
+    color: #503800;
+    border-radius: 20px;
+    padding: 3px 9px;
+  }
+  .snorkel-box .facts { margin-top: 22px; }
+
   /* ── RESPONSIVE / PHONE ── */
   @media (max-width: 760px) {
     .hero-stats { gap: 20px 30px; flex-wrap: wrap; }
@@ -474,6 +558,8 @@
     .day-content { padding: 18px 20px; }
 
     .travel-row { flex-direction: column; align-items: flex-start; }
+
+    .snorkel-box { padding: 22px 20px; }
   }
 </style>
 </head>
@@ -567,7 +653,7 @@
       Savinja-vallei
     </a>
     <div class="route-arrow">
-      <span class="route-drive">17–18 aug · via Meinheim</span>
+      <span class="route-drive">17 aug · in één keer</span>
     </div>
     <a class="route-stop" href="#terugweg">
       <span class="dot dot-nl"></span>
@@ -595,7 +681,7 @@
     <div class="lg"><span class="sw" style="background:#e8832a"></span> Basiskamp 2 &amp; dagtrips — Istrië</div>
     <div class="lg"><span class="sw" style="background:#2d5c1e"></span> Basiskamp 3 &amp; dagtrips — Savinja</div>
   </div>
-  <div class="map-hint">Grote stippen = campings · <b>gevulde</b> stippen = al gedaan · open stippen = nog gepland · klik voor details. (Coördinaten bij benadering.)</div>
+  <div class="map-hint">Grote stippen = campings · gevulde stippen = <b>waar we echt geweest zijn</b> · klik voor details. Wat niet doorging (bootje, raften, Kamnik) staat wel op de pagina, niet op de kaart. (Coördinaten bij benadering.)</div>
 </div>
 
 <!-- HEENREIS TUSSENSTOP -->
@@ -945,14 +1031,14 @@
 
     <div class="day-row done" data-date="2026-08-10">
       <div class="day-photo">
-        <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#ffecd0,#ffc870)">🗼</div>
-        <img data-wiki="Savudrija Lighthouse|Savudrija" data-search="Savudrija lighthouse Croatia Punta Salvore" alt="Vuurtoren van Savudrija" onerror="this.remove()">
-        <div class="drive-badge">🚗 30 min</div>
+        <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#ffecd0,#ffc870)">🏖️</div>
+        <img data-wiki="Premantura" data-search="Premantura beach Croatia rocky coast" alt="Corner Beach bij Crveni Vrh" onerror="this.remove()">
+        <div class="drive-badge">🚗 20 min</div>
       </div>
       <div class="day-content">
         <div class="day-label">Maandag 10 aug <span class="day-flag">✅ Gedaan</span></div>
-        <div class="day-title">Vuurtoren van Savudrija</div>
-        <div class="day-desc">De grens over naar <b>Kroatië</b>, naar de <b>vuurtoren van Savudrija</b> (Punta Salvore) op de westelijkste punt van het land — rotsige kust, helder water, <b>gesnorkeld</b>. De grens was geen gedoe (Kroatië zit sinds 2023 in Schengen én bij de euro). 's Avonds nog een uurtje in Piran gelopen; het echte Piran-dagje werd de dag erna.</div>
+        <div class="day-title">Snorkelen in Kroatië &amp; 's avonds Piran</div>
+        <div class="day-desc">De grens over naar <b>Kroatië</b>. Eerst gestopt bij <b>Kanegra</b>, het eerste strandje over de grens — maar dat ligt in de <b>binnenhoek van de Piranbaai</b>: kniediep, troebel en geen vis. Dus doorgereden naar de <b>buitenkant</b> van het schiereiland van Savudrija, een kwartiertje verder, en daar bij <b>Corner Beach</b> beland (45,50113° N · 13,52115° E): <b>prachtig gesnorkeld</b> 🤿 Open zee en rots in plaats van slib — de vuistregel werkte precies zoals hij hoort te werken. De grens was geen gedoe: sinds 2023 zit Kroatië in Schengen én bij de euro. 's <b>Avonds nog naar Piran</b>, en dat is het goede moment: de steegjes, het Tartiniplein en zwemmen van de rotsige kades met minder drukte dan overdag.<br><br>Alle snorkelplekken op deze kust staan hieronder in <a href="#snorkelen">Waar zitten de vissen?</a></div>
         <div class="day-tags">
           <span class="tag tag-swim">Snorkelen</span>
           <span class="tag">🇭🇷 Kroatië</span>
@@ -961,14 +1047,15 @@
         <details class="facts">
           <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">voorleesweetjes</span></summary>
           <ul class="facts-list">
-            <li><span class="fico">🗼</span><span><b>Over Savudrija:</b> deze vuurtoren brandt sinds <b>17 april 1818</b> en is daarmee de <b>oudste nog werkende vuurtoren van de Adriatische Zee</b>. Hij is 36 meter hoog en staat op het westelijkste puntje van Kroatië.</span></li>
-            <li><span class="fico">🔥</span><span>Hij was de eerste vuurtoren ter wereld die op <b>steenkoolgas</b> brandde. Mooi bedacht, alleen: het werkte voor geen meter, en al snel gingen ze over op olie.</span></li>
-            <li><span class="fico">💔</span><span>De legende wil dat de Oostenrijkse graaf <b>Metternich</b> de toren liet bouwen voor een Kroatische vrouw op wie hij verliefd was. Ze werd ziek en stierf voordat het licht ooit aanging. Volgens de verhalen hoor je in het lege huis ernaast nog steeds voetstappen. (De boeken zeggen: gebouwd voor de kooplieden van Triëst — maar dat verhaal is minder mooi.)</span></li>
-            <li><span class="fico">⚔️</span><span>De kaap heet in het Italiaans <b>Punta Salvore</b>. Volgens een oude Venetiaanse legende versloeg de vloot van Venetië hier in <b>1177</b> die van keizer Frederik Barbarossa. Historici twijfelen of dat gevecht echt zo is gegaan — maar in het Dogenpaleis in Venetië hangt het wél groot aan de muur.</span></li>
+            <li><span class="fico">🔴</span><span><b>Crveni Vrh</b> betekent <b>Rode Top</b> — in het Italiaans <i>Monte Rosso</i>. De aarde is hier roestrood: de kalksteen lost op in de regen, en wat overblijft is <b>ijzeroxide</b>, precies dezelfde stof als roest.</span></li>
+            <li><span class="fico">👁️</span><span>Vanaf het strand kijk je over de <b>Baai van Piran</b> naar Portorož en Piran. Dat is <b>dezelfde baai</b> als bij de camping — alleen zit je nu in een ander land.</span></li>
+            <li><span class="fico">🗺️</span><span>Tot <b>1954</b> hoorde dit stuk kust bij de gemeente Piran. Toen het Vrije Territorium Triëst werd opgeheven, ging Savudrija naar Kroatië en Piran naar Slovenië. De grens die je overstak is dus nog <b>geen tachtig jaar</b> oud.</span></li>
+            <li><span class="fico">🗼</span><span>Een paar kilometer verderop, op het westelijkste puntje van Kroatië, staat de <b>vuurtoren van Savudrija</b>: de oudste nog werkende van de Adriatische Zee, aan sinds <b>1818</b>. Die hebben we deze keer laten staan.</span></li>
           </ul>
         </details>
         <div class="actions">
-          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Savudrija+lighthouse" target="_blank" rel="noopener">📍 De vuurtoren</a>
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=45.50112839651788,13.521147743562166" target="_blank" rel="noopener">🧭 Navigatie · 20 min</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=45.50112839651788,13.521147743562166" target="_blank" rel="noopener">📍 Corner Beach</a>
         </div>
       </div>
     </div>
@@ -1006,6 +1093,122 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- ── SNORKELPLEKKEN ── -->
+  <div class="snorkel-box" id="snorkelen">
+    <h3>🤿 Waar zitten de vissen?</h3>
+    <p class="snorkel-lead">
+      In de <b>binnenhoek van de Piranbaai</b> (Kanegra, Sečovlje, de zoutpannen) valt niks te snorkelen, en dat is
+      logisch: de baai is er maar een paar meter diep, de Dragonja voert slib aan en de bodem is zand en modder.
+      Een vis heeft <b>rots</b> nodig — om zich in te verstoppen en om te eten. De regel voor deze kust:
+      <b>ga naar een kaap of punt aan de buitenkant, waar het meteen diep wordt</b>, en zwem langs de rand van de
+      rotsen in twee tot vier meter water. Zand oversteken kost je alleen tijd.
+      <b>Op 10 aug meteen bewezen:</b> bij Kanegra niks, een kwartier verder aan de buitenkant bij Corner Beach
+      prachtig snorkelen.
+    </p>
+
+    <div class="snorkel-sub">De Kroatische buitenkant — vanaf Kanegra</div>
+    <div class="snorkel-grid">
+      <div class="snorkel-spot pick">
+        <div class="sp-head"><span class="sp-name">Corner Beach</span><span class="sp-drive">🚗 ±15 min vanaf Kanegra</span><span class="sp-pick">✅ Hier waren we — top</span></div>
+        <div class="sp-desc">Waar we op <b>10 aug</b> belandden nadat Kanegra niks bleek: <b>45,50113° N · 13,52115° E</b>, op de <b>noordkust van het schiereiland van Savudrija</b>, zo'n 2,5 km noordoostelijk van de vuurtoren. Je bent daar de baai uit en aan de open zee — rots en diepte in plaats van slib, en <b>prachtig snorkelen</b>. Deze staat vanaf nu bovenaan: als iemand nog een keer wil, is dit de plek waar we het al weten.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=45.50112839651788,13.521147743562166" target="_blank" rel="noopener">🧭 Navigatie · Corner Beach</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=45.50112839651788,13.521147743562166" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+      <div class="snorkel-spot">
+        <div class="sp-head"><span class="sp-name">Bašanija &amp; Punta Savudrija</span><span class="sp-drive">🚗 ±15 min vanaf Kanegra</span></div>
+        <div class="sp-desc">Dezelfde kust, een stukje verder naar het westelijkste puntje van Kroatië: platte rotsplaten om vanaf in te stappen, rotspoeltjes voor Yune, pijnbomen voor de schaduw en de <b>vuurtoren</b> in het zicht. Vlak achter de punt wordt het snel diep; volg de rotsrand naar links of rechts, niet de baai in.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Basanija,+Savudrija,+Croatia" target="_blank" rel="noopener">🧭 Navigatie · Bašanija</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=45.4928,13.4938" target="_blank" rel="noopener">📍 Vuurtoren Savudrija</a>
+        </div>
+      </div>
+      <div class="snorkel-spot">
+        <div class="sp-head"><span class="sp-name">Zambratija &amp; de ruïne van Sipar</span><span class="sp-drive">🚗 ±25 min vanaf Kanegra</span></div>
+        <div class="sp-desc">Tussen Savudrija en Umag, een rij <b>kleine rotsbaaitjes</b> met makkelijke instap. Voor de kust ligt <b>Sipar</b>: de resten van een Romeins-Byzantijns stadje dat in de zee is verdwenen — een <b>half verdronken ruïne</b> waar je naartoe kunt kijken. Rustiger dan Umag zelf.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Zambratija,+Umag,+Croatia" target="_blank" rel="noopener">🧭 Navigatie · Zambratija</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="snorkel-sub">Dichtbij de camping (Sloveense kant)</div>
+    <div class="snorkel-grid">
+      <div class="snorkel-spot pick">
+        <div class="sp-head"><span class="sp-name">Rt Madona / Punta — Piran</span><span class="sp-drive">🚗 ±15 min</span><span class="sp-pick">Beste vlakbij</span></div>
+        <div class="sp-desc">De punt van het schiereiland van Piran, naast de vuurtoren. Je stapt van de <b>kade het diepe in</b> — geen ondiepe aanloop — en zwemt langs een rotswand met scheuren, zeegras, lipvissen en zeebrasems; er zijn hier zelfs <b>zeepaardjes</b> gezien. Officieel natuurmonument en samen met Strunjan de <b>rijkste plek van de Sloveense zee</b>. Combineer het met het avondbezoek aan Piran, of kom vóór tien uur — dan is het water het rustigst en het minst druk.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Rt+Madona,+Piran,+Slovenia" target="_blank" rel="noopener">🧭 Navigatie · 15 min</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=45.5285,13.5636" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+      <div class="snorkel-spot">
+        <div class="sp-head"><span class="sp-name">Bele skale &amp; de Maanbaai — Strunjan</span><span class="sp-drive">🚗 ±15 min + 15 min lopen</span></div>
+        <div class="sp-desc">Onder de flyschklif waar we zaterdag met de fiets waren. <b>Strunjan is het enige stuk zee dat Slovenië echt beschermt</b> (een strook van 200 m langs de kust), er mag niet gebouwd worden en dat merk je onder water: keien, zeegras en veel leven. <b>Vroeg in de ochtend of tegen de avond</b> komen de vissen tussen de stenen vandaan om te grazen — dan is het verschil met midden op de dag enorm. Parkeren bij Belvedere, daarna een steil pad naar beneden.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Camp+Belvedere+Strunjan" target="_blank" rel="noopener">🧭 Navigatie · Belvedere</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Mesecev+zaliv+Strunjan" target="_blank" rel="noopener">📍 Maanbaai</a>
+        </div>
+      </div>
+      <div class="snorkel-spot">
+        <div class="sp-head"><span class="sp-name">Fiesa</span><span class="sp-drive">🚗 ±15 min</span></div>
+        <div class="sp-desc">Het baaitje net achter Piran, tussen de rotsen. Weinig golfslag en weinig stroming, dus de <b>rustigste optie met de kinderen</b>; minder spectaculair dan de Punta, maar je kunt er zo vanaf het strandje de rotsrand op zwemmen.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Fiesa+beach,+Piran" target="_blank" rel="noopener">🧭 Navigatie · Fiesa</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="snorkel-sub">Een dag ervoor uittrekken</div>
+    <div class="snorkel-grid">
+      <div class="snorkel-spot">
+        <div class="sp-head"><span class="sp-name">Zeereservaat van Miramare — Grignano bij Triëst</span><span class="sp-drive far">🚗 ±55 min</span></div>
+        <div class="sp-desc">Hier zijn de vissen wél gegarandeerd: in dit stukje zee <b>mag sinds 1986 niet gevist of gevaren worden</b>, en dat &ldquo;reservaat-effect&rdquo; zie je meteen — scholen goudstreepbrasems, zeebrasems en wolken kleine donkerblauwe visjes boven de rotsen. Het WWF doet er <b>begeleide snorkeltochten</b> (woensdag, zaterdag en zondag, ±40 minuten in ondiep water, wetsuit en vinnen erbij, ±€30 p.p., vooraf reserveren). Let op: <b>de tocht is vanaf 8 jaar</b>, dus Floris mag mee en Yune niet — met haar erbij is de Karstkust hieronder de betere keuze. Zelfde hoek als het baaitje van vrijdag.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Porto+di+Grignano,+Trieste" target="_blank" rel="noopener">🧭 Navigatie · Grignano</a>
+          <a class="btn btn-map btn-sm" href="https://www.ampmiramare.it/en/seawatching-en/" target="_blank" rel="noopener">🌐 ampmiramare.it</a>
+          <a class="btn btn-call btn-sm" href="tel:+39040224147">📞 +39 040 224147</a>
+        </div>
+      </div>
+      <div class="snorkel-spot">
+        <div class="sp-head"><span class="sp-name">Terug naar de Karstkust</span><span class="sp-drive far">🚗 ±50 min</span></div>
+        <div class="sp-desc">Het kiezelbaaitje van vrijdag (45,7308° N · 13,6847° E) en de buurbaaitjes eronder — Canovella de' Zoppoli, Costa dei Barbari, Sistiana. <b>Steile kust, dus meteen diep water en rots</b>, en dat is precies waarom het daar zo goed was. Geen leeftijdsgrens, geen reservering, en volgens Floris het mooiste wat hij ooit heeft gezien: <b>hetzelfde nog eens doen mag gewoon</b>.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=45.7308,13.6847" target="_blank" rel="noopener">🧭 Navigatie · ons baaitje</a>
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Canovella+de+Zoppoli" target="_blank" rel="noopener">📍 Canovella</a>
+        </div>
+      </div>
+      <div class="snorkel-spot">
+        <div class="sp-head"><span class="sp-name">Zlatni Rt &amp; Sveta Katarina — Rovinj</span><span class="sp-drive far">🚗 ±1,5 uur</span></div>
+        <div class="sp-desc">Zuidelijker in Istrië, en dát is het punt: hoe verder je van de Golf van Triëst en de riviermondingen komt, hoe <b>helderder het water</b>. Zlatni Rt (Punta Corrente) is een bos van pijnbomen dat op rotsplaten aan de zee eindigt, met eilandjes ervoor. De mooiste snorkelkust van Istrië ligt nóg zuidelijker (Kaap Kamenjak bij Pula, ±2u15) — te ver voor deze camping, maar wel iets voor de volgende keer.</div>
+        <div class="actions">
+          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Zlatni+Rt,+Rovinj,+Croatia" target="_blank" rel="noopener">🧭 Navigatie · Zlatni Rt</a>
+        </div>
+      </div>
+    </div>
+
+    <details class="facts">
+      <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">over de zee hier</span></summary>
+      <ul class="facts-list">
+        <li><span class="fico">🪨</span><span>Op <b>zand</b> woont bijna niets: er is niks te eten en niks om je in te verstoppen. Eén rots erbij en je hebt meteen tientallen soorten. Daarom zie je bij Kanegra niks en bij een rotspunt alles.</span></li>
+        <li><span class="fico">🌬️</span><span>Of het water helder is, hangt af van de <b>wind van gisteren</b>. Na de koude noordoostenwind (de <b>burja</b>) kun je meters ver kijken; na een zuidenwind of een regenbui staat al het slib omhoog.</span></li>
+        <li><span class="fico">🐟</span><span>De <b>goudstreepbrasem</b> (salpa) is bijna de enige vis die gras eet. Ze grazen in groepjes het zeegras af, precies zoals schapen in een weiland.</span></li>
+        <li><span class="fico">💙</span><span>Die kleine donkere visjes die als een wolk boven de rotsen hangen, zijn <b>castagnole</b>. Hun jongen zijn <b>felblauw</b> — het mooiste blauw van de Middellandse Zee, en alleen als ze klein zijn.</span></li>
+        <li><span class="fico">🦔</span><span>Een <b>zee-egel</b> heeft <b>vijf tanden</b> waarmee hij algen van de steen af schraapt, en hij loopt op zijn stekels. Kijk dus goed waar je je voeten zet.</span></li>
+        <li><span class="fico">🐙</span><span>Een <b>octopus</b> heeft <b>drie harten</b> en blauw bloed, en hij <b>ruikt en voelt met zijn armen</b>. Vind je een holletje met een muurtje van schelpjes ervoor, dan woont daar er waarschijnlijk een.</span></li>
+        <li><span class="fico">🐴</span><span>Bij de Punta van Piran leven <b>zeepaardjes</b> in het zeegras. Bij zeepaardjes draagt de <b>pápa</b> de eitjes in een buidel en bevalt hij van de jongen.</span></li>
+        <li><span class="fico">🧊</span><span>Deze zee is nergens dieper dan ongeveer <b>25 meter</b> en het is het <b>noordelijkste puntje van de Middellandse Zee</b>. Daarom is hij in augustus zo warm — en in de winter juist ijskoud.</span></li>
+      </ul>
+    </details>
+
+    <p class="snorkel-lead" style="margin: 22px 0 0">
+      <b>Praktisch:</b> waterschoenen aan (zee-egels), in het zand niet met je hakken slepen vanwege de <b>pieterman</b>
+      die zich daar ingraaft, en langs de rotsen zwemmen betekent tussen de bootjes zwemmen — houd Floris en Yune
+      dicht bij de kust en neem iets fel gekleurds mee dat drijft.
+    </p>
   </div>
 </div>
 
@@ -1166,22 +1369,50 @@
       </div>
     </div>
 
-    <div class="day-row" data-date="2026-08-15">
+    <div class="day-row done" data-date="2026-08-15">
+      <div class="day-photo">
+        <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#d8f4e0,#8ad8a8)">🚲</div>
+        <img data-wiki="Savinja|Ljubno ob Savinji" data-search="Savinja river Ljubno ob Savinji Slovenia" alt="De Savinja bij de camping" onerror="this.remove()">
+        <div class="drive-badge">🏕️ Op de camping</div>
+      </div>
+      <div class="day-content">
+        <div class="day-label">Zaterdag 15 aug <span class="day-flag">✅ Gedaan</span></div>
+        <div class="day-title">Gefietst en bij de waterval gespeeld</div>
+        <div class="day-desc">Geen dagtrip: een <b>rondje gefietst</b> door de vallei en bij de <b>waterval</b> van de camping in het water gespeeld. Maria-Hemelvaart, dus de bergen waren extra druk — thuisblijven was precies goed.</div>
+        <div class="day-tags">
+          <span class="tag">🚲 Fietsen</span>
+          <span class="tag tag-water">Waterval</span>
+          <span class="tag tag-kids">Kids ⭐⭐⭐</span>
+        </div>
+        <details class="facts">
+          <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">voorleesweetjes</span></summary>
+          <ul class="facts-list">
+            <li><span class="fico">🇸🇮</span><span><b>15 augustus</b> is in Slovenië <b>Maria-Hemelvaart</b>: een nationale feestdag. Winkels dicht, en de mooie plekken extra vol — vandaar een rustige campingdag.</span></li>
+            <li><span class="fico">💧</span><span>De Savinja begint zo'n 25 km verderop bij de <b>Rinka-waterval</b> in Logarska dolina. Het water waar je in speelde is dus hetzelfde als dat van die grote val — daar zijn we deze keer niet geweest.</span></li>
+            <li><span class="fico">🥶</span><span>Het water is ijskoud terwijl het buiten warm is. Dat komt doordat het hoog in de bergen begint en <b>veel te snel naar beneden stroomt om op te warmen</b>.</span></li>
+            <li><span class="fico">🌊</span><span>Bouw je een dam met één gaatje erin, dan <b>schiet het water door dat gaatje veel sneller</b> naar buiten. Er moet immers evenveel water door — en als de doorgang smal is, kan dat alleen door harder te stromen.</span></li>
+          </ul>
+        </details>
+        <div class="actions">
+          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Kamp+na+Otoku,+Ljubno+ob+Savinji" target="_blank" rel="noopener">📍 De camping</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-row done" data-date="2026-08-16">
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#e0e8f8,#8fa8d8)">🚡</div>
         <img data-wiki="Golte Ski Resort|Golte" data-search="Golte plateau Slovenia mountain" alt="Golte-hoogvlakte" onerror="this.remove()">
         <div class="drive-badge">🚗 30 min</div>
       </div>
       <div class="day-content">
-        <div class="day-label">Zaterdag 15 aug</div>
+        <div class="day-label">Zondag 16 aug <span class="day-flag">✅ Gedaan</span></div>
         <div class="day-title">Met de langste kabelbaan van Slovenië de Golte op</div>
-        <div class="day-desc">Van 490 naar <b>1410 meter in acht minuten</b>: de nihalka bij Žekovec is met 3265 meter de langste kabelbaan van Slovenië. Boven ligt een <b>karst-hoogvlakte</b> met weiden, bos en makkelijke wandelpaadjes — naar de Mozirska koča of langs de vijver bij Trije ploti — en er zit een <b>avonturenpark</b> met klimparcours (vanaf 5 en 7 jaar), een rollercoaster-zipline en een trampoline. Trui mee: boven is het al snel 6 graden kouder dan beneden. 's <b>Avonds eten bij Gostilna Weiss</b> — dat komt goed uit: die zit in <b>Radegunda</b>, hetzelfde gehucht als het dalstation van de kabelbaan.</div>
+        <div class="day-desc">Laatste hele dag: de Golte op, met de <b>nihalka</b> van Žekovec — van 490 naar <b>1410 meter in acht minuten</b>, 3265 meter lang. Boven de <b>karst-hoogvlakte</b>: weiden, bos en makkelijke paadjes. Logarska Dolina en de Rinka-waterval zijn er niet van gekomen.</div>
         <div class="day-tags">
           <span class="tag">🚡 Kabelbaan</span>
           <span class="tag tag-hike">Hoogvlakte</span>
-          <span class="tag">🍽️ Gostilna Weiss</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
-          <span class="tag">⚠️ Feestdag — druk</span>
         </div>
         <details class="facts">
           <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">voorleesweetjes</span></summary>
@@ -1190,63 +1421,32 @@
             <li><span class="fico">🌡️</span><span>Hoe hoger je komt, hoe kouder: ongeveer <b>6 graden per 1000 meter</b>. Je gaat 900 meter omhoog, dus als het beneden 30 graden is, is het boven zo'n 24. Daarom liggen de skipistes hier en niet in het dorp.</span></li>
             <li><span class="fico">🕳️</span><span>De hoogvlakte is van <b>kalksteen</b>: het regenwater zakt er dwars door naar beneden en holt er gangen en schachten in uit. Daarom zie je boven bijna geen beekjes — precies dezelfde steen als in de Postojna-grot.</span></li>
             <li><span class="fico">🛖</span><span>De <b>Mozirska koča</b> op 1356 meter is een van de <b>oudste berghutten van Slovenië</b>.</span></li>
-            <li><span class="fico">🌲</span><span>Golte is <b>landschapspark sinds 1987</b> — hetzelfde jaar als Logarska dolina, waar we zondag heen gaan.</span></li>
+            <li><span class="fico">🌲</span><span>Golte is <b>landschapspark sinds 1987</b> — hetzelfde jaar als Logarska dolina, waar we deze keer níet heen zijn geweest.</span></li>
           </ul>
         </details>
-        <div class="booking-box">
-          <span class="booking-status bk-todo">⏳ Op de dag zelf even checken</span>
-          <div class="bk-row"><span class="bk-ico">🚫</span><span><b>Snežna jama gaat niet:</b> de ijsgrot op Raduha (op ruim 1500 m de hoogst gelegen toeristische grot van Slovenië) is <b>nog steeds gesloten</b>. Bij het noodweer van augustus 2023 stortte de grond bij de ingang in en werden de trappen weggeslagen; ook in het seizoen 2026 blijft de jama dicht en staat er een hek om de instortingstrechter. Daarom vandaag omhóóg in plaats van omlaag.</span></div>
-          <div class="bk-row"><span class="bk-ico">🕑</span><span>Nihalka rijdt in augustus <b>dagelijks 8:00–18:00, elk half uur</b>. De stoeltjesliften Medvedjak en Stari stani draaien de hele augustus mee.</span></div>
-          <div class="bk-row"><span class="bk-ico">📞</span><span><b>Bel vooraf</b> voor het actuele schema — de kabelbaan stond deze winter weken stil voor onderhoud en rijdt sinds maart weer: <a href="tel:+38638391212">+386 3 839 1212</a> of receptie hotel Montis <a href="tel:+38638391100">+386 3 839 1100</a>.</span></div>
-          <div class="bk-row"><span class="bk-ico">💶</span><span>Kaartjes seizoen 2025: retour €20 volw. / €12 kind (6–14), enkel €16 / €10. Kinderen tot 6 gratis. Er zijn ook gezins- en avonturenpark-pakketten — check de actuele prijs op <a href="https://www.golte.si/" target="_blank" rel="noopener">golte.si</a>.</span></div>
-          <div class="bk-row"><span class="bk-ico">🧗</span><span>Avonturenpark op 1468 m: gele en oranje route <b>vanaf 5 jaar</b> (reikhoogte 140 cm), groene vanaf 7, blauwe vanaf 10. Rollercoaster-zipline: min. 140 cm en 30 kg. De vrije val is vanaf 10 jaar en 160 cm — dus niets voor Yune.</span></div>
-          <div class="bk-row"><span class="bk-ico">🅿️</span><span>Onderstation: Radegunda 19c, 3330 Mozirje — meer dan 1000 gratis parkeerplekken.</span></div>
-          <div class="bk-row"><span class="bk-ico">🇸🇮</span><span><b>15 aug is Maria-Hemelvaart</b>, een Sloveense feestdag: winkels zijn dicht en het is drukker op de berg. Boodschappen dus <b>vrijdag 14 aug</b> doen.</span></div>
-          <div class="bk-row"><span class="bk-ico">🍽️</span><span><b>Gostilna Weiss</b> — Radegunda 53A, 3330 Mozirje, om de hoek bij het dalstation. <b>Reserveren</b> op <a href="tel:+38635832854">+386 3 583 28 54</a>; ze nemen reserveringen aan tot een uur voor sluiting, en bellen terug als het even te druk is. Op een feestdag zeker even vooraf bellen — hun openingstijden wisselen, dus check meteen hoe laat ze open zijn.</span></div>
-        </div>
         <div class="actions">
           <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Nihalka+Golte,+Radegunda+19c,+Mozirje" target="_blank" rel="noopener">🧭 Navigatie · 30 min</a>
-          <a class="btn btn-call btn-sm" href="tel:+38638391212">📞 Kabelbaan</a>
-          <a class="btn btn-call btn-sm" href="tel:+38635832854">📞 Gostilna Weiss</a>
           <a class="btn btn-map btn-sm" href="https://www.golte.si/" target="_blank" rel="noopener">🌐 golte.si</a>
-          <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Gostilna+Weiss,+Radegunda+53A,+Mozirje" target="_blank" rel="noopener">📍 Gostilna Weiss</a>
         </div>
       </div>
     </div>
 
-    <div class="day-row" data-date="2026-08-16">
+    <div class="day-row">
       <div class="day-photo">
         <div class="day-photo-placeholder" style="background:linear-gradient(135deg,#d0f0d0,#90d890)">🏔️</div>
         <img data-wiki="Logar Valley|Logarska Dolina" data-search="Logar Valley Slovenia" alt="Logarska dolina" onerror="this.remove()">
         <div class="drive-badge">🚗 35 min</div>
       </div>
       <div class="day-content">
-        <div class="day-label">Zondag 16 aug</div>
+        <div class="day-label">Logarska Dolina <span class="day-flag open">Niet doorgegaan</span></div>
         <div class="day-title">Logarska Dolina &amp; de Rinka-waterval</div>
-        <div class="day-desc">Laatste hele dag, en meteen de mooiste: een van de indrukwekkendste bergvalleien van Europa, met 2000+ meter hoge toppen eromheen en een vlak pad van 7 km door de hele vallei. Achterin de <b>Rinka-waterval</b> — vanaf het bovenste parkeerterrein een makkelijke wandeling van een kwartier, en rechts naast de val zit het terras <b>Orlovo gnezdo</b> ("adelaarsnest") met uitzicht op de waterval. Neem een picknick mee; onderweg genoeg beekjes om in te pootjebaden.</div>
+        <div class="day-desc"><b>Niet van gekomen.</b> Zondag gingen we naar Golte. Blijft staan voor een volgende keer: een van de mooiste bergvalleien van Europa, met achterin de Rinka — daar begint de Savinja, dezelfde rivier als bij de camping.</div>
         <div class="day-tags">
           <span class="tag tag-hike">Vlak wandelpad</span>
           <span class="tag tag-water">Waterval</span>
           <span class="tag tag-kids">Kids ⭐⭐⭐</span>
-          <span class="tag">💶 €10 per auto</span>
-        </div>
-        <details class="facts">
-          <summary>📖 Wist je dat… <span style="opacity:.65;font-weight:500">voorleesweetjes</span></summary>
-          <ul class="facts-list">
-            <li><span class="fico">🧊</span><span>De vallei is uitgesleten door een <b>gletsjer</b>. Daarom is hij overal even breed en heeft hij die U-vorm; een rivier had er een V van gemaakt.</span></li>
-            <li><span class="fico">💦</span><span>Achterin stort de <b>Rinka</b> negentig meter naar beneden. Daar <b>begint de Savinja</b> — dezelfde rivier als bij onze camping, waar we dammen in bouwden.</span></li>
-            <li><span class="fico">🌲</span><span>Sinds <b>1987</b> is het een beschermd landschapspark, en bijzonder: het wordt beheerd door <b>de boeren uit de vallei zelf</b>.</span></li>
-            <li><span class="fico">🚲</span><span>Wie op de fiets komt hoeft <b>geen entree te betalen</b>; alleen auto\'s betalen bij de slagboom. De vallei is precies vlak genoeg om erin rond te fietsen.</span></li>
-          </ul>
-        </details>
-        <div class="booking-box">
-          <span class="booking-status bk-todo">💶 Contant meenemen</span>
-          <div class="bk-row"><span class="bk-ico">💶</span><span>Entree landschapspark: <b>€10 per personenauto</b> (motor €7, busje €20). Te voet of op de fiets is gratis.</span></div>
-          <div class="bk-row"><span class="bk-ico">🅿️</span><span>Parkeren mag alleen op de parkeerterreinen (niet langs de weg). Duurzame tip van de beheerder: parkeer bij <b>Podbreg</b>, vóór de slagboom, en ga te voet of op de fiets verder.</span></div>
-          <div class="bk-row"><span class="bk-ico">ℹ️</span><span>TIC Logarska: <a href="tel:+38638389004">+386 3 838 9004</a> — daar kun je ook de actuele prijs checken.</span></div>
         </div>
         <div class="actions">
-          <a class="btn btn-nav btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Logarska+Dolina" target="_blank" rel="noopener">🧭 Navigatie · 35 min</a>
           <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Slap+Rinka,+Logarska+dolina" target="_blank" rel="noopener">📍 Rinka-waterval</a>
         </div>
       </div>
@@ -1259,30 +1459,25 @@
 
 <!-- TERUGWEG -->
 <div class="section" id="terugweg" style="padding-top: 40px; padding-bottom: 60px;">
-  <div class="travel-row travel-stay">
-    <span class="travel-icon">🏠</span>
+  <div class="travel-row travel-stay done">
+    <span class="travel-icon">✅</span>
     <div style="flex:1">
-      <strong>Terug naar huis — 17 &amp; 18 aug · in tweeën, met dezelfde tussenstop als op de heenweg</strong><br>
-      Beslist: we splitsen de rit weer, en slapen op <b>dezelfde plek als op de heenweg</b> — de Campspace-boerderij bij Meinheim in Beieren. Maandag 17 aug uit Ljubno, dinsdag 18 aug door naar De Glind.
+      <strong>Maandag 17 aug — thuisgekomen · in één keer doorgereden, ±1200 km</strong><br>
+      Geen tussenstop, de hele terugreis op één dag. Gelukt, maar <b>te veel</b> — en dat is de laatste learning van deze vakantie.
       <div class="booking-box">
-        <span class="booking-status bk-ok">✅ Zelfde plek als op de heenweg</span>
-        <div class="bk-row"><span class="bk-ico">🏕️</span><span><b>Berghof Oberweiler</b> — Oberweiler 5, 91802 Meinheim, Duitsland. Familie Lehner &amp; Wolf, struisvogelboerderij met bio-winkel, warm water en toilet. Bekend terrein, dus geen verrassingen na een lange rijdag.</span></div>
-        <div class="bk-row"><span class="bk-ico">📅</span><span><b>Ma 17 aug</b> Ljubno → Meinheim (±7u) · <b>di 18 aug</b> Meinheim → De Glind (±7,5u)</span></div>
-        <div class="bk-row"><span class="bk-ico">✉️</span><span>Even <b>opnieuw boeken via Campspace</b> als dat nog niet gebeurd is — het is dezelfde plek, maar niet dezelfde reservering. info@berghof-oberweiler.de · <a href="tel:+499146940560">+49 9146 940 560</a></span></div>
-        <div class="bk-row"><span class="bk-ico">🚧</span><span>Let op de files bij de <b>Karawankentunnel</b>, <b>Salzburg</b> en de <b>Tauerntunnel</b>: in augustus vooral op zaterdag en zondag. 17 aug is een <b>maandag</b>, dus dat scheelt — maar vroeg weg blijft slim.</span></div>
-        <div class="bk-row"><span class="bk-ico">🛣️</span><span>Vignet dekt de terugreis: het tweede vignet loopt van 10 t/m 19 aug.</span></div>
-        <div class="bk-row"><span class="bk-ico">💶</span><span>Vóór vertrek nog <b>contant afrekenen</b> bij Kamp na Otoku (rest + toeristenbelasting).</span></div>
-      </div>
-      <div class="actions">
-        <a class="btn btn-nav" href="https://www.google.com/maps/dir/?api=1&destination=Oberweiler+5,+91802+Meinheim,+Germany" target="_blank" rel="noopener">🧭 Navigatie · ±7u</a>
-        <a class="btn btn-call" href="tel:+499146940560">📞 Bel boerderij</a>
+        <span class="booking-status bk-ok">✅ Thuis</span>
+        <div class="bk-row"><span class="bk-ico">🅱️</span><span><b>In één keer doorgereden</b> vanuit Ljubno, zonder nacht onderweg. Achteraf: <b>te lang voor één dag</b>. Onze grens ligt rond de <b>7 uur rijden</b> — daarboven knip je de rit beter in tweeën, ook al kost dat een overnachting.</span></div>
+        <div class="bk-row"><span class="bk-ico">💡</span><span>Die learning staat nu op de <a href="learnings.html">learnings-pagina</a> bij <i>Een verre autorit</i> — dat is de pagina die we bij het plannen van de volgende vakantie openslaan.</span></div>
+        <div class="bk-row"><span class="bk-ico">📓</span><span><b>Niet gebruikt, wel bewaren</b> — de tussenstops die we hadden uitgezocht liggen op de route en zijn een volgende keer meteen bruikbaar:</span></div>
+        <div class="bk-row" style="padding-left:26px"><span class="bk-ico">🏕️</span><span><b>Campingplatz Kupferschmiede</b> — Trostberger Str. 4, 83339 Arlaching (Chieming), aan het Chiemsee. Bosrijk en rustig, badstrand en biergarten.<br><a class="btn btn-call btn-sm" href="tel:+498667446" style="margin-top:8px">📞 +49 8667 446</a> <a class="btn btn-map btn-sm" href="https://www.campingkupferschmiede.de/" target="_blank" rel="noopener" style="margin-top:8px">🌐 campingkupferschmiede.de</a> <a class="btn btn-map btn-sm" href="https://www.google.com/maps/search/?api=1&query=Campingplatz+Kupferschmiede,+Arlaching" target="_blank" rel="noopener" style="margin-top:8px">📍 Maps</a></span></div>
+        <div class="bk-row" style="padding-left:26px"><span class="bk-ico">🛖</span><span><b>Hirschalm am Fernsteinsee</b> — Selbstversorgerhütte op ±990 m, alleenstaand in het bos bij Nassereith (Tirol), 2–6 pers., vanaf €150/nacht + €65 eindschoonmaak. Mooi op de route via de Fernpas.<br><a class="btn btn-map btn-sm" href="https://www.huettenland.com/huette/1059/Hirschalm-am-Fernsteinsee/" target="_blank" rel="noopener" style="margin-top:8px">🌐 huettenland.com</a></span></div>
       </div>
     </div>
   </div>
 </div>
 
 <footer class="site-footer">
-  <strong>Onze Slovenië-vakantie augustus 2026</strong> 🇸🇮 &nbsp;·&nbsp; Bijgewerkt t/m <strong>vrijdag 14 aug</strong> (Ljubljana ✅) — groen is wat we écht gedaan hebben &nbsp;·&nbsp; Nu op <strong>Kamp na Otoku</strong> in Ljubno t/m 17 aug &nbsp;·&nbsp; <strong>Zaterdag Golte</strong>, 's avonds eten bij Gostilna Weiss (reserveren!) &nbsp;·&nbsp; <strong>Zondag Logarska</strong>, maandag naar huis via Meinheim &nbsp;·&nbsp; 15 aug is een Sloveense <strong>feestdag</strong>: boodschappen op 14 aug &nbsp;·&nbsp; Elk uitje heeft een uitklapper met <strong>voorleesweetjes</strong> &nbsp;·&nbsp; Genoeg <strong>cash</strong> mee (camping + Logarska betaal je contant)
+  <strong>Onze Slovenië-vakantie augustus 2026</strong> 🇸🇮 &nbsp;·&nbsp; <strong>Terug thuis sinds maandag 17 aug</strong> — groen is wat we écht gedaan hebben &nbsp;·&nbsp; Snorkelen? Zie <a href="#snorkelen" style="color:inherit"><strong>Waar zitten de vissen?</strong></a> &nbsp;·&nbsp; Elk uitje heeft een uitklapper met <strong>voorleesweetjes</strong> &nbsp;·&nbsp; Wat we meenemen naar de volgende keer staat op <a href="learnings.html" style="color:inherit"><strong>Learnings</strong></a>
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -1391,11 +1586,12 @@
     { name: 'Postojna Grotten (9 aug)',       lat: 45.783,   lng: 14.204,   c: 1, done: true },
     { name: 'Rakov Škocjan · natuurbrug (9 aug)', lat: 45.789, lng: 14.297, c: 1, done: true },
     { name: 'Koper · Baščaršija (9 aug)',     lat: 45.547,   lng: 13.729,   c: 1, done: true },
-    { name: 'Savudrija · snorkelen (10 aug)', lat: 45.4928,  lng: 13.4938,  c: 1, done: true },
+    { name: 'Kanegra · te ondiep (10 aug)', lat: 45.4776, lng: 13.5825, c: 1, done: true },
+    { name: 'Corner Beach · snorkelen (10 aug)', lat: 45.50113, lng: 13.52115, c: 1, done: true },
     { name: 'Piran op de fiets (11 aug)',     lat: 45.528,   lng: 13.568,   c: 1, done: true },
     { name: 'Ljubljana (14 aug)',             lat: 46.0498,  lng: 14.5065,  c: 2, done: true },
-    { name: 'Golte · nihalka (15 aug)',       lat: 46.303,   lng: 14.876,   c: 2 },
-    { name: 'Logarska Dolina &amp; Rinka (16 aug)', lat: 46.392, lng: 14.622, c: 2 }
+    { name: 'Camping · fietsen &amp; waterval (15 aug)', lat: 46.3455, lng: 14.8355, c: 2, done: true },
+    { name: 'Golte · nihalka (16 aug)',       lat: 46.303,   lng: 14.876,   c: 2, done: true }
   ];
 
   var map = L.map('trip-map', { scrollWheelZoom: false }).setView([46.1, 14.1], 8);

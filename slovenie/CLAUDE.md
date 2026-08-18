@@ -61,6 +61,14 @@ open een `.html` in de browser en klaar.
 
 ## Plan wordt logboek
 
+De reis is voorbij: we zijn op **maandag 17 aug** thuisgekomen en het reisplan is
+nu volledig een logboek. Wat niet doorging: het **bootje** (11 aug werd Piran
+op de fiets) en **Logarska Dolina / Rinka** (16 aug werd Golte). Die laatste
+blijft met `<span class="day-flag open">Niet doorgegaan</span>` op de pagina
+staan, zonder `data-date`. Markers van dingen die we niet deden gaan van de
+kaart af. Ook de snorkelplekken uit `#snorkelen` waar we niet kwamen staan
+niet op de kaart.
+
 Tijdens de reis wordt het reisplan bijgewerkt naar **wat er echt gebeurd is**.
 Een dag die geweest is:
 
@@ -98,6 +106,28 @@ Een dag die geweest is:
   rivier als bij de camping") — dat werkt goed bij het voorlezen.
 - Controleer een weetje voordat je het opschrijft. Bij twijfel: weglaten of
   voorzichtiger formuleren; dit wordt letterlijk aan kinderen voorgelezen.
+
+## Snorkelplekken (`#snorkelen` op het reisplan)
+
+- Onder de dagtrips van kamp 2 staat een `.snorkel-box` met **"Waar zitten de
+  vissen?"**: de snorkelplekken op deze kust, gegroepeerd met een
+  `.snorkel-sub`-kopje per afstand (vandaag vlakbij / dichtbij de camping / een
+  dag ervoor uittrekken). Elke `.snorkel-spot` heeft een naam, een
+  `.sp-drive`-rijtijd (`.far` voor de verdere) en knoppen; de aanraders krijgen
+  `class="snorkel-spot pick"` plus een `.sp-pick`-label.
+- De vuistregel die erboven staat is de kern: **rots en diepte aan de buitenkant
+  van een kaap**, niet de binnenhoek van een baai. Dat kwam uit Kanegra
+  (10 aug), waar het kniediep en troebel was — die ervaring staat als
+  waarschuwing in de dagrij van 10 aug en als learning op `learnings.html`.
+  Een kwartier verder, op de noordkust van het schiereiland van Savudrija, was
+  **Corner Beach** wél prachtig; die staat daarom bovenaan met `.sp-pick`
+  "✅ Hier waren we". Zo hoort dit blok mee te groeien: een plek waar we geweest
+  zijn, gaat naar boven met wat we er echt zagen. Corner Beach is niet in
+  kaartdiensten te vinden, dus alle links gaan op **coördinaat**
+  (45,50113 · 13,52115, van Lukas ter plekke) in plaats van op naam.
+- Er hoort een `<details class="facts">` bij met weetjes over de zee zelf
+  (waarom rots wél en zand niet, burja en helder water, castagnole, zee-egels).
+  Zelfde voorleestoon als bij de uitjes.
 
 ## `geschiedenis.html`
 
@@ -143,12 +173,15 @@ Een dag die geweest is:
     Bovec, which is ±1,5u away over the mountain road.
   - **Berghof Oberweiler** (heenweg-tussenstop): Oberweiler 5, 91802 Meinheim,
     Duitsland · 1–2 aug · geboekt via Campspace · tel +49 9146 940 560.
-  - **Terugweg** (17 & 18 aug): in tweeën, met dezelfde tussenstop als op de
-    heenweg — Berghof Oberweiler bij Meinheim. Wel een nieuwe reservering via
-    Campspace.
+  - **Terugweg** (17 aug): geen tussenstop geworden, in één keer doorgereden
+    (±1200 km). Achteraf te veel — **±7 uur rijden is onze max**, dat staat als
+    learning op `learnings.html`. De twee tussenstops die we hadden uitgezocht
+    (Kupferschmiede aan het Chiemsee, Hirschalm am Fernsteinsee) blijven in het
+    laatste blok staan onder "niet gebruikt, wel bewaren" — ze liggen op de
+    route en zijn een volgende keer meteen bruikbaar.
   - **Bootverhuur** (dagtrip 11 aug, kamp 2): is er niet van gekomen — die
-    dagrij staat nu als *Niet doorgegaan* op de pagina en de learning
-    ("boek een bootje vóór de vakantie") staat op `learnings.html`.
+    dag werd Piran op de fiets, en de learning ("boek een bootje vóór de
+    vakantie") staat op `learnings.html`.
   - **Ljubljana** (dagtrip 14 aug, kamp 3): niks te boeken. Centrum is
     autovrij. Vanuit kamp 3 kom je aan de noordoostkant binnen, dus P+R Center
     Stožice (inrit Štajerska cesta) — €1,50/dag inclusief twee busritten,
@@ -157,9 +190,11 @@ Een dag die geweest is:
     kiezen. Alternatieven: P+R Dolgi most (zuidwest) en P+R Ježica (noord, via
     Kamnik), of garage Kongresni trg ±€2–3/uur. Op vrijdag staat de
     *Odprta kuhna* op Pogačarjev trg (10:00–22:00, niet bij regen).
-  - **Golte** (dagtrip 15 aug, kamp 3): niks te boeken, wel bellen voor het
+  - **Golte** (dagtrip 16 aug, kamp 3): niks te boeken, wel bellen voor het
     actuele schema van de nihalka (+386 3 839 1212, of hotel Montis
     +386 3 839 1100). Onderstation Radegunda 19c, Mozirje.
+  - **Logarska Dolina / Rinka** is er niet van gekomen. Niet terugzetten als
+    "gedaan".
   - **Uit eten** (kamp 3): *Okrepčevalnica Ribiški dom* (Matej Podkrižnik
     s.p.), Na Pečeh 10, Ljubno — naast de camping, forel uit eigen vijver,
     +386 31 408 428. *Gostilna Weiss*, Radegunda 53A, Mozirje, bij het
