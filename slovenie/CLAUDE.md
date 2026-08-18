@@ -62,10 +62,12 @@ open een `.html` in de browser en klaar.
 ## Plan wordt logboek
 
 De reis is voorbij: we zijn op **maandag 17 aug** thuisgekomen en het reisplan is
-nu een logboek. Twee dingen staan nog als plán en niet als verslag — de dagtrips
-van **10/11 aug** (kamp 2) en **13/14/15 aug** (kamp 3). Wat daar echt gebeurd
-is, weten we niet uit de repo; vul dat alleen in op basis van wat Lukas
-vertelt, verzin er niets bij.
+nu volledig een logboek. Drie uitjes gingen niet door — het **bootje** (11 aug),
+**raften** (14 aug) en **Kamnik** (15 aug). Die blijven met
+`<span class="day-flag open">Niet gedaan</span>` op de pagina staan, want het
+zijn nog steeds goede ideeën voor een volgende keer; hun markers zijn wél van de
+kaart af, zodat de kaart alleen laat zien waar we echt geweest zijn. Ook de
+snorkelplekken uit `#snorkelen` waar we niet kwamen staan niet op de kaart.
 
 Tijdens de reis wordt het reisplan bijgewerkt naar **wat er echt gebeurd is**.
 Een dag die geweest is:
