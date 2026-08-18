@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paklijst — Lukas' plekkie</title>
+<meta name="theme-color" content="#1c1c1c">
+<link rel="icon" href="/icons/icon-192.png" sizes="192x192" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --dark: #1c1c1c;
+    --mid: #555;
+    --light: #f4f4f0;
+    --white: #fff;
+    --accent: #2d7a3a;
+    --radius: 18px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.10);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--light);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  .wrap { max-width: 860px; margin: 0 auto; padding: 56px 28px 80px; }
+
+  .terug {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--mid);
+    text-decoration: none;
+    margin-bottom: 28px;
+  }
+  .terug:hover { color: var(--dark); }
+
+  header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+  header .sub {
+    font-size: 17px;
+    color: var(--mid);
+    line-height: 1.55;
+    max-width: 560px;
+  }
+
+  /* ── Hoofdstuk-kiezer ── */
+  .kiezer {
+    margin: 32px 0 10px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--mid);
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+  .chip {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1.5px solid #ddd;
+    background: var(--white);
+    color: var(--mid);
+    cursor: pointer;
+    transition: all .15s ease;
+  }
+  .chip.aan {
+    background: var(--dark);
+    border-color: var(--dark);
+    color: var(--white);
+  }
+  .chip.vast { cursor: default; opacity: .85; }
+
+  /* ── Werkbalk ── */
+  .werkbalk { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+  .knop {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: none;
+    background: var(--dark);
+    color: var(--white);
+    cursor: pointer;
+  }
+  .knop.stil { background: var(--white); color: var(--dark); border: 1.5px solid #ddd; }
+  .knop:hover { opacity: .88; }
+
+  /* ── Hoofdstukken ── */
+  .hfd {
+    background: var(--white);
+    border: 1px solid #eee;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 26px 28px 20px;
+    margin-bottom: 24px;
+  }
+  .hfd.uit { display: none; }
+
+  .hfd h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 700;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .hfd h2 .telling {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--mid);
+  }
+  .hfd .hfd-sub { font-size: 13.5px; color: var(--mid); margin-bottom: 14px; }
+
+  ul.items { list-style: none; }
+  ul.items li { border-top: 1px solid #f0f0ec; }
+  ul.items li:first-child { border-top: none; }
+
+  label.item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 2px;
+    cursor: pointer;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  label.item input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .box {
+    flex: 0 0 auto;
+    width: 20px; height: 20px;
+    margin-top: 2px;
+    border: 2px solid #bbb;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    transition: all .12s ease;
+  }
+  input:checked ~ .box { background: var(--accent); border-color: var(--accent); }
+  input:checked ~ .box::after { content: '✓'; }
+  input:checked ~ .tekst { color: #999; text-decoration: line-through; text-decoration-color: #ccc; }
+  input:focus-visible ~ .box { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .tekst b { font-weight: 600; }
+  .src {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    color: #8a6d1a;
+    background: #faf3dc;
+    border-radius: 999px;
+    padding: 2px 8px;
+    margin-left: 6px;
+    vertical-align: 1px;
+    white-space: nowrap;
+  }
+
+  footer.onder {
+    margin-top: 44px;
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 36px 18px 60px; }
+    header h1 { font-size: 38px; }
+    .hfd { padding: 20px 18px 14px; }
+  }
+
+  /* ── Print: zwart-wit, compact, geen chrome ── */
+  @media print {
+    body { background: #fff; }
+    .wrap { max-width: none; padding: 0; }
+    .terug, .kiezer, .chips, .werkbalk, footer.onder, .hfd .hfd-sub { display: none; }
+    header h1 { font-size: 26pt; margin-bottom: 4pt; }
+    header .sub { display: none; }
+    .print-datum { display: block !important; font-size: 10pt; color: #444; margin-bottom: 14pt; }
+    .hfd {
+      box-shadow: none;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      margin: 0 0 14pt;
+      break-inside: avoid-page;
+    }
+    .hfd h2 { font-size: 15pt; border-bottom: 1.5pt solid #000; padding-bottom: 3pt; margin-bottom: 6pt; break-after: avoid; }
+    .hfd h2 .telling { display: none; }
+    ul.items { columns: 2; column-gap: 24pt; }
+    ul.items li { border: none; break-inside: avoid; }
+    label.item { padding: 2.5pt 0; font-size: 10pt; line-height: 1.35; }
+    .box { width: 11pt; height: 11pt; border: 1.2pt solid #000; border-radius: 2pt; margin-top: 1pt; font-size: 9pt; }
+    input:checked ~ .box { background: none; border-color: #000; color: #000; }
+    input:checked ~ .tekst { color: #000; text-decoration: none; }
+    .src { background: none; border: .8pt solid #999; color: #666; padding: 0 4pt; }
+  }
+  .print-datum { display: none; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <a class="terug" href="/">← Lukas' plekkie</a>
+
+  <header>
+    <h1>Paklijst 🎒</h1>
+    <p class="sub">Onze eigen paklijst, gegroeid uit echte vakanties. Kies hieronder wat voor reis het wordt, vink af wat ingepakt is — of print een lege lijst voor op de keukentafel.</p>
+    <span class="print-datum" id="print-datum"></span>
+  </header>
+
+  <div class="kiezer">Wat voor vakantie wordt het?</div>
+  <div class="chips" id="chips"></div>
+
+  <div class="werkbalk">
+    <button class="knop" onclick="window.print()">🖨️ Print de lijst</button>
+    <button class="knop stil" id="reset-knop">Vinkjes wissen</button>
+  </div>
+
+  <!-- ═══ BASIS ═══ -->
+  <section class="hfd" id="basis" data-naam="Basis" data-emoji="🎒" data-vast>
+    <h2>🎒 Basis — altijd mee <span class="telling"></span></h2>
+    <p class="hfd-sub">Wat er in elke koffer of kofferbak moet, waar we ook heen gaan.</p>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Paspoorten / ID-kaarten (ook van de kids)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Rijbewijs &amp; autopapieren</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Zorgpassen &amp; reisverzekeringspas</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Medicijnen + paracetamol (ook kinder)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">EHBO-setje: <b>ruim pleisters, en blarenpleisters apart</b> — je hebt er altijd meer nodig dan je denkt <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Tekentang</b> — elke avond even checken <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Genoeg cash</b> — kleine campings en bergrestaurants rekenen contant af <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Opladers + powerbank</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Zonnebrand &amp; after-sun</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Zonnebrillen &amp; petten</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Zakmes, ducttape, stukje touw</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Klein flesje wasmiddel + wasknijpers</span></label></li>
+    </ul>
+  </section>
+
+  <!-- ═══ KAMPEREN ═══ -->
+  <section class="hfd" id="kamperen" data-naam="Kamperen" data-emoji="🏕️">
+    <h2>🏕️ Kamperen <span class="telling"></span></h2>
+    <p class="hfd-sub">Voor als het huis een tent is.</p>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Tent + extra haringen &amp; scheerlijnen</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Hamer &amp; haringtrekker</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Slaapzakken, matjes &amp; kussens</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Kampeerstoelen &amp; tafel</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Brander + gas + aansteker (én reserve-aansteker)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Pannen, borden, bekers, bestek, scherp mes</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Afwasteil, afwasmiddel, theedoeken</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Lampjes / hoofdlampjes + batterijen</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Verlengsnoer + CEE-stekker (campingstroom)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Waslijn, vuilniszakken, keukenrol</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Hangmat mét muggengaas</b> — anders is de hangmat 's avonds precies zo lang leuk als het duurt voordat de muggen je vinden <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Check vooraf de <b>oprit van de camping</b>: smalle wegen sluiten campers en aanhangers uit <span class="src">Slovenië 2026</span></span></label></li>
+    </ul>
+  </section>
+
+  <!-- ═══ WARM LAND ═══ -->
+  <section class="hfd" id="warm" data-naam="Warm land" data-emoji="☀️">
+    <h2>☀️ Warm land <span class="telling"></span></h2>
+    <p class="hfd-sub">Boven de 28 graden verandert de lijst.</p>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Electrolyten-bruistabletten</b> voor in de bidons — je drinkt liters en plast het er net zo snel weer uit <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Dunne lange kleding tegen de muggen</b> — houdt 's avonds meer tegen dan spray, zonder erin te smoren <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Dunne slaapzakken</b> in plaats van de dikke — anders lig je te bakken <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Mesh-binnententen</b>, buitentent eraf als het droog blijft <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Schaduwdoek of tarp</b> — scheelt overdag meer dan een extra tent <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Muggenspray &amp; azaron</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Koelbox of koeltas + koelelementen</span></label></li>
+    </ul>
+  </section>
+
+  <!-- ═══ ZEE & KUST ═══ -->
+  <section class="hfd" id="zee" data-naam="Zee &amp; kust" data-emoji="🌊">
+    <h2>🌊 Zee &amp; kust <span class="telling"></span></h2>
+    <p class="hfd-sub">Voor helder water en rotsige kades.</p>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Zwembrillen én flippers, voor iedereen</b> — bij helder water wil elk kind snorkelen <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Snorkels</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Waterschoenen</b> — aan veel kusten zwem je vanaf keien en kades, niet vanaf zand <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Onderwatercamera</b> — het snorkelen is wat je wilt terugzien, niet nóg een terrasfoto <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">UV-shirts / rashguards voor de kids</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Strandlaken(s) die snel drogen</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Strandtentje of parasol</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Emmertje &amp; schepjes</span></label></li>
+    </ul>
+  </section>
+
+  <!-- ═══ BERGEN & RIVIEREN ═══ -->
+  <section class="hfd" id="bergen" data-naam="Bergen &amp; rivieren" data-emoji="🏔️">
+    <h2>🏔️ Bergen &amp; rivieren <span class="telling"></span></h2>
+    <p class="hfd-sub">Ook in de zomer is het 's avonds koud in de bergen.</p>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Trekkingsandalen die het water in mogen</b> — de beste aankoop voor waterkinderen <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Fleece + lange broek</b>, ook als de verwachting 30 graden zegt <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Iets opblaasbaars voor op de rivier</b> — een band of opblaaskano gaf ons twee van de allerbeste dagen <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Sterke zaklamp</b> — in een grot zie je met eigen licht meer dan de gids laat zien <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Regenjassen (bergweer draait snel)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Wandelschoenen of stevige sneakers</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Dagrugzak + bidons of camelbak</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Verrekijker</span></label></li>
+    </ul>
+  </section>
+
+  <!-- ═══ WINTERSPORT ═══ -->
+  <section class="hfd" id="wintersport" data-naam="Wintersport" data-emoji="⛷️">
+    <h2>⛷️ Wintersport <span class="telling"></span></h2>
+    <p class="hfd-sub">Sneeuw, kou en natte handschoenen.</p>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Thermo-ondergoed (2 sets p.p.)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Skibroeken &amp; ski-jassen</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Helmen (of ter plekke huren — vooraf beslissen)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Skibrillen</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Twee paar handschoenen per kind</b> — één paar is altijd nat</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Buffs / colsjaals &amp; mutsen</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Skisokken (meerdere paar)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Zonnebrand hoge factor + lippenbalsem met SPF</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Snowboots voor het dorp</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Sleetje</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Skipassen / skiles vooraf geregeld</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Sneeuwkettingen of winterbanden gecheckt</span></label></li>
+    </ul>
+  </section>
+
+  <!-- ═══ STEDENTRIP ═══ -->
+  <section class="hfd" id="stad" data-naam="Stedentrip" data-emoji="🏙️">
+    <h2>🏙️ Stedentrip <span class="telling"></span></h2>
+    <p class="hfd-sub">Licht pakken, veel lopen.</p>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Ingelopen schoenen (geen nieuwe!)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Dagrugzak met flesjes water</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Powerbank — navigeren vreet batterij</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Tickets voor musea/attracties vooraf — <b>niet uitstellen tot de dag zelf</b> <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Check vooraf hoe parkeren werkt (P+R is bijna altijd de truc) <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Compact regenjack of paraplu</span></label></li>
+    </ul>
+  </section>
+
+  <!-- ═══ LANGE AUTORIT ═══ -->
+  <section class="hfd" id="autorit" data-naam="Lange autorit" data-emoji="🚗">
+    <h2>🚗 Lange autorit <span class="telling"></span></h2>
+    <p class="hfd-sub">Alles boven de ±10 uur: knip de rit in tweeën.</p>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Kist voorin de auto</b>: wc-papier, mesje, thee, zaklamp, cash, lunch — scheelt uitpakken bij elke stop <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Vignetten &amp; tol vooraf</b> geregeld — let op de geldigheidsdata <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Boven de ±10 uur: <b>tussenstop geboekt</b> — een boerencamping onderweg is een halve vakantiedag <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Plan op een <b>verplaatsingsdag een zwemstop</b> in de route <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Luisterverhalen &amp; podcasts vooraf gedownload</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Snacks &amp; drinken binnen handbereik</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Zonneschermen voor de achterramen</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Kotszakjes &amp; vochtige doekjes</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Bandenspanning, olie &amp; koelvloeistof gecheckt</span></label></li>
+    </ul>
+  </section>
+
+  <!-- ═══ KIDS ═══ -->
+  <section class="hfd" id="kids" data-naam="Met de kids" data-emoji="👧">
+    <h2>👧 Met de kids <span class="telling"></span></h2>
+    <p class="hfd-sub">Eén "doe-ding" per dag is genoeg.</p>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Eigen rugzakje per kind (zelf inpakken!)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Maak-gereedschap</b>: houtbewerkingssetje, touw — wint het van schermen <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Kinderfietsen mee</b>, ook als de afstand op papier te ver lijkt — onderschat ze niet <span class="src">Slovenië 2026</span></span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Leesboeken &amp; strips</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Reisspelletjes / kaartspel</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Knuffels (checken vóór vertrek bij elke overnachting!)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Zwemvesten / zwembandjes als er water is</span></label></li>
+    </ul>
+  </section>
+
+  <footer class="onder">
+    Na elke vakantie vullen we deze lijst aan met wat we geleerd hebben — een item uit een echte reis krijgt een geel labeltje met de naam van die reis. Vinkjes worden per apparaat onthouden; met <i>Vinkjes wissen</i> begin je een nieuwe vakantie met een schone lijst.
+  </footer>
+</div>
+
+<script>
+(function () {
+  var OPSLAG_HFD = 'paklijst-hoofdstukken';
+  var OPSLAG_VINK = 'paklijst-vinkjes';
+
+  var secties = Array.prototype.slice.call(document.querySelectorAll('.hfd'));
+  var chipsEl = document.getElementById('chips');
+
+  function lees(sleutel, anders) {
+    try { return JSON.parse(localStorage.getItem(sleutel)) || anders; }
+    catch (e) { return anders; }
+  }
+  function bewaar(sleutel, waarde) {
+    try { localStorage.setItem(sleutel, JSON.stringify(waarde)); } catch (e) {}
+  }
+
+  /* ── Hoofdstuk-chips: kies wat voor vakantie het is ── */
+  var actief = lees(OPSLAG_HFD, null);
+  if (!actief) {
+    actief = {};
+    secties.forEach(function (s) { actief[s.id] = true; });  // eerste bezoek: alles aan
+  }
+
+  secties.forEach(function (s) {
+    var vast = s.hasAttribute('data-vast');
+    if (vast) actief[s.id] = true;
+
+    var chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'chip' + (vast ? ' vast' : '');
+    chip.innerHTML = s.getAttribute('data-emoji') + ' ' + s.getAttribute('data-naam');
+    chipsEl.appendChild(chip);
+
+    function toon() {
+      chip.classList.toggle('aan', !!actief[s.id]);
+      s.classList.toggle('uit', !actief[s.id]);
+    }
+    toon();
+
+    if (!vast) {
+      chip.addEventListener('click', function () {
+        actief[s.id] = !actief[s.id];
+        bewaar(OPSLAG_HFD, actief);
+        toon();
+      });
+    }
+  });
+  bewaar(OPSLAG_HFD, actief);
+
+  /* ── Vinkjes: per item onthouden in localStorage ── */
+  function itemId(sectie, label) {
+    var tekst = label.querySelector('.tekst').textContent;
+    var srcEl = label.querySelector('.src');
+    if (srcEl) tekst = tekst.replace(srcEl.textContent, '');
+    return sectie.id + '|' + tekst.toLowerCase().replace(/\s+/g, ' ').trim().slice(0, 60);
+  }
+
+  var vinkjes = lees(OPSLAG_VINK, {});
+
+  secties.forEach(function (s) {
+    var telling = s.querySelector('.telling');
+    var boxen = Array.prototype.slice.call(s.querySelectorAll('label.item'));
+
+    function tel() {
+      var aan = boxen.filter(function (l) { return l.querySelector('input').checked; }).length;
+      telling.textContent = aan + '/' + boxen.length;
+    }
+
+    boxen.forEach(function (label) {
+      var input = label.querySelector('input');
+      var id = itemId(s, label);
+      input.checked = !!vinkjes[id];
+      input.addEventListener('change', function () {
+        vinkjes[id] = input.checked;
+        if (!input.checked) delete vinkjes[id];
+        bewaar(OPSLAG_VINK, vinkjes);
+        tel();
+      });
+    });
+    tel();
+  });
+
+  /* ── Vinkjes wissen ── */
+  document.getElementById('reset-knop').addEventListener('click', function () {
+    if (!confirm('Alle vinkjes wissen en met een lege lijst beginnen?')) return;
+    vinkjes = {};
+    bewaar(OPSLAG_VINK, vinkjes);
+    secties.forEach(function (s) {
+      s.querySelectorAll('input').forEach(function (i) { i.checked = false; });
+      var boxen = s.querySelectorAll('label.item').length;
+      s.querySelector('.telling').textContent = '0/' + boxen;
+    });
+  });
+
+  /* ── Datum op de print ── */
+  var d = new Date();
+  document.getElementById('print-datum').textContent =
+    'Geprint op ' + d.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+})();
+</script>
+
+</body>
+</html>

@@ -30,6 +30,7 @@
     }
   ],
   "shortcuts": [
+    { "name": "Paklijst", "url": "/paklijst/" },
     { "name": "Luisterverhalen", "url": "/podcasts/" },
     { "name": "Slovenië 2026", "url": "/slovenie/" },
     { "name": "Boodschappen", "url": "/boodschappen/" },

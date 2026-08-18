@@ -9,13 +9,15 @@
 // en een cache-first worker zou oude versies blijven serveren tot de cache wordt
 // geleegd. De cache is hier dus alleen een fallback, geen bron van waarheid.
 
-const CACHE = 'plekkie-v2';
+const CACHE = 'plekkie-v3';
 
 // De schil vooraf cachen, plus one-offs die offline mee moeten (stokken: voor
-// in de schuur of het bos). Overige apps komen in de cache zodra je ze bezoekt.
+// in de schuur of het bos; paklijst: voor bij het inpakken en onderweg).
+// Overige apps komen in de cache zodra je ze bezoekt.
 const PRECACHE = [
   '/',
   '/manifest.webmanifest',
+  '/paklijst/',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
   '/icons/maskable-512.png',
