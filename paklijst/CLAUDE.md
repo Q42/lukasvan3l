@@ -35,6 +35,20 @@ Na elke vakantie:
 4. Nieuw soort vakantie? Nieuw hoofdstuk-`<section>` met een uniek `id`,
    `data-naam` en `data-emoji`; de chip verschijnt vanzelf.
 
+## Kledinglijsten per persoon
+
+Naast het generieke hoofdstuk **Kleding** (het systeem: 1 week, rest wassen)
+krijgt elk gezinslid een eigen hoofdstuk (`Kleding Hester` is de eerste; Lukas,
+Floris en Yune volgen). Vast stramien binnen zo'n hoofdstuk, met
+`<div class="subkop">`-kopjes boven aparte `ul.items`-lijsten:
+
+1. **Standaard — 1 week** (de basisgarderobe),
+2. **Bij hitte — warme landen**,
+3. **Bij kou — koude landen**.
+
+Een item met `(?)` erachter is onzeker gelezen van het papieren lijstje en
+moet nog bevestigd worden — haal de `(?)` weg zodra het klopt.
+
 De eerste vulling komt uit **Slovenië 2026** (kamperen). De reis-specifieke
 learnings-pagina van zo'n vakantie blijft in de eigen reis-directory staan;
 hierheen verhuist alleen wat over *inpakken* gaat.

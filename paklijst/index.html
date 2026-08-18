@@ -127,6 +127,17 @@
   }
   .hfd .hfd-sub { font-size: 13.5px; color: var(--mid); margin-bottom: 14px; }
 
+  .subkop {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--mid);
+    margin: 18px 0 4px;
+  }
+  ul.items + .subkop { border-top: 1px solid #f0f0ec; padding-top: 16px; }
+
   ul.items { list-style: none; }
   ul.items li { border-top: 1px solid #f0f0ec; }
   ul.items li:first-child { border-top: none; }
@@ -206,6 +217,7 @@
       break-inside: avoid-page;
     }
     .hfd h2 { font-size: 15pt; border-bottom: 1.5pt solid #000; padding-bottom: 3pt; margin-bottom: 6pt; break-after: avoid; }
+    .subkop { font-size: 9pt; color: #000; margin: 8pt 0 2pt; border: none; padding-top: 0; break-after: avoid; }
     .hfd h2 .telling { display: none; }
     ul.items { columns: 2; column-gap: 24pt; }
     ul.items li { border: none; break-inside: avoid; }
@@ -245,7 +257,7 @@
       <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Paspoorten / ID-kaarten (ook van de kids)</span></label></li>
       <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Rijbewijs &amp; autopapieren</span></label></li>
       <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Zorgpassen &amp; reisverzekeringspas</span></label></li>
-      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Medicijnen + paracetamol (ook kinder)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Medicijnen: <b>Thyrax</b> + paracetamol (ook kinder)</span></label></li>
       <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Supplementen: slaap &amp; spijsvertering</span></label></li>
       <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">EHBO-setje: <b>ruim pleisters, en blarenpleisters apart</b> — je hebt er altijd meer nodig dan je denkt <span class="src">Slovenië 2026</span></span></label></li>
       <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Tekentang</b> — elke avond even checken <span class="src">Slovenië 2026</span></span></label></li>
@@ -277,6 +289,56 @@
       <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Sportlegging / yogakleding</span></label></li>
       <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst"><b>Slaapmaskers &amp; oordoppen</b> (+ reservepaar)</span></label></li>
       <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Aparte tas met kleding voor de <b>overnachting onderweg</b> — dan blijft de rest ingepakt</span></label></li>
+    </ul>
+  </section>
+
+  <!-- ═══ KLEDING HESTER ═══ -->
+  <section class="hfd" id="kleding-hester" data-naam="Kleding Hester" data-emoji="👗">
+    <h2>👗 Kleding Hester <span class="telling"></span></h2>
+    <p class="hfd-sub">Hesters eigen lijst: de standaard week, plus wat erbij komt bij hitte of kou. (De andere gezinsleden volgen.)</p>
+
+    <div class="subkop">Standaard — 1 week</div>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">8× onderbroek</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">7× sokken (kort &amp; lang)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">2× bh + hemdjes</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">T-shirts</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Pyjama</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Sportlegging / yogakleding</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Kort warm vest (grijs)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Slaapmasker</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Oordoppen + reservepaar</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Wandelschoenen (?)</span></label></li>
+    </ul>
+
+    <div class="subkop">Bij hitte — warme landen</div>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Bruine linnen jurk</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Katoenen shirt + rokje (?)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">3× linnen hemdje</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Zwempak + korte spijkerbroek</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Dun overhemd / vestje</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">1× lange zwarte legging</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">1× shirt lange mouwen</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">1× warm vest (voor de avond)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">1× bruin (pistache) shirt</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">5–6× enkelsokken</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">2× sportsokken (?)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Zonnehoed</span></label></li>
+    </ul>
+
+    <div class="subkop">Bij kou — koude landen</div>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Thermoshirt + warme fleece met lange mouwen</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">3× shirt lange mouwen</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Wandelleggings (?)</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">1 à 2 broeken</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Thermosokken</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Sloffen / slofsokken</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">2× hemd</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">2× T-shirt</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Muts &amp; handschoenen</span></label></li>
+      <li><label class="item"><input type="checkbox"><span class="box"></span><span class="tekst">Jute poncho, voor in het huisje (?)</span></label></li>
     </ul>
   </section>
 
