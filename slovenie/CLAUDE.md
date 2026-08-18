@@ -61,6 +61,12 @@ open een `.html` in de browser en klaar.
 
 ## Plan wordt logboek
 
+De reis is voorbij: we zijn op **maandag 17 aug** thuisgekomen en het reisplan is
+nu een logboek. Twee dingen staan nog als plán en niet als verslag — de dagtrips
+van **10/11 aug** (kamp 2) en **13/14/15 aug** (kamp 3). Wat daar echt gebeurd
+is, weten we niet uit de repo; vul dat alleen in op basis van wat Lukas
+vertelt, verzin er niets bij.
+
 Tijdens de reis wordt het reisplan bijgewerkt naar **wat er echt gebeurd is**.
 Een dag die geweest is:
 
@@ -160,8 +166,12 @@ Een dag die geweest is:
     Bovec, which is ±1,5u away over the mountain road.
   - **Berghof Oberweiler** (heenweg-tussenstop): Oberweiler 5, 91802 Meinheim,
     Duitsland · 1–2 aug · geboekt via Campspace · tel +49 9146 940 560.
-  - **Terugweg** (17 aug): tussenstop nog te beslissen — opties staan in het
-    laatste blok op de pagina.
+  - **Terugweg** (17 aug): geen tussenstop geworden, in één keer doorgereden
+    (±1200 km). Achteraf te veel — **±7 uur rijden is onze max**, dat staat als
+    learning op `learnings.html`. De twee tussenstops die we hadden uitgezocht
+    (Kupferschmiede aan het Chiemsee, Hirschalm am Fernsteinsee) blijven in het
+    laatste blok staan onder "niet gebruikt, wel bewaren" — ze liggen op de
+    route en zijn een volgende keer meteen bruikbaar.
   - **Bootverhuur** (dagtrip 11 aug, kamp 2): nog te regelen. Eerste keus
     *Rent a Boat Bernardin / Rnavtika*, Marina Bernardin, +386 31 348 590,
     rentaboat.si — kleinere boten mogen daar zónder vaarbewijs. Alternatieven:
